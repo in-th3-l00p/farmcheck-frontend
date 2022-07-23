@@ -4,6 +4,12 @@
     background-color: $green;
 }
 
+$sidebar-alpha: 60%;
+@keyframes sidebarBehindAppear {
+    from { background-color: rgba(0, 0, 0, 0%); }
+    to { background-color: rgba(0, 0, 0, $sidebar-alpha); }
+}
+
 .sidebarBehind {
     // positioning
     position: absolute;
@@ -14,7 +20,15 @@
     // filtering
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 60%);
+    background-color: rgba(0, 0, 0, $sidebar-alpha);
+
+    // animating
+    animation: sidebarBehindAppear 0.5s;
+}
+
+@keyframes sidebarAppear {
+    from { transform: translateX(100%); } 
+    to { transform: translate(0); }
 }
 
 .sidebar {
@@ -41,6 +55,9 @@
             color: black;
         }
     }
+
+    // animation
+    animation: sidebarAppear 0.5s;
 }
 
 .close {

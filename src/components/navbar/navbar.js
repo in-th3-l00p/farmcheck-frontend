@@ -39,7 +39,7 @@ const Collapse = ({ expand, isOpen, setOpen, children }) => {
         return (
             <>
                 {isOpen && (
-                    <div>
+                    <div className="position-absolute top-0 start-0 vw-100 vh-100">
                         {/* used for the dark effect on the back of the sidebar */}
                         <span 
                             className={style.sidebarBehind}
@@ -89,7 +89,7 @@ const Navbar = () => {
                     </Nav>
                     <Nav>
                         <Nav.Link href="/login">Login</Nav.Link>
-                        <Nav.Link href="/Register">Register</Nav.Link>
+                        <Nav.Link href="/register">Register</Nav.Link>
                     </Nav>
                 </Collapse>
             </Container>
