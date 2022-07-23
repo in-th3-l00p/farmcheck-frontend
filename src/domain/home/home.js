@@ -2,9 +2,12 @@
  * Page at path "/"
  * @returns page's component
  */
-const Home = () => {
+
+import ImageCarousel from "../../components/carousel/carousel"
+
+export const Home = () => {
     return (
-        <p>hello world!</p>
+        <ImageCarousel/>
     );
 }
 
