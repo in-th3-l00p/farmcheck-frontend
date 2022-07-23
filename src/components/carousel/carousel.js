@@ -15,6 +15,7 @@ export const ImageCarousel = () => {
                             alt={image}
                             className="carousel-image"
                             src={`/images/carousel-images/${image}`}
+                            onDrag={(e) => e.preventDefault()}
                         />
                     </Carousel.Item>
                 ))}

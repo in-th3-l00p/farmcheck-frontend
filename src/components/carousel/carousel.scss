@@ -6,67 +6,67 @@ $saturation: 60%;
 .carousel-container {
     position: relative;
 
-    .carousel-control-next {
-        top: 80%;
-        z-index: 1;
-    }
-    .carousel-control-prev {
-        top: 80%;
-        z-index: 1;
-    }
+    .carousel {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
 
-    .carousel-indicators [data-bs-target] {
-        color: $grey;
-
-
-        margin-left: 20px;
-        margin-bottom: 6vh;
-
-        border: 1px solid transparent;
-        border-radius: 10px;
-
-        width: 12px;
-        height: 12px;
-
-        @media screen and (max-width: 800px) {
-            margin-left: 15px;
-            width: 10px;
-            height: 10px;
+        // refering to the arrows
+        a {
+            -webkit-user-drag: none;
+            top: 80%;
+            z-index: 1;
         }
 
-        @media screen and (max-width: 660px) {
-            margin-bottom: 1vh;
-            margin-left: 10px;
-            width: 8px;
-            height: 8px;
+        .carousel-indicators [data-bs-target] {
+            color: $grey;
+
+            border: 1px solid transparent;
+            border-radius: 10px;
+
+            width: 12px;
+            height: 12px;
+            margin: 0 0 6vh 20px;
+
+            @media screen and (max-width: 800px) {
+                margin-left: 15px;
+                width: 10px;
+                height: 10px;
+            }
+
+            @media screen and (max-width: 660px) {
+                margin-bottom: 1vh;
+                margin-left: 10px;
+                width: 8px;
+                height: 8px;
+            }
         }
-    }
 
-    .carousel-image {
-        object-fit: cover;
-        width: 100vw;
-        height: 40vh;
+        .carousel-image {
+            object-fit: cover;
+            filter: brightness($brightnes) saturate($saturation);
 
-        @media screen and (min-height: 800px) {
-            height: 80vh;
-        }
-
-        @media screen and (max-width: 660px) {
+            width: 100vw;
             height: 40vh;
+            @media screen and (min-height: 800px) { height: 80vh; }
+            @media screen and (max-width: 660px) { height: 40vh; }
         }
-
-        filter: brightness($brightnes) saturate($saturation);
     }
 
     .carousel-text {
+        // positioning
         position: absolute;
-
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
 
-        color: $grey;
+        // disable selection
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
 
+        // handling visuals and responsivness
+        color: $grey;
         h1 {
             font-size: 6rem;
         }
