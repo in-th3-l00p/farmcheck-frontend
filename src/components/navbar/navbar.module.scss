@@ -1,0 +1,50 @@
+@import "../../styles/colorscheme.scss";
+
+.navbar {
+    background-color: $green;
+}
+
+.sidebarBehind {
+    // positioning
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    
+    // filtering
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 60%);
+}
+
+.sidebar {
+    // positioning
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+
+    // display
+    display: flex;
+    flex-direction: row;
+
+    // design
+    height: 100vh;
+    background-color: $grey;
+    a { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: black; 
+        
+        &:focus {
+            color: black;
+        }
+    }
+}
+
+.close {
+    aspect-ratio: 1/1;
+    width: 2rem;
+    height: 2rem;
+}

@@ -3,7 +3,9 @@
  * @returns page's component
  */
 const Home = () => {
-    return <p>home page</p>;
+    return (
+        <p>hello world!</p>
+    );
 }
 
 export default Home;
