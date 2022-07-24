@@ -1,0 +1,20 @@
+@import "src/styles/colorscheme.scss";
+
+.footer {
+    background-color: $dark-green;
+    color: $grey;
+    width: 100%;
+
+    .line {
+        height: 2px;
+        background-color: $grey;
+        margin: 0 10rem 10px 10rem;
+
+        @media screen and (max-width: 1100px) {
+            margin: 0 5rem 10px 5rem;
+        }
+        @media screen and (max-width: 520px) {
+            margin: 0 2rem 10px 2rem;
+        }
+    }
+}

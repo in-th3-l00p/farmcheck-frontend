@@ -2,9 +2,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./domain/home/home";
 import Navbar from "./components/navbar/navbar";
+import Footer from "./components/footer/footer";
+import About from "./domain/about/about";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./app.scss"
 
 /**
  * Entry point of the application.
@@ -18,13 +21,13 @@ const App = () => {
             <Navbar />
             <Router>
                 <Routes>
-                    <Route route="/">
-                        <Route index element={<Home />} />
-                    </Route>
+                    <Route exact path="/" element={<Home />}/>
+                    <Route path="/about" element={<About />}/>
                 </Routes>
             </Router>
+            <Footer />
         </div>
     );
-}
+};
 
 export default App;
