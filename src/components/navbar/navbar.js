@@ -74,7 +74,7 @@ const Navbar = () => {
     return (
         <NavBar className={style.navbar} variant="dark" expand={expand} fixed="top">
             <Container>
-                <NavbarBrand href="/"><h3>FarmCheck</h3></NavbarBrand>
+                <NavbarBrand href="/" className={style.brand}>FarmCheck</NavbarBrand>
                 <NavBar.Toggle onClick={() => { setCollapseOpen(!isCollapseOpen); }} />
                 <Collapse 
                     expand={expand} 
@@ -82,14 +82,14 @@ const Navbar = () => {
                     setOpen={setCollapseOpen}
                 >
                     <Nav className="me-auto mb-auto">
-                        <Nav.Link href="/shop"><h5>Shop</h5></Nav.Link>
-                        <Nav.Link href="/download"><h5>Download</h5></Nav.Link>
-                        <Nav.Link href="/wiki"><h5>Crop wiki</h5></Nav.Link>
-                        <Nav.Link href="/about"><h5>About us</h5></Nav.Link>
+                        <Nav.Link className={style.link} href="/shop">Shop</Nav.Link>
+                        <Nav.Link className={style.link} href="/download">Download</Nav.Link>
+                        <Nav.Link className={style.link} href="/wiki">Crop wiki</Nav.Link>
+                        <Nav.Link className={style.link} href="/about">About us</Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="/login"><h5>Login</h5></Nav.Link>
-                        <Nav.Link href="/register"><h5>Register</h5></Nav.Link>
+                        <Nav.Link className={style.link} href="/login">Login</Nav.Link>
+                        <Nav.Link className={style.link} href="/register">Register</Nav.Link>
                     </Nav>
                 </Collapse>
             </Container>
