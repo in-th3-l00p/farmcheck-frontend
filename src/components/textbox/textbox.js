@@ -6,7 +6,7 @@ import "./textbox.scss";
 const TextBox = ({ title, children, className }) => {
     return (
         <Container className={`text-box my-4 p-5 ${className}`}>
-            <h2>{title}</h2>
+            <h2 className="text-center">{title}</h2>
             {children}
         </Container>
     );
