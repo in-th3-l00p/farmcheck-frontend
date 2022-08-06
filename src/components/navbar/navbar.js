@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Navbar as NavBar, NavbarBrand, Nav, Container } from "react-bootstrap";
 
 import style from "./navbar.module.scss";
+import icon from "./icon.module.scss";
 
 /**
  * Custome Collapse component used for a sidebar insted of a expanding navbar on mobile.
@@ -54,12 +55,69 @@ const Collapse = ({ expand, isOpen, setOpen, children }) => {
             </>
         );
     }
+    else
+        setOpen(false);
 
     // on desktop
     return (
         <div className="d-flex w-100">
             {children}
         </div>
+    )
+}
+
+const menuIconsPath = [
+    "/menu-icons/light.png",
+    "/menu-icons/feedback.png"
+];
+
+const MenuButton = ({src, title}) => {
+    return (
+        <div 
+            className={`${style.menu_button}`}
+        >
+            <p className={style.link}>{title}</p>
+            <span className={icon.image}>
+                <img src={src} alt="button icon" />
+            </span>
+        </div>
+    );
+}
+
+const CollapseMenuSettings = (isOpen) => {
+    if (isOpen)
+        return (
+            <div className="menu">
+                <div className={style.line} />
+                <MenuButton
+                    src={menuIconsPath[0]}
+                    title="Swich theme"
+                />
+                <Nav.Link href="/feedback">
+                    <MenuButton
+                        src={menuIconsPath[1]}
+                        title="Feedback"
+                    />
+                </Nav.Link>
+            </div>
+        );
+    return <></>
+}
+
+const CollapseMenuButtons = (isOpen) => {
+    if (isOpen)
+        return (
+            <div className="d-flex">
+                <Nav.Link className={style.button} href="/login">Login</Nav.Link>
+                <Nav.Link className={style.button} href="/register">Register</Nav.Link>
+            </div>
+        );
+
+    return (
+        <>
+            <Nav.Link className={style.link} href="/login">Login</Nav.Link>
+            <Nav.Link className={style.link} href="/register">Register</Nav.Link>
+        </>
     )
 }
 
@@ -82,14 +140,16 @@ const Navbar = () => {
                     setOpen={setCollapseOpen}
                 >
                     <Nav className="me-auto mb-auto">
-                        <Nav.Link className={style.link} href="/shop">Shop</Nav.Link>
-                        <Nav.Link className={style.link} href="/download">Download</Nav.Link>
-                        <Nav.Link className={style.link} href="/wiki">Crop wiki</Nav.Link>
-                        <Nav.Link className={style.link} href="/about">About us</Nav.Link>
+                        <div className={(isCollapseOpen) ? style.menu : "d-flex"}>
+                            <Nav.Link className={style.link} href="/shop">Shop</Nav.Link>
+                            <Nav.Link className={style.link} href="/download">Download</Nav.Link>
+                            <Nav.Link className={style.link} href="/wiki">Crop wiki</Nav.Link>
+                            <Nav.Link className={style.link} href="/about">About us</Nav.Link>
+                            {CollapseMenuSettings(isCollapseOpen)}
+                        </div>
                     </Nav>
                     <Nav>
-                        <Nav.Link className={style.link} href="/login">Login</Nav.Link>
-                        <Nav.Link className={style.link} href="/register">Register</Nav.Link>
+                        {CollapseMenuButtons(isCollapseOpen)}
                     </Nav>
                 </Collapse>
             </Container>

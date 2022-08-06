@@ -4,6 +4,7 @@ import Home from "./domain/home/home";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import About from "./domain/about/about";
+import Feedback from "./domain/feedback/feedback";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -23,9 +24,9 @@ const App = () => {
                 <Routes>
                     <Route exact path="/" element={<Home />}/>
                     <Route path="/about" element={<About />}/>
+                    <Route path="/feedback" element={<Feedback />}/>
                 </Routes>
             </Router>
-            <Footer />
         </div>
     );
 };

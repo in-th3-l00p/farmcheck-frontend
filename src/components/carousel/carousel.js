@@ -4,7 +4,7 @@ import { Carousel } from "react-bootstrap";
 import "./carousel.scss";
 
 export const ImageCarousel = () => {
-    const images = ["1.jpg", "2.jpg", "3.jpg"];
+    const images = ["/carousel-images/1.jpg", "/carousel-images/2.jpg", "/carousel-images/3.jpg"];
 
     return (
         <div className="carousel-container">
@@ -14,7 +14,7 @@ export const ImageCarousel = () => {
                         <img
                             alt={image}
                             className="carousel-image"
-                            src={`/images/carousel-images/${image}`}
+                            src={`${image}`}
                             onDrag={(e) => e.preventDefault()}
                         />
                     </Carousel.Item>

@@ -1,42 +1,42 @@
 @import "src/styles/colorscheme.scss";
 
-.aboutText {  
-  font-size: 1.75rem;
+.about_text {  
+    font-size: 1.75rem;
 
-  @media screen and (max-width: 650px) {
-    font-size: 1.5rem;
-  }
+    @media screen and (max-width: 650px) {
+        font-size: 1.5rem;
+    }
 
-  @media screen and (max-width: 450px) {
-    font-size: 1.25rem;
-  }
+    @media screen and (max-width: 450px) {
+        font-size: 1.25rem;
+    }
 }
 
 @keyframes onAboutButtonHover {
-  from { background-color: $yellow; }
-  to { background-color: $orange;} 
+    from { background-color: $yellow; }
+    to { background-color: $orange;} 
 }
 
 .button {
-  background-color: $yellow;
-  border: none;
-  color: black;
-  border-radius: 15px;
-  padding: 0.6rem;
-
-  &:hover {
-    animation: onAboutButtonHover 0.5s;
-    background-color: $orange; 
+    background-color: $yellow;
+    border: none;
     color: black;
-  }
+    border-radius: 15px;
+    padding: 0.6rem;
 
-  font-weight: 400;
-  font-size: 1.75rem;
-  @media screen and (max-width: 650px) {
-    font-size: 1.5rem;
-  }
+    &:hover {
+        animation: onAboutButtonHover 0.5s;
+        background-color: $orange; 
+        color: black;
+    }
 
-  @media screen and (max-width: 450px) {
-    font-size: 1.25rem;
-  }
+    font-weight: 500;
+    font-size: 1.75rem;
+    @media screen and (max-width: 650px) {
+        font-size: 1.5rem;
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: 1.25rem;
+    }
 }

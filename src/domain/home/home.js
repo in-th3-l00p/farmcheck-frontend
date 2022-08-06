@@ -3,42 +3,43 @@
  * @returns page's component
  */
 
-import { Col, Grid, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import ImageCarousel from "../../components/carousel/carousel";
 import TextBox from "../../components/textbox/textbox";
+import Footer from "../../components/footer/footer"
 
 import style from "./home.module.scss";
-import features from "./features.module.scss";
+import feature from "./features.module.scss";
 
 const featuresIconsPath = [
-    "/featuresIcons/dictionary.jpeg",
-    "/featuresIcons/livedata.jpeg",
-    "/featuresIcons/maintenance.jpeg",
-    "/featuresIcons/surveillance.jpeg"
+    "/featuresIcons/dictionary.png",
+    "/featuresIcons/livedata.png",
+    "/featuresIcons/maintenance.png",
+    "/featuresIcons/surveillance.png"
 ];
 
 const FeatureIcon = ({className="", src, title, description}) => {
     return (
         <div 
-            className={`${className} d-flex flex-column gap-3 text-center`}
+            className={`${className} ${feature.feature_text} d-flex flex-column text-center pt-5`}
             style={{alignItems: "center"}}
         >
-            <span className={features.image}>
+            <span className={feature.image}>
                 <img src={src} alt="feature icon" />
             </span>
-            <h3>{title}</h3> 
-            <p>{description}</p>
+            <h3 className={`${feature.title} pt-3`}>{title}</h3> 
+            <p className={feature.text}>{description}</p>
         </div> 
     );
 }
 
-export const Home = () => {
+const Home = () => {
     return (
         <div>
             <ImageCarousel/>
 
             <TextBox title="About us" className="text-center">
-                    <p className={style.aboutText}>We are the CyberTech Farmers</p>
+                    <p className={style.about_text}>We are the CyberTech Farmers</p>
                     <button 
                         className={style.button}
                         onClick={()=> window.open("https://www.facebook.com/FarmCheck-105867298851897", "_blank")}>
@@ -51,14 +52,14 @@ export const Home = () => {
                     <Col>
                         <FeatureIcon 
                             src={featuresIconsPath[0]} 
-                            title="test" 
+                            title="Dictionary" 
                             description="helloworld" 
                         />
                     </Col>
                     <Col>
                         <FeatureIcon 
                             src={featuresIconsPath[1]} 
-                            title="test" 
+                            title="Live Data" 
                             description="helloworld" 
                         />
                     </Col>
@@ -67,20 +68,21 @@ export const Home = () => {
                     <Col>
                         <FeatureIcon 
                             src={featuresIconsPath[2]} 
-                            title="test" 
+                            title="Maintenance" 
                             description="helloworld" 
                         />
                     </Col>
                     <Col>
                         <FeatureIcon 
                             src={featuresIconsPath[3]} 
-                            title="test" 
+                            title="Surveillance" 
                             description="helloworld" 
                         />
                     </Col>
                 </Row>
 
             </TextBox>
+            <Footer />
         </div>
     );
 }
