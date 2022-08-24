@@ -5,7 +5,7 @@ import style from "./navbar.module.scss";
 import icon from "./icon.module.scss";
 
 /**
- * Custome Collapse component used for a sidebar insted of a expanding navbar on mobile.
+ * Custom collapse component used for a sidebar insted of a expanding navbar on mobile.
  * @param props.expand the bootstrap expand used for responsivness
  * @param props.isOpen state that is true if the side bar should be opened (only on mobile)
  * @param props.setOpen callback for setting the open state
@@ -66,46 +66,63 @@ const Collapse = ({ expand, isOpen, setOpen, children }) => {
     )
 }
 
-const menuIconsPath = [
-    "/menu-icons/light.png",
-    "/menu-icons/feedback.png"
-];
-
-const MenuButton = ({src, title}) => {
+/**
+ * A link component that has an icon
+ * @param props.text the text of the  
+ * @param props.onClick callback executed on click
+ * @param props.iconSrc icon's image source
+ * @returns 
+ */
+const IconMenuLink = ({
+    text = "",
+    href = "#",
+    iconSrc = ""
+}) => {
     return (
-        <div 
-            className={`${style.menu_button}`}
-        >
-            <p className={style.link}>{title}</p>
-            <span className={icon.image}>
-                <img src={src} alt="button icon" />
-            </span>
-        </div>
+        <Nav.Link href={href}>
+            <div className={style.menu_button}>
+                <p className={style.link}>{text}</p>
+                <span className={icon.image}>
+                    <img src={iconSrc} alt="button icon" />
+                </span>
+            </div>
+        </Nav.Link>
     );
 }
 
-const CollapseMenuSettings = (isOpen) => {
-    if (isOpen)
+/**
+ * Set of links that is begin shown only when the collapse is open
+ * @returns the collapses' settings
+ */
+const CollapseMenuSettings = ({ isCollapseOpen }) => {
+    const menuLinks = [
+        {text: "Switch theme", iconSrc: "/menu-icons/light.png"},
+        {text: "Feedback", iconSrc: "/menu-icons/feedback.png"}
+    ];
+
+    if (isCollapseOpen)
         return (
             <div className="menu">
                 <div className={style.line} />
-                <MenuButton
-                    src={menuIconsPath[0]}
-                    title="Swich theme"
-                />
-                <Nav.Link href="/feedback">
-                    <MenuButton
-                        src={menuIconsPath[1]}
-                        title="Feedback"
+                {menuLinks.map((link, index) => (
+                    <IconMenuLink 
+                        key={index} 
+                        text={link.text} 
+                        iconSrc={link.iconSrc} 
                     />
-                </Nav.Link>
+                ))}
             </div>
         );
     return <></>
 }
 
-const CollapseMenuButtons = (isOpen) => {
-    if (isOpen)
+/**
+ * Login and register links that are integrating the collapse
+ * @param props.isCollapseOpen if the component should appear
+ * @returns the component
+ */
+const CollapseMenuButtons = ({ isCollapseOpen }) => {
+    if (isCollapseOpen)
         return (
             <div className="d-flex">
                 <Nav.Link className={style.button} href="/login">Login</Nav.Link>
@@ -145,11 +162,11 @@ const Navbar = () => {
                             <Nav.Link className={style.link} href="/download">Download</Nav.Link>
                             <Nav.Link className={style.link} href="/wiki">Crop wiki</Nav.Link>
                             <Nav.Link className={style.link} href="/about">About us</Nav.Link>
-                            {CollapseMenuSettings(isCollapseOpen)}
+                            <CollapseMenuSettings isCollapseOpen={isCollapseOpen} />
                         </div>
                     </Nav>
                     <Nav>
-                        {CollapseMenuButtons(isCollapseOpen)}
+                        <CollapseMenuButtons isCollapseOpen={isCollapseOpen} />
                     </Nav>
                 </Collapse>
             </Container>
