@@ -1,0 +1,36 @@
+@import "../../styles/colorscheme.scss";
+
+.countryInput {
+    position: relative;
+    width: 100%;
+}
+
+$country-list-border-radius: 25px;
+.countryList {
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+
+    height: 150px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: 0;
+    
+    background-color: white;
+    border-bottom-left-radius: $country-list-border-radius;
+    border-bottom-right-radius: $country-list-border-radius;
+    list-style: none;
+}
+
+.countryButton {
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
+
+    border: 0;
+    background-color: #fbfbfb;
+
+    &:hover {
+        background-color: $grey;
+    }
+}

@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "./domain/home/home";
+import Home from "./pages/home/home";
 import Navbar from "./components/navbar/navbar";
-import About from "./domain/about/about";
+import Footer from "./components/footer/footer";
+import About from "./pages/about/about";
+import { Login, Register } from "./pages/auth/auth";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,6 +24,8 @@ const App = () => {
                 <Routes>
                     <Route exact path="/" element={<Home />}/>
                     <Route path="/about" element={<About />}/>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
                 </Routes>
             </Router>
         </div>

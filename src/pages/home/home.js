@@ -38,7 +38,7 @@ const Home = () => {
         <div>
             <ImageCarousel/>
 
-            <TextBox title="About us" className="text-center">
+            <TextBox title="About us" className="text-center my-4">
                     <p className={style.about_text}>We are the CyberTech Farmers</p>
                     <button 
                         className={style.button}
@@ -47,7 +47,7 @@ const Home = () => {
                     </button>
             </TextBox>
 
-            <TextBox title="Features" className="d-grid">
+            <TextBox title="Features" className="d-grid my-4">
                 <Row>
                     <Col>
                         <FeatureIcon 

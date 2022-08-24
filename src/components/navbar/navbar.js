@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar as NavBar, NavbarBrand, Nav, Container, Button } from "react-bootstrap";
+import { Navbar as NavBar, NavbarBrand, Nav, Container } from "react-bootstrap";
+import { Button } from '../buttons/buttons';
+
 
 import style from "./navbar.module.scss";
 import collapse from "./collapse.module.scss";
@@ -123,9 +125,19 @@ const Navbar = () => {
                         </Link>
                     </Nav>
 
-                    <Nav className="d-flex gap-3 mb-3">
-                        <Button>Login</Button>
-                        <Button>Register</Button>
+                    <Nav className="d-flex gap-3 mb-3 justify-content-center">
+                        <Button 
+                            className={collapse.button}
+                            onClick={() => window.location.href="/login"}
+                        >
+                            Login
+                        </Button>
+                        <Button 
+                            className={collapse.button}
+                            onClick={() => window.location.href="/register"}
+                        >
+                            Register
+                        </Button>
                     </Nav>
                 </Collapse>
 
