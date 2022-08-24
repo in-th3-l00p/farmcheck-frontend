@@ -1,141 +1,80 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar as NavBar, NavbarBrand, Nav, Container } from "react-bootstrap";
+import { Navbar as NavBar, NavbarBrand, Nav, Container, Button } from "react-bootstrap";
 
 import style from "./navbar.module.scss";
-import icon from "./icon.module.scss";
+import collapse from "./collapse.module.scss";
 
 /**
  * Custom collapse component used for a sidebar insted of a expanding navbar on mobile.
- * @param props.expand the bootstrap expand used for responsivness
- * @param props.isOpen state that is true if the side bar should be opened (only on mobile)
+ * @param props.isOpened state that is true if the side bar should be opened (only on mobile)
  * @param props.setOpen callback for setting the open state
  * @param props.children the component's children elements
  * @returns 
  */
-const Collapse = ({ expand, isOpen, setOpen, children }) => {
-    // bootstrap's breakpoints
-    const breakpoints = {
-        "sm": 576,
-        "md": 768,
-        "lg": 992,
-        "xl": 1200,
-        "xxl": 1400
-    };
-
-    // viewport's width (used for checking if the collapse is on mobile)
-    const [width, setWidth] = useState(window.innerWidth);
-
-    // getting the viewport's width
-    useEffect(() => {
-        const onWindowResize = () => {
-            setWidth(window.innerWidth);
-        }
-
-        window.addEventListener("resize", onWindowResize);
-        return () => { window.removeEventListener("resize", onWindowResize); }
-    }, [])
-
-    // on mobile
-    if (width < breakpoints[expand]) {
-        return (
-            <>
-                {isOpen && (
-                    <div className="position-absolute top-0 start-0 vw-100 vh-100">
-                        {/* used for the dark effect on the back of the sidebar */}
-                        <span 
-                            className={style.sidebarBehind}
-                            onClick={() => setOpen(false)}
-                        >
-                        </span>
-                        <div className={`${style.sidebar} px-3`}>
-                            <span className="d-flex flex-column ms-4 text-right">{children}</span>
-                        </div>
+const Collapse = ({ isOpened, setOpen, children }) => {
+    return (
+        <>
+            {isOpened && (
+                <div className="position-absolute top-0 start-0 vw-100 vh-100">
+                    {/* used for the dark effect on the back of the sidebar */}
+                    <span 
+                        className={style.sidebarBehind}
+                        onClick={() => setOpen(false)}
+                    >
+                    </span>
+                    <div className={`${style.sidebar} px-3`}>
+                        <span className="d-flex flex-column ms-4 text-right">{children}</span>
                     </div>
-                )}
-            </>
-        );
-    }
-    else
-        setOpen(false);
-
-    // on desktop
-    return (
-        <div className="d-flex w-100">
-            {children}
-        </div>
-    )
-}
-
-/**
- * A link component that has an icon
- * @param props.text the text of the  
- * @param props.onClick callback executed on click
- * @param props.iconSrc icon's image source
- * @returns 
- */
-const IconMenuLink = ({
-    text = "",
-    href = "#",
-    iconSrc = ""
-}) => {
-    return (
-        <Nav.Link href={href}>
-            <div className={style.menu_button}>
-                <p className={style.link}>{text}</p>
-                <span className={icon.image}>
-                    <img src={iconSrc} alt="button icon" />
-                </span>
-            </div>
-        </Nav.Link>
+                </div>
+            )}
+        </>
     );
 }
 
-/**
- * Set of links that is begin shown only when the collapse is open
- * @returns the collapses' settings
- */
-const CollapseMenuSettings = ({ isCollapseOpen }) => {
-    const menuLinks = [
-        {text: "Switch theme", iconSrc: "/menu-icons/light.png"},
-        {text: "Feedback", iconSrc: "/menu-icons/feedback.png"}
-    ];
-
-    if (isCollapseOpen)
-        return (
-            <div className="menu">
-                <div className={style.line} />
-                {menuLinks.map((link, index) => (
-                    <IconMenuLink 
-                        key={index} 
-                        text={link.text} 
-                        iconSrc={link.iconSrc} 
-                    />
-                ))}
-            </div>
-        );
-    return <></>
+const CollapseToggler = ({isCollapseOpened, setCollapseOpen}) => {
+    return (
+        <button 
+            className={collapse.toggler}
+            disabled={isCollapseOpened}
+            onClick={() => {
+                setCollapseOpen(!isCollapseOpened);
+            }}
+        >
+            <span className={collapse.togglerLine} />
+            <span className={collapse.togglerLine} />
+            <span className={collapse.togglerLine} />
+        </button>
+    );
 }
 
-/**
- * Login and register links that are integrating the collapse
- * @param props.isCollapseOpen if the component should appear
- * @returns the component
- */
-const CollapseMenuButtons = ({ isCollapseOpen }) => {
-    if (isCollapseOpen)
-        return (
-            <div className="d-flex">
-                <Nav.Link className={style.button} href="/login">Login</Nav.Link>
-                <Nav.Link className={style.button} href="/register">Register</Nav.Link>
-            </div>
-        );
-
+const Link = ({
+    className="",
+    href="",
+    onClick=undefined,
+    iconSrc=undefined,
+    iconAlt="",
+    children
+}) => {
     return (
-        <>
-            <Nav.Link className={style.link} href="/login">Login</Nav.Link>
-            <Nav.Link className={style.link} href="/register">Register</Nav.Link>
-        </>
-    )
+        <div
+            href={href} 
+            className={`${collapse.link} ${className}`}
+            onClick={(
+                typeof onClick === "undefined" ? 
+                () => {window.location.href={href}} : 
+                onClick
+            )}
+        >
+            <span className="me-auto">
+                {children}
+            </span>
+            {typeof iconSrc !== "undefined" && (
+                <span className={collapse.icon}>
+                    <img src={iconSrc} alt={iconAlt} />
+                </span>
+            )}
+        </div>
+    ) 
 }
 
 /**
@@ -143,32 +82,57 @@ const CollapseMenuButtons = ({ isCollapseOpen }) => {
  * @returns the navbar component
  */
 const Navbar = () => {
-    const [isCollapseOpen, setCollapseOpen] = useState(false);
-    const expand = "lg";
+    const [isCollapseOpened, setCollapseOpen] = useState(false);
+
+    // prevent scrolling
+    useEffect(() => {
+        document.body.style.overflow = (
+            isCollapseOpened ? "hidden" : "unset"
+        );
+    }, [isCollapseOpened])
 
     return (
-        <NavBar className={style.navbar} variant="dark" expand={expand} fixed="top">
+        <NavBar className={style.navbar} variant="dark" fixed="top">
             <Container>
                 <NavbarBrand href="/" className={style.brand}>FarmCheck</NavbarBrand>
-                <NavBar.Toggle onClick={() => { setCollapseOpen(!isCollapseOpen); }} />
                 <Collapse 
-                    expand={expand} 
-                    isOpen={isCollapseOpen} 
+                    isOpened={isCollapseOpened} 
                     setOpen={setCollapseOpen}
                 >
-                    <Nav className="me-auto mb-auto">
-                        <div className={(isCollapseOpen) ? style.menu : "d-flex"}>
-                            <Nav.Link className={style.link} href="/shop">Shop</Nav.Link>
-                            <Nav.Link className={style.link} href="/download">Download</Nav.Link>
-                            <Nav.Link className={style.link} href="/wiki">Crop wiki</Nav.Link>
-                            <Nav.Link className={style.link} href="/about">About us</Nav.Link>
-                            <CollapseMenuSettings isCollapseOpen={isCollapseOpen} />
-                        </div>
+                    <Nav className={`${style.menu} mb-auto`}>
+                        <Link href="/shop">Shop</Link>
+                        <Link href="/download">Download</Link>
+                        <Link href="/wiki">Crop wiki</Link>
+                        <Link href="/about">About us</Link>
+
+                        <div className={collapse.line} />
+
+                        <Link 
+                            href="/feedback"
+                            iconSrc="/menu-icons/feedback.png"
+                            iconAlt="feedback icon"
+                        >
+                            Feedback
+                        </Link>
+                        <Link 
+                            onClick={() => {console.log("yees")}}
+                            iconSrc="/menu-icons/dark.png"
+                            iconAlt="switch theme"
+                        >
+                            Switch theme
+                        </Link>
                     </Nav>
-                    <Nav>
-                        <CollapseMenuButtons isCollapseOpen={isCollapseOpen} />
+
+                    <Nav className="d-flex gap-3 mb-3">
+                        <Button>Login</Button>
+                        <Button>Register</Button>
                     </Nav>
                 </Collapse>
+
+                <CollapseToggler 
+                    isCollapseOpened={isCollapseOpened} 
+                    setCollapseOpen={setCollapseOpen}
+                />
             </Container>
         </NavBar>
     );

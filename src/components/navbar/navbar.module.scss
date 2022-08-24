@@ -91,30 +91,8 @@ $sidebar-alpha: 60%;
     animation: sidebarAppear 0.4s;
 }
 
-.close {
-    aspect-ratio: 1/1;
-    width: 2rem;
-    height: 2rem;
-}
-
-.button {
-    background-color: $orange;
-    border-radius: 15px;
-    text-align: center;
-    font-weight: 400;
-
-    position: relative;
-    width: 110px;
-    left: -20px;
-    margin: 0 15px 30px 0;
-}
-
-.username {
-    font-weight: 700;
-    margin: 25px 0 15px 0;
-}
-
 .menu {
+    flex-direction: column !important;
     margin-top: 20px;
     position: relative;
     text-align: right;
@@ -125,5 +103,18 @@ $sidebar-alpha: 60%;
         display: flex;
         align-items: center;
         justify-content: right;
+    }
+}
+
+.link { 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.5rem; 
+    font-weight: 400;
+
+    @media screen and (max-width: 992px) {
+        font-weight: 500;
+        float: right;
     }
 }
