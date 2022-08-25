@@ -19,7 +19,29 @@ $border-distance: 0.8rem;
     flex-direction: column;
     gap: 0.5rem;
 
-    border-bottom: 2px solid $grey;
+    border-bottom: 2px solid $light-grey;
     padding-bottom: $border-distance;
     margin-bottom: $border-distance;
+}
+
+.button {
+    width: 150px;
+}
+
+.alert {
+    margin-top: -10px;
+    margin-bottom: -15px !important;
+    margin-left: -5px;
+    background-color: transparent !important;
+    border: none !important;
+
+    .link {
+        margin-left: 5px;
+        text-decoration: none;
+        color: $orange !important;
+    }
+}
+
+.login {
+    margin-top: 20vh;
 }

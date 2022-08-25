@@ -49,8 +49,8 @@ export const InputRange = ({
  */
 export const LabelInput = ({ 
     label, 
-    className="", 
     type="text", 
+    className="",
     value, 
     setValue, 
     onFocus=() => {},
@@ -58,10 +58,11 @@ export const LabelInput = ({
 }) => {
     return (
         <FloatingLabel
-            label={label} 
-            className={className} 
+            label={label}
+            className={`${style.label} ${className}`} 
         >
             <Form.Control 
+                className={style.content}
                 type={type} 
                 value={value} 
                 onChange={(e) => setValue(e.target.value)}

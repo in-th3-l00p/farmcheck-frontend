@@ -13,20 +13,19 @@
     margin: 4px;
     height: 5px;
     width: 40px;
-    background: $grey;
+    background: $light-grey;
     border-radius: 9px;
 }
 
 .link {
     display: flex;
     font-size: 1.5rem !important;
-    font-weight: 400 !important;
-    text-decoration: none;
+    font-weight: 600 !important;
     width: 100%;
 
     &:hover {
         cursor: pointer;
-        text-decoration: underline;
+        color: $grey;
     }
 }
 
@@ -35,6 +34,7 @@
         width: 35px;
         aspect-ratio: 1/1;
         object-fit: contain;
+        margin-top: 10px;
     }
 }
 
@@ -51,5 +51,5 @@ $line-margin: 10px;
 .button {
     font-size: 1.25rem;
     text-align: center;
-    width: 100px;
+    width: 92px;
 }

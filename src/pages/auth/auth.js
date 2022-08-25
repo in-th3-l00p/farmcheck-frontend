@@ -36,9 +36,9 @@ export const Login = () => {
     const [password, setPassword] = useState("");
 
     return (
-        <TextBox className={style.formContainer}>
+        <TextBox className={`${style.formContainer} ${style.login}`}>
             <form className={style.form}>
-                <h2 className="text-center mb-3">Login</h2>
+                <h2 className="text-center mb-4">Login</h2>
 
                 <span className={style.inputContainer}>
                     <LabelInput
@@ -53,14 +53,14 @@ export const Login = () => {
                         setValue={setPassword}
                     />
 
-                    <Alert variant="warning" className="mb-0">
+                    <Alert variant="warning" className={style.alert}>
                         Don't have an account. 
-                        <Alert.Link href="/register" className="ms-1">Register here</Alert.Link>
+                        <Alert.Link href="/register" className={style.link}>Register here</Alert.Link>
                     </Alert>
                 </span>
 
                 <div className="d-flex justify-content-center gap-2">
-                    <Button>Login</Button>
+                    <Button className={style.button}>Login</Button>
                 </div>
             </form>
         </TextBox>
@@ -79,7 +79,7 @@ export const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [name, setName] = useState({first: "", last: ""});
     const [country, setCountry] = useState("");
-    const [dob, setDOB] = useState({day: 1, month: 1, year: 2000});
+    const [dob, setDOB] = useState({day: "", month: "", year: ""});
 
     // deal with month or year changing
     useEffect(() => {
@@ -91,7 +91,7 @@ export const Register = () => {
     return (
         <TextBox className={style.formContainer}>
             <form className={style.form}>
-                <h2 className="text-center mb-3">Register</h2>
+                <h2 className="text-center mb-4">Register</h2>
 
                 {/* user's informations */}
                 <span className={style.inputContainer}>
@@ -188,11 +188,16 @@ export const Register = () => {
                             }}
                         />
                     </div>
+
+                    <Alert variant="warning" className={style.alert}>
+                        Already have an account. 
+                        <Alert.Link href="/login" className={style.link}>Login here</Alert.Link>
+                    </Alert>
                 </span>
 
                 {/* todo: create a main button component */}
                 <span className="d-flex justify-content-center">
-                    <Button>Submit</Button>
+                    <Button className={style.button}>Submit</Button>
                 </span>
             </form>
         </TextBox>

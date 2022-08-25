@@ -7,15 +7,16 @@ import { Col, Row } from "react-bootstrap";
 import ImageCarousel from "../../components/carousel/carousel";
 import TextBox from "../../components/textbox/textbox";
 import Footer from "../../components/footer/footer"
+import { Button } from "../../components/buttons/buttons";
 
 import style from "./home.module.scss";
 import feature from "./features.module.scss";
 
 const featuresIconsPath = [
-    "/featuresIcons/dictionary.png",
-    "/featuresIcons/livedata.png",
-    "/featuresIcons/maintenance.png",
-    "/featuresIcons/surveillance.png"
+    "/icons/features-icons/livedata.png",
+    "/icons/features-icons/maintenance.png",
+    "/icons/features-icons/surveillance.png",
+    "/icons/features-icons/dictionary.png",
 ];
 
 const FeatureIcon = ({className="", src, title, description}) => {
@@ -40,11 +41,12 @@ const Home = () => {
 
             <TextBox title="About us" className="text-center my-4">
                     <p className={style.about_text}>We are the CyberTech Farmers</p>
-                    <button 
-                        className={style.button}
-                        onClick={()=> window.open("https://www.facebook.com/FarmCheck-105867298851897", "_blank")}>
+                    <Button 
+                        className=""
+                        onClick={()=> window.open("https://www.facebook.com/FarmCheck-105867298851897", "_blank")}
+                    >
                         Learn more
-                    </button>
+                    </Button>
             </TextBox>
 
             <TextBox title="Features" className="d-grid my-4">

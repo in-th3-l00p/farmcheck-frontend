@@ -4,7 +4,7 @@ import { Carousel } from "react-bootstrap";
 import "./carousel.scss";
 
 export const ImageCarousel = () => {
-    const images = ["/carousel-images/1.jpg", "/carousel-images/2.jpg", "/carousel-images/3.jpg"];
+    const images = ["/images/carousel-images/1.jpg", "/images/carousel-images/2.jpg", "/images/carousel-images/3.jpg"];
 
     return (
         <div className="carousel-container">

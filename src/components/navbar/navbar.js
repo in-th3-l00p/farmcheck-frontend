@@ -25,7 +25,7 @@ const Collapse = ({ isOpened, setOpen, children }) => {
                     >
                     </span>
                     <div className={`${style.sidebar} px-3`}>
-                        <span className="d-flex flex-column ms-4 text-right">{children}</span>
+                        <span className="d-flex flex-column ms-4 text-right py-2">{children}</span>
                     </div>
                 </div>
             )}
@@ -67,7 +67,7 @@ const Link = ({
                 onClick
             )}
         >
-            <span className="me-auto">
+            <span className="me-auto py-2">
                 {children}
             </span>
             {typeof iconSrc !== "undefined" && (
@@ -111,14 +111,14 @@ const Navbar = () => {
 
                         <Link 
                             href="/feedback"
-                            iconSrc="/menu-icons/feedback.png"
+                            iconSrc="/icons/menu-icons/feedback.png"
                             iconAlt="feedback icon"
                         >
                             Feedback
                         </Link>
                         <Link 
                             onClick={() => {console.log("yees")}}
-                            iconSrc="/menu-icons/dark.png"
+                            iconSrc="/icons/menu-icons/dark.png"
                             iconAlt="switch theme"
                         >
                             Switch theme
