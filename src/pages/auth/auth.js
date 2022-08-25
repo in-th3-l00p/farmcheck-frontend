@@ -114,7 +114,7 @@ export const Register = () => {
                             className="w-100"
                             value={name.first}
                             setValue={(newName) => setName(
-                                {first: newName, ...name}
+                                {...name, first: newName}
                             )}
                         />
 
@@ -123,7 +123,7 @@ export const Register = () => {
                             className="w-100"
                             value={name.last}
                             setValue={(newName) => setName(
-                                {last: newName, ...name}
+                                {...name, last: newName}
                             )}
                         />
                     </div>
