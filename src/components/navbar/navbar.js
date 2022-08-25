@@ -20,12 +20,12 @@ const Collapse = ({ isOpened, setOpen, children }) => {
                 <div className="position-absolute top-0 start-0 vw-100 vh-100">
                     {/* used for the dark effect on the back of the sidebar */}
                     <span 
-                        className={style.sidebarBehind}
+                        className={collapse.behind}
                         onClick={() => setOpen(false)}
-                    >
-                    </span>
-                    <div className={`${style.sidebar} px-3`}>
-                        <span className="d-flex flex-column ms-4 text-right py-2">{children}</span>
+                    />
+
+                    <div className={`${collapse.collapse} px-3 d-flex flex-column ms-4 text-right py-2`}>
+                        {children}
                     </div>
                 </div>
             )}
