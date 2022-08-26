@@ -3,8 +3,10 @@ import TextBox from "../../components/textbox/textbox";
 import { CountryInput, InputRange, LabelInput } from "../../components/forms/forms";
 import { Alert } from "react-bootstrap";
 import { Button } from "../../components/buttons/buttons"; 
+import axios from "axios";
 
 import style from "./auth.module.scss";
+import { storeJWT } from "../../lib/auth";
 
 /**
  * Function to return the max number of days based on month and year
@@ -27,6 +29,26 @@ const DaysExceptions = (month, year) => {
 }
 
 /**
+ * Alert that is displayed only if an error occured.
+ * @param props.error the error message
+ * @param props.setError error's reducer
+ * @returns the alert if the error message is not an empty string
+ */
+const ErrorAlert = ({ error, setError }) => {
+    if (error)
+        return (
+            <Alert 
+                variant="danger" 
+                onClose={() => setError("")} 
+                dismissible
+            >
+                {error}
+            </Alert>
+        );
+    return <></>;
+}
+
+/**
  * Login page.
  * @returns page at "/login"
  */
@@ -35,10 +57,56 @@ export const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    const [error, setError] = useState(""); // auth error
+    const [registered, setRegistered] = useState(
+        (new URLSearchParams(window.location.search)).get("registered")
+    );
+
     return (
         <TextBox className={`${style.formContainer} ${style.login}`}>
-            <form className={style.form}>
+            <form
+                className={style.form}
+                onSubmit={(event) => {
+                    event.preventDefault();
+                    axios.post(
+                        "/api/authenticate",
+                        {
+                            "username": username,
+                            "password": password
+                        }
+                    )   
+                        .then(resp => {
+                            if (resp.status === 200) {
+                                storeJWT(resp.data.id_token);
+                                window.location.href = "/";
+                            }
+                        })
+                        .catch(err => {
+                            switch (err.code) {
+                                case "ERR_BAD_REQUEST":
+                                    setError(err.response.data.detail);
+                                    break;
+                                default:
+                                    setError("Server error");
+                                    break;
+                            }
+                        })
+                }}
+            >
                 <h2 className="text-center mb-4">Login</h2>
+
+                {/* alerts */}
+                {registered !== null && (
+                    <Alert
+                        variant="success"
+                        onClose={() => setRegistered(null)}
+                        dismissible
+                    >
+                        Your account was registered. Activate your account using the mail
+                        sent to your email address
+                    </Alert>
+                )}
+                <ErrorAlert error={error} setError={setError} />
 
                 <span className={style.inputContainer}>
                     <LabelInput
@@ -55,12 +123,23 @@ export const Login = () => {
 
                     <Alert variant="warning" className={style.alert}>
                         Don't have an account. 
-                        <Alert.Link href="/register" className={style.link}>Register here</Alert.Link>
+                        <Alert.Link 
+                            href="/register" 
+                            className={style.link}
+                        >
+                            Register here
+                        </Alert.Link>
                     </Alert>
                 </span>
 
                 <div className="d-flex justify-content-center gap-2">
-                    <Button className={style.button}>Login</Button>
+                    <Button 
+                        type="submit" 
+                        disabled={!username || !password} 
+                        style={{width: "150px"}}
+                    >
+                        Login
+                    </Button>
                 </div>
             </form>
         </TextBox>
@@ -81,6 +160,24 @@ export const Register = () => {
     const [country, setCountry] = useState("");
     const [dob, setDOB] = useState({day: "", month: "", year: ""});
 
+    const [error, setError] = useState("");
+
+    // checks if all fields are completed
+    const isInputValid = () => {
+        return (
+            !!email && 
+            !!username && 
+            !!password && 
+            password === confirmPassword && 
+            !!name.first && 
+            !!name.last &&
+            !!country &&
+            !!dob.day &&
+            !!dob.month &&
+            !!dob.year
+        );
+    }
+
     // deal with month or year changing
     useEffect(() => {
         const maxDay = DaysExceptions(dob.month, dob.year);
@@ -90,8 +187,34 @@ export const Register = () => {
 
     return (
         <TextBox className={style.formContainer}>
-            <form className={style.form}>
+            <form className={style.form} onSubmit={(event) => {
+                event.preventDefault();
+                axios.post("/api/register", {
+                    "login": username,
+                    "firstName": name.first,
+                    "lastName": name.last,
+                    "email": email,
+                    "password": password,
+                    "langKey": "en"
+                })
+                    .then(resp => { 
+                        if (resp.status === 201)
+                            window.location.href = "/login?registered" 
+                    })
+                    .catch(err => {
+                        switch (err.code) {
+                            case "ERR_BAD_REQUEST":
+                                setError(err.response.data.title);
+                                break;
+                            default:
+                                setError("Server error");
+                                break;
+                        }
+                    })
+
+            }}>
                 <h2 className="text-center mb-4">Register</h2>
+                <ErrorAlert error={error} setError={setError} />
 
                 {/* user's informations */}
                 <span className={style.inputContainer}>
@@ -191,13 +314,24 @@ export const Register = () => {
 
                     <Alert variant="warning" className={style.alert}>
                         Already have an account. 
-                        <Alert.Link href="/login" className={style.link}>Login here</Alert.Link>
+                        <Alert.Link 
+                            href="/login" 
+                            className={style.link}
+                        >
+                            Login here
+                        </Alert.Link>
                     </Alert>
                 </span>
 
                 {/* todo: create a main button component */}
                 <span className="d-flex justify-content-center">
-                    <Button className={style.button}>Submit</Button>
+                    <Button 
+                        type="submit"
+                        disabled={!isInputValid()}
+                        style={{width: "150px"}}
+                    >
+                        Submit
+                    </Button>
                 </span>
             </form>
         </TextBox>

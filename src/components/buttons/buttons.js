@@ -13,11 +13,13 @@ export const Button = ({
     className = "",
     style = {},
     onClick = () => {},
+    disabled = false,
     children
 }) => {
     return (
         <button 
             className={`${css.button} ${className}`}
+            disabled={disabled}
             style={style}
             onClick={onClick}
         >
