@@ -63,7 +63,7 @@ const Link = ({
             className={`${collapse.link} ${className}`}
             onClick={(
                 typeof onClick === "undefined" ? 
-                () => {window.location.href={href}} : 
+                () => window.location.href = href : 
                 onClick
             )}
         >
