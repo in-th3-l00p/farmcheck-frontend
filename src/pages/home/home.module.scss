@@ -12,11 +12,6 @@
     }
 }
 
-@keyframes onAboutButtonHover {
-    from { background-color: $yellow; }
-    to { background-color: $orange;} 
-}
-
 .button {
     background-color: $yellow;
     border: none;

@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/home/home";
 import Navbar from "./components/navbar/navbar";
-// import Footer from "./components/footer/footer";
+import Home from "./pages/home/home";
+import Shop from "./pages/shop/shop";
 import About from "./pages/about/about";
 import { Login, Register } from "./pages/auth/auth";
+// import Footer from "./components/footer/footer";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -26,6 +27,7 @@ const App = () => {
                     <Route path="/about" element={<About />}/>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/shop" element={<Shop />} />
                 </Routes>
             </Router>
         </div>

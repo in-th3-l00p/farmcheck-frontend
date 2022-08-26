@@ -36,10 +36,10 @@
 
 .menu {
     flex-direction: column !important;
-    margin-top: 20px;
     position: relative;
     text-align: right;
-    width: 100%;
+    width: 90%;
+    margin: 20px auto 0 auto;
 
     .menu_button {
         display: flex;
