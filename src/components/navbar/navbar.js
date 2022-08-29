@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar as NavBar, NavbarBrand, Nav, Container } from "react-bootstrap";
-import { Button } from '../buttons/buttons';
-
+import { Navbar as NavBar, NavbarBrand, Container } from "react-bootstrap";
+import { UnauthenticatedNavs, AuthenticatedNavs } from './navs';
 
 import style from "./navbar.module.scss";
 import collapse from "./collapse.module.scss";
@@ -49,36 +48,6 @@ const CollapseToggler = ({isCollapseOpened, setCollapseOpen}) => {
     );
 }
 
-const Link = ({
-    className="",
-    href="",
-    onClick=undefined,
-    iconSrc=undefined,
-    iconAlt="",
-    children
-}) => {
-    return (
-        <div
-            href={href} 
-            className={`${collapse.link} ${className}`}
-            onClick={(
-                typeof onClick === "undefined" ? 
-                () => window.location.href = href : 
-                onClick
-            )}
-        >
-            <span className="me-auto py-2">
-                {children}
-            </span>
-            {typeof iconSrc !== "undefined" && (
-                <span className={collapse.icon}>
-                    <img src={iconSrc} alt={iconAlt} />
-                </span>
-            )}
-        </div>
-    ) 
-}
-
 /**
  * The main navbar component that should appear on every page.
  * @returns the navbar component
@@ -93,6 +62,10 @@ const Navbar = () => {
         );
     }, [isCollapseOpened])
 
+    useEffect(() => {
+        console.log(sessionStorage.getItem("authenticated"))
+    })
+
     return (
         <NavBar className={style.navbar} variant="dark" fixed="top">
             <Container>
@@ -101,44 +74,11 @@ const Navbar = () => {
                     isOpened={isCollapseOpened} 
                     setOpen={setCollapseOpen}
                 >
-                    <Nav className={`${style.menu} mb-auto`}>
-                        <Link href="/shop">Shop</Link>
-                        <Link href="/download">Download</Link>
-                        <Link href="/wiki">Crop wiki</Link>
-                        <Link href="/about">About us</Link>
-
-                        <div className={collapse.line} />
-
-                        <Link 
-                            href="/feedback"
-                            iconSrc="/icons/menu-icons/feedback.png"
-                            iconAlt="feedback icon"
-                        >
-                            Feedback
-                        </Link>
-                        <Link 
-                            onClick={() => {console.log("yees")}}
-                            iconSrc="/icons/menu-icons/dark.png"
-                            iconAlt="switch theme"
-                        >
-                            Switch theme
-                        </Link>
-                    </Nav>
-
-                    <Nav className="d-flex gap-3 mb-3 justify-content-center">
-                        <Button 
-                            className={collapse.button}
-                            onClick={() => window.location.href="/login"}
-                        >
-                            Login
-                        </Button>
-                        <Button 
-                            className={collapse.button}
-                            onClick={() => window.location.href="/register"}
-                        >
-                            Register
-                        </Button>
-                    </Nav>
+                    {sessionStorage.getItem("authenticated") === "true" ? (
+                        <AuthenticatedNavs />
+                    ): (
+                        <UnauthenticatedNavs />
+                    )}
                 </Collapse>
 
                 <CollapseToggler 

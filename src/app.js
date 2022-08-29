@@ -5,11 +5,12 @@ import Home from "./pages/home/home";
 import Shop from "./pages/shop/shop";
 import About from "./pages/about/about";
 import { Login, Register } from "./pages/auth/auth";
-// import Footer from "./components/footer/footer";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.scss"
+import { useEffect } from "react";
+import { getUserDetails } from "./lib/auth";
 
 /**
  * Entry point of the application.
@@ -18,6 +19,19 @@ import "./app.scss"
  * @returns the main component
  */
 const App = () => {
+    // fetching user data on every page if authenticated
+    useEffect(() => {
+        getUserDetails()
+            .then(data => {
+                sessionStorage.setItem("authenticated", true);
+                sessionStorage.setItem("user", JSON.stringify(data));
+            })
+            .catch(err => {
+                sessionStorage.setItem("authenticated", false);
+                sessionStorage.removeItem("user");
+            })
+    }, [])
+
     return (
         <div>
             <Navbar />

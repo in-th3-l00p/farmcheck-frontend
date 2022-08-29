@@ -2,35 +2,18 @@
 
 .navbar {
     background-color: $green;
+}
 
-    .brand { 
-        font-size: 1.75rem; 
-        font-weight: 500;
-    
-        @media screen and (max-width: 1200px) {
-            font-size: 1.6rem; 
-        }
-    
-        @media screen and (max-width: 650px) {
-            font-size: 1.5rem; 
-        }
-    }
-    
-    .link { 
-        font-size: 1.5rem; 
-        font-weight: 400;
+.brand { 
+    font-size: 1.75rem !important; 
+    font-weight: 500 !important;
 
-        @media screen and (max-width: 992px) {
-            font-weight: 500;
-            float: right;
-        }
+    @media screen and (max-width: 1200px) {
+        font-size: 1.6rem !important; 
     }
 
-    .line {
-        height: 2px;
-        width: 100%;
-        background-color: $orange;
-        margin: 15px 0 15px 0;
+    @media screen and (max-width: 650px) {
+        font-size: 1.5rem !important; 
     }
 }
 
@@ -40,23 +23,58 @@
     text-align: right;
     width: 90%;
     margin: 20px auto 0 auto;
+}
 
-    .menu_button {
-        display: flex;
-        align-items: center;
-        justify-content: right;
+.link {
+    display: flex;
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    width: 100%;
+
+    &:hover {
+        cursor: pointer;
+        color: $grey;
     }
 }
 
-.link { 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 1.5rem; 
-    font-weight: 400;
-
-    @media screen and (max-width: 992px) {
-        font-weight: 500;
-        float: right;
+.icon {
+    img {
+        width: 35px;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+        margin-top: 10px;
     }
+}
+
+$line-margin: 10px;
+.line {
+    background-color: $yellow;
+    padding: 2px;
+    border-radius: 2px;
+
+    margin-top: $line-margin;
+    margin-bottom: $line-margin;
+}
+
+.button {
+    font-size: 1.25rem;
+    text-align: center;
+    width: 120px;
+}
+
+.profile {
+    margin-top: 10px;
+
+    display: flex;
+    align-items: center;
+
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.profilePicture {
+    outline: 3px solid $orange;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    width: 50px;
 }
