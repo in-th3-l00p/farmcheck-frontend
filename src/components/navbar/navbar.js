@@ -62,10 +62,6 @@ const Navbar = () => {
         );
     }, [isCollapseOpened])
 
-    useEffect(() => {
-        console.log(sessionStorage.getItem("authenticated"))
-    })
-
     return (
         <NavBar className={style.navbar} variant="dark" fixed="top">
             <Container>
