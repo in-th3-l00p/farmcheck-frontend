@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TextBox from "../../components/textbox/textbox";
-import { CountryInput, InputRange, LabelInput } from "../../components/forms/forms";
+import { CountryInput, InputRange, LabelInput, PhoneNumberInput } from "../../components/forms/forms";
 import { Alert } from "react-bootstrap";
 import { Button } from "../../components/buttons/buttons"; 
 import axios from "axios";
@@ -336,4 +336,89 @@ export const Register = () => {
             </form>
         </TextBox>
     );
+}
+
+/**
+ * Create Farm page.
+ * @returns page at "/createfarm"
+ */
+export const CreateFarm = () => {
+    const [companyName, setCompanyName] = useState("");
+    const [contactName, setContactName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [adress, setAdress] = useState("");
+
+    const [error, setError] = useState("");
+
+    const isInputValid = () => {
+        return (
+            !!companyName && 
+            !!contactName && 
+            !!phoneNumber && 
+            !!adress
+        );
+    }
+
+    return (
+        <TextBox className={style.formContainer}>
+            <form className={style.form} onSubmit={(event) => {
+                event.preventDefault();
+                axios.post("/api/createfarm", {
+                    "companyName": companyName,
+                    "contactName": contactName,
+                    "phoneNumber": phoneNumber,
+                    "adress": adress
+                })
+                    .then(resp => { 
+                        if (resp.status === 202)
+                            window.location.href = "/login?registered" 
+                    })
+                    .catch(err => {
+                        switch (err.code) {
+                            case "ERR_BAD_REQUEST":
+                                setError(err.response.data.title);
+                                break;
+                            default:
+                                setError("Server error");
+                                break;
+                        }
+                })
+            }}>
+                <h2 className="text-center mb-4">Create Farm</h2>
+                <ErrorAlert error={error} setError={setError} />
+
+                <span className={style.inputContainer}>
+                    <LabelInput
+                        label="Company name"
+                        value={companyName}
+                        setValue={setCompanyName}
+                    />
+                    <LabelInput 
+                        label="Contact Person Name" 
+                        value={contactName}
+                        setValue={setContactName}
+                    />
+                    <LabelInput 
+                        label="Adress" 
+                        value={adress}
+                        setValue={setAdress}
+                    />
+                    <PhoneNumberInput 
+                        value={phoneNumber} 
+                        setValue={setPhoneNumber} 
+                    />
+                </span>
+
+                <span className="d-flex justify-content-center">
+                    <Button 
+                        type="submit"
+                        disabled={!isInputValid()}
+                        style={{width: "150px"}}
+                    >
+                        Submit
+                    </Button>
+                </span>
+            </form>
+        </TextBox>
+    )
 }
