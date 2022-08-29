@@ -1,12 +1,12 @@
 @import "../../styles/colorscheme.scss";
 
-.countryInput {
+.input {
     position: relative;
     width: 100%;
 }
 
 $country-list-border-radius: 25px;
-.countryList {
+.list {
     position: absolute;
     width: 100%;
     z-index: 100;
@@ -22,7 +22,7 @@ $country-list-border-radius: 25px;
     list-style: none;
 }
 
-.countryButton {
+.button {
     width: 100%;
     text-align: left;
     padding-left: 20px;

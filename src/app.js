@@ -4,7 +4,7 @@ import Navbar from "./components/navbar/navbar";
 import Home from "./pages/home/home";
 import Shop from "./pages/shop/shop";
 import About from "./pages/about/about";
-import { Login, Register } from "./pages/auth/auth";
+import { CreateFarm, Login, Register } from "./pages/auth/auth";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -29,6 +29,7 @@ const App = () => {
                     <Route path="/about" element={<About />}/>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/createfarm" element={<CreateFarm />} />
                     <Route path="/shop" element={<Shop />} />
                 </Routes>
             </Router>

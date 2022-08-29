@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { FloatingLabel, Form } from "react-bootstrap";
 import { getElementsBy } from "../../lib/algorithms";
 import countries from "./countries";
+import indexes from "./indexes";
 
 import style from "./forms.module.scss";
 
@@ -99,7 +100,7 @@ export const CountryInput = ({ className="", value, setValue }) => {
     }, [value])
 
     return (
-        <div className={`${style.countryInput} ${className}`}>
+        <div className={`${style.input} ${className}`}>
             <LabelInput 
                 label="Country / Region"
                 value={value} setValue={setValue}
@@ -110,7 +111,7 @@ export const CountryInput = ({ className="", value, setValue }) => {
             {/* the country chooser */}
             {((inputSelected || countryListHover) && countryList.length > 0) ? (
                 <ul 
-                    className={style.countryList}
+                    className={style.list}
                     onMouseEnter={() => setCountryListHover(true)}
                     onMouseLeave={() => setCountryListHover(false)}
                 >
@@ -118,7 +119,7 @@ export const CountryInput = ({ className="", value, setValue }) => {
                         return (
                             <li key={index}>
                                 <button 
-                                    className={style.countryButton}
+                                    className={style.button}
                                     onClick={() => { 
                                         setValue(country); 
                                         setCountryListHover(false)
@@ -133,4 +134,62 @@ export const CountryInput = ({ className="", value, setValue }) => {
             ): <></>}
         </div>
     );
+}
+
+export const PhoneNumberInput = ({ className="", value, setValue }) => {
+    const [inputSelected, setInputSelected] = useState(false);
+    const [phoneNumberIndexHover, setPhoneNumberIndexHover] = useState(false);
+    const [phoneNumberIndexList, setPhoneNumberIndexList] = useState(indexes);
+
+    useEffect(() => {
+        let bounds = getElementsBy(indexes, value);
+
+        if (bounds.length) {
+            setPhoneNumberIndexList(bounds);
+            return;
+        }
+
+        setPhoneNumberIndexList([]);
+    }, [value])
+
+    return (
+        <div className={`${style.input} ${className}`}>
+            <LabelInput 
+                label="Phone number"
+                value={value} 
+                setValue={(newValue) => {
+                    if (newValue === "" || (/^-?\d+$/.test(newValue.length > 1 ? newValue.substring(1) : newValue)))
+                        setValue(newValue);
+                    else if (newValue === "+")
+                        setValue("");
+                }}
+                onFocus={() => setInputSelected(true)}
+                onBlur={() => setInputSelected(false)}
+            />
+
+            {((inputSelected || phoneNumberIndexHover) && phoneNumberIndexList.length > 0) ? (
+                <ul 
+                    className={style.list}
+                    onMouseEnter={() => setPhoneNumberIndexHover(true)}
+                    onMouseLeave={() => setPhoneNumberIndexHover(false)}
+                >
+                    {phoneNumberIndexList.map((countryNumber, index) => {
+                        return (
+                            <li key={index}>
+                                <button 
+                                    className={style.button}
+                                    onClick={() => {
+                                        setValue("+" + countryNumber.match(/\d/g).join(""));
+                                        setPhoneNumberIndexHover(false)
+                                    }}
+                                >
+                                    {"+" + countryNumber}
+                                </button>
+                            </li>
+                        )
+                    })}                
+                </ul>
+            ): <></>}
+        </div>
+    )
 }
