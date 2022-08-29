@@ -70,13 +70,8 @@ const ShopItem = ({ frontImageSrc, images, text, className, description, price, 
                     <h4>{description}</h4>
                     <h4>Components: </h4>
                     <ul className={style.list}>
-                        {/* <li>Sensor 1</li>
-                        <li>Sensor 2</li>
-                        <li>Sensor 3</li>
-                        <li>ESP32</li>
-                        <li>Battery</li> */}
                         {componentslist.map((component, index) => (
-                            <li>{component}</li>
+                            <li key={index}>{component}</li>
                         ))}
                     </ul>
                 </div>
