@@ -22,60 +22,73 @@ const Shop = () => {
                     <Row>
                         <Col>
                             <ShopItem 
-                                image="yes" 
-                                imgSrc="/images/shop-images/1.png"
+                                className={style.item}
+                                frontImageSrc="/images/shop-images/1.png"
+                                images={["/images/shop-images/1.png"]}
                                 text="Sensor Package 1"
-                                href="/sensor-package-1"
-                                className={style.item}
+                                description="
+                                yes yes yes
+                                Description
+                                bla bla bla
+                                haha
+                                why
+                                "
+                                price="20"
+                                componentslist={["Sensor 1", "Sensor 2", "ESP32", "Battery"]}
                             />
                         </Col>
                         <Col>
-                            <ShopItem 
-                                image="yes" 
-                                imgSrc="/images/shop-images/2.png"
+                            <ShopItem
+                                className={style.item}
+                                frontImageSrc="/images/shop-images/2.png"
+                                images={["/images/shop-images/2.png"]}
                                 text="Sensor Package 2"
-                                href="/sensor-package-2"
-                                className={style.item}
+                                description="yes yes yes"
+                                price="20"
                             />
                         </Col>
                     </Row>
                     <Row>
                         <Col>
                             <ShopItem 
-                                image="yes" 
-                                imgSrc="/images/shop-images/3.png"
+                                className={style.item}
+                                frontImageSrc="/images/shop-images/3.png"
+                                images={["/images/shop-images/3.png"]}
                                 text="Sensor Package 3"
-                                href="/sensor-package-3"
-                                className={style.item}
+                                description="yes yes yes"
+                                price="20"
                             />
                         </Col>
                         <Col>
                             <ShopItem 
-                                image="yes" 
-                                imgSrc="/images/shop-images/4.png"
-                                text="Sensor Package 4"
-                                href="/sensor-package-4"
                                 className={style.item}
+                                frontImageSrc="/images/shop-images/4.png"
+                                images={["/images/shop-images/4.png"]}
+                                text="Sensor Package 4"
+                                description="yes yes yes"
+                                price="20"
                             />
                         </Col>
                     </Row>
                     <Row>
                         <Col>
                             <ShopItem 
-                                image="yes" 
-                                imgSrc="/images/shop-images/5.png"
+                                className={style.item} 
+                                frontImageSrc="/images/shop-images/5.png"
+                                images={["/images/shop-images/5.png"]}
                                 text="Sensor Package 5"
-                                href="/sensor-package-5"
-                                className={style.item}
+                                description="yes yes yes"
+                                price="20"
                             />
                         </Col>
                         <Col>
                             <ShopItem 
-                                image="yes" 
-                                imgSrc="/images/shop-images/6.png"
-                                text="Sensor Package 6"
-                                href="/sensor-package-6"
                                 className={style.item}
+                                frontImageSrc="/images/shop-images/6.png"
+                                images={["/images/shop-images/6.png"]}
+                                text="Sensor Package 6"
+                                description="yes yes yes"
+                                price="20"
                             />
                         </Col>
                     </Row>

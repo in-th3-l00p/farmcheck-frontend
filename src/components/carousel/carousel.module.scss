@@ -1,9 +1,6 @@
 @import "src/styles/colorscheme.scss";
 
-$brightnes: 50%;
-$saturation: 60%;
-
-.carousel-container {
+.container {
     position: relative;
 
     .carousel {
@@ -17,43 +14,33 @@ $saturation: 60%;
             top: 80%;
             z-index: 1;
         }
+    }
 
-        .carousel-indicators [data-bs-target] {
-            color: $light-grey;
+    .indicators [data-bs-target] {
+        color: $light-grey;
 
-            border: 1px solid transparent;
-            border-radius: 10px;
+        border: 1px solid transparent;
+        border-radius: 10px;
 
-            width: 12px;
-            height: 12px;
-            margin: 0 0 6vh 20px;
-
-            @media screen and (max-width: 800px) {
-                margin-left: 15px;
-                width: 10px;
-                height: 10px;
-            }
-
-            @media screen and (max-width: 660px) {
-                margin-bottom: 1vh;
-                margin-left: 10px;
-                width: 8px;
-                height: 8px;
-            }
+        width: 12px;
+        height: 12px;
+        margin: 0 0 6vh 20px;
+        
+        @media screen and (max-width: 800px) {
+            margin-left: 15px;
+            width: 10px;
+            height: 10px;
         }
 
-        .carousel-image {
-            object-fit: cover;
-            filter: brightness($brightnes) saturate($saturation);
-
-            width: 100vw;
-            height: 40vh;
-            @media screen and (min-height: 600px) { height: 80vh; }
-            @media screen and (max-width: 660px) { height: 40vh; }
+        @media screen and (max-width: 660px) {
+            margin-bottom: 1vh;
+            margin-left: 10px;
+            width: 8px;
+            height: 8px;
         }
     }
 
-    .carousel-text {
+    .text {
         // positioning
         position: absolute;
         top: 50%;

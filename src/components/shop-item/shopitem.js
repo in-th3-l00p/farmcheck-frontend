@@ -10,22 +10,81 @@
  * @returns the shop item
  */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import ImageCarousel from "../../components/carousel/carousel";
+import { Button } from "../../components/buttons/buttons"
 
 import style from "./shopitem.module.scss";
 
-const ShopItem = ({ image, imgSrc, text, href, className }) => {
+const ShopItemInterface = ({ isOpened, setOpen, children }) => {
     return (
-        <div 
-            className={`${style.container} ${className}`}
-            onClick={() => window.location.href=href}
-        >
-            <img 
-                alt={image}
-                className=""
-                src={imgSrc}
-            />
-            <h2 className={style.text}>{text}</h2>
+        <>
+            {isOpened && (
+                <div className={style.item}>
+                    <span 
+                        className={style.behind}
+                        onClick={() => setOpen(false)}
+                    />
+                    <div className={`${style.interface} px-3 py-3`}>
+                        {children}
+                    </div>
+                </div>
+            )}
+        </>
+    );
+}
+
+const ShopItem = ({ frontImageSrc, images, text, className, description, price, componentslist=[] }) => {
+    const [isItemOpen, setItemOpen] = useState(false);
+
+    useEffect(() => {
+        document.body.style.overflow = (
+            isItemOpen ? "hidden" : "unset"
+        );
+    }, [isItemOpen])
+
+    return (
+        <div> 
+            <div 
+                className={`${style.container} ${className}`}
+                onClick={() => {setItemOpen(!isItemOpen)}}
+            >
+                <img 
+                    alt="yes"
+                    src={frontImageSrc}
+                />
+                <h2 className={style.text}>{text}</h2>
+            </div>
+            <ShopItemInterface
+                isOpened={isItemOpen} 
+                setOpen={setItemOpen}
+            >
+                <ImageCarousel
+                    className = {style.carousel_image}
+                    images = {images}
+                    classNameIndicators = {style.carousel_indicators}
+                    sliding = {false}
+                />
+                <div className={style.text}>
+                    <h2>{text}</h2>
+                    <h4>{description}</h4>
+                    <h4>Components: </h4>
+                    <ul className={style.list}>
+                        {/* <li>Sensor 1</li>
+                        <li>Sensor 2</li>
+                        <li>Sensor 3</li>
+                        <li>ESP32</li>
+                        <li>Battery</li> */}
+                        {componentslist.map((component, index) => (
+                            <li>{component}</li>
+                        ))}
+                    </ul>
+                </div>
+                <div className={style.price}>
+                    <h3>Price: {price}$</h3>
+                    <Button className={style.button} disabled={true}>Add to cart</Button>
+                </div>
+            </ShopItemInterface>
         </div>
     )
 }

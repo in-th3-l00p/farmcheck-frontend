@@ -37,7 +37,12 @@ const FeatureIcon = ({className="", src, title, description}) => {
 const Home = () => {
     return (
         <div>
-            <ImageCarousel/>
+            <ImageCarousel
+                className={style.carousel_image}
+                images = {["/images/carousel-images/1.png", "/images/carousel-images/2.png", "/images/carousel-images/3.png"]}
+                title = "FarmCheck"
+                description = "Dc inca exist"
+            />
 
             <TextBox title="About us" className="text-center my-4">
                     <p className={style.about_text}>We are the CyberTech Farmers</p>

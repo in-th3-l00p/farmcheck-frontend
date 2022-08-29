@@ -35,3 +35,15 @@
         font-size: 1.25rem;
     }
 }
+
+$brightnes: 50%;
+$saturation: 60%;
+.carousel_image {
+    object-fit: cover;
+    filter: brightness($brightnes) saturate($saturation);
+
+    width: 100vw;
+    height: 40vh;
+    @media screen and (min-height: 600px) { height: 80vh; }
+    @media screen and (max-width: 660px) { height: 40vh; }
+}
