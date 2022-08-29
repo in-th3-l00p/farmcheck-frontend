@@ -103,7 +103,7 @@ export const AuthenticatedNavs = () => {
         <>
             <Nav className={style.profile}>
                 <img 
-                    src="images/default-profile-picture.png" 
+                    src="/images/default-profile-picture.png" 
                     alt="profile"
                     className={style.profilePicture}
                 />
