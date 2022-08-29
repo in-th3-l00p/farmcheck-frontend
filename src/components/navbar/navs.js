@@ -1,5 +1,6 @@
 import { Nav } from "react-bootstrap";
 import { deleteJWT } from "../../lib/auth";
+import userService from "../../lib/services/userService";
 import { Button } from '../buttons/buttons';
 
 import style from "./navbar.module.scss";
@@ -98,8 +99,6 @@ export const UnauthenticatedNavs = () => {
  * @returns the Nav components 
  */
 export const AuthenticatedNavs = () => {
-    const userDetails = JSON.parse(sessionStorage.getItem("user"));
-
     return (
         <>
             <Nav className={style.profile}>
@@ -108,7 +107,7 @@ export const AuthenticatedNavs = () => {
                     alt="profile"
                     className={style.profilePicture}
                 />
-                <h3 className="ms-3">{userDetails.login}</h3>
+                <h3 className="ms-3">{userService.getUserDetails()["login"]}</h3>
             </Nav>
             <Nav className={`${style.menu} mb-auto`}>
                 <Link href="/shop">Shop</Link>
@@ -138,7 +137,7 @@ export const AuthenticatedNavs = () => {
                 <Button 
                     className={style.button} 
                     onClick={() => {
-                        deleteJWT();
+                        userService.logout();
                         window.location.href = "/";
                     }}
                 >

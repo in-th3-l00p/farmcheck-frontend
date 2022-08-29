@@ -1,5 +1,6 @@
 // implementing authentification and authorization utilities
 import axios from "axios";
+import { NotAuthenticatedError } from "./constants";
 
 /**
  * Stores the JWT using cookies.
@@ -31,7 +32,7 @@ export function getJWT() {
             return cookies[i].substring(key.length, cookies[i].length);
     }
 
-    throw new Error("Unauthenticated");
+    throw NotAuthenticatedError;
 }
 
 /**
@@ -41,15 +42,18 @@ export function getJWT() {
  */
 export function getAuthorizationHeader() {
     const token = getJWT();
+    if (!token)
+        throw NotAuthenticatedError;
+
     return { "Authorization": `Bearer ${token}` };
 }
 
 /**
- * Gets user details if authenticated.
+ * Fetches user details if authenticated.
  * @returns the user details
  * @throws error if not authenticated
  */
-export async function getUserDetails() {
+export async function fetchUserDetails() {
     const response = await axios.get(
         "/api/account", 
         { headers: getAuthorizationHeader() }

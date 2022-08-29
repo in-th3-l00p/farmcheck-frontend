@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar as NavBar, NavbarBrand, Container } from "react-bootstrap";
 import { UnauthenticatedNavs, AuthenticatedNavs } from './navs';
+import userService from "../../lib/services/userService";
 
 import style from "./navbar.module.scss";
 import collapse from "./collapse.module.scss";
@@ -70,7 +71,7 @@ const Navbar = () => {
                     isOpened={isCollapseOpened} 
                     setOpen={setCollapseOpen}
                 >
-                    {sessionStorage.getItem("authenticated") === "true" ? (
+                    {userService.isAuthenticated() ? (
                         <AuthenticatedNavs />
                     ): (
                         <UnauthenticatedNavs />

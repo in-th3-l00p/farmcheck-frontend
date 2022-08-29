@@ -9,8 +9,7 @@ import { Login, Register } from "./pages/auth/auth";
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.scss"
-import { useEffect } from "react";
-import { getUserDetails } from "./lib/auth";
+import { useUserDetailsUpdater } from "./lib/services/userService";
 
 /**
  * Entry point of the application.
@@ -19,18 +18,7 @@ import { getUserDetails } from "./lib/auth";
  * @returns the main component
  */
 const App = () => {
-    // fetching user data on every page if authenticated
-    useEffect(() => {
-        getUserDetails()
-            .then(data => {
-                sessionStorage.setItem("authenticated", true);
-                sessionStorage.setItem("user", JSON.stringify(data));
-            })
-            .catch(err => {
-                sessionStorage.setItem("authenticated", false);
-                sessionStorage.removeItem("user");
-            })
-    }, [])
+    useUserDetailsUpdater();
 
     return (
         <div>
