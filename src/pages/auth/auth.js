@@ -158,6 +158,7 @@ export const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [name, setName] = useState({first: "", last: ""});
     const [country, setCountry] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [dob, setDOB] = useState({day: "", month: "", year: ""});
 
     const [error, setError] = useState("");
@@ -172,6 +173,7 @@ export const Register = () => {
             !!name.first && 
             !!name.last &&
             !!country &&
+            !!phoneNumber &&
             !!dob.day &&
             !!dob.month &&
             !!dob.year
@@ -195,6 +197,7 @@ export const Register = () => {
                     "lastName": name.last,
                     "email": email,
                     "password": password,
+                    "phoneNumber": phoneNumber,
                     "langKey": "en"
                 })
                     .then(resp => { 
@@ -280,6 +283,10 @@ export const Register = () => {
                     <CountryInput 
                         value={country} 
                         setValue={setCountry} 
+                    />
+                    <PhoneNumberInput 
+                        value={phoneNumber} 
+                        setValue={setPhoneNumber} 
                     />
 
                     <div className="d-flex gap-2">
