@@ -1,5 +1,4 @@
 import { Nav } from "react-bootstrap";
-import { deleteJWT } from "../../lib/auth";
 import userService from "../../lib/services/userService";
 import { Button } from '../buttons/buttons';
 
@@ -52,7 +51,7 @@ const Link = ({
 export const UnauthenticatedNavs = () => {
     return (
         <>
-            <Nav className={`${style.menu} mb-auto`}>
+            <Nav className={`${style.menu} mb-auto px-3`}>
                 <Link href="/shop">Shop</Link>
                 <Link href="/download">Download</Link>
                 <Link href="/wiki">Crop wiki</Link>
@@ -76,7 +75,7 @@ export const UnauthenticatedNavs = () => {
                 </Link>
             </Nav>
 
-            <Nav className="d-flex gap-3 mb-3 justify-content-center">
+            <Nav className="d-flex gap-3 mb-3 px-3 justify-content-center">
                 <Button 
                     className={style.button}
                     onClick={() => window.location.href="/login"}
@@ -102,14 +101,22 @@ export const AuthenticatedNavs = () => {
     return (
         <>
             <Nav className={style.profile}>
-                <img 
-                    src="/images/default-profile-picture.png" 
-                    alt="profile"
-                    className={style.profilePicture}
-                />
-                <h3 className="ms-3">{userService.getUserDetails()["login"]}</h3>
+                <button 
+                    type="button" 
+                    className={`${style.profileButton} py-3`}
+                    onClick={() => { 
+                        window.location.href = `/profile/${userService.getCurrentUsername()}` 
+                    }}
+                >
+                    <img 
+                        src="/images/default-profile-picture.png" 
+                        alt="profile"
+                        className={style.profilePicture}
+                    />
+                    <h3 className="ms-3">{userService.getCurrentUsername()}</h3>
+                </button>
             </Nav>
-            <Nav className={`${style.menu} mb-auto`}>
+            <Nav className={`${style.menu} mb-auto mx-3`}>
                 <Link href="/shop">Shop</Link>
                 <Link href="/download">Download</Link>
                 <Link href="/wiki">Crop wiki</Link>
@@ -133,7 +140,7 @@ export const AuthenticatedNavs = () => {
                     Switch theme
                 </Link>
             </Nav>
-            <Nav className={`${style.menu} ms-auto`}>
+            <Nav className={`${style.menu} mb-3 mx-3`}>
                 <Button 
                     className={style.button} 
                     onClick={() => {

@@ -9,4 +9,6 @@ Am patru ași, da' parcă ar fi certați
 Dacă nu ești tu, nu-mi pasă`;
 
 // exceptions
-export const NotAuthenticatedError = new Error("User is unauthenticated");
+export const NetworkError = new Error("Network error");
+export const NotAuthenticatedError = new Error("Client is unauthenticated");
+export const UserNotFound = new Error("User not found");

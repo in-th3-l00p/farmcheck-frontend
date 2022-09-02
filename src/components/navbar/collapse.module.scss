@@ -1,5 +1,6 @@
 @import "../../styles/colorscheme.scss";
 
+$collapse-width: 20rem;
 @keyframes collapseAppear {
     from { transform: translateX(100%); } 
     to { transform: translate(0); }
@@ -18,7 +19,7 @@
 
     // design
     height: 100vh;
-    width: 20rem;
+    width: $collapse-width;
     background-color: $light-grey;
     a { 
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 

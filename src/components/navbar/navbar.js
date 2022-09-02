@@ -24,7 +24,7 @@ const Collapse = ({ isOpened, setOpen, children }) => {
                         onClick={() => setOpen(false)}
                     />
 
-                    <div className={`${collapse.collapse} px-3 d-flex flex-column ms-4 text-right py-2`}>
+                    <div className={`${collapse.collapse} d-flex flex-column text-right`}>
                         {children}
                     </div>
                 </div>

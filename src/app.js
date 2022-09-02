@@ -1,15 +1,31 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useUserDetailsUpdater } from "./lib/services/userService";
 
+import { Spinner } from "react-bootstrap";
 import Navbar from "./components/navbar/navbar";
+
 import Home from "./pages/home/home";
 import Shop from "./pages/shop/shop";
 import About from "./pages/about/about";
 import { CreateFarm, Login, Register } from "./pages/auth/auth";
+import Profile from "./pages/profile/profile";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.scss"
-import { useUserDetailsUpdater } from "./lib/services/userService";
+
+const Loading = () => {
+    return (
+        <div className="loading">
+            <h1>Loading...</h1>
+            <Spinner 
+                animation="border" 
+                variant="success" 
+                className="spinner"
+            />
+        </div>
+    )
+}
 
 /**
  * Entry point of the application.
@@ -18,7 +34,18 @@ import { useUserDetailsUpdater } from "./lib/services/userService";
  * @returns the main component
  */
 const App = () => {
-    useUserDetailsUpdater();
+    const [loaded, error] = useUserDetailsUpdater();
+
+    // server error
+    if (error)
+        return (
+            <div className="error">
+                <p>server error: {error}</p>
+            </div>
+        );
+
+    if (!loaded)
+        return <Loading />
 
     return (
         <div>
@@ -31,6 +58,7 @@ const App = () => {
                     <Route path="/register" element={<Register />} />
                     <Route path="/createfarm" element={<CreateFarm />} />
                     <Route path="/shop" element={<Shop />} />
+                    <Route path="/profile/:username" element={<Profile />} />
                 </Routes>
             </Router>
         </div>

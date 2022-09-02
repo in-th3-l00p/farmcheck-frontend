@@ -1,4 +1,5 @@
 @import "../../styles/colorscheme.scss";
+@import "collapse.module.scss";
 
 .navbar {
     background-color: $green;
@@ -62,9 +63,28 @@ $line-margin: 10px;
     width: 120px;
 }
 
-.profile {
-    margin-top: 10px;
+$profile-button-hover-bg: #e2e2e2;
+@keyframes profileButtonHover {
+    from { background-color: $light-grey; }
+    to { background-color: $profile-button-hover-bg }
+}
 
+.profileButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $collapse-width;
+
+    background-color: $light-grey;
+    border: 0;
+
+    &:hover {
+        animation: profileButtonHover 0.15s;
+        background-color: $profile-button-hover-bg;
+    }
+}
+
+.profile {
     display: flex;
     align-items: center;
 
