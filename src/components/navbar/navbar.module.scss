@@ -5,16 +5,16 @@
     background-color: $green;
 }
 
-.brand { 
-    font-size: 1.75rem !important; 
+.brand {
+    font-size: 1.75rem !important;
     font-weight: 500 !important;
 
     @media screen and (max-width: 1200px) {
-        font-size: 1.6rem !important; 
+        font-size: 1.6rem !important;
     }
 
     @media screen and (max-width: 650px) {
-        font-size: 1.5rem !important; 
+        font-size: 1.5rem !important;
     }
 }
 
@@ -23,7 +23,7 @@
     position: relative;
     text-align: right;
     width: 90%;
-    margin: 20px auto 0 auto;
+    margin: 0 auto 0 auto;
 }
 
 .link {
@@ -65,8 +65,12 @@ $line-margin: 10px;
 
 $profile-button-hover-bg: #e2e2e2;
 @keyframes profileButtonHover {
-    from { background-color: $light-grey; }
-    to { background-color: $profile-button-hover-bg }
+    from {
+        background-color: $light-grey;
+    }
+    to {
+        background-color: $profile-button-hover-bg;
+    }
 }
 
 .profileButton {
