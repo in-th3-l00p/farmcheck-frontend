@@ -1,0 +1,53 @@
+@import "../../styles/colorscheme.scss";
+
+$container-margin: 100px;
+.formContainer {
+    margin-top: $container-margin;
+    margin-bottom: $container-margin;
+}
+
+.form {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+$input-container-border-distance: 0.8rem;
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    border-bottom: 2px solid $light-grey;
+    padding-bottom: $input-container-border-distance;
+    margin-bottom: $input-container-border-distance;
+}
+
+$farm-display-hover-bg-color: $light-grey;
+@keyframes onFarmDisplayHover {
+    from { background-color: white }
+    to { background-color: $light-grey; }
+}
+
+.farmContainer {
+    .farmDisplay {
+        border: 2px solid $grey;
+        border-radius: 15px;
+
+        &:hover {
+            animation: onFarmDisplayHover 0.3s;
+            background-color: $light-grey;
+            text-decoration: underline;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+}
+
+.placeholder {
+    &:hover {
+        cursor: wait !important;
+    }
+}

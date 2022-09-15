@@ -7,13 +7,19 @@ import Navbar from "./components/navbar/navbar";
 import Home from "./pages/home/home";
 import Shop from "./pages/shop/shop";
 import About from "./pages/about/about";
-import { CreateFarm, Login, Register } from "./pages/auth/auth";
+import { Login, Register } from "./pages/auth/auth";
 import Profile from "./pages/profile/profile";
+import { CreateFarm } from "./pages/farms/create";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.scss"
+import ShowFarms from "./pages/farms/show";
 
+/**
+ * Loading component showed when initial requests to the server are made.
+ * @return {JSX.Element} the loading component
+ */
 const Loading = () => {
     return (
         <div className="loading">
@@ -37,12 +43,16 @@ const App = () => {
     const [loaded, error] = useUserDetailsUpdater();
 
     // server error
-    if (error)
+    if (error) {
         return (
-            <div className="error">
-                <p>server error: {error}</p>
+            <div
+                className="d-flex align-items-center justify-content-center"
+                style={{width: "100vw", height: "100vh"}}
+            >
+                <h1>server error: {error.message}</h1>
             </div>
         );
+    }
 
     if (!loaded)
         return <Loading />
@@ -54,11 +64,12 @@ const App = () => {
                 <Routes>
                     <Route exact path="/" element={<Home />}/>
                     <Route path="/about" element={<About />}/>
+                    <Route path="/shop" element={<Shop />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/createfarm" element={<CreateFarm />} />
-                    <Route path="/shop" element={<Shop />} />
                     <Route path="/profile/:username" element={<Profile />} />
+                    <Route path="/farms" element={<ShowFarms />} />
+                    <Route path="/farms/create" element={<CreateFarm />} />
                 </Routes>
             </Router>
         </div>

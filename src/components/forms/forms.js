@@ -193,3 +193,27 @@ export const PhoneNumberInput = ({ className="", value, setValue }) => {
         </div>
     )
 }
+
+export const FileUploader = ({ setBlob }) => {
+    return (
+        <div>
+            <input
+                type="file"
+                onChange={(event) => {
+                    const file = event.target.files[0];
+                    if (!file) return; // error checking
+
+                    // getting the file content as an array
+                    const reader = new FileReader();
+                    reader.readAsArrayBuffer(file);
+                    reader.onload = (event) => {
+                        if (event.target.result instanceof ArrayBuffer) {
+                            const buffer = new Uint8Array(event.target.result);
+                            setBlob([...buffer]);
+                        }
+                    };
+                }}
+            />
+        </div>
+    );
+}
