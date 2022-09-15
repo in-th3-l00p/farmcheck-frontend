@@ -1,29 +1,5 @@
 @import "../../styles/colorscheme.scss";
 
-$container-margin: 100px;
-.formContainer {
-    margin-top: $container-margin;
-    margin-bottom: $container-margin;
-}
-
-.form {
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-}
-
-$border-distance: 0.8rem;
-.inputContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    border-bottom: 2px solid $light-grey;
-    padding-bottom: $border-distance;
-    margin-bottom: $border-distance;
-}
-
 .alert {
     margin-top: -10px;
     margin-bottom: -15px !important;

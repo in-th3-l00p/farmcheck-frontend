@@ -25,7 +25,7 @@ const Farm = ({ farm }) => {
 
 const FarmPlaceholder = ({ times = 1 }) => {
     const sizeRange = [2, 6];
-    const keys = _.map(new Array(times), () => 0);
+    const keys = _.map(new Array(times), (value, key) => key);
 
     return (
         <>
@@ -73,7 +73,7 @@ const ShowFarms = () => {
     }, []);
 
     return (
-        <TextBox className={style.formContainer}>
+        <TextBox className="form-container">
             {error && <ErrorAlert error={error} setError={setError} />}
             <div className="d-flex m-3">
                 <h3 className="text-decoration-underline me-auto">Your farms</h3>

@@ -5,7 +5,6 @@ import {FileUploader, LabelInput} from "../../components/forms/forms";
 import { Button } from "../../components/buttons/buttons";
 import ErrorAlert from "../../components/alerts/error";
 
-import style from "./farms.module.scss";
 import {getAuthorizationHeader} from "../../lib/auth";
 
 /**
@@ -23,8 +22,8 @@ export const CreateFarm = () => {
     }
 
     return (
-        <TextBox className={style.formContainer}>
-            <form className={style.form} onSubmit={(event) => {
+        <TextBox className="form-container">
+            <form className="form" onSubmit={(event) => {
                 event.preventDefault();
                 axios.post(
                     "/api/farms",
@@ -48,7 +47,7 @@ export const CreateFarm = () => {
                 <h2 className="text-center mb-4">Create Farm</h2>
                 <ErrorAlert error={error} setError={setError} />
 
-                <span className={style.inputContainer}>
+                <span className="input-container">
                     <LabelInput
                         label="Farm name:"
                         value={name}

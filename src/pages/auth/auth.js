@@ -44,9 +44,9 @@ export const Login = () => {
     );
 
     return (
-        <TextBox className={`${style.formContainer} ${style.login}`}>
+        <TextBox className={`form-container ${style.login}`}>
             <form
-                className={style.form}
+                className="form"
                 onSubmit={(event) => {
                     event.preventDefault();
                     axios.post(
@@ -89,7 +89,7 @@ export const Login = () => {
                 )}
                 <ErrorAlert error={error} setError={setError} />
 
-                <span className={style.inputContainer}>
+                <span className="input-container">
                     <LabelInput
                         label="Username" 
                         value={username}
@@ -169,8 +169,8 @@ export const Register = () => {
     }, [dob])
 
     return (
-        <TextBox className={style.formContainer}>
-            <form className={style.form} onSubmit={(event) => {
+        <TextBox className="form-container">
+            <form className="form" onSubmit={(event) => {
                 event.preventDefault();
                 axios.post("/api/register", {
                     "login": username,
@@ -200,8 +200,8 @@ export const Register = () => {
                 <h2 className="text-center mb-4">Register</h2>
                 <ErrorAlert error={error} setError={setError} />
 
-                {/* user's informations */}
-                <span className={style.inputContainer}>
+                {/* user's information */}
+                <span className="input-container">
                     <LabelInput
                         label="Email address"
                         type="email"
@@ -237,7 +237,7 @@ export const Register = () => {
                 </span>
 
                 {/* password */}
-                <span className={style.inputContainer}>
+                <span className="input-container">
                     <LabelInput 
                         type="password" 
                         label="Password"
@@ -260,7 +260,7 @@ export const Register = () => {
                 </span>
 
                 {/* date of birth and country */}
-                <span className={style.inputContainer}>
+                <span className="input-container">
                     <CountryInput 
                         value={country} 
                         setValue={setCountry} 

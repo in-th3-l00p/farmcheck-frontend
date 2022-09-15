@@ -13,7 +13,8 @@ import { CreateFarm } from "./pages/farms/create";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./app.scss"
+import "./styles/globals.scss";
+import "./app.scss";
 import ShowFarms from "./pages/farms/show";
 
 /**
@@ -68,8 +69,10 @@ const App = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile/:username" element={<Profile />} />
-                    <Route path="/farms" element={<ShowFarms />} />
-                    <Route path="/farms/create" element={<CreateFarm />} />
+                    <Route path="/farms">
+                        <Route index element={<ShowFarms />} />
+                        <Route path="/farms/create" element={<CreateFarm />} />
+                    </Route>
                 </Routes>
             </Router>
         </div>
