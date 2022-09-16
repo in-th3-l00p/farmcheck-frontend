@@ -49,7 +49,7 @@ const Link = ({
 export const UnauthenticatedNavs = () => {
     return (
         <>
-            <Nav className={`${style.menu} mb-auto px-3`}>
+            <Nav className={`${style.menu} mb-auto px-3 pt-3`}>
                 <Link href="/shop">Shop</Link>
                 <Link href="/download">Download</Link>
                 <Link href="/wiki">Crop wiki</Link>

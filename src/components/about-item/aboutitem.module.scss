@@ -3,40 +3,18 @@
 .container {
     margin: auto;
 
-    width: 300px !important;
+    width: 225px !important;
+    height: 400px !important;
 
-    @media screen and (max-width: 1500px) {
-        width: 225px !important;
-    }
-
-    @media screen and (max-width: 750px) {
-        width: 150px !important;
-    }
-
-    @media screen and (max-width: 550px) {
-        width: 225px !important;
-    }
+    margin-bottom: 30px !important;
 
     img {
         border-radius: 10px;
-        height: 350px !important;
-        width: 275px !important;
+
+        width: 225px !important;
+        height: 300px !important;
+
         border: 4px solid $yellow;
-
-        @media screen and (max-width: 1500px) {
-            height: 300px !important;
-            width: 225px !important;
-        }
-
-        @media screen and (max-width: 750px) {
-            height: 200px !important;
-            width: 150px !important;
-        }
-
-        @media screen and (max-width: 550px) {
-            height: 300px !important;
-            width: 225px !important;
-        }
     }
 
     .name {

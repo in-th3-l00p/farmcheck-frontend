@@ -11,6 +11,10 @@ $left-margin: 5%;
     margin: 100px auto 40px auto;
     border-radius: 20px;
 
+    @media screen and (max-width: 490px) {
+        width: 100%;
+    }
+
     .title {
         margin-left: $left-margin;
         max-width: 500px;
@@ -39,12 +43,11 @@ $left-margin: 5%;
     }
 
     .description {
+        @media screen and (max-width: 750px) {
+            max-width: 400px;
+        }
+        
         margin-left: $left-margin;
-    }
-
-    .team_title {
-        margin-left: $left-margin;
-        max-width: 250px;
     }
 
     .question {
@@ -61,7 +64,33 @@ $left-margin: 5%;
         }
     }
 
-    .profile {
-        margin-left: 2%;
+    .team {
+        // margin-left: $left-margin;
+
+        .team_title {
+            margin-left: $left-margin;
+            width: 250px;
+
+            @media screen and (max-width: 1500px) {
+                margin-left: 5%;
+            }
+
+            @media screen and (max-width: 750px) {
+                margin-left: 7%;
+            }
+
+            @media screen and (max-width: 600px) {
+                margin-left: 20%;
+            }
+
+            @media screen and (max-width: 450px) {
+                margin-left: 15%;
+            }
+        }
+
+        .profile {
+            margin-left: 2%;
+            margin-right: 2%;
+        }
     }
 }

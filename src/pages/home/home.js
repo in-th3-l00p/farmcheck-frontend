@@ -13,10 +13,10 @@ import style from "./home.module.scss";
 import feature from "./features.module.scss";
 
 const featuresIconsPath = [
-    "/icons/features-icons/livedata.png",
-    "/icons/features-icons/maintenance.png",
-    "/icons/features-icons/surveillance.png",
     "/icons/features-icons/dictionary.png",
+    "/icons/features-icons/livedata.png",
+    "/icons/features-icons/surveillance.png",
+    "/icons/features-icons/maintenance.png",
 ];
 
 const FeatureIcon = ({className="", src, title, description}) => {
@@ -41,16 +41,18 @@ const Home = () => {
                 className={style.carousel_image}
                 images = {["/images/carousel-images/1.png", "/images/carousel-images/2.png", "/images/carousel-images/3.png"]}
                 title = "FarmCheck"
-                description = "Dc inca exist"
+                description = "(Slogan goes here)"
             />
 
             <TextBox title="About us" className="text-center my-4">
-                    <p className={style.about_text}>We are the CyberTech Farmers</p>
+                    <p className={style.about_text}>CyberTech Farmers is a team of aspiring programmers, 
+                    brought together by a desire to make farming more efficient by bringing the combination 
+                    of agriculture and technology into the mainstream.</p>
                     <Button 
                         className=""
                         onClick={()=> window.open("https://www.facebook.com/FarmCheck-105867298851897", "_blank")}
                     >
-                        Learn more
+                        See more
                     </Button>
             </TextBox>
 
@@ -60,14 +62,16 @@ const Home = () => {
                         <FeatureIcon 
                             src={featuresIconsPath[0]} 
                             title="Dictionary" 
-                            description="helloworld" 
+                            description="All the information you need to know about planting all types of crops  
+                            (from carrots to asparagus?)  all in one place - our free CropWiki." 
                         />
                     </Col>
                     <Col>
                         <FeatureIcon 
                             src={featuresIconsPath[1]} 
                             title="Live Data" 
-                            description="helloworld" 
+                            description="Our hardware package brings you fresh data right from your own field, 
+                            with just a few sensors and clicks. Nothing easier than that." 
                         />
                     </Col>
                 </Row>
@@ -75,15 +79,16 @@ const Home = () => {
                     <Col>
                         <FeatureIcon 
                             src={featuresIconsPath[2]} 
-                            title="Maintenance" 
-                            description="helloworld" 
+                            title="Forecast" 
+                            description="We help you keep an eye on the weather in your area easily, by 
+                            integrating an alert system that warns you of extreme conditions." 
                         />
                     </Col>
                     <Col>
                         <FeatureIcon 
                             src={featuresIconsPath[3]} 
-                            title="Surveillance" 
-                            description="helloworld" 
+                            title="Maintenance" 
+                            description="Your sensors are in good hands. If anything happens, just give us a call." 
                         />
                     </Col>
                 </Row>

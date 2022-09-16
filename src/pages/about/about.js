@@ -26,19 +26,12 @@ const About = () => {
                         </h4>
                     </div>
                     <div className={style.line} />
-                    <div className={`${style.profiles} d-grid gap-3 py-5`}>
+                    <div className={`${style.team} d-grid gap-3 py-5`}>
                         <h2 className={style.team_title}>
                             Meet our amazing team
                         </h2>
                         <div className={style.profile}>
                             <Row>
-                                <Col>
-                                    <AboutItem
-                                        imageSrc="/images/about-images/1.png"
-                                        name="Random Dude"
-                                        description="Front-end Developer"
-                                    />
-                                </Col>
                                 <Col>
                                     <AboutItem
                                         imageSrc="/images/about-images/1.png"
