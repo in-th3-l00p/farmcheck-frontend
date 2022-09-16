@@ -194,6 +194,12 @@ export const PhoneNumberInput = ({ className="", value, setValue }) => {
     )
 }
 
+/**
+ * A file uploader component. Once a file is loaded, it will
+ * be stored as an Int8Array. 
+ * @param {callback} props.setBlob content state reducer
+ * @returns the components
+ */
 export const FileUploader = ({ setBlob }) => {
     return (
         <div>

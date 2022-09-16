@@ -9,6 +9,7 @@ import ErrorAlert from "../../components/alerts/error";
 
 import style from "./farms.module.scss";
 import {Placeholder} from "react-bootstrap";
+import farmService from "../../lib/services/farmService";
 
 /**
  * Farm display component.
@@ -62,14 +63,12 @@ const ShowFarms = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        axios.get(
-            "/api/farms",
-            { headers: getAuthorizationHeader() })
-            .then(resp => {
-                setFarms(resp.data)
+        farmService.getAuthenticatedUserFarms()
+            .then(farms => {
+                setFarms(farms);
                 setLoading(false);
             })
-            .catch(err => setError(err.message));
+            .catch(err => setError(err));
     }, []);
 
     return (
