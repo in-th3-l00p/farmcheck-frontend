@@ -1,6 +1,6 @@
 // implementing authentification and authorization utilities
 import axios from "axios";
-import { NotAuthenticatedError } from "./constants";
+import {NotAuthenticatedError} from "./constants";
 
 /**
  * Stores the JWT using cookies.
@@ -14,7 +14,7 @@ export function storeJWT(id_token) {
  * Deletes the JWT cookie.
  */
 export function deleteJWT() {
-    document.cookie="id_token=;expires=Thu, 01 Jan 00:00:00 UTC";
+    document.cookie="id_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC";
 }
 
 /**
