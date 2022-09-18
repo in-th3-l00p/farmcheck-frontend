@@ -1,5 +1,11 @@
 @import "./colorscheme.scss";
 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 $container-margin: 100px;
 .form-container {
   margin-top: $container-margin;

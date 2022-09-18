@@ -1,13 +1,11 @@
 import {useEffect, useState} from "react";
-import axios from "axios";
 import _ from "lodash";
-import {getAuthorizationHeader} from "../../lib/auth";
 
 import TextBox from "../../components/textbox/textbox";
 import {Button} from "../../components/buttons/buttons";
 import ErrorAlert from "../../components/alerts/error";
 
-import style from "./farms.module.scss";
+import style from "./styles/farms.module.scss";
 import {Placeholder} from "react-bootstrap";
 import farmService from "../../lib/services/farmService";
 
@@ -18,7 +16,10 @@ import farmService from "../../lib/services/farmService";
  */
 const Farm = ({ farm }) => {
     return (
-        <span className={`${style.farmDisplay} p-3`}>
+        <span
+            className={`${style.farmDisplay} p-3`}
+            onClick={() => window.location.href = "/farms/panel/" + farm.name}
+        >
             <h4>{farm.name}</h4>
         </span>
     )

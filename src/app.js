@@ -1,21 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useUserDetailsUpdater } from "./lib/services/userService";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {useUserDetailsUpdater} from "./lib/services/userService";
 
-import { Spinner } from "react-bootstrap";
+import {Spinner} from "react-bootstrap";
 import Navbar from "./components/navbar/navbar";
 
 import Home from "./pages/home/home";
 import Shop from "./pages/shop/shop";
 import About from "./pages/about/about";
-import { Login, Register } from "./pages/auth/auth";
+import {Login, Register} from "./pages/auth/auth";
 import Profile from "./pages/profile/profile";
-import { CreateFarm } from "./pages/farms/create";
+import CreateFarm from "./pages/farms/create";
+import ShowFarms from "./pages/farms/show";
+import FarmPanel from "./pages/farms/panel/panel";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/globals.scss";
 import "./app.scss";
-import ShowFarms from "./pages/farms/show";
 
 /**
  * Loading component showed when initial requests to the server are made.
@@ -72,6 +73,7 @@ const App = () => {
                     <Route path="/farms">
                         <Route index element={<ShowFarms />} />
                         <Route path="/farms/create" element={<CreateFarm />} />
+                        <Route path="/farms/panel/:farm_name" element={<FarmPanel />} />
                     </Route>
                 </Routes>
             </Router>

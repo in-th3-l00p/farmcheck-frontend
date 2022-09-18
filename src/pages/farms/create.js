@@ -1,7 +1,7 @@
-import { useState } from "react";
+import {useState} from "react";
 import TextBox from "../../components/textbox/textbox";
 import {FileUploader, LabelInput} from "../../components/forms/forms";
-import { Button } from "../../components/buttons/buttons";
+import {Button} from "../../components/buttons/buttons";
 import ErrorAlert from "../../components/alerts/error";
 
 import farmService from "../../lib/services/farmService";
@@ -10,7 +10,7 @@ import farmService from "../../lib/services/farmService";
  * Create Farm page.
  * @returns page at "/createfarm"
  */
-export const CreateFarm = () => {
+const CreateFarm = () => {
     const [name, setName] = useState("");
     const [image, setImage] = useState([]);
 
@@ -54,3 +54,5 @@ export const CreateFarm = () => {
         </TextBox>
     )
 }
+
+export default CreateFarm;

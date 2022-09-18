@@ -10,7 +10,7 @@
   border: none;
   color: black;
   border-radius: 15px;
-  padding: 0.6rem;
+  padding: 0.4rem;
 
   &:hover:enabled {
     animation: onButtonHover 0.5s;
@@ -22,8 +22,7 @@
     background-color: $dark-orange;
   }
 
-  font-weight: 600;
-  font-size: 1.75rem;
+  font-size: 1.15rem;
   @media screen and (max-width: 650px) {
     font-size: 1.5rem;
   }
