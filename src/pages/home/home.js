@@ -3,11 +3,11 @@
  * @returns page's component
  */
 
-import { Col, Row } from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import ImageCarousel from "../../components/carousel/carousel";
 import TextBox from "../../components/textbox/textbox";
 import Footer from "../../components/footer/footer"
-import { Button } from "../../components/buttons/buttons";
+import {Button} from "../../components/buttons/buttons";
 
 import style from "./home.module.scss";
 import feature from "./features.module.scss";
@@ -41,7 +41,7 @@ const Home = () => {
                 className={style.carousel_image}
                 images = {["/images/carousel-images/1.png", "/images/carousel-images/2.png", "/images/carousel-images/3.png"]}
                 title = "FarmCheck"
-                description = "Dc inca exist"
+                description = "We plan(t) the future"
             />
 
             <TextBox title="About us" className="text-center my-4">

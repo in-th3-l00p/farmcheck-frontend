@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel } from "react-bootstrap";
+import {Carousel} from "react-bootstrap";
 
 import style from "./carousel.module.scss";
 
@@ -23,7 +23,7 @@ export const ImageCarousel = ({ className, images, title="", description="", cla
             </Carousel>
             <span className={`${style.text} text-center`}>
                 <h1 className="fw-bold">{title}</h1>
-                <h2 className="fw-light">{description}</h2>
+                <h2 className="fw-light fst-italic">"{description}"</h2>
             </span>
         </div>
     );
