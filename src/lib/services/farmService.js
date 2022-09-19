@@ -1,27 +1,28 @@
 import axios from "axios";
-import { getAuthorizationHeader } from "../auth";
+import {getAuthorizationHeader} from "../auth";
 
 // farm main service
 class FarmService {
     /**
      * Stores a farm inside the database.
      * @param {string} name name farm
-     * @param {bytes} image the image file encoded in bytes
+     * @param {*[]} image the image file encoded in bytes
      */
     async createFarm(name, image) {
-        axios.post(
-            "/api/farms",
-            { name, image },
-            { headers: getAuthorizationHeader() }
-        )
-            .catch(err => {
-                switch (err.code) {
-                    case "ERR_BAD_REQUEST":
-                        throw new Error(err.response.data.title);
-                    default:
-                        throw new Error("Server error");
-                }
-            });
+        try {
+            await axios.post(
+                "/api/farms",
+                {name, image},
+                {headers: getAuthorizationHeader()}
+            );
+        }catch(err) {
+            switch (err.code) {
+                case "ERR_BAD_REQUEST":
+                    throw new Error(err.response.data.title);
+                default:
+                    throw new Error("Server error");
+            }
+        }
     }
 
     /**
