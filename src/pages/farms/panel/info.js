@@ -1,5 +1,6 @@
 import {Container, Placeholder} from "react-bootstrap";
 import {useEffect, useRef} from "react";
+import {base64ToBlob} from "../../../lib/algorithms";
 
 /**
  * Used while waiting for the farm data to be fetched.
@@ -22,21 +23,19 @@ const PlaceholderInfoTab = () => {
 }
 
 /**
- * Tab used by the farm panel that displays informations about the farm.
+ * Tab used by the farm panel that displays information about the farm.
  * @param farm the farm object
  * @param users the users of the farm
  * @return {JSX.Element} the tab component
  */
 const InfoTab = ({ farm, users }) => {
-    // todo: fix b64 decoder
     const imageRef = useRef(null);
-    useEffect(() => {
+    useEffect(() => { // loading the image
         if (imageRef.current === null || typeof farm === "undefined")
             return;
-        const image = atob(farm.image);
-        const blob = new Blob([image], {type: "image/jpeg"});
-        const url = URL.createObjectURL(blob);
+        const url = URL.createObjectURL(base64ToBlob(farm.image));
         imageRef.current.src = url;
+        imageRef.current.onload = URL.revokeObjectURL(url);
     }, [imageRef, farm])
 
     if (
@@ -50,6 +49,7 @@ const InfoTab = ({ farm, users }) => {
                 ref={imageRef}
                 width={200}
                 height={200}
+                alt="profile"
             />
             <div>
                 <h3 className="text-decoration-underline">{farm.name}</h3>

@@ -41,3 +41,17 @@ export const getElementsBy = (list, value) => {
 
     return list.slice(bounds[0], bounds[1]);
 }
+
+/**
+ * Creates a blob from a base64 encoded string.
+ * @param b64 the base64 encoded string
+ * @return {Blob} the blob
+ */
+export const base64ToBlob = (b64) => {
+    const bytes = atob(b64);
+    const byteNumbers = new Array(bytes.length);
+    for (let i = 0; i < bytes.length; i++)
+        byteNumbers[i] = bytes.charCodeAt(i);
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray]);
+}
