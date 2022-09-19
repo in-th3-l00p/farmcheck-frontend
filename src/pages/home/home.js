@@ -60,14 +60,14 @@ const Home = () => {
                         <FeatureIcon 
                             src={featuresIconsPath[0]} 
                             title="Dictionary" 
-                            description="helloworld" 
+                            description="Our team indexed every agricultural term you will ever need"
                         />
                     </Col>
                     <Col>
                         <FeatureIcon 
                             src={featuresIconsPath[1]} 
                             title="Live Data" 
-                            description="helloworld" 
+                            description="We provide live data about your field"
                         />
                     </Col>
                 </Row>
@@ -76,14 +76,14 @@ const Home = () => {
                         <FeatureIcon 
                             src={featuresIconsPath[2]} 
                             title="Maintenance" 
-                            description="helloworld" 
+                            description="No need to be scared of technology, we will always help you"
                         />
                     </Col>
                     <Col>
                         <FeatureIcon 
                             src={featuresIconsPath[3]} 
                             title="Surveillance" 
-                            description="helloworld" 
+                            description="If something ever happens, we got you covered"
                         />
                     </Col>
                 </Row>
