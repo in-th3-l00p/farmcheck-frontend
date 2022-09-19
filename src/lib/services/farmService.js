@@ -5,8 +5,8 @@ import {getAuthorizationHeader} from "../auth";
 class FarmService {
     /**
      * Stores a farm inside the database.
-     * @param {string} name name farm
-     * @param {*[]} image the image file encoded in bytes
+     * @param name name farm
+     * @param image the image file encoded in bytes
      */
     async createFarm(name, image) {
         try {
@@ -23,6 +23,39 @@ class FarmService {
                     throw new Error("Server error");
             }
         }
+    }
+
+    /**
+     * Updates a farm from the database
+     * @param farmName current farm name
+     * @param newName the new name
+     * @param newImage the new image
+     */
+    async updateFarm(farmName, newName, newImage) {
+        await axios.put(
+            "/api/farms/update",
+            {
+                name: newName,
+            },
+            {
+                headers: getAuthorizationHeader(),
+                params: { farmName }
+            }
+        );
+    }
+
+    /**
+     * Deletes a farm from the database.
+     * @param farmName the farm name
+     */
+    async deleteFarm(farmName) {
+        await axios.delete(
+            "/api/farms/delete",
+            {
+                headers: getAuthorizationHeader(),
+                params: {farmName}
+            }
+        );
     }
 
     /**

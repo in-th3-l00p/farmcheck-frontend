@@ -1,10 +1,9 @@
 import {useState} from "react";
-import axios from "axios";
 import {Container, Form, Modal} from "react-bootstrap";
 import {Button} from "../../../components/buttons/buttons";
 import {FileUploader} from "../../../components/forms/forms";
-import {getAuthorizationHeader} from "../../../lib/auth";
 import ErrorAlert from "../../../components/alerts/error";
+import farmService from "../../../lib/services/farmService";
 
 /**
  * Used while waiting for the farm data to be fetched.
@@ -57,13 +56,7 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farmName }) => {
                     disabled={farmNameInput !== farmName}
                     onClick={() => {
                         setDeleting(true);
-                        axios.delete(
-                            "/api/farms/delete",
-                            {
-                                headers: getAuthorizationHeader(),
-                                params: { farmName: farmName }
-                            }
-                        )
+                        farmService.deleteFarm(farmName)
                             .then(() => window.location.href = "/farms?deleted")
                             .catch((err) => setError(err.message))
                             .finally(() => {
@@ -110,16 +103,7 @@ const SettingsTab = ({ farm, users }) => {
             <Form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    axios.put(
-                        "/api/farms/update",
-                        {
-                            name: inputFarmName,
-                        },
-                        {
-                            headers: getAuthorizationHeader(),
-                            params: { farmName: farm.name }
-                        }
-                    )
+                    farmService.updateFarm(farm.name, inputFarmName)
                         .then(() => window.location.href = `/farms/panel/${inputFarmName}?updated`)
                         .catch(err => setError(err.message));
                 }}
