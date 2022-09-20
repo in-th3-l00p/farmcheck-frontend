@@ -18,7 +18,7 @@ const Farm = ({ farm }) => {
     return (
         <span
             className={`${style.farmDisplay} p-3`}
-            onClick={() => window.location.href = "/farms/panel/" + farm.name}
+            onClick={() => window.location.href = "/farms/panel/" + farm.id}
         >
             <h4>{farm.name}</h4>
         </span>

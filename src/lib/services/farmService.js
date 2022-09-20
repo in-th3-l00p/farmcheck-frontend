@@ -26,12 +26,46 @@ class FarmService {
     }
 
     /**
+     * Gets a farm's users.
+     * @param farmId the id of the farm
+     * @returns 
+     */
+    async getFarmUsers(farmId) {
+        const resp = await axios.get(
+            "/api/farms/users",
+            {
+                headers: getAuthorizationHeader(),
+                params: { farmId }
+            }
+        );
+
+        return resp.data;
+    }
+
+    /**
+     * Gets a farm object.
+     * @param farmId farm's id
+     * @returns 
+     */
+    async getFarm(farmId) {
+        const resp = await axios.get(
+            "/api/farms/data",
+            {
+                headers: getAuthorizationHeader(),
+                params: { farmId }
+            }
+        );
+
+        return resp.data;
+    }
+
+    /**
      * Updates a farm from the database
-     * @param farmName current farm name
+     * @param farmId farm's id
      * @param newName the new name
      * @param newImage the new image
      */
-    async updateFarm(farmName, newName, newImage) {
+    async updateFarm(farmId, newName, newImage) {
         await axios.put(
             "/api/farms/update",
             {
@@ -39,21 +73,21 @@ class FarmService {
             },
             {
                 headers: getAuthorizationHeader(),
-                params: { farmName }
+                params: { farmId }
             }
         );
     }
 
     /**
      * Deletes a farm from the database.
-     * @param farmName the farm name
+     * @param farmId farm's id
      */
-    async deleteFarm(farmName) {
+    async deleteFarm(farmId) {
         await axios.delete(
             "/api/farms/delete",
             {
                 headers: getAuthorizationHeader(),
-                params: {farmName}
+                params: { farmId }
             }
         );
     }

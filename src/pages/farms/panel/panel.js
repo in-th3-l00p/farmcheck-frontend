@@ -10,6 +10,7 @@ import style from "../styles/panel.module.scss";
 import InfoTab from "./info";
 import UsersTab from "./users";
 import SettingsTab from "./settings";
+import farmService from "../../../lib/services/farmService";
 
 // every tab indexed
 const tabs = {
@@ -89,25 +90,13 @@ const FarmPanel = () => {
 
     // getting information about the farm
     useEffect(() => {
-        axios.get(
-            "/api/farms/users",
-            {
-                headers: getAuthorizationHeader(),
-                params: { farmName: params["farm_name"] }
-            }
-        )
-            .then(resp => setUsers(resp.data))
-            .catch(err => setError(err.message));
-
-        axios.get(
-            "/api/farms/data",
-            {
-                headers: getAuthorizationHeader(),
-                params: { farmName: params["farm_name"] }
-            }
-        )
-            .then(resp => setFarm(resp.data))
+        farmService.getFarm(params["farm_id"])
+            .then(resp => setFarm(resp))
             .catch(err => setError(err.message))
+
+        farmService.getFarmUsers(params["farm_id"])
+            .then(resp => setUsers(resp))
+            .catch(err => setError(err.message));
     }, [])
 
     if (error)

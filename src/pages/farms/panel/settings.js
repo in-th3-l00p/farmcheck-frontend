@@ -22,10 +22,10 @@ const SettingsTabPlaceholder = () => {
  * @param show state that controls if the modal should appear on the screen
  * @param setShow show state's reducer
  * @param setError error state's reducer
- * @param farmName the name of the farm
+ * @param farm farm object
  * @return {JSX.Element} the component
  */
-const DeleteFarmConfirmationModal = ({ show, setShow, setError, farmName }) => {
+const DeleteFarmConfirmationModal = ({ show, setShow, setError, farm }) => {
     const [farmNameInput, setFarmNameInput] = useState("");
     const [deleting, setDeleting] = useState(false);
 
@@ -43,7 +43,7 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farmName }) => {
             <Modal.Body>
                 <p>
                     If you really want to delete farm
-                    <b>{` "${farmName}"`}</b>,
+                    <b>{` "${farm.name}"`}</b>,
                     write the name of the farm:
                 </p>
                 <Form.Control
@@ -53,10 +53,10 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farmName }) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button
-                    disabled={farmNameInput !== farmName}
+                    disabled={farmNameInput !== farm.name}
                     onClick={() => {
                         setDeleting(true);
-                        farmService.deleteFarm(farmName)
+                        farmService.deleteFarm(farm.id)
                             .then(() => window.location.href = "/farms?deleted")
                             .catch((err) => setError(err.message))
                             .finally(() => {
@@ -98,7 +98,7 @@ const SettingsTab = ({ farm, users }) => {
                 show={showDeleteModal}
                 setShow={setShowDeleteModal}
                 setError={setError}
-                farmName={farm.name}
+                farm={farm}
             />
             <Form
                 onSubmit={(event) => {

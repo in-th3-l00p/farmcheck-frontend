@@ -73,7 +73,7 @@ const App = () => {
                     <Route path="/farms">
                         <Route index element={<ShowFarms />} />
                         <Route path="/farms/create" element={<CreateFarm />} />
-                        <Route path="/farms/panel/:farm_name" element={<FarmPanel />} />
+                        <Route path="/farms/panel/:farm_id" element={<FarmPanel />} />
                     </Route>
                 </Routes>
             </Router>
