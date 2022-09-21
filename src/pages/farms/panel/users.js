@@ -1,7 +1,8 @@
 import {useState} from "react";
-import {Col, Container, FormControl, Modal, Row, Table} from "react-bootstrap";
+import {Alert, Col, Container, FormControl, Modal, Row, Table} from "react-bootstrap";
 import {Button} from "../../../components/buttons/buttons";
 import ErrorAlert from "../../../components/alerts/error";
+import userService from "../../../lib/services/userService";
 
 /**
  * Used while waiting for the farm data to be fetched.
@@ -61,7 +62,13 @@ const UserDisplay = ({ user, setShowRemoveUserModal, setRemoveUser }) => {
  * @param setError error state's reducer
  * @return {JSX.Element} the modal component
  */
-const AddUserModal = ({ show, setShow }) => {
+const AddUserModal = ({ 
+    farmId, 
+    setSuccessMessage, 
+    setErrorMessage, 
+    show, 
+    setShow 
+}) => {
     const [userDetails, setUserDetails] = useState("");
     const [error, setError] = useState("");
 
@@ -85,6 +92,12 @@ const AddUserModal = ({ show, setShow }) => {
             <Modal.Footer>
                 <Button
                     disabled={!userDetails}
+                    onClick={() => {
+                        userService.addFarm(userDetails, farmId)
+                            .then((message) => setSuccessMessage(message))
+                            .catch((error) => setErrorMessage(error.message))
+                            .finally(() => setShow(false));
+                    }}
                     className="fw-bolder"
                 >
                     Add
@@ -94,7 +107,15 @@ const AddUserModal = ({ show, setShow }) => {
     )
 }
 
-const RemoveUserModal = ({ user, setUser, show, setShow }) => {
+const RemoveUserModal = ({ 
+    farmId,
+    setSuccessMessage,
+    setErrorMessage,
+    user, 
+    setUser, 
+    show, 
+    setShow 
+}) => {
     const [error, setError] = useState("");
     const [confirmationInput, setConfirmationInput] = useState("");
 
@@ -103,7 +124,8 @@ const RemoveUserModal = ({ user, setUser, show, setShow }) => {
             show={show}
             onHide={() => {
                 setUser(null);
-                setShow(false)
+                setConfirmationInput("");
+                setShow(false);
             }}
         >
             <Modal.Header>
@@ -122,6 +144,15 @@ const RemoveUserModal = ({ user, setUser, show, setShow }) => {
             <Modal.Footer>
                 <Button
                     disabled={confirmationInput !== user.login}
+                    onClick={() => {
+                        userService.removeFarm(user.login, farmId)
+                            .then((message) => setSuccessMessage(message))
+                            .catch((err) => setErrorMessage(err.message))
+                            .finally(() => {
+                                setShow(false);
+                                setConfirmationInput("");
+                            });
+                    }}
                     className="fw-bold bg-danger text-white"
                 >
                     Remove
@@ -133,6 +164,7 @@ const RemoveUserModal = ({ user, setUser, show, setShow }) => {
 
 /**
  * Tab for supporting CRUD operations on farm's users.
+ * TODO: automatically reload changes.
  * @param farm farm object
  * @param users farm's users
  * @return {JSX.Element} the tab component
@@ -143,6 +175,10 @@ const UsersTab = ({ farm, users }) => {
     const [showRemoveUserModal, setShowRemoveUserModal] = useState(false);
     const [selectedRemoveUser, setSelectedRemoveUser] = useState(null);
 
+    // messages showed for adding users to the farm
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+
     if (
         typeof farm === "undefined" ||
         typeof users === "undefined"
@@ -151,18 +187,41 @@ const UsersTab = ({ farm, users }) => {
     return (
         <>
             <AddUserModal
+                farmId={farm.id}
+                setSuccessMessage={setSuccessMessage}
+                setErrorMessage={setErrorMessage}
                 show={showAddUserModal}
                 setShow={setShowAddUserModal}
             />
 
-            {selectedRemoveUser && (<RemoveUserModal
-                user={selectedRemoveUser}
-                setUser={setSelectedRemoveUser}
-                show={showRemoveUserModal}
-                setShow={setShowRemoveUserModal}
-            />)}
+            {selectedRemoveUser && (
+                <RemoveUserModal
+                    farmId={farm.id}
+                    setSuccessMessage={setSuccessMessage}
+                    setErrorMessage={setErrorMessage}
+                    user={selectedRemoveUser}
+                    setUser={setSelectedRemoveUser}
+                    show={showRemoveUserModal}
+                    setShow={setShowRemoveUserModal}
+                />
+            )}
 
             <Container className="d-flex flex-column gap-2">
+                {errorMessage && (
+                    <ErrorAlert 
+                        error={errorMessage} 
+                        setError={setErrorMessage}
+                    />
+                )}
+                {successMessage && (
+                    <Alert
+                        variant="success"
+                        onClose={() => setSuccessMessage("")}
+                        dismissible 
+                    >
+                        {successMessage}
+                    </Alert>
+                )}
                 <div className="text-end">
                     <Button
                         onClick={() => setShowAddUserModal(true)}

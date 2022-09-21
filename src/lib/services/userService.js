@@ -78,6 +78,43 @@ class UserService {
             throw NetworkError;
         }
     }
+
+    /**
+     * Adds a user to a farm.
+     * @param {string} username user's username
+     * @param {number} farmId farm's id
+     * @returns the status message
+     */
+    async addFarm(username, farmId) {
+        try {
+            const resp = await axios.put(
+                "/api/user/addFarm",
+                {},
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { "userLogin": username, farmId }
+                }
+            )
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    async removeFarm(username, farmId) {
+        try {
+            const resp = await axios.delete(
+                "/api/user/removeFarm",
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { "userLogin": username, farmId }
+                }
+            )
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data);
+        }
+    }
 }
 
 /**

@@ -1,21 +1,22 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import axios from "axios";
-import {getAuthorizationHeader} from "../../../lib/auth";
 import ErrorAlert from "../../../components/alerts/error";
 import TextBox from "../../../components/textbox/textbox";
 import {Col, Row} from "react-bootstrap";
+import farmService from "../../../lib/services/farmService";
 
 import style from "../styles/panel.module.scss";
+
 import InfoTab from "./info";
 import UsersTab from "./users";
 import SettingsTab from "./settings";
-import farmService from "../../../lib/services/farmService";
+import ChatTab from "./chat";
 
 // every tab indexed
 const tabs = {
     "Info": (farm, users) => <InfoTab farm={farm} users={users} />,
     "Users": (farm, users) => <UsersTab farm={farm} users={users} />,
+    "Chat": (farm, users) => <ChatTab farm={farm} users={users} />,
     "Settings": (farm, users) => <SettingsTab farm={farm} users={users} />
 };
 
