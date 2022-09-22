@@ -36,11 +36,12 @@ const TabNav = ({ tab, setTab }) => {
         <Row className={`${style.tabDisplay} mb-2`}>
             <Col sm={1}>
                 <button
-                    onClick={() => {
+                    onClick={({ target }) => {
                         if (tab === 0)
                             setTab(tabsLength - 1);
                         else
                             setTab(tab - 1);
+                        target.blur();
                     }}
                     className={`
                         ${style.tabArrow} 
@@ -57,11 +58,12 @@ const TabNav = ({ tab, setTab }) => {
             </Col>
             <Col sm={1}>
                 <button
-                    onClick={() => {
+                    onClick={({ target }) => {
                         if (tab === tabsLength - 1)
                             setTab(0);
                         else
                             setTab(tab + 1);
+                        target.blur();
                     }}
                     className={`
                         ${style.tabArrow} 

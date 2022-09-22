@@ -44,3 +44,17 @@ $border-radius: 10px;
   border: $border;
   border-radius: $border-radius;
 }
+
+.chatBox {
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+
+  ul {
+    width: 100%;
+    margin-top: auto;
+    list-style: none;
+    padding-left: 0;
+  }
+}

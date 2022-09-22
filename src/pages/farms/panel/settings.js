@@ -103,8 +103,8 @@ const SettingsTab = ({ farm, users }) => {
             <Form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    farmService.updateFarm(farm.name, inputFarmName)
-                        .then(() => window.location.href = `/farms/panel/${inputFarmName}?updated`)
+                    farmService.updateFarm(farm.id, inputFarmName)
+                        .then(() => window.location.href = `/farms/panel/${farm.id}?updated`)
                         .catch(err => setError(err.message));
                 }}
             >
