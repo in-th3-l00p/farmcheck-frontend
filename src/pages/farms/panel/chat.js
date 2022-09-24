@@ -6,6 +6,8 @@ import SockJsClient from "react-stomp";
 import style from "../styles/panel.module.scss";
 import _ from "lodash";
 import userService from "../../../lib/services/userService";
+import messageService from "../../../lib/services/messageService";
+import ErrorAlert from "../../../components/alerts/error";
 
 const CHAT_URL = "http://localhost:8080/ws";
 
@@ -18,11 +20,16 @@ const ChatTabPlaceholder = () => {
 }
 
 const ChatMessage = ({ message }) => {
+    const date = message.datetime
+        .replace(/T/g, " ")
+        .replace(/\..*/g, "");
+
     return (
         <Container fluid className="p-1 border">
             <Row>
-                <Col><p className="fw-bold me-2">{message.sender}</p></Col>
-                <Col><p>{message.text}</p></Col>
+                <Col sm><p className="fw-bold me-2">{message.sender}</p></Col>
+                <Col sm={6}><p>{message.text}</p></Col>
+                <Col sm><p className="text-muted fw-lighter">{date}</p></Col>
             </Row>
         </Container>
     );
@@ -36,6 +43,14 @@ const ChatTab = ({ farm, users }) => {
 
     const [messageInput, setMessageInput] = useState("");
     const [messages, setMessages] = useState([]);
+
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        messageService.getFarmMessages(farm.id)
+            .then(messageList => setMessages(messageList))
+            .catch(err => setError(err));
+    }, []);
 
     // handling auto scrolling
     useEffect(() => {
@@ -64,6 +79,7 @@ const ChatTab = ({ farm, users }) => {
                  ref={stompClient}
             />
             <Container className="d-flex flex-column gap-2">
+                <ErrorAlert error={error} setError={setError} />
                 <div
                     className={style.chatBox}
                     ref={chatBox}
@@ -87,12 +103,13 @@ const ChatTab = ({ farm, users }) => {
                         if (stompClient.current === null)
                             return;
                         stompClient.current.sendMessage(
-                            `/topic/${farm.id}`,
+                            `/app/chat/sendMessage/${farm.id}`,
                             JSON.stringify({
                                 sender: userService.getCurrentUsername(),
                                 text: messageInput
                             })
                         );
+                        setMessageInput("");
                     }}
                 >
                     <Form.Control
