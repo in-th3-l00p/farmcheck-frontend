@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import ErrorAlert from "../../../components/alerts/error";
 import TextBox from "../../../components/textbox/textbox";
 import {Col, Row} from "react-bootstrap";
 import farmService from "../../../lib/services/farmService";
@@ -11,6 +10,7 @@ import InfoTab from "./info";
 import UsersTab from "./users";
 import SettingsTab from "./settings";
 import ChatTab from "./chat";
+import NotFound from "../../notFound";
 
 // every tab indexed
 const tabs = {
@@ -103,7 +103,7 @@ const FarmPanel = () => {
     }, [])
 
     if (error)
-        return <ErrorAlert error={error} setError={setError} />;
+        return <NotFound />
     return (
         <TextBox className="form-container flex-column center">
             <TabNav tab={tab} setTab={setTab} />

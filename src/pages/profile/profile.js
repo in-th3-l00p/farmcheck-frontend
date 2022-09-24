@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 import TextBox from "../../components/textbox/textbox";
-import { Row, Col, Placeholder } from "react-bootstrap";
+import {Col, Placeholder, Row} from "react-bootstrap";
 import userService from "../../lib/services/userService";
-import { NotAuthenticatedError } from "../../lib/constants";
+import {NotAuthenticatedError} from "../../lib/constants";
 
 /**
  * Animated placeholder used when the profile is loading.
@@ -75,7 +75,7 @@ const Profile = () => {
     if (error)
         return (
             <TextBox style={{ marginTop: "100px" }}>
-                <h3 className="text-center">{error.message}</h3>
+                <h3 className="text-center">User {params.username} not found.</h3>
             </TextBox>
         );
 

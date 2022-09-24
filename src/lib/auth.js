@@ -36,6 +36,19 @@ export function getJWT() {
 }
 
 /**
+ * Checks if the user is authenticated.
+ * @return {boolean} true if authenticated
+ */
+export function isAuthenticated() {
+    try {
+        const token = getJWT();
+        return true;
+    } catch {
+        return false;
+    }
+}
+
+/**
  * Gets the authorization headr if authenticated.
  * @returns the authorization header if authenticated, or an empty object
  * @throws error if not authenticated
