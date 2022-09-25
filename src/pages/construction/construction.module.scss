@@ -1,0 +1,34 @@
+@import "src/styles/colorscheme.scss";
+
+.page {
+    margin: 20vh auto 0 auto;
+    background-color: $white;
+    width: 40vw;
+    height: 60vh;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 1300px) {
+        width: 600px;
+    }
+
+    @media screen and (max-width: 800px) {
+        width: 400px;
+    }
+
+    @media screen and (max-width: 450px) {
+        width: 300px;
+    }
+
+    .text {
+        max-width: 400px;
+        text-align: center;
+
+        @media screen and (max-width: 800px) {
+            width: 300px;
+        }
+    }
+}

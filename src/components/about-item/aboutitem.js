@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from "react";
-
 import style from "./aboutitem.module.scss";
 
 const AboutItem = ({ imageSrc, name, description }) => {

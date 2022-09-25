@@ -12,7 +12,7 @@
 
 import React, { useState, useEffect } from "react";
 import ImageCarousel from "../../components/carousel/carousel";
-import { Button } from "../../components/buttons/buttons"
+import { Button } from "../../components/buttons/buttons";
 
 import style from "./shopitem.module.scss";
 
@@ -21,7 +21,7 @@ const ShopItemInterface = ({ isOpened, setOpen, children }) => {
         <>
             {isOpened && (
                 <div className={style.item}>
-                    <span 
+                    <span
                         className={style.behind}
                         onClick={() => setOpen(false)}
                     />
@@ -32,45 +32,49 @@ const ShopItemInterface = ({ isOpened, setOpen, children }) => {
             )}
         </>
     );
-}
+};
 
-const ShopItem = ({ frontImageSrc, images, text, className, description, price, componentslist=[] }) => {
+const ShopItem = ({
+    frontImageSrc,
+    images,
+    text,
+    className,
+    description,
+    price,
+    componentslist = [],
+    disabled = false,
+}) => {
     const [isItemOpen, setItemOpen] = useState(false);
 
     useEffect(() => {
-        document.body.style.overflow = (
-            isItemOpen ? "hidden" : "unset"
-        );
-    }, [isItemOpen])
+        document.body.style.overflow = isItemOpen ? "hidden" : "unset";
+    }, [isItemOpen]);
 
     return (
-        <div> 
-            <div 
+        <div>
+            <div
                 className={`${style.container} ${className}`}
-                onClick={() => {setItemOpen(!isItemOpen)}}
+                onClick={() => {
+                    setItemOpen(!isItemOpen);
+                }}
             >
-                <img 
-                    alt="yes"
-                    src={frontImageSrc}
-                />
+                <img alt="yes" src={frontImageSrc} />
                 <h2 className={style.text}>{text}</h2>
             </div>
-            <ShopItemInterface
-                isOpened={isItemOpen} 
-                setOpen={setItemOpen}
-            >
+            <ShopItemInterface isOpened={isItemOpen} setOpen={setItemOpen}>
                 <ImageCarousel
-                    className = {style.carousel_image}
-                    images = {images}
-                    classNameIndicators = {style.carousel_indicators}
-                    sliding = {false}
+                    className={style.carousel_image}
+                    images={images}
+                    classNameIndicators={style.carousel_indicators}
+                    sliding={false}
                 />
                 <div className={style.text}>
                     <h2>{text}</h2>
                     <h4>{description}</h4>
                     <div>
-                        {componentslist.length === 0 ? (<></>) :
-                        (
+                        {componentslist.length === 0 ? (
+                            <></>
+                        ) : (
                             <div>
                                 {console.log(componentslist)}
                                 <h4>Components: </h4>
@@ -85,11 +89,13 @@ const ShopItem = ({ frontImageSrc, images, text, className, description, price, 
                 </div>
                 <div className={style.price}>
                     <h3>Price: {price}$</h3>
-                    <Button className={style.button} disabled={true}>Add to cart</Button>
+                    <Button className={style.button} disabled={disabled}>
+                        {disabled ? "Coming soon" : "Add to cart"}
+                    </Button>
                 </div>
             </ShopItemInterface>
         </div>
-    )
-}
+    );
+};
 
 export default ShopItem;

@@ -12,7 +12,7 @@ const About = () => {
                 <div className="pt-4">
                     <div className={style.title}>
                         <h1>Farmcheck</h1>
-                        <h3>Just another team. (slogan goes here)</h3>
+                        <h3>We plant the future.</h3>
                     </div>
                     <div className={style.image}>
                         <img src="/images/team.png" alt="team" />
@@ -86,7 +86,7 @@ const About = () => {
                     </div>
                     <div className={style.line} />
                     <div className={`${style.question} py-5`}>
-                        <div>
+                        <div className={style.text}>
                             <h2>
                                 Have a question or want to learn more about our
                                 team?
@@ -105,6 +105,9 @@ const About = () => {
                             >
                                 Learn more
                             </Button>
+                        </div>
+                        <div className={style.img_div}>
+                            <img alt="about us" src="/images/aboutus.png" />
                         </div>
                     </div>
                 </div>
