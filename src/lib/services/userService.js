@@ -1,6 +1,6 @@
-import { useLayoutEffect, useState } from "react";
-import { deleteJWT, fetchUserDetails, getAuthorizationHeader } from "../auth";
-import { NetworkError, NotAuthenticatedError, UserNotFound } from "../constants";
+import {useLayoutEffect, useState} from "react";
+import {deleteJWT, fetchUserDetails, getAuthorizationHeader} from "../auth";
+import {NetworkError, NotAuthenticatedError, UserNotFound} from "../constants";
 import axios from "axios";
 
 /* 
@@ -109,10 +109,27 @@ class UserService {
                     headers: getAuthorizationHeader(),
                     params: { "userLogin": username, farmId }
                 }
-            )
+            );
             return resp.data;
         } catch (err) {
             throw new Error(err.response.data);
+        }
+    }
+
+    async updateRole(username, farmId, role) {
+        try {
+            const resp = await axios.put(
+                "/api/farms/roles",
+                {
+                    farmId: farmId,
+                    userLogin: username,
+                    role: role
+                },
+                { headers: getAuthorizationHeader() }
+            );
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
         }
     }
 }
