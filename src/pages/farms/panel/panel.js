@@ -1,45 +1,37 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import axios from "axios";
-import {getAuthorizationHeader} from "../../../lib/auth";
-import ErrorAlert from "../../../components/alerts/error";
 import TextBox from "../../../components/textbox/textbox";
 import {Col, Row} from "react-bootstrap";
-
-import style from "../styles/panel.module.scss";
-import InfoTab from "./info";
-import UsersTab from "./users";
-import SettingsTab from "./settings";
 import farmService from "../../../lib/services/farmService";
 
-// every tab indexed
-const tabs = {
-    "Info": (farm, users) => <InfoTab farm={farm} users={users} />,
-    "Users": (farm, users) => <UsersTab farm={farm} users={users} />,
-    "Settings": (farm, users) => <SettingsTab farm={farm} users={users} />
-};
+import style from "../styles/panel.module.scss";
 
-const tabsNames = Object.keys(tabs);
-const tabsLength = tabsNames.length;
+import InfoTab from "./info";
+import UsersTab from "./users";
+import OwnerSettingsTab from "./settings/ownerSettings";
+import ChatTab from "./chat";
+import NotFound from "../../notFound";
+import AdminSettingsTab from "./settings/adminSettings";
+import WorkerSettingsTab from "./settings/workerSettings";
 
 /**
  * Tab navigation component
+ * @param tabs index object
  * @param tab the tab state
  * @param setTab the tab reducer
  * @return {JSX.Element} the navigation component
  */
-const TabNav = ({ tab, setTab }) => {
-    const tabsNames = Object.keys(tabs);
-
+const TabNav = ({ tabs, tab, setTab }) => {
     return (
         <Row className={`${style.tabDisplay} mb-2`}>
             <Col sm={1}>
                 <button
-                    onClick={() => {
+                    onClick={({ target }) => {
                         if (tab === 0)
-                            setTab(tabsLength - 1);
+                            setTab(tabs.length - 1);
                         else
                             setTab(tab - 1);
+                        target.blur();
                     }}
                     className={`
                         ${style.tabArrow} 
@@ -51,16 +43,17 @@ const TabNav = ({ tab, setTab }) => {
             </Col>
             <Col>
                 <div className={style.tabName}>
-                    <p>{tabsNames[tab]}</p>
+                    <p>{tabs[tab]}</p>
                 </div>
             </Col>
             <Col sm={1}>
                 <button
-                    onClick={() => {
-                        if (tab === tabsLength - 1)
+                    onClick={({ target }) => {
+                        if (tab === tabs.length - 1)
                             setTab(0);
                         else
                             setTab(tab + 1);
+                        target.blur();
                     }}
                     className={`
                         ${style.tabArrow} 
@@ -71,6 +64,84 @@ const TabNav = ({ tab, setTab }) => {
                 </button>
             </Col>
         </Row>
+    );
+}
+
+/**
+ * Layout component for displaying the tabs
+ * @param tabs all the tabs
+ * @param tab tab state
+ * @param setTab tab state reducer
+ * @param children child components
+ * @return the layout component
+ */
+const PanelLayout = ({ tabs, tab, setTab, children }) => {
+    return (
+        <TextBox className="form-container flex-column center">
+            <TabNav tabs={tabs} tab={tab} setTab={setTab} />
+            <div className={style.tab}>
+                {children}
+            </div>
+        </TextBox>
+    );
+}
+
+/**
+ * Tabs used by the owner
+ * @param farm farm object
+ * @param users users array
+ * @return {JSX.Element} the tabs
+ */
+const OwnerTabs = ({ farm, users }) => {
+    const [tab, setTab] = useState(0);
+    const tabs = ["Info", "Users", "Chat", "Settings"];
+
+    return (
+        <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
+            {tab === 0 && <InfoTab farm={farm} users={users} />}
+            {tab === 1 && <UsersTab farm={farm} users={users} />}
+            {tab === 2 && <ChatTab farm={farm} users={users} />}
+            {tab === 3 && <OwnerSettingsTab farm={farm} users={users} />}
+        </PanelLayout>
+    );
+}
+
+/**
+ * Tabs used by an admin
+ * @param farm farm object
+ * @param users users array
+ * @return {JSX.Element} the tabs
+ */
+const AdminTabs = ({ farm, users }) => {
+    const [tab, setTab] = useState(0);
+    const tabs = ["Info", "Users", "Chat", "Settings"];
+
+    return (
+        <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
+            {tab === 0 && <InfoTab farm={farm} users={users} />}
+            {tab === 1 && <UsersTab farm={farm} users={users} />}
+            {tab === 2 && <ChatTab farm={farm} users={users} />}
+            {tab === 3 && <AdminSettingsTab farm={farm} users={users} />}
+        </PanelLayout>
+    );
+}
+
+/**
+ * Tabs used by a worker
+ * @param farm farm object
+ * @param users users array
+ * @return {JSX.Element} the tabs
+ */
+const WorkerTabs = ({ farm, users }) => {
+    const [tab, setTab] = useState(0);
+    const tabs = ["Info", "Chat", "Settings"];
+
+    return (
+        <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
+            {tab === 0 && <InfoTab farm={farm} users={users} />}
+            {tab === 1 && <ChatTab farm={farm} users={users} />}
+            {tab === 2 && <WorkerSettingsTab farm={farm} users={users} />}
+        </PanelLayout>
     );
 }
 
@@ -86,7 +157,6 @@ const FarmPanel = () => {
     const [error, setError] = useState("");
 
     // setting up tabs
-    const [tab, setTab] = useState(0);
 
     // getting information about the farm
     useEffect(() => {
@@ -100,15 +170,16 @@ const FarmPanel = () => {
     }, [])
 
     if (error)
-        return <ErrorAlert error={error} setError={setError} />;
+        return <NotFound />
+    if (farm === undefined || users === [])
+        return <></>;
     return (
-        <TextBox className="form-container flex-column center">
-            <TabNav tab={tab} setTab={setTab} />
-            <div className={style.tab}>
-                {tabs[tabsNames[tab]](farm, users)}
-            </div>
-        </TextBox>
-    )
+        <>
+            {farm.role === 1 && <OwnerTabs farm={farm} users={users} />}
+            {farm.role === 2 && <AdminTabs farm={farm} users={users} />}
+            {farm.role === 3 && <WorkerTabs farm={farm} users={users} />}
+        </>
+    );
 }
 
 export default FarmPanel;

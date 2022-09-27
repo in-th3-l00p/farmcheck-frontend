@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import AuthenticatedRoute from "./components/authenticated-route/authenticatedRoute";
 import {useUserDetailsUpdater} from "./lib/services/userService";
-
 import {Spinner} from "react-bootstrap";
 import Navbar from "./components/navbar/navbar";
 
@@ -12,6 +12,7 @@ import Profile from "./pages/profile/profile";
 import CreateFarm from "./pages/farms/create";
 import ShowFarms from "./pages/farms/show";
 import FarmPanel from "./pages/farms/panel/panel";
+import NotFound from "./pages/notFound";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -64,6 +65,7 @@ const App = () => {
             <Navbar />
             <Router>
                 <Routes>
+                    <Route path="*" element={<NotFound />} />
                     <Route exact path="/" element={<Home />}/>
                     <Route path="/about" element={<About />}/>
                     <Route path="/shop" element={<Shop />} />
@@ -71,9 +73,21 @@ const App = () => {
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile/:username" element={<Profile />} />
                     <Route path="/farms">
-                        <Route index element={<ShowFarms />} />
-                        <Route path="/farms/create" element={<CreateFarm />} />
-                        <Route path="/farms/panel/:farm_id" element={<FarmPanel />} />
+                        <Route index element={(
+                            <AuthenticatedRoute>
+                                <ShowFarms />
+                            </AuthenticatedRoute>
+                        )} />
+                        <Route path="/farms/create" element={(
+                            <AuthenticatedRoute>
+                                <CreateFarm />
+                            </AuthenticatedRoute>
+                        )} />
+                        <Route path="/farms/panel/:farm_id" element={(
+                            <AuthenticatedRoute>
+                                <FarmPanel />
+                            </AuthenticatedRoute>
+                        )} />
                     </Route>
                 </Routes>
             </Router>

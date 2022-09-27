@@ -1,9 +1,9 @@
 import {useState} from "react";
 import {Container, Form, Modal} from "react-bootstrap";
-import {Button} from "../../../components/buttons/buttons";
-import {FileUploader} from "../../../components/forms/forms";
-import ErrorAlert from "../../../components/alerts/error";
-import farmService from "../../../lib/services/farmService";
+import {Button} from "../../../../components/buttons/buttons";
+import {FileUploader} from "../../../../components/forms/forms";
+import ErrorAlert from "../../../../components/alerts/error";
+import farmService from "../../../../lib/services/farmService";
 
 /**
  * Used while waiting for the farm data to be fetched.
@@ -75,12 +75,12 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farm }) => {
 }
 
 /**
- * Tab used for viewing/changing farm's settings.
+ * Owner's tab used for viewing/changing farm's settings.
  * @param farm the farm object
  * @param users farm's users
  * @return {JSX.Element} the tab component
  */
-const SettingsTab = ({ farm, users }) => {
+const OwnerSettingsTab = ({ farm, users }) => {
     const [inputFarmName, setInputFarmName] = useState(farm.name);
     const [inputFarmImage, setInputFarmImage] = useState(farm.image);
 
@@ -103,8 +103,8 @@ const SettingsTab = ({ farm, users }) => {
             <Form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    farmService.updateFarm(farm.name, inputFarmName)
-                        .then(() => window.location.href = `/farms/panel/${inputFarmName}?updated`)
+                    farmService.updateFarm(farm.id, inputFarmName)
+                        .then(() => window.location.href = `/farms/panel/${farm.id}?updated`)
                         .catch(err => setError(err.message));
                 }}
             >
@@ -140,4 +140,4 @@ const SettingsTab = ({ farm, users }) => {
     )
 }
 
-export default SettingsTab;
+export default OwnerSettingsTab;

@@ -1,6 +1,6 @@
-import { useLayoutEffect, useState } from "react";
-import { deleteJWT, fetchUserDetails, getAuthorizationHeader } from "../auth";
-import { NetworkError, NotAuthenticatedError, UserNotFound } from "../constants";
+import {useLayoutEffect, useState} from "react";
+import {deleteJWT, fetchUserDetails, getAuthorizationHeader} from "../auth";
+import {NetworkError, NotAuthenticatedError, UserNotFound} from "../constants";
 import axios from "axios";
 
 /* 
@@ -76,6 +76,75 @@ class UserService {
             if (err.response.status === 500) 
                 throw UserNotFound;
             throw NetworkError;
+        }
+    }
+
+    /**
+     * Adds a user to a farm.
+     * @param {string} username user's username
+     * @param {number} farmId farm's id
+     * @returns the status message
+     */
+    async addFarm(username, farmId) {
+        try {
+            const resp = await axios.put(
+                "/api/user/addFarm",
+                {},
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { "userLogin": username, farmId }
+                }
+            )
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    async removeFarm(username, farmId) {
+        try {
+            const resp = await axios.delete(
+                "/api/user/removeFarm",
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { "userLogin": username, farmId }
+                }
+            );
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    async exitFarm(farmId) {
+        try {
+            const resp = await axios.delete(
+                "/api/user/farms/exit",
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { farmId }
+                }
+            );
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    async updateFarmRole(username, farmId, role) {
+        try {
+            const resp = await axios.put(
+                "/api/farms/roles",
+                {
+                    farmId: farmId,
+                    userLogin: username,
+                    role: role
+                },
+                { headers: getAuthorizationHeader() }
+            );
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
         }
     }
 }

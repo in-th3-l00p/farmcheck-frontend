@@ -6,8 +6,9 @@ import {Button} from "../../components/buttons/buttons";
 import ErrorAlert from "../../components/alerts/error";
 
 import style from "./styles/farms.module.scss";
-import {Placeholder} from "react-bootstrap";
+import {Alert, Placeholder} from "react-bootstrap";
 import farmService from "../../lib/services/farmService";
+import {useLocation} from "react-router-dom";
 
 /**
  * Farm display component.
@@ -53,11 +54,28 @@ const FarmPlaceholder = ({ times = 1 }) => {
     )
 }
 
+// used for not repeating
+const QueryAlert = ({ children }) => {
+    const [show, setShow] = useState(true);
+    if (show)
+        return (
+            <Alert
+                variant="success"
+                onClose={() => setShow(false)}
+                dismissible
+            >
+                {children}
+            </Alert>
+        );
+    return <></>
+}
+
 /**
  * Page located at "/farms".
  * @return {JSX.Element} the page component
  */
 const ShowFarms = () => {
+    const location = useLocation();
     const [farms, setFarms] = useState([]);
 
     const [loading, setLoading] = useState(true);
@@ -83,6 +101,13 @@ const ShowFarms = () => {
                     +
                 </Button>
             </div>
+
+            {location.search === "?created" && (
+                <QueryAlert>Farm created successfully</QueryAlert>
+            )}
+            {location.search === "?exited" && (
+                <QueryAlert>You left the farm</QueryAlert>
+            )}
 
             <div className={`
                 d-flex flex-column gap-3
