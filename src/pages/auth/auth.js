@@ -178,7 +178,6 @@ export const Register = () => {
                     "lastName": name.last,
                     "email": email,
                     "password": password,
-                    "phoneNumber": phoneNumber,
                     "langKey": "en"
                 })
                     .then(resp => { 
