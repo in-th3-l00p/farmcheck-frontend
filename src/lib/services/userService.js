@@ -112,7 +112,7 @@ class UserService {
             );
             return resp.data;
         } catch (err) {
-            throw new Error(err.response.data);
+            throw new Error(err.response.data.detail);
         }
     }
 
