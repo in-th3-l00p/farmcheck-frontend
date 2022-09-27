@@ -8,12 +8,11 @@
 
 #### Informations:
 
--   ##### Best time to plant: late spring to mid summer
+-   ##### Best time to plant: Late spring to mid-summer
 -   ##### Soil Temperature: 13-18°C
--   ##### Soil type: free-draining
+-   ##### Soil type: Free-draining
 -   ##### Light: 6-10 hours of sun
 -   ##### Harvest time: 10-12 weeks
--   ##### Emerge time: 14-21 days
 
 ---
 
