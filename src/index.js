@@ -4,7 +4,7 @@ import App from "./app";
 import axios from "axios";
 
 // proxy the axios
-axios.defaults.baseURL = "https://farmcheck-test.herokuapp.com/";
+axios.defaults.baseURL = "https://farmcheck-test.herokuapp.com";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
