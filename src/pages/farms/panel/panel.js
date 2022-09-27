@@ -8,9 +8,11 @@ import style from "../styles/panel.module.scss";
 
 import InfoTab from "./info";
 import UsersTab from "./users";
-import SettingsTab from "./settings";
+import OwnerSettingsTab from "./settings/ownerSettings";
 import ChatTab from "./chat";
 import NotFound from "../../notFound";
+import AdminSettingsTab from "./settings/adminSettings";
+import WorkerSettingsTab from "./settings/workerSettings";
 
 /**
  * Tab navigation component
@@ -99,7 +101,7 @@ const OwnerTabs = ({ farm, users }) => {
             {tab === 0 && <InfoTab farm={farm} users={users} />}
             {tab === 1 && <UsersTab farm={farm} users={users} />}
             {tab === 2 && <ChatTab farm={farm} users={users} />}
-            {tab === 3 && <SettingsTab farm={farm} users={users} />}
+            {tab === 3 && <OwnerSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
 }
@@ -119,7 +121,7 @@ const AdminTabs = ({ farm, users }) => {
             {tab === 0 && <InfoTab farm={farm} users={users} />}
             {tab === 1 && <UsersTab farm={farm} users={users} />}
             {tab === 2 && <ChatTab farm={farm} users={users} />}
-            {tab === 3 && <SettingsTab farm={farm} users={users} />}
+            {tab === 3 && <AdminSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
 }
@@ -132,12 +134,13 @@ const AdminTabs = ({ farm, users }) => {
  */
 const WorkerTabs = ({ farm, users }) => {
     const [tab, setTab] = useState(0);
-    const tabs = ["Info", "Chat"];
+    const tabs = ["Info", "Chat", "Settings"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} />}
             {tab === 1 && <ChatTab farm={farm} users={users} />}
+            {tab === 2 && <WorkerSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
 }

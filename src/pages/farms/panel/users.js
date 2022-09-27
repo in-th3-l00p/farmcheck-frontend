@@ -255,7 +255,7 @@ const ChangeRoleModal = ({
                             hide();
                             return;
                         }
-                        userService.updateRole(user.login, farmId, selectedRole)
+                        userService.updateFarmRole(user.login, farmId, selectedRole)
                             .then((message) => setSuccessMessage(message))
                             .catch((err) => setErrorMessage(err.message))
                             .finally(hide);

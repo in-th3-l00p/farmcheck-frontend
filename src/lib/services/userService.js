@@ -116,7 +116,22 @@ class UserService {
         }
     }
 
-    async updateRole(username, farmId, role) {
+    async exitFarm(farmId) {
+        try {
+            const resp = await axios.delete(
+                "/api/user/farms/exit",
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { farmId }
+                }
+            );
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    async updateFarmRole(username, farmId, role) {
         try {
             const resp = await axios.put(
                 "/api/farms/roles",
