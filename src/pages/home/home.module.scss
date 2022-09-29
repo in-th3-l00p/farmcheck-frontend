@@ -1,8 +1,6 @@
 @import "src/styles/colorscheme.scss";
 
 .about_text {  
-    margin: 0 auto 20px auto;
-    max-width: 750px;
     font-size: 1.75rem;
 
     @media screen and (max-width: 650px) {

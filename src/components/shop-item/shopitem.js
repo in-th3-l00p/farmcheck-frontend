@@ -68,20 +68,12 @@ const ShopItem = ({ frontImageSrc, images, text, className, description, price, 
                 <div className={style.text}>
                     <h2>{text}</h2>
                     <h4>{description}</h4>
-                    <div>
-                        {componentslist.length === 0 ? (<></>) :
-                        (
-                            <div>
-                                {console.log(componentslist)}
-                                <h4>Components: </h4>
-                                <ul className={style.list}>
-                                    {componentslist.map((component, index) => (
-                                        <li key={index}>{component}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-                    </div>
+                    <h4>Components: </h4>
+                    <ul className={style.list}>
+                        {componentslist.map((component, index) => (
+                            <li key={index}>{component}</li>
+                        ))}
+                    </ul>
                 </div>
                 <div className={style.price}>
                     <h3>Price: {price}$</h3>

@@ -13,10 +13,10 @@ import style from "./home.module.scss";
 import feature from "./features.module.scss";
 
 const featuresIconsPath = [
-    "/icons/features-icons/dictionary.png",
     "/icons/features-icons/livedata.png",
-    "/icons/features-icons/surveillance.png",
     "/icons/features-icons/maintenance.png",
+    "/icons/features-icons/surveillance.png",
+    "/icons/features-icons/dictionary.png",
 ];
 
 const FeatureIcon = ({className="", src, title, description}) => {
@@ -45,14 +45,12 @@ const Home = () => {
             />
 
             <TextBox title="About us" className="text-center my-4">
-                    <p className={style.about_text}>CyberTech Farmers is a team of aspiring programmers, 
-                    brought together by a desire to make farming more efficient by bringing the combination 
-                    of agriculture and technology into the mainstream.</p>
+                    <p className={style.about_text}>We are the CyberTech Farmers</p>
                     <Button 
                         className=""
                         onClick={()=> window.open("https://www.facebook.com/FarmCheck-105867298851897", "_blank")}
                     >
-                        See more
+                        Learn more
                     </Button>
             </TextBox>
 
