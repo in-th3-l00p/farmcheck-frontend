@@ -1,0 +1,80 @@
+@import "src/styles/colorscheme.scss";
+
+.wiki {
+    width: 80%;
+    max-width: 1400px;
+    min-height: 679px;
+
+    background-color: $white;
+    margin: 100px auto 40px auto;
+    border-radius: 20px;
+
+    @media screen and (max-width: 490px) {
+        width: 100%;
+    }
+
+    .title {
+        width: 85%;
+        margin: 30px auto 40px auto;
+        display: flex;
+
+        .text {
+            font-size: 2.25rem;
+
+            @media screen and (max-width: 900px) {
+                font-size: 2rem;
+            }
+
+            @media screen and (max-width: 450px) {
+                font-size: 1.75rem;
+            }
+        }
+
+        .search {
+            margin-left: auto;
+            display: flex;
+            height: 45px;
+            width: 300px;
+            padding-left: 20px;
+
+            .search_tab {
+                border-radius: 10px 0 0 10px;
+                border-right: 0;
+            }
+
+            .search_tab:focus {
+                border-color: $yellow;
+                box-shadow: 0 0 5px 0.2rem $yellow;
+            }
+        }
+    }
+}
+
+.search_button {
+    background-color: $yellow;
+    height: 45px;
+    width: 45px;
+    border-radius: 0 10px 10px 0;
+    border: 0;
+
+    img {
+        width: 25px;
+    }
+}
+
+.search_button:focus {
+    background-color: $orange;
+}
+
+.items {
+    width: 95%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+
+    .error {
+        text-align: center;
+        margin: 180px 50px 0 50px;
+    }
+}

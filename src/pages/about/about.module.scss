@@ -1,0 +1,143 @@
+@import "src/styles/colorscheme.scss";
+
+$margin: 5%;
+.about {
+    display: flex;
+    flex-direction: column;
+
+    background-color: $white;
+    width: 80vw;
+    max-width: 1200px;
+    margin: 100px auto 40px auto;
+    border-radius: 20px;
+
+    @media screen and (max-width: 490px) {
+        width: 100%;
+    }
+
+    .title {
+        margin-left: $margin;
+        max-width: 500px;
+    }
+
+    img {
+        margin-left: $margin;
+        -webkit-user-drag: none;
+        object-fit: fill;
+        width: 100%;
+        height: auto;
+        margin: 30px 0 50px 0;
+    }
+
+    $line-margin: 10px;
+    .line {
+        margin-left: $margin;
+        background-color: $yellow;
+        padding: 1px;
+        border-radius: 2px;
+        width: 95%;
+        margin: auto;
+
+        margin-top: $line-margin;
+        margin-bottom: $line-margin;
+    }
+
+    .description {
+        @media screen and (max-width: 750px) {
+            max-width: 400px;
+        }
+
+        margin-left: $margin;
+        margin-right: $margin;
+    }
+
+    .question {
+        margin-left: $margin;
+        max-width: 90%;
+        display: flex;
+
+        @media screen and (max-width: 500px) {
+            display: block;
+            height: 300px;
+
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+
+        .line {
+            width: 100%;
+        }
+
+        .button {
+            font-size: 1.5rem;
+        }
+
+        .text {
+            max-width: 600px;
+
+            @media screen and (max-width: 500px) {
+                max-width: 100%;
+                width: 1000px;
+                margin: auto;
+            }
+        }
+
+        .img_div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 200px;
+                height: 200px;
+                margin-left: 10vw;
+                margin-top: -10px;
+                border: 4px solid $yellow;
+                border-radius: 100%;
+
+                padding: 15px;
+
+                @media screen and (max-width: 800px) {
+                    width: 150px;
+                    height: 150px;
+                }
+
+                @media screen and (max-width: 500px) {
+                    width: 0px;
+                    height: 0px;
+                    border: 0px;
+                }
+            }
+        }
+    }
+
+    .team {
+        // margin-left: $margin;
+
+        .team_title {
+            margin-left: $margin;
+            width: 250px;
+
+            @media screen and (max-width: 1500px) {
+                margin-left: 5%;
+            }
+
+            @media screen and (max-width: 750px) {
+                margin-left: 7%;
+            }
+
+            @media screen and (max-width: 600px) {
+                margin-left: 20%;
+            }
+
+            @media screen and (max-width: 450px) {
+                margin-left: 15%;
+            }
+        }
+
+        .profile {
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+    }
+}
