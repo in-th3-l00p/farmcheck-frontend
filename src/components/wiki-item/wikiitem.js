@@ -52,7 +52,7 @@ const WikiItem = ({ className, imgSrc, title, file = "./error.md" }) => {
                 <h2 className={style.title}>{transformToTitle(title)}</h2>
             </div>
             <WikiItemInterface isOpened={isItemOpen} setOpen={setItemOpen}>
-                <div>
+                <div className={style.markdownContainer}>
                     <ReactMarkdown children={content} />
                 </div>
             </WikiItemInterface>

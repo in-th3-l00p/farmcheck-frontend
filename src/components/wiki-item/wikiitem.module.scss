@@ -95,3 +95,8 @@
         background-color: rgba(black, $behind-alpha);
     }
 }
+
+.markdownContainer {
+    overflow-y: scroll;
+    height: 72vh;
+}
