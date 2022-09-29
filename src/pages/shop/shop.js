@@ -25,14 +25,8 @@ const Shop = () => {
                                 className={style.item}
                                 frontImageSrc="/images/shop-images/1.png"
                                 images={["/images/shop-images/1.png"]}
-                                text="Sensor Package 1"
-                                description="
-                                yes yes yes
-                                Description
-                                bla bla bla
-                                haha
-                                why
-                                "
+                                text="Temperature + Humidity Sensor"
+                                description=""
                                 price="20"
                                 componentslist={["Sensor 1", "Sensor 2", "ESP32", "Battery"]}
                             />

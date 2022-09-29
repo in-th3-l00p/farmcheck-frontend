@@ -1,0 +1,23 @@
+@import "src/styles/colorscheme.scss";
+
+.container {
+    margin: auto;
+
+    width: 225px !important;
+    height: 400px !important;
+
+    margin-bottom: 30px !important;
+
+    img {
+        border-radius: 10px;
+
+        width: 225px !important;
+        height: 300px !important;
+
+        border: 4px solid $yellow;
+    }
+
+    .name {
+        margin-top: -30px;
+    }
+}
