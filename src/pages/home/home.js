@@ -56,7 +56,7 @@ const Home = () => {
                     the mainstream.
                 </p>
                 <Button
-                    className=""
+                    className={style.button}
                     onClick={() =>
                         window.open(
                             "https://www.facebook.com/FarmCheck-105867298851897",
