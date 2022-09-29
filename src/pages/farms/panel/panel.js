@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import TextBox from "../../../components/textbox/textbox";
-import {Col, Row} from "react-bootstrap";
+import {Alert, Col, Row} from "react-bootstrap";
 import farmService from "../../../lib/services/farmService";
 
 import style from "../styles/panel.module.scss";
@@ -13,6 +13,7 @@ import ChatTab from "./chat";
 import NotFound from "../../notFound";
 import AdminSettingsTab from "./settings/adminSettings";
 import WorkerSettingsTab from "./settings/workerSettings";
+import SensorsTab from "./sensors";
 
 /**
  * Tab navigation component
@@ -94,14 +95,15 @@ const PanelLayout = ({ tabs, tab, setTab, children }) => {
  */
 const OwnerTabs = ({ farm, users }) => {
     const [tab, setTab] = useState(0);
-    const tabs = ["Info", "Users", "Chat", "Settings"];
+    const tabs = ["Info", "Users", "Sensors", "Chat", "Settings"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} />}
             {tab === 1 && <UsersTab farm={farm} users={users} />}
-            {tab === 2 && <ChatTab farm={farm} users={users} />}
-            {tab === 3 && <OwnerSettingsTab farm={farm} users={users} />}
+            {tab === 2 && <SensorsTab farm={farm} users={users} /> }
+            {tab === 3 && <ChatTab farm={farm} users={users} />}
+            {tab === 4 && <OwnerSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
 }
@@ -114,14 +116,15 @@ const OwnerTabs = ({ farm, users }) => {
  */
 const AdminTabs = ({ farm, users }) => {
     const [tab, setTab] = useState(0);
-    const tabs = ["Info", "Users", "Chat", "Settings"];
+    const tabs = ["Info", "Users", "Sensors", "Chat", "Settings"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} />}
             {tab === 1 && <UsersTab farm={farm} users={users} />}
-            {tab === 2 && <ChatTab farm={farm} users={users} />}
-            {tab === 3 && <AdminSettingsTab farm={farm} users={users} />}
+            {tab === 2 && <SensorsTab farm={farm} users={users} /> }
+            {tab === 3 && <ChatTab farm={farm} users={users} />}
+            {tab === 4 && <AdminSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
 }
@@ -134,13 +137,14 @@ const AdminTabs = ({ farm, users }) => {
  */
 const WorkerTabs = ({ farm, users }) => {
     const [tab, setTab] = useState(0);
-    const tabs = ["Info", "Chat", "Settings"];
+    const tabs = ["Info", "Sensors", "Chat", "Settings"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} />}
-            {tab === 1 && <ChatTab farm={farm} users={users} />}
-            {tab === 2 && <WorkerSettingsTab farm={farm} users={users} />}
+            {tab === 1 && <SensorsTab farm={farm} users={users} /> }
+            {tab === 2 && <ChatTab farm={farm} users={users} />}
+            {tab === 3 && <WorkerSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
 }
@@ -155,8 +159,6 @@ const FarmPanel = () => {
     const [farm, setFarm] = useState(undefined);
     const [users, setUsers] = useState([]);
     const [error, setError] = useState("");
-
-    // setting up tabs
 
     // getting information about the farm
     useEffect(() => {

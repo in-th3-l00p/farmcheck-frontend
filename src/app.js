@@ -11,7 +11,6 @@ import { Login, Register } from "./pages/auth/auth";
 import Profile from "./pages/profile/profile";
 import CreateFarm from "./pages/farms/create";
 import Wiki from "./pages/wiki/wiki";
-import Construction from "./pages/construction/construction";
 import ShowFarms from "./pages/farms/show";
 import FarmPanel from "./pages/farms/panel/panel";
 import NotFound from "./pages/notFound";
@@ -20,6 +19,8 @@ import NotFound from "./pages/notFound";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.scss";
 import "./styles/globals.scss";
+import {CreateSensor} from "./pages/farms/panel/sensors";
+import SensorPage from "./pages/farms/sensor";
 /**
  * Loading component showed when initial requests to the server are made.
  * @return {JSX.Element} the loading component
@@ -91,6 +92,24 @@ const App = () => {
                             element={
                                 <AuthenticatedRoute>
                                     <FarmPanel />
+                                </AuthenticatedRoute>
+                            }
+                        />
+                    </Route>
+                    <Route path="/sensors">
+                        <Route
+                            path="/sensors/:sensor_id"
+                            element={
+                                <AuthenticatedRoute>
+                                    <SensorPage />
+                                </AuthenticatedRoute>
+                            }
+                        />
+                        <Route
+                            path="/sensors/create/:farm_id"
+                            element={
+                                <AuthenticatedRoute>
+                                    <CreateSensor />
                                 </AuthenticatedRoute>
                             }
                         />

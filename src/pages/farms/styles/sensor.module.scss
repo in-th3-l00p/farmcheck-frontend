@@ -1,0 +1,24 @@
+@import "../../../styles/colorscheme";
+
+@keyframes onSensorDataDisplayHover {
+  from { background-color: white; }
+  to { background-color: $light-grey; }
+}
+
+.sensorDataDisplay {
+  background-color: white;
+  border: 2px solid $grey;
+  border-radius: 15px;
+  padding: 1rem;
+
+  &:hover {
+    animation: onSensorDataDisplayHover 0.3s;
+    background-color: $light-grey;
+    cursor: pointer;
+    user-select: none;
+    h4 {
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  }
+}

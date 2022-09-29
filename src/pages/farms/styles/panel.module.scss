@@ -58,3 +58,23 @@ $border-radius: 10px;
     padding-left: 0;
   }
 }
+
+@keyframes onSensorDisplayHover {
+  from { background-color: white; }
+  to { background-color: $light-grey; }
+}
+
+.sensorDisplay {
+  border: 2px solid $grey;
+  border-radius: 15px;
+  padding: 1rem;
+
+  &:hover {
+    animation: onSensorDisplayHover 0.3s;
+    background-color: $light-grey;
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+  }
+}

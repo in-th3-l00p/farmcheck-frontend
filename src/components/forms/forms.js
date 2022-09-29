@@ -49,8 +49,8 @@ export const InputRange = ({
  * @returns the component
  */
 export const LabelInput = ({ 
-    label, 
-    type="text", 
+    label,
+    type="text",
     className="",
     value, 
     setValue, 
@@ -62,7 +62,7 @@ export const LabelInput = ({
             label={label}
             className={`${style.label} ${className}`} 
         >
-            <Form.Control 
+            <Form.Control
                 className={style.content}
                 type={type} 
                 value={value} 
@@ -70,6 +70,43 @@ export const LabelInput = ({
                 onFocus={onFocus} onBlur={onBlur}
             />
         </FloatingLabel>
+    );
+}
+
+/**
+ * Input component that goes on multiple lines.
+ * @param label the label of the input
+ * @param className the class name of the container
+ * @param style the style of the container
+ * @param inputClassName the class name of the input
+ * @param inputStyle the style of the input
+ * @param value the input's value
+ * @param setValue the input's value state reducer
+ * @return {JSX.Element} the input component
+ */
+export const LabelTextInput = ({
+    label,
+    className="",
+    inputClassName = "",
+    style = {},
+    inputStyle = {},
+    value,
+    setValue
+}) => {
+    return (
+        <Form.Group
+            className={className}
+            style={style}
+        >
+            <Form.Label>{label}</Form.Label>
+            <Form.Control
+                as="textarea"
+                className={inputClassName}
+                style={inputStyle}
+                value={value}
+                onChange={(event) => setValue(event.target.value)}
+            />
+        </Form.Group>
     );
 }
 
