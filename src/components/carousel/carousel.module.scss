@@ -8,6 +8,10 @@
         -webkit-user-select: none;
         -moz-user-select: none;
 
+        .image {
+            -webkit-user-drag: none;
+        }
+
         // refering to the arrows
         a {
             -webkit-user-drag: none;
@@ -25,7 +29,7 @@
         width: 12px;
         height: 12px;
         margin: 0 0 6vh 20px;
-        
+
         @media screen and (max-width: 800px) {
             margin-left: 15px;
             width: 10px;
@@ -54,22 +58,38 @@
 
         // handling visuals and responsivness
         color: $light-grey;
-        h1 { font-size: 6rem; }
-        h3 { font-size: 2rem; }
+        h1 {
+            font-size: 6rem;
+        }
+        h3 {
+            font-size: 2rem;
+        }
 
         @media screen and (max-width: 650px) {
-            h1 { font-size: 4rem; }
-            h3 { font-size: 1.75rem; }
+            h1 {
+                font-size: 4rem;
+            }
+            h3 {
+                font-size: 1.75rem;
+            }
         }
 
         @media screen and (max-width: 450px) {
-            h1 { font-size: 3rem; }
-            h3 { font-size: 1.65rem; }
+            h1 {
+                font-size: 3rem;
+            }
+            h3 {
+                font-size: 1.65rem;
+            }
         }
 
         @media only screen and (max-width: 300px), (max-height: 650px) {
-            h1 { font-size: 2.5rem; }
-            h3 { font-size: 1.5rem; }
+            h1 {
+                font-size: 2.5rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
         }
     }
 }

@@ -5,16 +5,16 @@
     background-color: $green;
 }
 
-.brand { 
-    font-size: 1.75rem !important; 
+.brand {
+    font-size: 1.75rem !important;
     font-weight: 500 !important;
 
     @media screen and (max-width: 1200px) {
-        font-size: 1.6rem !important; 
+        font-size: 1.6rem !important;
     }
 
     @media screen and (max-width: 650px) {
-        font-size: 1.5rem !important; 
+        font-size: 1.5rem !important;
     }
 }
 
@@ -44,6 +44,8 @@
         aspect-ratio: 1/1;
         object-fit: contain;
         margin-top: 10px;
+
+        -webkit-user-drag: none;
     }
 }
 
@@ -61,12 +63,17 @@ $line-margin: 10px;
     font-size: 1.25rem;
     text-align: center;
     width: 120px;
+    font-weight: 500;
 }
 
 $profile-button-hover-bg: #e2e2e2;
 @keyframes profileButtonHover {
-    from { background-color: $light-grey; }
-    to { background-color: $profile-button-hover-bg }
+    from {
+        background-color: $light-grey;
+    }
+    to {
+        background-color: $profile-button-hover-bg;
+    }
 }
 
 .profileButton {

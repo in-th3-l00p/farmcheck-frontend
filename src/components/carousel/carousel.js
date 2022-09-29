@@ -1,20 +1,31 @@
 import React from "react";
-import {Carousel} from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 
 import style from "./carousel.module.scss";
 
-export const ImageCarousel = ({ className, images, title="", description="", classNameIndicators=undefined, sliding=true }) => {
+export const ImageCarousel = ({
+    className,
+    images,
+    title = "",
+    description = "",
+    classNameIndicators = undefined,
+    sliding = true,
+}) => {
     return (
         <div className={style.container}>
-            <Carousel 
-                className={`${style.carousel} ${classNameIndicators === undefined ? style.indicators : classNameIndicators}`} 
+            <Carousel
+                className={`${style.carousel} ${
+                    classNameIndicators === undefined
+                        ? style.indicators
+                        : classNameIndicators
+                }`}
                 interval={sliding ? 5000 : null}
             >
                 {images.map((image, index) => (
                     <Carousel.Item key={index}>
                         <img
                             alt={image}
-                            className={className}
+                            className={`${className} ${style.image}`}
                             src={`${image}`}
                             onDrag={(e) => e.preventDefault()}
                         />
