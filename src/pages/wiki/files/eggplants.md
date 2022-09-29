@@ -16,6 +16,6 @@
 
 #### How to plant
 
-1. ###### After risk of the last spring frost has passed and daytime temperatures are 70° to 75°F (60° to 65°F at night), set seedlings in holes 24 to 30 inches apart in rows 3 feet apart. Use a covering of black plastic mulch to warm soils before setting out transplants if soil temperatures aren’t yet high enough.
-2. ###### Immediately after planting (in ground or pot), set 24-inch-high stakes 1 to 2 inches from each plant or use cages to provide support and avoid disturbing the soil or roots later. Eggplant will fall over when laden with fruit.
+1. ###### After risk of the last spring frost has passed and daytime temperatures are 70° to 75°F (60° to 65°F at night), set seedlings in holes 60 to 75 cm apart in rows 90 cm apart. Use a covering of black plastic mulch to warm soils before setting out transplants if soil temperatures aren’t yet high enough.
+2. ###### Immediately after planting (in ground or pot), set 60 cm high stakes 2 to 5 cm from each plant or use cages to provide support and avoid disturbing the soil or roots later. Eggplant will fall over when laden with fruit.
 3. ###### If you live in a cold climate, consider using row covers to keep the young eggplants warm and sheltered. Open the ends of the row covers on warm days so that bees may pollinate the eggplants’ flowers.

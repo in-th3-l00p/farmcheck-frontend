@@ -16,5 +16,5 @@
 
 #### How to plant
 
-1. ###### Sow seeds ¼ to ½ of an inch deep, 2 to 4 inches apart, in rows 2 feet apart.
+1. ###### Sow seeds 1/2 cm to 1 of an inch deep, 5 to 10 cm apart, in rows 60 cm apart.
 2. ###### Germination takes 1 to 2 weeks.

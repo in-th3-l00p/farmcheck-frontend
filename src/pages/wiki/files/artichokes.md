@@ -16,6 +16,6 @@
 
 #### How to plant
 
-1. ###### Space each plant three to four feet apart in rows and leave four to five feet between the rows.
-2. ###### Plant the shoots and dormant roots about six inches deep. The tops should be above ground level.
+1. ###### Space each plant 90 to 120 cm apart in rows and leave 120 to 150 feet between the rows.
+2. ###### Plant the shoots and dormant roots about 15 cm deep. The tops should be above ground level.
 3. ###### Water deeply at the time of planting.

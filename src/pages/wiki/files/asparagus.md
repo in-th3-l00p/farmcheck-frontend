@@ -17,6 +17,6 @@
 #### How to plant
 
 1. ###### Plant crowns deeply to protect them from the cultivation needed for annual weed control.
-2. ###### Dig a trench of about 12 to 18 inches wide and 6 to 8 inches deep. If digging more than one trench, space the trenches at least 3 feet apart.
-3. ###### Make a 2-inch-high ridge of soil along the center of the trench and place the asparagus crowns on top of the mound, spreading their roots out evenly.
-4. ###### Within the trench, space asparagus crowns 12 to 18 inches apart (measured from root tip to root tip).
+2. ###### Dig a trench of about 30 to 45 cm wide and 15 to 20 cm deep. If digging more than one trench, space the trenches at least 90 cm apart.
+3. ###### Make a 5 cm high ridge of soil along the center of the trench and place the asparagus crowns on top of the mound, spreading their roots out evenly.
+4. ###### Within the trench, space asparagus crowns 30 to 45 cm apart (measured from root tip to root tip).

@@ -16,5 +16,5 @@
 
 #### How to plant
 
-1. ###### Plant horseradish by laying sets or pieces of roots about 18 inches apart and at a 45° angle, in a trench 3 to 4 inches deep. Sets generally come with the lower end sliced off on the diagonal to indicate which end should slant down
+1. ###### Plant horseradish by laying sets or pieces of roots about 45 cm apart and at a 45° angle, in a trench 7 to 10 cm deep. Sets generally come with the lower end sliced off on the diagonal to indicate which end should slant down
 2. ######  With fully horizontal planting, leaves will sprout forth from several points along the length of the set, which is less ideal. Cover over with topsoil after planting.

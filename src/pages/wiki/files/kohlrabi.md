@@ -16,7 +16,7 @@
 
 #### How to plant
 
-1. ###### Sow seeds 1/4 to 1/2 inch deep.
-2. ###### In rows, space kohlrabi seeds about 2 inches apart in rows 10 to 12 inches apart.
-3. ###### Once seedlings have emerged (4 to 7 days), thin them to every 5 to 8 inches.
+1. ###### Sow seeds 1/2 to 1 cm deep.
+2. ###### In rows, space kohlrabi seeds about 5 inches apart in rows 25 to 30 cm apart.
+3. ###### Once seedlings have emerged (4 to 7 days), thin them to every 12 to 20 cm.
 4. ###### Stagger sowing every 2 to 3 weeks for a continuous summer.  

@@ -16,7 +16,7 @@
 
 #### How to plant
 
-1. ###### When planting, add fertilizer (1-1/2 cups of 5-10-10 fertilizer per 25 feet of row) into the top 3 to 4 inches of soil. If you fertilize with compost, apply no more than 1 inch of well-composted organic matter per 100 square feet of garden area.
-2. ###### Plant seeds 1/4 to 1/2 of an inch deep, 1 inch apart, in rows 18 to 30 inches apart.
-3. ###### If you’re setting out young plants (transplants), plant them at the depth at which they are growing in the container, spaced 12 inches apart, in rows 18 to 30 inches apart.
+1. ###### When planting, add fertilizer (1-1/2 cups of 5-10-10 fertilizer per 750 cm of row) into the top 7 to 10 cm of soil. 
+2. ###### Plant seeds 1/2 to 1 cm deep, 2 cm apart, in rows 45 to 75 cm apart.
+3. ###### If you’re setting out young plants (transplants), plant them at the depth at which they are growing in the container, spaced 30 cm apart, in rows 45 to 75 cm apart.
 4. ###### After planting, water plants well.

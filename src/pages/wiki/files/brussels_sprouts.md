@@ -16,7 +16,7 @@
 
 #### How to plant
 
-1. ###### Sow seeds about ½ inch deep.
-2. ###### If direct-sowing seeds outdoors, sow seeds about 2 to 3 inches apart. (Seedlings should be thinned to 12 to 24 inches apart when they reach about 6 inches tall.)
-3. ###### Plant seedlings 12 to 24 inches apart.
+1. ###### Sow seeds about 1 cm deep.
+2. ###### If direct-sowing seeds outdoors, sow seeds about 5 to 7 cm apart. (Seedlings should be thinned to 30 to 60 cm apart when they reach about 15 cm tall.)
+3. ###### Plant seedlings 30 to 60 cm apart.
 4. ###### Water well at time of sowing/transplanting.

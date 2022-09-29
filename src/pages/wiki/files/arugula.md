@@ -16,6 +16,6 @@
 
 #### How to plant
 
-1. ###### Sow seeds ¼-inch deep and about 1 inch apart in rows 10 inches apart. Alternatively, broadcast arugula seeds alone or mix with other salad greens.
+1. ###### Sow seeds 0.6cm deep and about 2 cm apart in rows 25 cm apart. Alternatively, broadcast arugula seeds alone or mix with other salad greens.
 2. ###### Seeds germinate in about a week (or slightly longer in cold soil). Speed up germination by soaking seeds in water for a few hours prior to planting.
 3. ###### Sow new seeds every 2 to 3 weeks for a continuous harvest later on!
