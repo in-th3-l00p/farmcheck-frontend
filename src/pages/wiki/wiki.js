@@ -44,21 +44,22 @@ const Wiki = () => {
                 <div className={style.items}>
                     <Row>
                         {plants.map((item, index) => {
-                            if (item.startsWith(value)) {
-                                counter = 0;
-                                return (
-                                    <Col key={index}>
-                                        <WikiItem
-                                            className={style.item}
-                                            imgSrc={`/images/wiki-images/${item}.png`}
-                                            title={item}
-                                            file={`./${item}.md`}
-                                        />
-                                    </Col>
-                                );
+                            if (!item.startsWith(value)) {
+                                counter++
+                                return <></>;
                             }
-                            counter++;
-                            return undefined;
+
+                            counter = 0;
+                            return (
+                                <Col key={index}>
+                                    <WikiItem
+                                        className={style.item}
+                                        imgSrc={`/images/wiki-images/${item}.png`}
+                                        title={item}
+                                        file={`/wiki-pages/${item}.md`}
+                                    />
+                                </Col>
+                            );
                         })}
                     </Row>
                     {counter === plants.length ? (
