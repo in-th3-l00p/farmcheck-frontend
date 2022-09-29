@@ -2,8 +2,6 @@
 
 ###### Carrots are a cool-season crop grown in spring. They are an excellent source of vitamin A and add color to a meal. They can be served cooked or raw.
 
-<!-- ![carrot](../images/wiki-images/carrot.png) -->
-
 ---
 
 #### Informations:

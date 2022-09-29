@@ -3,7 +3,8 @@ import ReactMarkdown from "react-markdown";
 
 import style from "./wikiitem.module.scss";
 
-const capitalize = (word) => {
+const transformToTitle = (word) => {
+    word = word.replace(/_/g, " ");
     return word.charAt(0).toUpperCase() + word.slice(1);
 };
 
@@ -48,7 +49,7 @@ const WikiItem = ({ className, imgSrc, title, file = "./error.md" }) => {
                 }}
             >
                 <img alt="yes" src={imgSrc} />
-                <h2 className={style.title}>{capitalize(title)}</h2>
+                <h2 className={style.title}>{transformToTitle(title)}</h2>
             </div>
             <WikiItemInterface isOpened={isItemOpen} setOpen={setItemOpen}>
                 <div>

@@ -1,4 +1,9 @@
-import "./about.scss";
+import Footer from "../../components/footer/footer";
+import { Button } from "../../components/buttons/buttons";
+import AboutItem from "../../components/about-item/aboutitem";
+import { Col, Row } from "react-bootstrap";
+
+import style from "./about.module.scss";
 
 const About = () => {
     return (
