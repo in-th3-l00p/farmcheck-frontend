@@ -43,8 +43,8 @@ const CollapseToggler = ({isCollapseOpened, setCollapseOpen}) => {
             }}
         >
             <span className={collapse.togglerLine} />
-            <span className={collapse.togglerLine} />
-            <span className={collapse.togglerLine} />
+            <span className={collapse.togglerLine} style={{width: "30px"}}/>
+            <span className={collapse.togglerLine} style={{width: "20px"}}/>
         </button>
     );
 }

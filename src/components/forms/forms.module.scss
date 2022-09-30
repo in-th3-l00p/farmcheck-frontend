@@ -42,3 +42,19 @@ $country-list-border-radius: 25px;
         height: 75px !important;
     }
 }
+
+.imageInput {
+    font-size: 1.1rem;
+    font-weight: 400;
+
+    @media screen and (max-width: 500px) {
+        font-size: 1rem;        
+    }
+}
+
+.imageInput::file-selector-button {
+    border-radius: 15px;
+    padding: 5px 10px 5px 10px;
+    background-color: $yellow;
+    border: 5px solid $white;
+}

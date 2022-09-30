@@ -103,7 +103,7 @@ export const AuthenticatedNavs = () => {
             <Nav className={style.profile}>
                 <button 
                     type="button" 
-                    className={`${style.profileButton} py-3`}
+                    className={`${style.profileButton} py-3 mb-1`}
                     onClick={() => { 
                         window.location.href = `/profile/${userService.getCurrentUsername()}` 
                     }}
@@ -116,7 +116,7 @@ export const AuthenticatedNavs = () => {
                     <h3 className="ms-3">{userService.getCurrentUsername()}</h3>
                 </button>
             </Nav>
-            <Nav className={`${style.menu} mb-auto mx-3`}>
+            <Nav className={`${style.menu} mb-auto mt-0 px-3`}>
                 <Link href="/shop">Shop</Link>
                 <Link href="/download">Download</Link>
                 <Link href="/wiki">Crop wiki</Link>
@@ -140,7 +140,7 @@ export const AuthenticatedNavs = () => {
                     Switch theme
                 </Link>
             </Nav>
-            <Nav className={`${style.menu} mb-3 mx-3`}>
+            <Nav className={`${style.menu} mb-3 px-3`}>
                 <Button 
                     className={style.button} 
                     onClick={() => {

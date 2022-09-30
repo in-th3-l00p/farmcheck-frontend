@@ -1,10 +1,10 @@
 import {useState} from "react";
-import TextBox from "../../components/textbox/textbox";
 import {FileUploader, LabelInput} from "../../components/forms/forms";
 import {Button} from "../../components/buttons/buttons";
 import ErrorAlert from "../../components/alerts/error";
 
 import farmService from "../../lib/services/farmService";
+import style from "./styles/farms.module.scss";
 
 /**
  * Create Farm page.
@@ -21,17 +21,17 @@ const CreateFarm = () => {
     }
 
     return (
-        <TextBox className="form-container">
-            <form className="form" onSubmit={(event) => {
+        <div className={`${style.createContainer} form-container`}>
+            <form className={`${style.form} form`} onSubmit={(event) => {
                 event.preventDefault();
                 farmService.createFarm(name, image)
                     .then(() => window.location.href = "/farms?created")
                     .catch(err => setError(err.message));
             }}>
-                <h2 className="text-center mb-4">Create Farm</h2>
+                <h2 className="text-center mt-5 mb-4">Create Farm</h2>
                 <ErrorAlert error={error} setError={setError} />
 
-                <span className="input-container">
+                <span className="input-container mb-2">
                     <LabelInput
                         label="Farm name:"
                         value={name}
@@ -41,7 +41,7 @@ const CreateFarm = () => {
 
                 <FileUploader setBlob={setImage} />
 
-                <span className="d-flex justify-content-center">
+                <span className="d-flex justify-content-center mt-4">
                     <Button 
                         type="submit"
                         disabled={!isInputValid()}
@@ -51,7 +51,7 @@ const CreateFarm = () => {
                     </Button>
                 </span>
             </form>
-        </TextBox>
+        </div>
     )
 }
 

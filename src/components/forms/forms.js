@@ -241,7 +241,9 @@ export const FileUploader = ({ setBlob }) => {
     return (
         <div>
             <input
+                className={style.imageInput}
                 type="file"
+                accept="image/*"
                 onChange={(event) => {
                     const file = event.target.files[0];
                     if (!file) return; // error checking

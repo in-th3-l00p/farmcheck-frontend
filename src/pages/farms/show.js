@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import _ from "lodash";
 
-import TextBox from "../../components/textbox/textbox";
 import {Button} from "../../components/buttons/buttons";
 import ErrorAlert from "../../components/alerts/error";
 
@@ -18,10 +17,14 @@ import {useLocation} from "react-router-dom";
 const Farm = ({ farm }) => {
     return (
         <span
-            className={`${style.farmDisplay} p-3`}
+            className={`${style.farmDisplay} p-2 mt-2`}
             onClick={() => window.location.href = "/farms/panel/" + farm.id}
         >
-            <h4>{farm.name}</h4>
+            <img src={farm.image === "" ? "/images/default-farm-picture.png" : farm.image}/>
+            <div className={style.text}>
+                <h4>{farm.name}</h4>
+                <p>Your farm</p>
+            </div>
         </span>
     )
 }
@@ -91,14 +94,15 @@ const ShowFarms = () => {
     }, []);
 
     return (
-        <TextBox className="form-container">
+        <div className={`form-container ${style.textBox}`}>
             {error && <ErrorAlert error={error} setError={setError} />}
             <div className="d-flex m-3">
-                <h3 className="text-decoration-underline me-auto">Your farms</h3>
+                <h3 className="me-auto">Your farms</h3>
                 <Button
                     onClick={() => window.location.href = "/farms/create"}
+                    className={style.createButton}
                 >
-                    +
+                    <span className={style.buttonText}>+</span>
                 </Button>
             </div>
 
@@ -116,7 +120,7 @@ const ShowFarms = () => {
                 {loading && <FarmPlaceholder times={4} />}
                 {farms.map((farm, index) => <Farm farm={farm} key={index} /> )}
             </div>
-        </TextBox>
+        </div>
     )
 }
 
