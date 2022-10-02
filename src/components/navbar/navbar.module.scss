@@ -59,11 +59,32 @@ $line-margin: 10px;
     margin-bottom: $line-margin;
 }
 
+@keyframes onButtonHover {
+    from {
+        background-color: $orange;
+    }
+    to {
+        background-color: $dark-orange;
+    }
+}
+
 .button {
     font-size: 1.25rem;
     text-align: center;
     width: 120px;
     font-weight: 500;
+
+    background-color: $orange;
+
+    &:hover:enabled {
+        animation: onButtonHover 0.5s;
+        background-color: $dark-orange;
+        color: black;
+    }
+
+    &:disabled {
+        background-color: $orange;
+    }
 }
 
 $profile-button-hover-bg: #e2e2e2;

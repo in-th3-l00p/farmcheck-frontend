@@ -1,6 +1,6 @@
 import { Nav } from "react-bootstrap";
 import userService from "../../lib/services/userService";
-import { Button } from '../buttons/buttons';
+import { Button } from "../buttons/buttons";
 
 import style from "./navbar.module.scss";
 
@@ -15,26 +15,24 @@ import style from "./navbar.module.scss";
  * @returns the link component
  */
 const Link = ({
-    className="",
-    href="",
-    onClick=undefined,
-    iconSrc=undefined,
-    iconAlt="",
-    children
+    className = "",
+    href = "",
+    onClick = undefined,
+    iconSrc = undefined,
+    iconAlt = "",
+    children,
 }) => {
     return (
         <div
-            href={href} 
+            href={href}
             className={`${style.link} ${className}`}
-            onClick={(
-                typeof onClick === "undefined" ? 
-                () => window.location.href = href : 
-                onClick
-            )}
+            onClick={
+                typeof onClick === "undefined"
+                    ? () => (window.location.href = href)
+                    : onClick
+            }
         >
-            <span className="me-auto py-2">
-                {children}
-            </span>
+            <span className="me-auto py-2">{children}</span>
             {typeof iconSrc !== "undefined" && (
                 <span className={style.icon}>
                     <img src={iconSrc} alt={iconAlt} />
@@ -42,7 +40,7 @@ const Link = ({
             )}
         </div>
     );
-}
+};
 
 /**
  * Navs that are being showed if the user isn't authenticated.
@@ -53,21 +51,22 @@ export const UnauthenticatedNavs = () => {
         <>
             <Nav className={`${style.menu} mb-auto px-3`}>
                 <Link href="/shop">Shop</Link>
-                <Link href="/download">Download</Link>
                 <Link href="/wiki">Crop wiki</Link>
                 <Link href="/about">About us</Link>
 
                 <div className={style.line} />
 
-                <Link 
+                <Link
                     href="/feedback"
                     iconSrc="/icons/menu-icons/feedback.png"
                     iconAlt="feedback icon"
                 >
                     Feedback
                 </Link>
-                <Link 
-                    onClick={() => {console.log("yees")}}
+                <Link
+                    onClick={() => {
+                        console.log("yees");
+                    }}
                     iconSrc="/icons/menu-icons/dark.png"
                     iconAlt="switch theme"
                 >
@@ -76,40 +75,40 @@ export const UnauthenticatedNavs = () => {
             </Nav>
 
             <Nav className="d-flex gap-3 mb-3 px-3 justify-content-center">
-                <Button 
+                <Button
                     className={style.button}
-                    onClick={() => window.location.href="/login"}
+                    onClick={() => (window.location.href = "/login")}
                 >
                     Login
                 </Button>
-                <Button 
+                <Button
                     className={style.button}
-                    onClick={() => window.location.href="/register"}
+                    onClick={() => (window.location.href = "/register")}
                 >
                     Register
                 </Button>
             </Nav>
         </>
     );
-}
+};
 
 /**
  * The navs components that are being showed if the client is authenticated.
- * @returns the Nav components 
+ * @returns the Nav components
  */
 export const AuthenticatedNavs = () => {
     return (
         <>
             <Nav className={style.profile}>
-                <button 
-                    type="button" 
+                <button
+                    type="button"
                     className={`${style.profileButton} py-3 mb-1`}
-                    onClick={() => { 
-                        window.location.href = `/profile/${userService.getCurrentUsername()}` 
+                    onClick={() => {
+                        window.location.href = `/profile/${userService.getCurrentUsername()}`;
                     }}
                 >
-                    <img 
-                        src="/images/default-profile-picture.png" 
+                    <img
+                        src="/images/default-profile-picture.png"
                         alt="profile"
                         className={style.profilePicture}
                     />
@@ -118,22 +117,23 @@ export const AuthenticatedNavs = () => {
             </Nav>
             <Nav className={`${style.menu} mb-auto mt-0 px-3`}>
                 <Link href="/shop">Shop</Link>
-                <Link href="/download">Download</Link>
                 <Link href="/wiki">Crop wiki</Link>
                 <Link href="/about">About us</Link>
                 <Link href="/farms">Your farms</Link>
 
                 <div className={style.line} />
 
-                <Link 
+                <Link
                     href="/feedback"
                     iconSrc="/icons/menu-icons/feedback.png"
                     iconAlt="feedback icon"
                 >
                     Feedback
                 </Link>
-                <Link 
-                    onClick={() => {console.log("yees")}}
+                <Link
+                    onClick={() => {
+                        console.log("yees");
+                    }}
                     iconSrc="/icons/menu-icons/dark.png"
                     iconAlt="switch theme"
                 >
@@ -141,8 +141,8 @@ export const AuthenticatedNavs = () => {
                 </Link>
             </Nav>
             <Nav className={`${style.menu} mb-3 px-3`}>
-                <Button 
-                    className={style.button} 
+                <Button
+                    className={style.button}
                     onClick={() => {
                         userService.logout();
                         window.location.href = "/";
@@ -152,5 +152,5 @@ export const AuthenticatedNavs = () => {
                 </Button>
             </Nav>
         </>
-    )
-}
+    );
+};

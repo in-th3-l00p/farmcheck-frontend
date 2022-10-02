@@ -19,59 +19,57 @@ import style from "./forms.module.scss";
  */
 export const InputRange = ({
     label,
-    className="",
-    maximum=100,
+    className = "",
+    maximum = 100,
     value,
-    setValue
+    setValue,
 }) => {
     return (
         <div className={className}>
-            <LabelInput 
-                label={label} 
+            <LabelInput
+                label={label}
                 value={value}
                 setValue={(newValue) => {
                     // checking if the newValue is a number and is in the range
                     if (
-                        newValue === "" || (
-                        /^-?\d+$/.test(newValue) && 
-                        newValue >= 1 && 
-                        newValue <= maximum
-                    ))
+                        newValue === "" ||
+                        (/^-?\d+$/.test(newValue) &&
+                            newValue >= 1 &&
+                            newValue <= maximum)
+                    )
                         setValue(newValue);
                 }}
             />
         </div>
     );
-}
+};
 
 /**
  * An input that comes with a label
  * @returns the component
  */
-export const LabelInput = ({ 
+export const LabelInput = ({
     label,
-    type="text",
-    className="",
-    value, 
-    setValue, 
-    onFocus=() => {},
-    onBlur=() => {}
+    type = "text",
+    className = "",
+    value,
+    setValue,
+    onFocus = () => {},
+    onBlur = () => {},
 }) => {
     return (
-        <FloatingLabel
-            label={label}
-            className={`${style.label} ${className}`} 
-        >
+        <FloatingLabel label={label} className={`${style.label} ${className}`}>
             <Form.Control
                 className={style.content}
-                type={type} 
-                value={value} 
+                type={type}
+                value={value}
                 onChange={(e) => setValue(e.target.value)}
-                onFocus={onFocus} onBlur={onBlur}
+                onFocus={onFocus}
+                onBlur={onBlur}
             />
         </FloatingLabel>
     );
-}
+};
 
 /**
  * Input component that goes on multiple lines.
@@ -86,18 +84,15 @@ export const LabelInput = ({
  */
 export const LabelTextInput = ({
     label,
-    className="",
+    className = "",
     inputClassName = "",
     style = {},
     inputStyle = {},
     value,
-    setValue
+    setValue,
 }) => {
     return (
-        <Form.Group
-            className={className}
-            style={style}
-        >
+        <Form.Group className={className} style={style}>
             <Form.Label>{label}</Form.Label>
             <Form.Control
                 as="textarea"
@@ -108,7 +103,7 @@ export const LabelTextInput = ({
             />
         </Form.Group>
     );
-}
+};
 
 /**
  * A normal input with a label that auto completes into a country.
@@ -118,10 +113,10 @@ export const LabelTextInput = ({
  * @param props.setValue the function used for chaning the state of the input's value
  * @returns the component
  */
-export const CountryInput = ({ className="", value, setValue }) => {
-    const [inputSelected, setInputSelected] = useState(false)
-    const [countryListHover, setCountryListHover] = useState(false)
-    const [countryList, setCountryList] = useState(countries)
+export const CountryInput = ({ className = "", value, setValue }) => {
+    const [inputSelected, setInputSelected] = useState(false);
+    const [countryListHover, setCountryListHover] = useState(false);
+    const [countryList, setCountryList] = useState(countries);
 
     // getting every country that we need to list
     useEffect(() => {
@@ -134,20 +129,21 @@ export const CountryInput = ({ className="", value, setValue }) => {
         }
 
         setCountryList([]);
-    }, [value])
+    }, [value]);
 
     return (
         <div className={`${style.input} ${className}`}>
-            <LabelInput 
+            <LabelInput
                 label="Country / Region"
-                value={value} setValue={setValue}
+                value={value}
+                setValue={setValue}
                 onFocus={() => setInputSelected(true)}
                 onBlur={() => setInputSelected(false)}
             />
 
             {/* the country chooser */}
-            {((inputSelected || countryListHover) && countryList.length > 0) ? (
-                <ul 
+            {(inputSelected || countryListHover) && countryList.length > 0 ? (
+                <ul
                     className={style.list}
                     onMouseEnter={() => setCountryListHover(true)}
                     onMouseLeave={() => setCountryListHover(false)}
@@ -155,25 +151,27 @@ export const CountryInput = ({ className="", value, setValue }) => {
                     {countryList.map((country, index) => {
                         return (
                             <li key={index}>
-                                <button 
+                                <button
                                     className={style.button}
-                                    onClick={() => { 
-                                        setValue(country); 
-                                        setCountryListHover(false)
+                                    onClick={() => {
+                                        setValue(country);
+                                        setCountryListHover(false);
                                     }}
                                 >
                                     {country}
                                 </button>
                             </li>
-                        )
-                    })}                
+                        );
+                    })}
                 </ul>
-            ): <></>}
+            ) : (
+                <></>
+            )}
         </div>
     );
-}
+};
 
-export const PhoneNumberInput = ({ className="", value, setValue }) => {
+export const PhoneNumberInput = ({ className = "", value, setValue }) => {
     const [inputSelected, setInputSelected] = useState(false);
     const [phoneNumberIndexHover, setPhoneNumberIndexHover] = useState(false);
     const [phoneNumberIndexList, setPhoneNumberIndexList] = useState(indexes);
@@ -187,25 +185,32 @@ export const PhoneNumberInput = ({ className="", value, setValue }) => {
         }
 
         setPhoneNumberIndexList([]);
-    }, [value])
+    }, [value]);
 
     return (
         <div className={`${style.input} ${className}`}>
-            <LabelInput 
+            <LabelInput
                 label="Phone number"
-                value={value} 
+                value={value}
                 setValue={(newValue) => {
-                    if (newValue === "" || (/^-?\d+$/.test(newValue.length > 1 ? newValue.substring(1) : newValue)))
+                    if (
+                        newValue === "" ||
+                        /^-?\d+$/.test(
+                            newValue.length > 1
+                                ? newValue.substring(1)
+                                : newValue
+                        )
+                    )
                         setValue(newValue);
-                    else if (newValue === "+")
-                        setValue("");
+                    else if (newValue === "+") setValue("");
                 }}
                 onFocus={() => setInputSelected(true)}
                 onBlur={() => setInputSelected(false)}
             />
 
-            {((inputSelected || phoneNumberIndexHover) && phoneNumberIndexList.length > 0) ? (
-                <ul 
+            {(inputSelected || phoneNumberIndexHover) &&
+            phoneNumberIndexList.length > 0 ? (
+                <ul
                     className={style.list}
                     onMouseEnter={() => setPhoneNumberIndexHover(true)}
                     onMouseLeave={() => setPhoneNumberIndexHover(false)}
@@ -213,27 +218,34 @@ export const PhoneNumberInput = ({ className="", value, setValue }) => {
                     {phoneNumberIndexList.map((countryNumber, index) => {
                         return (
                             <li key={index}>
-                                <button 
+                                <button
                                     className={style.button}
                                     onClick={() => {
-                                        setValue("+" + countryNumber.match(/\d/g).join(""));
-                                        setPhoneNumberIndexHover(false)
+                                        setValue(
+                                            "+" +
+                                                countryNumber
+                                                    .match(/\d/g)
+                                                    .join("")
+                                        );
+                                        setPhoneNumberIndexHover(false);
                                     }}
                                 >
                                     {"+" + countryNumber}
                                 </button>
                             </li>
-                        )
-                    })}                
+                        );
+                    })}
                 </ul>
-            ): <></>}
+            ) : (
+                <></>
+            )}
         </div>
-    )
-}
+    );
+};
 
 /**
  * A file uploader component. Once a file is loaded, it will
- * be stored as an Int8Array. 
+ * be stored as an Int8Array.
  * @param {callback} props.setBlob content state reducer
  * @returns the components
  */
@@ -261,4 +273,4 @@ export const FileUploader = ({ setBlob }) => {
             />
         </div>
     );
-}
+};

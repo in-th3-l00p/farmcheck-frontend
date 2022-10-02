@@ -1,26 +1,33 @@
-import {useState} from "react";
-import {Alert, Col, Container, FormControl, FormSelect, Modal, Row, Table} from "react-bootstrap";
-import {Button} from "../../../components/buttons/buttons";
+import { useState } from "react";
+import {
+    Alert,
+    Col,
+    Container,
+    FormControl,
+    FormSelect,
+    Modal,
+    Row,
+    Table,
+} from "react-bootstrap";
+import { Button } from "../../../components/buttons/buttons";
 import ErrorAlert from "../../../components/alerts/error";
 import userService from "../../../lib/services/userService";
+
+import style from "./../styles/panel.module.scss";
 
 /**
  * Used while waiting for the farm data to be fetched.
  * @return {JSX.Element} placeholder component
  */
 const UsersTabPlaceholder = () => {
-    return (
-        <Container>
-
-        </Container>
-    );
-}
+    return <Container></Container>;
+};
 
 // roles of a user
-const roles = ["Owner", "Admin", "Worker"];
+const roles = ["Owner", "Admin", "+Worker"];
 const selectableRoles = [
-    {name: "Admin", id: 2},
-    {name: "Worker", id: 3}
+    { name: "Admin", id: 2 },
+    { name: "Worker", id: 3 },
 ];
 
 /**
@@ -37,12 +44,11 @@ const UserDisplay = ({
     setShowRemoveUserModal,
     setRemoveUser,
     setShowChangeRoleModal,
-    setChangeRoleUser
+    setChangeRoleUser,
 }) => {
     const role = roles[user.farmRole - 1];
 
-    if (role === "Owner")
-        return <></>;
+    if (role === "Owner") return <></>;
     return (
         <tr>
             <td>{user.login}</td>
@@ -79,7 +85,7 @@ const UserDisplay = ({
             </td>
         </tr>
     );
-}
+};
 
 // used for rendering the logged user
 const UserDisplayWithoutControls = ({ user }) => {
@@ -96,7 +102,7 @@ const UserDisplayWithoutControls = ({ user }) => {
             <td></td>
         </tr>
     );
-}
+};
 
 /**
  * Modal user for adding a new user to the current farm.
@@ -105,21 +111,18 @@ const UserDisplayWithoutControls = ({ user }) => {
  * @param setError error state's reducer
  * @return {JSX.Element} the modal component
  */
-const AddUserModal = ({ 
-    farmId, 
-    setSuccessMessage, 
-    setErrorMessage, 
-    show, 
-    setShow 
+const AddUserModal = ({
+    farmId,
+    setSuccessMessage,
+    setErrorMessage,
+    show,
+    setShow,
 }) => {
     const [userDetails, setUserDetails] = useState("");
     const [error, setError] = useState("");
 
     return (
-        <Modal
-            show={show}
-            onHide={() => setShow(false)}
-        >
+        <Modal show={show} onHide={() => setShow(false)}>
             <Modal.Header closeButton>
                 <Modal.Title>Add a new user</Modal.Title>
             </Modal.Header>
@@ -129,35 +132,37 @@ const AddUserModal = ({
                 <FormControl
                     value={userDetails}
                     onChange={(event) => setUserDetails(event.target.value)}
-                    placeholder={"address@gmail.com"}
+                    placeholder={"username / address@gmail.com"}
                 />
             </Modal.Body>
             <Modal.Footer>
                 <Button
                     disabled={!userDetails}
                     onClick={() => {
-                        userService.addFarm(userDetails, farmId)
+                        userService
+                            .addFarm(userDetails, farmId)
                             .then((message) => setSuccessMessage(message))
                             .catch((error) => setErrorMessage(error.message))
                             .finally(() => setShow(false));
                     }}
                     className="fw-bolder"
+                    style={{ width: "100px" }}
                 >
                     Add
                 </Button>
             </Modal.Footer>
         </Modal>
     );
-}
+};
 
-const RemoveUserModal = ({ 
+const RemoveUserModal = ({
     farmId,
     setSuccessMessage,
     setErrorMessage,
-    user, 
-    setUser, 
-    show, 
-    setShow 
+    user,
+    setUser,
+    show,
+    setShow,
 }) => {
     const [confirmationInput, setConfirmationInput] = useState("");
 
@@ -175,19 +180,23 @@ const RemoveUserModal = ({
             </Modal.Header>
             <Modal.Body>
                 <p>
-                    Are you sure you want to delete user <b>{user.login}</b>.<br />
+                    Are you sure you want to delete user <b>{user.login}</b>.
+                    <br />
                     Enter the username of the user to confirm:
                 </p>
                 <FormControl
                     value={confirmationInput}
-                    onChange={(event) => setConfirmationInput(event.target.value)}
+                    onChange={(event) =>
+                        setConfirmationInput(event.target.value)
+                    }
                 />
             </Modal.Body>
             <Modal.Footer>
                 <Button
                     disabled={confirmationInput !== user.login}
                     onClick={() => {
-                        userService.removeFarm(user.login, farmId)
+                        userService
+                            .removeFarm(user.login, farmId)
                             .then((message) => setSuccessMessage(message))
                             .catch((err) => setErrorMessage(err.message))
                             .finally(() => {
@@ -202,7 +211,7 @@ const RemoveUserModal = ({
             </Modal.Footer>
         </Modal>
     );
-}
+};
 
 const ChangeRoleModal = ({
     farmId,
@@ -211,7 +220,7 @@ const ChangeRoleModal = ({
     user,
     setUser,
     show,
-    setShow
+    setShow,
 }) => {
     const userRole = roles[user.farmRole - 1];
     const [selectedRole, setSelectedRole] = useState(selectableRoles[0].id);
@@ -219,10 +228,9 @@ const ChangeRoleModal = ({
     const hide = () => {
         setUser(null);
         setShow(false);
-    }
+    };
 
-    if (user.farmRole === 1)
-        return <></>
+    if (user.farmRole === 1) return <></>;
     return (
         <Modal
             show={show}
@@ -240,22 +248,29 @@ const ChangeRoleModal = ({
                     value={selectedRole.id}
                     onChange={(event) => setSelectedRole(event.target.value)}
                 >
-                    <option value={selectableRoles[0].id}>{selectableRoles[0].name}</option>
-                    <option value={selectableRoles[1].id}>{selectableRoles[1].name}</option>
+                    <option value={selectableRoles[0].id}>
+                        {selectableRoles[0].name}
+                    </option>
+                    <option value={selectableRoles[1].id}>
+                        {selectableRoles[1].name}
+                    </option>
                 </FormSelect>
             </Modal.Body>
             <Modal.Footer>
                 <Button
                     onClick={() => {
                         const selectedRoleObject = selectableRoles.find(
-                            role => role.id == selectedRole
+                            (role) => role.id === selectedRole
                         );
                         if (selectedRoleObject.name === userRole) {
-                            setErrorMessage(`User ${user.login} already has the ${selectedRoleObject.name} role.`);
+                            setErrorMessage(
+                                `User ${user.login} already has the ${selectedRoleObject.name} role.`
+                            );
                             hide();
                             return;
                         }
-                        userService.updateFarmRole(user.login, farmId, selectedRole)
+                        userService
+                            .updateFarmRole(user.login, farmId, selectedRole)
                             .then((message) => setSuccessMessage(message))
                             .catch((err) => setErrorMessage(err.message))
                             .finally(hide);
@@ -267,7 +282,7 @@ const ChangeRoleModal = ({
             </Modal.Footer>
         </Modal>
     );
-}
+};
 
 /**
  * Tab for supporting CRUD operations on farm's users.
@@ -288,11 +303,8 @@ const UsersTab = ({ farm, users }) => {
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    if (
-        typeof farm === "undefined" ||
-        typeof users === "undefined"
-    )
-        return <UsersTabPlaceholder />
+    if (typeof farm === "undefined" || typeof users === "undefined")
+        return <UsersTabPlaceholder />;
     return (
         <>
             <AddUserModal
@@ -329,8 +341,8 @@ const UsersTab = ({ farm, users }) => {
 
             <Container className="d-flex flex-column gap-2">
                 {errorMessage && (
-                    <ErrorAlert 
-                        error={errorMessage} 
+                    <ErrorAlert
+                        error={errorMessage}
                         setError={setErrorMessage}
                     />
                 )}
@@ -338,7 +350,7 @@ const UsersTab = ({ farm, users }) => {
                     <Alert
                         variant="success"
                         onClose={() => setSuccessMessage("")}
-                        dismissible 
+                        dismissible
                     >
                         {successMessage}
                     </Alert>
@@ -346,48 +358,56 @@ const UsersTab = ({ farm, users }) => {
                 <div className="text-end">
                     <Button
                         onClick={() => setShowAddUserModal(true)}
+                        className={style.createButton}
                     >
-                        +
+                        <span className={style.buttonText}>+</span>
                     </Button>
                 </div>
                 <Table striped bordered hover>
                     <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Roles</th>
-                        <th>Controls</th>
-                    </tr>
+                        <tr>
+                            <th>Username</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Roles</th>
+                            <th>Controls</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {users.map((user, index) => {
-                        if (
-                            user.login === userService.getCurrentUsername() ||
-                            user.farmRole === 1
-                        )
+                        {users.map((user, index) => {
+                            if (
+                                user.login ===
+                                    userService.getCurrentUsername() ||
+                                user.farmRole === 1
+                            )
+                                return (
+                                    <UserDisplayWithoutControls
+                                        key={index}
+                                        user={user}
+                                    />
+                                );
                             return (
-                                <UserDisplayWithoutControls
+                                <UserDisplay
                                     key={index}
                                     user={user}
+                                    setRemoveUser={setSelectedRemoveUser}
+                                    setShowRemoveUserModal={
+                                        setShowRemoveUserModal
+                                    }
+                                    setChangeRoleUser={
+                                        setSelectedChangeRoleUser
+                                    }
+                                    setShowChangeRoleModal={
+                                        setShowChangeRoleModel
+                                    }
                                 />
                             );
-                        return (
-                            <UserDisplay
-                                key={index}
-                                user={user}
-                                setRemoveUser={setSelectedRemoveUser}
-                                setShowRemoveUserModal={setShowRemoveUserModal}
-                                setChangeRoleUser={setSelectedChangeRoleUser}
-                                setShowChangeRoleModal={setShowChangeRoleModel}
-                            />
-                        );
-                    })}
+                        })}
                     </tbody>
                 </Table>
             </Container>
         </>
-    )
-}
+    );
+};
 
 export default UsersTab;

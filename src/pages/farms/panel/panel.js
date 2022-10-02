@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
-import {useLocation, useParams} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import TextBox from "../../../components/textbox/textbox";
-import {Alert, Col, Row} from "react-bootstrap";
+import { Alert, Col, Row } from "react-bootstrap";
 import farmService from "../../../lib/services/farmService";
 
 import style from "../styles/panel.module.scss";
@@ -28,10 +28,8 @@ const TabNav = ({ tabs, tab, setTab }) => {
             <Col sm={1}>
                 <button
                     onClick={({ target }) => {
-                        if (tab === 0)
-                            setTab(tabs.length - 1);
-                        else
-                            setTab(tab - 1);
+                        if (tab === 0) setTab(tabs.length - 1);
+                        else setTab(tab - 1);
                         target.blur();
                     }}
                     className={`
@@ -50,10 +48,8 @@ const TabNav = ({ tabs, tab, setTab }) => {
             <Col sm={1}>
                 <button
                     onClick={({ target }) => {
-                        if (tab === tabs.length - 1)
-                            setTab(0);
-                        else
-                            setTab(tab + 1);
+                        if (tab === tabs.length - 1) setTab(0);
+                        else setTab(tab + 1);
                         target.blur();
                     }}
                     className={`
@@ -66,7 +62,7 @@ const TabNav = ({ tabs, tab, setTab }) => {
             </Col>
         </Row>
     );
-}
+};
 
 /**
  * Layout component for displaying the tabs
@@ -78,14 +74,12 @@ const TabNav = ({ tabs, tab, setTab }) => {
  */
 const PanelLayout = ({ tabs, tab, setTab, children }) => {
     return (
-        <TextBox className="form-container flex-column center">
+        <div className={`${style.textBox} form-container flex-column center`}>
             <TabNav tabs={tabs} tab={tab} setTab={setTab} />
-            <div className={style.tab}>
-                {children}
-            </div>
-        </TextBox>
+            <div className={style.tab}>{children}</div>
+        </div>
     );
-}
+};
 
 /**
  * Tabs used by the owner
@@ -101,12 +95,12 @@ const OwnerTabs = ({ farm, users }) => {
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} />}
             {tab === 1 && <UsersTab farm={farm} users={users} />}
-            {tab === 2 && <SensorsTab farm={farm} users={users} /> }
+            {tab === 2 && <SensorsTab farm={farm} users={users} />}
             {tab === 3 && <ChatTab farm={farm} users={users} />}
             {tab === 4 && <OwnerSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
-}
+};
 
 /**
  * Tabs used by an admin
@@ -122,12 +116,12 @@ const AdminTabs = ({ farm, users }) => {
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} />}
             {tab === 1 && <UsersTab farm={farm} users={users} />}
-            {tab === 2 && <SensorsTab farm={farm} users={users} /> }
+            {tab === 2 && <SensorsTab farm={farm} users={users} />}
             {tab === 3 && <ChatTab farm={farm} users={users} />}
             {tab === 4 && <AdminSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
-}
+};
 
 /**
  * Tabs used by a worker
@@ -142,12 +136,12 @@ const WorkerTabs = ({ farm, users }) => {
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} />}
-            {tab === 1 && <SensorsTab farm={farm} users={users} /> }
+            {tab === 1 && <SensorsTab farm={farm} users={users} />}
             {tab === 2 && <ChatTab farm={farm} users={users} />}
             {tab === 3 && <WorkerSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
-}
+};
 
 /**
  * Farm panel located at "/farms/panel"
@@ -162,19 +156,19 @@ const FarmPanel = () => {
 
     // getting information about the farm
     useEffect(() => {
-        farmService.getFarm(params["farm_id"])
-            .then(resp => setFarm(resp))
-            .catch(err => setError(err.message))
+        farmService
+            .getFarm(params["farm_id"])
+            .then((resp) => setFarm(resp))
+            .catch((err) => setError(err.message));
 
-        farmService.getFarmUsers(params["farm_id"])
-            .then(resp => setUsers(resp))
-            .catch(err => setError(err.message));
-    }, [])
+        farmService
+            .getFarmUsers(params["farm_id"])
+            .then((resp) => setUsers(resp))
+            .catch((err) => setError(err.message));
+    }, []);
 
-    if (error)
-        return <NotFound />
-    if (farm === undefined || users === [])
-        return <></>;
+    if (error) return <NotFound />;
+    if (farm === undefined || users === []) return <></>;
     return (
         <>
             {farm.role === 1 && <OwnerTabs farm={farm} users={users} />}
@@ -182,6 +176,6 @@ const FarmPanel = () => {
             {farm.role === 3 && <WorkerTabs farm={farm} users={users} />}
         </>
     );
-}
+};
 
 export default FarmPanel;

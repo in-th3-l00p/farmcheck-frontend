@@ -100,7 +100,8 @@ const Home = () => {
                         <FeatureIcon
                             src={featuresIconsPath[3]}
                             title="Maintenance"
-                            description="Your sensors are in good hands. If anything happens, just give us a call."
+                            description="Your sensors are in good hands. If anything happens to them, just 
+                            give us a call. We'll take care of everything, while you sit back and relax."
                         />
                     </Col>
                 </Row>

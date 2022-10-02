@@ -5,76 +5,179 @@ $border: 1px solid $light-grey;
 $border-radius: 10px;
 
 .tabDisplay {
-  width: 100%;
-  * { padding: 0 !important; }
-
-  .tabArrow {
     width: 100%;
-    height: 100%;
+    * {
+        padding: 0 !important;
+    }
 
-    background-color: $background-color;
-    border: $border
-  }
+    .tabArrow {
+        width: 100%;
+        height: 100%;
 
-  .tabArrowLeft {
-    border-top-left-radius: $border-radius;
-    border-bottom-left-radius: $border-radius;
-  }
+        background-color: $background-color;
+        border: $border;
+    }
 
-  .tabArrowRight {
-    border-top-right-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-  }
+    .tabArrowLeft {
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+    }
 
-  .tabName {
-    font-size: 1.5rem;
-    text-align: center;
+    .tabArrowRight {
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+    }
 
-    background-color: $background-color;
-    border: $border;
-    width: 100%;
-  }
+    .tabName {
+        font-size: 1.5rem;
+        text-align: center;
+
+        background-color: $background-color;
+        border: $border;
+        width: 100%;
+    }
 }
 
 .tab {
-  width: 100%;
-  height: 100%;
-  padding: 15px;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
 
-  border: $border;
-  border-radius: $border-radius;
+    border: $border;
+    border-radius: $border-radius;
+
+    @media screen and (max-width: 550px) {
+        padding: 10px 5px 10px 5px;
+    }
+}
+
+.textBox {
+    background-color: $white;
+    width: 80%;
+    margin: 100px auto 40px auto;
+    border-radius: 20px;
+    padding: 3rem;
+
+    @media screen and (max-width: 550px) {
+        padding: 15px !important;
+        min-width: 100%;
+    }
 }
 
 .chatBox {
-  height: 400px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  display: flex;
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
 
-  ul {
-    width: 100%;
-    margin-top: auto;
-    list-style: none;
-    padding-left: 0;
-  }
+    ul {
+        width: 100%;
+        margin-top: auto;
+        list-style: none;
+        padding-left: 0;
+    }
 }
 
 @keyframes onSensorDisplayHover {
-  from { background-color: white; }
-  to { background-color: $light-grey; }
+    from {
+        background-color: white;
+    }
+    to {
+        background-color: $light-grey;
+    }
 }
 
 .sensorDisplay {
-  border: 2px solid $grey;
-  border-radius: 15px;
-  padding: 1rem;
+    border: 2px solid $grey;
+    border-radius: 15px;
+    padding: 1rem;
 
-  &:hover {
-    animation: onSensorDisplayHover 0.3s;
-    background-color: $light-grey;
-    text-decoration: underline;
-    font-weight: bold;
-    cursor: pointer;
-    user-select: none;
-  }
+    &:hover {
+        animation: onSensorDisplayHover 0.3s;
+        background-color: $light-grey;
+        text-decoration: underline;
+        font-weight: bold;
+        cursor: pointer;
+        user-select: none;
+    }
+}
+
+.createButton {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+
+    .buttonText {
+        position: relative;
+        bottom: 50%;
+    }
+}
+
+.rightMessages {
+    margin-left: auto;
+    margin-right: 15px;
+
+    border: 2px solid $green !important;
+
+    @media screen and (max-width: 550px) {
+        margin-right: 5px;
+    }
+}
+
+.messageBox {
+    border: 2px solid $orange;
+    border-radius: 20px;
+
+    padding: 10px;
+    margin-top: 15px;
+
+    width: fit-content;
+    max-width: 60%;
+
+    .messageHeader {
+        display: flex;
+
+        @media screen and (max-width: 700px) {
+            display: block;
+        }
+
+        .sender {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-right: 10px;
+            margin-bottom: 0;
+
+            @media screen and (max-width: 550px) {
+                font-size: 1rem;
+            }
+        }
+
+        .date {
+            margin-top: 4px;
+            margin-bottom: 0;
+        }
+    }
+
+    .message {
+        margin-top: 10px;
+        margin-bottom: 5px;
+        word-wrap: break-word;
+    }
+}
+
+.button {
+    width: 150px;
+    font-weight: 500;
+
+    margin-top: 25px;
+
+    @media screen and (max-width: 650px) {
+        font-size: 1rem;
+        width: 120px;
+    }
+
+    @media screen and (max-width: 350px) {
+        width: 90px;
+    }
 }

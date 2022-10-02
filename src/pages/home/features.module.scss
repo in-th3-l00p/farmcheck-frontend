@@ -1,9 +1,10 @@
 .feature_text {
     .text {
-        font-size: 1.5rem;
+        max-width: 500px;
+        font-size: 1.25rem;
 
         @media screen and (max-width: 650px) {
-            font-size: 1.25rem;
+            font-size: 1rem;
         }
 
         @media screen and (max-width: 450px) {
@@ -12,7 +13,7 @@
     }
 
     .title {
-        font-size: 2rem;
+        font-size: 1.75rem;
 
         @media screen and (max-width: 650px) {
             font-size: 1.5rem;

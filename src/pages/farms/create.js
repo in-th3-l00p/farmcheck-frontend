@@ -1,6 +1,6 @@
-import {useState} from "react";
-import {FileUploader, LabelInput} from "../../components/forms/forms";
-import {Button} from "../../components/buttons/buttons";
+import { useState } from "react";
+import { FileUploader, LabelInput } from "../../components/forms/forms";
+import { Button } from "../../components/buttons/buttons";
 import ErrorAlert from "../../components/alerts/error";
 
 import farmService from "../../lib/services/farmService";
@@ -17,17 +17,21 @@ const CreateFarm = () => {
     const [error, setError] = useState("");
 
     const isInputValid = () => {
-        return ( !!name && !!image );
-    }
+        return !!name && !!image;
+    };
 
     return (
         <div className={`${style.createContainer} form-container`}>
-            <form className={`${style.form} form`} onSubmit={(event) => {
-                event.preventDefault();
-                farmService.createFarm(name, image)
-                    .then(() => window.location.href = "/farms?created")
-                    .catch(err => setError(err.message));
-            }}>
+            <form
+                className={`${style.form} form`}
+                onSubmit={(event) => {
+                    event.preventDefault();
+                    farmService
+                        .createFarm(name, image)
+                        .then(() => (window.location.href = "/farms?created"))
+                        .catch((err) => setError(err.message));
+                }}
+            >
                 <h2 className="text-center mt-5 mb-4">Create Farm</h2>
                 <ErrorAlert error={error} setError={setError} />
 
@@ -42,17 +46,17 @@ const CreateFarm = () => {
                 <FileUploader setBlob={setImage} />
 
                 <span className="d-flex justify-content-center mt-4">
-                    <Button 
+                    <Button
                         type="submit"
                         disabled={!isInputValid()}
-                        style={{width: "150px"}}
+                        style={{ width: "150px", fontWeight: 500 }}
                     >
                         Submit
                     </Button>
                 </span>
             </form>
         </div>
-    )
-}
+    );
+};
 
 export default CreateFarm;

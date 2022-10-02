@@ -2,8 +2,12 @@
 
 $farm-display-hover-bg-color: $light-grey;
 @keyframes onFarmDisplayHover {
-    from { background-color: white }
-    to { background-color: $light-grey; }
+    from {
+        background-color: white;
+    }
+    to {
+        background-color: $light-grey;
+    }
 }
 
 .farmContainer {
@@ -41,8 +45,6 @@ $farm-display-hover-bg-color: $light-grey;
     }
 }
 
-
-
 .placeholder {
     &:hover {
         cursor: wait !important;
@@ -63,7 +65,7 @@ $farm-display-hover-bg-color: $light-grey;
     @media screen and (max-width: 500px) {
         width: 100%;
     }
-        
+
     .createButton {
         border-radius: 50%;
         width: 40px;
@@ -72,7 +74,7 @@ $farm-display-hover-bg-color: $light-grey;
 
         .buttonText {
             position: relative;
-            top: -13px;
+            bottom: 50%;
         }
     }
 }
@@ -82,13 +84,13 @@ $farm-display-hover-bg-color: $light-grey;
     height: 370px;
     border-radius: 10px;
     background-color: $white;
-    margin: 100px auto 0 auto;
+    margin: 180px auto 0 auto !important;
 
-    @media screen and (max-width: 500px){
+    @media screen and (max-width: 500px) {
         width: 100vw !important;
     }
 
-    @media screen and (max-width: 300px){
+    @media screen and (max-width: 300px) {
         width: 110vw !important;
     }
 

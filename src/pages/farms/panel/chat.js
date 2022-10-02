@@ -14,17 +14,47 @@ const CHAT_URL = "http://localhost:8080/ws";
 const ChatTabPlaceholder = () => {
     return (
         <Container>
-            <p>loading... prea chill</p>
+            <p>loading...</p>
         </Container>
     );
 };
 
 const ChatMessage = ({ message }) => {
-    const date = message.datetime.replace(/T/g, " ").replace(/\..*/g, "");
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        function handleWindowResize() {
+            setWidth(window.innerWidth);
+        }
+
+        window.addEventListener("resize", handleWindowResize);
+
+        return () => {
+            window.removeEventListener("resize", handleWindowResize);
+        };
+    }, []);
+
+    const date = message.datetime
+        .replace(/T/g, " ")
+        .replace(/\..*/g, "")
+        .replace("-", ".")
+        .replace("-", ".")
+        .slice(width <= 550 ? 10 : 0, -3);
 
     return (
-        <Container fluid className="p-1 border">
-            <Row>
+        <div
+            className={`${style.messageBox} ${
+                userService.getCurrentUsername() === message.sender
+                    ? style.rightMessages
+                    : {}
+            }`}
+        >
+            <div className={style.messageHeader}>
+                <p className={style.sender}>{message.sender}</p>
+                <p className={`${style.date} text-muted`}>{date}</p>
+            </div>
+            <p className={style.message}>{message.text}</p>
+            {/* <Row>
                 <Col sm>
                     <p className="fw-bold me-2">{message.sender}</p>
                 </Col>
@@ -34,8 +64,8 @@ const ChatMessage = ({ message }) => {
                 <Col sm>
                     <p className="text-muted fw-lighter">{date}</p>
                 </Col>
-            </Row>
-        </Container>
+            </Row> */}
+        </div>
     );
 };
 
@@ -79,7 +109,10 @@ const ChatTab = ({ farm, users }) => {
                 }}
                 ref={stompClient}
             />
-            <Container className="d-flex flex-column gap-2">
+            <div
+                className="d-flex flex-column gap-2 p-1"
+                style={{ padding: 10 }}
+            >
                 <ErrorAlert error={error} setError={setError} />
                 <div
                     className={style.chatBox}
@@ -120,11 +153,15 @@ const ChatTab = ({ farm, users }) => {
                         }
                         className="me-2 w-100"
                     />
-                    <Button type="submit" disabled={!messageInput}>
+                    <Button
+                        type="submit"
+                        disabled={!messageInput}
+                        style={{ width: "100px", fontWeight: "500" }}
+                    >
                         Send
                     </Button>
                 </Form>
-            </Container>
+            </div>
         </>
     );
 };

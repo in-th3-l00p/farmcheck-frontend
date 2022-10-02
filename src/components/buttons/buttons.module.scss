@@ -1,33 +1,36 @@
 @import "src/styles/colorscheme.scss";
 
 @keyframes onButtonHover {
-  from { background-color: $yellow; }
-  to { background-color: $orange;} 
+    from {
+        background-color: $yellow;
+    }
+    to {
+        background-color: $orange;
+    }
 }
 
 .button {
-  background-color: $yellow;
-  border: none;
-  color: black;
-  border-radius: 15px;
-  padding: 0.4rem;
-
-  &:hover:enabled {
-    animation: onButtonHover 0.5s;
-    background-color: $orange; 
+    background-color: $yellow;
+    border: none;
     color: black;
-  }
+    border-radius: 15px;
+    padding: 0.4rem;
 
-  &:disabled {
-    background-color: $dark-orange;
-  }
+    &:hover:enabled {
+        animation: onButtonHover 0.5s;
+        background-color: $orange;
+    }
 
-  font-size: 1.15rem;
-  @media screen and (max-width: 650px) {
-    font-size: 1.5rem;
-  }
+    &:disabled {
+        background-color: $dark-orange;
+    }
 
-  @media screen and (max-width: 450px) {
-    font-size: 1.25rem;
-  }
+    font-size: 1.15rem;
+    @media screen and (max-width: 650px) {
+        font-size: 1.5rem;
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: 1.25rem;
+    }
 }

@@ -1,20 +1,18 @@
-import {useState} from "react";
-import {Container, Form, Modal} from "react-bootstrap";
-import {Button} from "../../../../components/buttons/buttons";
+import { useState } from "react";
+import { Container, Form, Modal } from "react-bootstrap";
+import { Button } from "../../../../components/buttons/buttons";
 import userService from "../../../../lib/services/userService";
 import ErrorAlert from "../../../../components/alerts/error";
+
+import style from "./../../styles/panel.module.scss";
 
 /**
  * Used while waiting for the farm data to be fetched.
  * @return {JSX.Element} placeholder component
  */
 const SettingsTabPlaceholder = () => {
-    return (
-        <Container>
-
-        </Container>
-    );
-}
+    return <Container></Container>;
+};
 
 /**
  * Modal that is used for confirming if the user want to exit the farm or not.
@@ -32,8 +30,7 @@ const ExitConfirmationModal = ({ show, setShow, setError, farm }) => {
         <Modal
             show={show}
             onHide={() => {
-                if (!exiting)
-                    setShow(false)
+                if (!exiting) setShow(false);
             }}
         >
             <Modal.Header closeButton>
@@ -42,8 +39,7 @@ const ExitConfirmationModal = ({ show, setShow, setError, farm }) => {
             <Modal.Body>
                 <p>
                     If you really want to exit farm
-                    <b>{` "${farm.name}"`}</b>,
-                    write the name of the farm:
+                    <b>{` "${farm.name}"`}</b>, write the name of the farm:
                 </p>
                 <Form.Control
                     value={farmNameInput}
@@ -55,14 +51,17 @@ const ExitConfirmationModal = ({ show, setShow, setError, farm }) => {
                     disabled={farmNameInput !== farm.name}
                     onClick={() => {
                         setExiting(true);
-                        userService.exitFarm(farm.id)
-                            .then(() => window.location.href = "/farms?exited")
+                        userService
+                            .exitFarm(farm.id)
+                            .then(
+                                () => (window.location.href = "/farms?exited")
+                            )
                             .catch((err) => setError(err.message))
                             .finally(() => {
                                 setExiting(false);
                                 setShow(false);
                                 setFarmNameInput("");
-                            })
+                            });
                     }}
                     className="bg-danger text-white fw-bolder"
                 >
@@ -70,8 +69,8 @@ const ExitConfirmationModal = ({ show, setShow, setError, farm }) => {
                 </Button>
             </Modal.Footer>
         </Modal>
-    )
-}
+    );
+};
 
 /**
  * Worker's tab used for viewing/changing farm's settings.
@@ -83,11 +82,8 @@ const WorkerSettingsTab = ({ farm, users }) => {
     const [showExitModal, setShowExitModal] = useState(false);
     const [error, setError] = useState("");
 
-    if (
-        typeof farm === "undefined" ||
-        typeof users === "undefined"
-    )
-        return <SettingsTabPlaceholder />
+    if (typeof farm === "undefined" || typeof users === "undefined")
+        return <SettingsTabPlaceholder />;
     return (
         <>
             <ExitConfirmationModal
@@ -102,14 +98,14 @@ const WorkerSettingsTab = ({ farm, users }) => {
 
                     <Button
                         onClick={() => setShowExitModal(true)}
-                        className="bg-danger text-white"
+                        className={`${style.button} bg-danger text-white mt-1`}
                     >
                         Exit farm
                     </Button>
                 </div>
             </Form>
         </>
-    )
-}
+    );
+};
 
 export default WorkerSettingsTab;

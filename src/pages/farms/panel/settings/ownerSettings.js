@@ -1,21 +1,19 @@
-import {useState} from "react";
-import {Container, Form, Modal} from "react-bootstrap";
-import {Button} from "../../../../components/buttons/buttons";
-import {FileUploader} from "../../../../components/forms/forms";
+import { useState } from "react";
+import { Container, Form, Modal } from "react-bootstrap";
+import { Button } from "../../../../components/buttons/buttons";
+import { FileUploader } from "../../../../components/forms/forms";
 import ErrorAlert from "../../../../components/alerts/error";
 import farmService from "../../../../lib/services/farmService";
+
+import style from "./../../styles/panel.module.scss";
 
 /**
  * Used while waiting for the farm data to be fetched.
  * @return {JSX.Element} placeholder component
  */
 const SettingsTabPlaceholder = () => {
-    return (
-        <Container>
-
-        </Container>
-    );
-}
+    return <Container></Container>;
+};
 
 /**
  * Modal that is used for confirming if the farm should be deleted or not.
@@ -33,8 +31,7 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farm }) => {
         <Modal
             show={show}
             onHide={() => {
-                if (!deleting)
-                    setShow(false)
+                if (!deleting) setShow(false);
             }}
         >
             <Modal.Header closeButton>
@@ -43,8 +40,7 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farm }) => {
             <Modal.Body>
                 <p>
                     If you really want to delete farm
-                    <b>{` "${farm.name}"`}</b>,
-                    write the name of the farm:
+                    <b>{` "${farm.name}"`}</b>, write the name of the farm:
                 </p>
                 <Form.Control
                     value={farmNameInput}
@@ -56,14 +52,17 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farm }) => {
                     disabled={farmNameInput !== farm.name}
                     onClick={() => {
                         setDeleting(true);
-                        farmService.deleteFarm(farm.id)
-                            .then(() => window.location.href = "/farms?deleted")
+                        farmService
+                            .deleteFarm(farm.id)
+                            .then(
+                                () => (window.location.href = "/farms?deleted")
+                            )
                             .catch((err) => setError(err.message))
                             .finally(() => {
                                 setDeleting(false);
                                 setShow(false);
                                 setFarmNameInput("");
-                            })
+                            });
                     }}
                     className="bg-danger text-white fw-bolder"
                 >
@@ -71,8 +70,8 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farm }) => {
                 </Button>
             </Modal.Footer>
         </Modal>
-    )
-}
+    );
+};
 
 /**
  * Owner's tab used for viewing/changing farm's settings.
@@ -87,11 +86,8 @@ const OwnerSettingsTab = ({ farm, users }) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [error, setError] = useState("");
 
-    if (
-        typeof farm === "undefined" ||
-        typeof users === "undefined"
-    )
-        return <SettingsTabPlaceholder />
+    if (typeof farm === "undefined" || typeof users === "undefined")
+        return <SettingsTabPlaceholder />;
     return (
         <>
             <DeleteFarmConfirmationModal
@@ -103,33 +99,44 @@ const OwnerSettingsTab = ({ farm, users }) => {
             <Form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    farmService.updateFarm(farm.id, inputFarmName)
-                        .then(() => window.location.href = `/farms/panel/${farm.id}?updated`)
-                        .catch(err => setError(err.message));
+                    farmService
+                        .updateFarm(farm.id, inputFarmName)
+                        .then(
+                            () =>
+                                (window.location.href = `/farms/panel/${farm.id}?updated`)
+                        )
+                        .catch((err) => setError(err.message));
                 }}
             >
                 <Container className="d-flex flex-column gap-3">
                     {error && <ErrorAlert error={error} setError={setError} />}
                     <Form.Group>
-                        <Form.Label>Farm name:</Form.Label>
+                        <Form.Label>
+                            <h5>Farm name:</h5>
+                        </Form.Label>
                         <Form.Control
                             value={inputFarmName}
-                            onChange={(event) => setInputFarmName(event.target.value)}
+                            onChange={(event) =>
+                                setInputFarmName(event.target.value)
+                            }
+                            style={{ fontSize: "1.1rem" }}
                         />
                     </Form.Group>
 
                     <Form.Group>
-                        <Form.Label>Farm image:</Form.Label>
-                        <FileUploader
-                            setBlob={setInputFarmImage}
-                        />
+                        <Form.Label>
+                            <h5>Farm image:</h5>
+                        </Form.Label>
+                        <FileUploader setBlob={setInputFarmImage} />
                     </Form.Group>
 
-                    <div className="center gap-5">
-                        <Button type="submit">Save changes</Button>
+                    <div className="center gap-4">
+                        <Button type="submit" className={style.button}>
+                            Save changes
+                        </Button>
                         <Button
                             onClick={() => setShowDeleteModal(true)}
-                            className="bg-danger text-white"
+                            className={`${style.button} bg-danger text-white`}
                         >
                             Delete farm
                         </Button>
@@ -137,7 +144,7 @@ const OwnerSettingsTab = ({ farm, users }) => {
                 </Container>
             </Form>
         </>
-    )
-}
+    );
+};
 
 export default OwnerSettingsTab;

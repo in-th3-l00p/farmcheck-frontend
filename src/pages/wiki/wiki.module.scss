@@ -37,6 +37,11 @@
             width: 300px;
             padding-left: 20px;
 
+            @media screen and (max-width: 650px) {
+                margin: 18px;
+                margin-left: 20px;
+            }
+
             .search_tab {
                 border-radius: 10px 0 0 10px;
                 border-right: 0;

@@ -1,11 +1,11 @@
-import {useEffect, useState} from "react";
-import {Container} from "react-bootstrap";
-import {Button} from "../../../components/buttons/buttons";
+import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
+import { Button } from "../../../components/buttons/buttons";
 import ErrorAlert from "../../../components/alerts/error";
 import TextBox from "../../../components/textbox/textbox";
-import {LabelInput, LabelTextInput} from "../../../components/forms/forms";
+import { LabelInput, LabelTextInput } from "../../../components/forms/forms";
 import sensorService from "../../../lib/services/sensorService";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import style from "../styles/panel.module.scss";
 
@@ -19,7 +19,7 @@ const SensorsTabPlaceholder = () => {
             <p>loading...</p>
         </Container>
     );
-}
+};
 
 /**
  * Page component at "/sensors/create/:farm-id". Used for creating a new component.
@@ -39,22 +39,25 @@ export const CreateSensor = () => {
                 className={"d-flex align-items-center justify-content-center"}
                 style={{ width: "100vw", height: "100vh" }}
             >
-                <h1>You need to provide a id for the farm where the sensor will be added</h1>
+                <h1>
+                    You need to provide a id for the farm where the sensor will
+                    be added
+                </h1>
             </div>
-        )
+        );
     return (
         <TextBox className="form-container">
             <form
                 className="form"
                 onSubmit={(event) => {
                     event.preventDefault();
-                    sensorService.createSensor(
-                        params["farm_id"],
-                        name,
-                        description
-                    )
-                        .then(() => window.location.href = `/farms/panel/${params["farm_id"]}?sensorAdded`)
-                        .catch(err => setError(err.message));
+                    sensorService
+                        .createSensor(params["farm_id"], name, description)
+                        .then(
+                            () =>
+                                (window.location.href = `/farms/panel/${params["farm_id"]}?sensorAdded`)
+                        )
+                        .catch((err) => setError(err.message));
                 }}
             >
                 <h2 className="mb-4 text-center">Create sensor</h2>
@@ -76,7 +79,7 @@ export const CreateSensor = () => {
                 <span className="d-flex justify-content-center">
                     <Button
                         type="submit"
-                        style={{width: "150px"}}
+                        style={{ width: "150px", fontWeight: "500" }}
                     >
                         Submit
                     </Button>
@@ -84,7 +87,7 @@ export const CreateSensor = () => {
             </form>
         </TextBox>
     );
-}
+};
 
 /**
  * Tab used for displaying sensors.
@@ -98,26 +101,26 @@ const SensorsTab = ({ farm, users }) => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        sensorService.getSensors(farm.id)
-            .then(sensorList => setSensors(sensorList))
-            .catch(err => setError(err.message));
-    }, [])
+        sensorService
+            .getSensors(farm.id)
+            .then((sensorList) => setSensors(sensorList))
+            .catch((err) => setError(err.message));
+    }, []);
 
-    if (
-        farm === undefined ||
-        users === undefined ||
-        sensors === null
-    )
-        return <SensorsTabPlaceholder />
+    if (farm === undefined || users === undefined || sensors === null)
+        return <SensorsTabPlaceholder />;
     return (
         <Container>
             {error && <ErrorAlert error={error} setError={setError} />}
             <div className="d-flex m-3">
-                <h3 className="text-decoration-underline me-auto">Farm's sensors:</h3>
+                <h3 className="me-auto">{farm.name} sensors:</h3>
                 <Button
-                    onClick={() => window.location.href = `/sensors/create/${farm.id}`}
+                    onClick={() =>
+                        (window.location.href = `/sensors/create/${farm.id}`)
+                    }
+                    className={style.createButton}
                 >
-                    +
+                    <span className={style.buttonText}>+</span>
                 </Button>
             </div>
             <div className="d-flex flex-column gap-3">
@@ -125,7 +128,9 @@ const SensorsTab = ({ farm, users }) => {
                     <span
                         key={index}
                         className={style.sensorDisplay}
-                        onClick={() => window.location.href = `/sensors/${sensor.id}`}
+                        onClick={() =>
+                            (window.location.href = `/sensors/${sensor.id}`)
+                        }
                     >
                         <h4>{sensor.name}</h4>
                     </span>
@@ -133,6 +138,6 @@ const SensorsTab = ({ farm, users }) => {
             </div>
         </Container>
     );
-}
+};
 
 export default SensorsTab;

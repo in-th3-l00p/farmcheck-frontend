@@ -1,0 +1,48 @@
+@import "../../../styles/colorscheme";
+
+.profile {
+    padding: 0;
+
+    img {
+        border: 3px solid $yellow;
+        border-radius: 10px;
+
+        height: 200px;
+        width: auto;
+
+        @media screen and (max-width: 1000px) {
+            height: 150px;
+        }
+
+        @media screen and (max-width: 600px) {
+            height: 100px;
+        }
+    }
+
+    .text {
+        margin: 10px 0 0 15px;
+        visibility: visible;
+
+        @media screen and (max-width: 400px) {
+            margin: 10px 0 0 0;
+        }
+
+        .name {
+            @media screen and (max-width: 400px) {
+                margin-top: 23px;
+                margin-bottom: 50px;
+            }
+
+            @media screen and (max-width: 286px) {
+                margin-top: 15px;
+                margin-bottom: 30px;
+            }
+        }
+
+        .description {
+            @media screen and (max-width: 400px) {
+                margin-left: -110px;
+            }
+        }
+    }
+}

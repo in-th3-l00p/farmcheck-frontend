@@ -9,14 +9,11 @@ import "./textbox.scss";
  * @param {*} props.children the children components
  * @param {*} props.className additional class names
  * @param {*} props.style additional styling
- * @returns 
+ * @returns
  */
-const TextBox = ({ title, children, className="", style={} }) => {
+const TextBox = ({ title, children, className = "", style = {} }) => {
     return (
-        <Container 
-            className={`text-box p-5 ${className}`} 
-            style={style}
-        >
+        <Container className={`text-box p-5 ${className}`} style={style}>
             <h2 className="text-center">{title}</h2>
             {children}
         </Container>
