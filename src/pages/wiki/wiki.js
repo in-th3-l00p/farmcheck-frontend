@@ -1,6 +1,6 @@
 import { Form } from "react-bootstrap";
 import Footer from "../../components/footer/footer";
-import WikiItem from "../../components/wiki-item/wikiitem";
+import WikiItem from "./wiki-item/wikiitem";
 import { Col, Row } from "react-bootstrap";
 import React, { useState } from "react";
 
@@ -9,12 +9,7 @@ import plants from "./plants.js";
 
 const SearchbarButton = () => {
     return (
-        <button
-            className={style.search_button}
-            onClick={() => {
-                // console.log("lol");
-            }}
-        >
+        <button className={style.search_button}>
             <img alt="search" src="/icons/search.png" />
         </button>
     );
@@ -45,7 +40,7 @@ const Wiki = () => {
                     <Row>
                         {plants.map((item, index) => {
                             if (!item.startsWith(value)) {
-                                counter++
+                                counter++;
                                 return <></>;
                             }
 

@@ -28,8 +28,8 @@ const FeatureIcon = ({ className = "", src, title, description }) => {
             <span className={feature.image}>
                 <img src={src} alt="feature icon" />
             </span>
-            <h3 className={`${feature.title} pt-3`}>{title}</h3>
-            <p className={feature.text}>{description}</p>
+            <h4 className={`${feature.title} pt-3`}>{title}</h4>
+            <h5 className={feature.text}>{description}</h5>
         </div>
     );
 };
@@ -49,12 +49,12 @@ const Home = () => {
             />
 
             <TextBox title="About us" className="text-center my-4">
-                <p className={style.about_text}>
+                <h5 className={style.aboutText}>
                     CyberTech Farmers is a team of aspiring programmers, brought
                     together by a desire to make farming more efficient by
                     bringing the combination of agriculture and technology into
                     the mainstream.
-                </p>
+                </h5>
                 <Button
                     className={style.button}
                     onClick={() =>

@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import ShopItem from "../../components/shop-item/shopitem";
+import ShopItem from "./shop-item/shopitem";
 import Footer from "../../components/footer/footer";
 import { Col, Row } from "react-bootstrap";
 
@@ -27,49 +27,34 @@ const Shop = () => {
                         <Col>
                             <ShopItem
                                 className={style.item}
-                                frontImageSrc="/images/shop-images/1.png"
-                                images={["/images/shop-images/1.png"]}
-                                text="Complete package"
-                                description="The base package that contains a Brain Component
-                                and the Basic Temperature and Soil Humidity Sensor."
-                                price="20"
+                                frontImageSrc="/images/shop-images/basicSensor.png"
+                                images={["/images/shop-images/basicSensor.png"]}
+                                text="Basic Sensor"
+                                description="The basic sensor has the ability to get the temperature and humidity both from air and soil. Upon opening the sensor will create a hotspot on which the user must connect and give informations about a wifi connection and the token found on his account. After the connection the sensor will start sending data at the token showing it on the website."
+                                price="200"
                                 componentslist={[
-                                    "Brain Component",
-                                    "Basic Sensor",
+                                    "ESP32 microcontroller",
+                                    "DHT11 sensor",
+                                    "Soil moisture and temperature sensor",
                                 ]}
                             />
                         </Col>
                         <Col>
                             <ShopItem
                                 className={style.item}
-                                frontImageSrc="/images/shop-images/2.png"
-                                images={["/images/shop-images/2.png"]}
-                                text="Brain Component"
-                                description="The Brain Component used to communicate with the sensors."
-                                price="20"
-                                disabled={true}
-                            />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <ShopItem
-                                className={style.item}
-                                frontImageSrc="/images/shop-images/3.png"
-                                images={["/images/shop-images/3.png"]}
-                                text="Basic Sensor"
-                                description="The Basic Temperature and Soil Humidity Sensor."
-                                price="20"
-                            />
-                        </Col>
-                        <Col>
-                            <ShopItem
-                                className={style.item}
-                                frontImageSrc="/images/shop-images/4.png"
-                                images={["/images/shop-images/4.png"]}
+                                frontImageSrc="/images/shop-images/advancedSensor.png"
+                                images={[
+                                    "/images/shop-images/advancedSensor.png",
+                                ]}
                                 text="Advanced Sensor"
-                                description="yes yes yes"
-                                price="20"
+                                description="The advanced sensor has the ability to get the temperature and humidity from air and 3 locations from the soil. Using an upgraded sensor it can get more precise data and from different deepths."
+                                price="350"
+                                componentslist={[
+                                    "ESP32 microcontroller",
+                                    "DHT22 sensor",
+                                    "Capacitive Moisture sensor",
+                                    "Soil temperature sensor",
+                                ]}
                                 disabled={true}
                             />
                         </Col>
@@ -78,25 +63,20 @@ const Shop = () => {
                         <Col>
                             <ShopItem
                                 className={style.item}
-                                frontImageSrc="/images/shop-images/5.png"
-                                images={["/images/shop-images/5.png"]}
-                                text="GPS Sensor"
-                                description="yes yes yes"
-                                price="20"
+                                frontImageSrc="/images/shop-images/wifiModule.png"
+                                images={["/images/shop-images/wifiModule.png"]}
+                                text="WiFi Module"
+                                description="The Wifi Module is used in places where signal or wifi has a bad connection. It can expand the cover range of WiFi up to 20km and allow all sensors in that range connect to the server."
+                                componentslist={[
+                                    "ESP32 microcontroller",
+                                    "DHT22 sensor",
+                                    "Capacitive Moisture sensor",
+                                    "Soil temperature sensor",
+                                ]}
+                                price="250"
                                 disabled={true}
                             />
                         </Col>
-                        {/* <Col>
-                            <ShopItem
-                                className={style.item}
-                                frontImageSrc="/images/shop-images/6.png"
-                                images={["/images/shop-images/6.png"]}
-                                text="Sensor Package 6"
-                                description="yes yes yes"
-                                price="20"
-                                disabled={true}
-                            />
-                        </Col> */}
                     </Row>
                 </div>
             </div>

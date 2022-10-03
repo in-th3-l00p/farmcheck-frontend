@@ -66,6 +66,10 @@ $farm-display-hover-bg-color: $light-grey;
         width: 100%;
     }
 
+    @media screen and (min-height: 600px) {
+        margin-bottom: 50px;
+    }
+
     .createButton {
         border-radius: 50%;
         width: 40px;

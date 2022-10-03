@@ -11,8 +11,8 @@
  */
 
 import React, { useState, useEffect } from "react";
-import ImageCarousel from "../../components/carousel/carousel";
-import { Button } from "../../components/buttons/buttons";
+import ImageCarousel from "../../../components/carousel/carousel";
+import { Button } from "../../../components/buttons/buttons";
 
 import style from "./shopitem.module.scss";
 
@@ -59,7 +59,7 @@ const ShopItem = ({
                 }}
             >
                 <img alt="yes" src={frontImageSrc} />
-                <h2 className={style.text}>{text}</h2>
+                <h3 className={style.text}>{text}</h3>
             </div>
             <ShopItemInterface isOpened={isItemOpen} setOpen={setItemOpen}>
                 <ImageCarousel
@@ -69,18 +69,24 @@ const ShopItem = ({
                     sliding={false}
                 />
                 <div className={style.text}>
-                    <h2>{text}</h2>
-                    <h4>{description}</h4>
-                    <div>
+                    <h4>{text}</h4>
+                    <h6 style={{ fontWeight: 400, textAlign: "justify" }}>
+                        {description}
+                    </h6>
+                    <div className={style.list}>
                         {componentslist.length === 0 ? (
                             <></>
                         ) : (
                             <div>
                                 {console.log(componentslist)}
-                                <h4>Components: </h4>
+                                <h5>Components: </h5>
                                 <ul className={style.list}>
                                     {componentslist.map((component, index) => (
-                                        <li key={index}>{component}</li>
+                                        <li key={index}>
+                                            <h6 style={{ fontWeight: 400 }}>
+                                                {component}
+                                            </h6>
+                                        </li>
                                     ))}
                                 </ul>
                             </div>
@@ -88,7 +94,7 @@ const ShopItem = ({
                     </div>
                 </div>
                 <div className={style.price}>
-                    <h3>Price: {price}$</h3>
+                    <h4>Price: {price} RON</h4>
                     <Button className={style.button} disabled={disabled}>
                         {disabled ? "Coming soon" : "Add to cart"}
                     </Button>

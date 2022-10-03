@@ -2,30 +2,34 @@
 
 $background-color: $white;
 $border: 1px solid $light-grey;
-$border-radius: 10px;
+$border-radius: 20px;
 
 .tabDisplay {
+    display: flex;
     width: 100%;
     * {
         padding: 0 !important;
     }
 
+    margin-bottom: 20px;
+
     .tabArrow {
-        width: 100%;
+        width: 40vw;
         height: 100%;
 
-        background-color: $background-color;
-        border: $border;
-    }
+        font-size: 1.5rem;
+        font-weight: 500;
 
-    .tabArrowLeft {
-        border-top-left-radius: $border-radius;
-        border-bottom-left-radius: $border-radius;
-    }
+        border: 2px solid $light-grey;
+        border-radius: 20px;
 
-    .tabArrowRight {
-        border-top-right-radius: $border-radius;
-        border-bottom-right-radius: $border-radius;
+        margin: auto;
+        text-align: center;
+
+        &:hover {
+            background-color: $light-grey;
+            cursor: pointer;
+        }
     }
 
     .tabName {
@@ -33,7 +37,6 @@ $border-radius: 10px;
         text-align: center;
 
         background-color: $background-color;
-        border: $border;
         width: 100%;
     }
 }
@@ -58,22 +61,22 @@ $border-radius: 10px;
     border-radius: 20px;
     padding: 3rem;
 
-    @media screen and (max-width: 550px) {
-        padding: 15px !important;
+    @media screen and (min-height: 600px) {
+        margin-bottom: 50px;
+    }
+
+    @media screen and (max-width: 620px) {
+        padding: 20px !important;
         min-width: 100%;
     }
 }
 
 .chatBox {
     height: auto;
-    max-height: 400px;
+    height: 50vh;
     overflow-x: hidden;
     overflow-y: scroll;
     display: flex;
-
-    @media screen and (max-height: 700px) {
-        max-height: 250px;
-    }
 
     ul {
         width: 100%;
@@ -97,13 +100,18 @@ $border-radius: 10px;
     border-radius: 15px;
     padding: 1rem;
 
+    box-shadow: 0px 2px 5px 0px $grey;
+
+    margin-top: 15px;
+
     &:hover {
         animation: onSensorDisplayHover 0.3s;
         background-color: $light-grey;
-        text-decoration: underline;
-        font-weight: bold;
         cursor: pointer;
         user-select: none;
+
+        transform: translateY(-5px);
+        box-shadow: 0px 5px 10px 2px $grey;
     }
 }
 

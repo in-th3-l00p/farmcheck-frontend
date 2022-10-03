@@ -33,6 +33,7 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farm }) => {
             onHide={() => {
                 if (!deleting) setShow(false);
             }}
+            style={{ top: "25%" }}
         >
             <Modal.Header closeButton>
                 <Modal.Title>Are you sure?</Modal.Title>

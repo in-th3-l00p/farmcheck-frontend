@@ -32,6 +32,7 @@ const ExitConfirmationModal = ({ show, setShow, setError, farm }) => {
             onHide={() => {
                 if (!exiting) setShow(false);
             }}
+            style={{ top: "25%" }}
         >
             <Modal.Header closeButton>
                 <Modal.Title>Are you sure?</Modal.Title>

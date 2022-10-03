@@ -14,6 +14,7 @@ import ErrorAlert from "../../../components/alerts/error";
 import userService from "../../../lib/services/userService";
 
 import style from "./../styles/panel.module.scss";
+import UserItem from "./user-item/useritem";
 
 /**
  * Used while waiting for the farm data to be fetched.
@@ -24,85 +25,11 @@ const UsersTabPlaceholder = () => {
 };
 
 // roles of a user
-const roles = ["Owner", "Admin", "+Worker"];
+const roles = ["Owner", "Admin", "Worker"];
 const selectableRoles = [
     { name: "Admin", id: 2 },
     { name: "Worker", id: 3 },
 ];
-
-/**
- * Component used for displaying a user inside the users table.
- * @param user user object
- * @param setShowRemoveUserModal state's reducer for showing the confirmation modal for removing a user
- * @param setRemoveUser reducer for the user's object that is trying to be removed
- * @param setShowRemoveUserModal state's reducer for showing the modal that changes the role of a user
- * @param setChangeRoleUser reducer for the user's object whose role is changed
- * @return {JSX.Element} the component
- */
-const UserDisplay = ({
-    user,
-    setShowRemoveUserModal,
-    setRemoveUser,
-    setShowChangeRoleModal,
-    setChangeRoleUser,
-}) => {
-    const role = roles[user.farmRole - 1];
-
-    if (role === "Owner") return <></>;
-    return (
-        <tr>
-            <td>{user.login}</td>
-            <td>{user.firstName}</td>
-            <td>{user.lastName}</td>
-            <td>{role}</td>
-
-            {/*control buttons*/}
-            <td>
-                <Container>
-                    <Row md>
-                        <Col className="text-center my-1">
-                            <Button
-                                onClick={() => {
-                                    setRemoveUser(user);
-                                    setShowRemoveUserModal(true);
-                                }}
-                            >
-                                remove
-                            </Button>
-                        </Col>
-                        <Col className="text-center my-1">
-                            <Button
-                                onClick={() => {
-                                    setChangeRoleUser(user);
-                                    setShowChangeRoleModal(true);
-                                }}
-                            >
-                                change role
-                            </Button>
-                        </Col>
-                    </Row>
-                </Container>
-            </td>
-        </tr>
-    );
-};
-
-// used for rendering the logged user
-const UserDisplayWithoutControls = ({ user }) => {
-    // indexing the user's role
-    const roles = ["Owner", "Admin", "Worker"];
-    const role = roles[user.farmRole - 1];
-
-    return (
-        <tr>
-            <td>{user.login}</td>
-            <td>{user.firstName}</td>
-            <td>{user.lastName}</td>
-            <td>{role}</td>
-            <td></td>
-        </tr>
-    );
-};
 
 /**
  * Modal user for adding a new user to the current farm.
@@ -122,7 +49,7 @@ const AddUserModal = ({
     const [error, setError] = useState("");
 
     return (
-        <Modal show={show} onHide={() => setShow(false)}>
+        <Modal show={show} onHide={() => setShow(false)} style={{ top: "25%" }}>
             <Modal.Header closeButton>
                 <Modal.Title>Add a new user</Modal.Title>
             </Modal.Header>
@@ -174,13 +101,14 @@ const RemoveUserModal = ({
                 setConfirmationInput("");
                 setShow(false);
             }}
+            style={{ top: "25%" }}
         >
             <Modal.Header>
                 <Modal.Title>Are you sure?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <p>
-                    Are you sure you want to delete user <b>{user.login}</b>.
+                    Are you sure you want to remove user <b>{user.login}</b>.
                     <br />
                     Enter the username of the user to confirm:
                 </p>
@@ -204,7 +132,7 @@ const RemoveUserModal = ({
                                 setConfirmationInput("");
                             });
                     }}
-                    className="fw-bold bg-danger text-white"
+                    className={`${style.button} fw-bold bg-danger text-white`}
                 >
                     Remove
                 </Button>
@@ -238,6 +166,7 @@ const ChangeRoleModal = ({
                 setUser(null);
                 setShow(false);
             }}
+            style={{ top: "25%" }}
         >
             <Modal.Header>
                 <Modal.Title>Change the role of user {user.login}</Modal.Title>
@@ -275,9 +204,9 @@ const ChangeRoleModal = ({
                             .catch((err) => setErrorMessage(err.message))
                             .finally(hide);
                     }}
-                    className="fw-bold bg-danger text-white"
+                    className={style.button}
                 >
-                    Change
+                    Change role
                 </Button>
             </Modal.Footer>
         </Modal>
@@ -363,7 +292,33 @@ const UsersTab = ({ farm, users }) => {
                         <span className={style.buttonText}>+</span>
                     </Button>
                 </div>
-                <Table striped bordered hover>
+                <div>
+                    {users.map((user, index) => {
+                        if (
+                            user.login === userService.getCurrentUsername() ||
+                            user.farmRole === 1
+                        )
+                            return (
+                                <UserItem
+                                    key={index}
+                                    user={user}
+                                    controls={false}
+                                />
+                            );
+                        return (
+                            <UserItem
+                                key={index}
+                                user={user}
+                                controls={true}
+                                setRemoveUser={setSelectedRemoveUser}
+                                setShowRemoveUserModal={setShowRemoveUserModal}
+                                setChangeRoleUser={setSelectedChangeRoleUser}
+                                setShowChangeRoleModal={setShowChangeRoleModel}
+                            />
+                        );
+                    })}
+                </div>
+                {/* <Table striped bordered hover>
                     <thead>
                         <tr>
                             <th>Username</th>
@@ -404,7 +359,7 @@ const UsersTab = ({ farm, users }) => {
                             );
                         })}
                     </tbody>
-                </Table>
+                </Table> */}
             </Container>
         </>
     );

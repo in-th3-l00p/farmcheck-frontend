@@ -19,8 +19,9 @@ import NotFound from "./pages/notFound";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.scss";
 import "./styles/globals.scss";
-import {CreateSensor} from "./pages/farms/panel/sensors";
+import { CreateSensor } from "./pages/farms/panel/sensors";
 import SensorPage from "./pages/farms/sensor";
+import FeedBack from "./pages/feedback/feedback";
 /**
  * Loading component showed when initial requests to the server are made.
  * @return {JSX.Element} the loading component
@@ -70,6 +71,7 @@ const App = () => {
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile/:username" element={<Profile />} />
                     <Route path="/wiki" element={<Wiki />} />
+                    <Route path="/Feedback" element={<FeedBack />} />
                     <Route path="/farms">
                         <Route
                             index

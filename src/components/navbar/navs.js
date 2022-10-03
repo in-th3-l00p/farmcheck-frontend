@@ -118,8 +118,8 @@ export const AuthenticatedNavs = () => {
             <Nav className={`${style.menu} mb-auto mt-0 px-3`}>
                 <Link href="/shop">Shop</Link>
                 <Link href="/wiki">Crop wiki</Link>
-                <Link href="/about">About us</Link>
                 <Link href="/farms">Your farms</Link>
+                <Link href="/about">About us</Link>
 
                 <div className={style.line} />
 

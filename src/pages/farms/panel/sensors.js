@@ -77,10 +77,7 @@ export const CreateSensor = () => {
                 </span>
 
                 <span className="d-flex justify-content-center">
-                    <Button
-                        type="submit"
-                        className={style.button}
-                    >
+                    <Button type="submit" className={style.button}>
                         Submit
                     </Button>
                 </span>
@@ -132,7 +129,7 @@ const SensorsTab = ({ farm, users }) => {
                             (window.location.href = `/sensors/${sensor.id}`)
                         }
                     >
-                        <h4>{sensor.name}</h4>
+                        <h4 style={{ marginTop: 8 }}>{sensor.name}</h4>
                     </span>
                 ))}
             </div>

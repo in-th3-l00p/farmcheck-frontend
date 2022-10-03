@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import TextBox from "../../../components/textbox/textbox";
 import { Alert, Col, Row } from "react-bootstrap";
 import farmService from "../../../lib/services/farmService";
 
@@ -24,43 +23,31 @@ import SensorsTab from "./sensors";
  */
 const TabNav = ({ tabs, tab, setTab }) => {
     return (
-        <Row className={`${style.tabDisplay} mb-2`}>
-            <Col sm={1}>
-                <button
-                    onClick={({ target }) => {
-                        if (tab === 0) setTab(tabs.length - 1);
-                        else setTab(tab - 1);
-                        target.blur();
-                    }}
-                    className={`
-                        ${style.tabArrow} 
-                        ${style.tabArrowLeft}
-                    `}
-                >
-                    {"<"}
-                </button>
-            </Col>
-            <Col>
-                <div className={style.tabName}>
-                    <p>{tabs[tab]}</p>
-                </div>
-            </Col>
-            <Col sm={1}>
-                <button
-                    onClick={({ target }) => {
-                        if (tab === tabs.length - 1) setTab(0);
-                        else setTab(tab + 1);
-                        target.blur();
-                    }}
-                    className={`
-                        ${style.tabArrow} 
-                        ${style.tabArrowRight}
-                    `}
-                >
-                    {">"}
-                </button>
-            </Col>
-        </Row>
+        <div className={style.tabDisplay}>
+            <p
+                onClick={({ target }) => {
+                    if (tab === 0) setTab(tabs.length - 1);
+                    else setTab(tab - 1);
+                    target.blur();
+                }}
+                className={style.tabArrow}
+            >
+                <span className={style.buttonText}>{"<"}</span>
+            </p>
+            <div className={style.tabName}>
+                <h3>{tabs[tab]}</h3>
+            </div>
+            <p
+                onClick={({ target }) => {
+                    if (tab === tabs.length - 1) setTab(0);
+                    else setTab(tab + 1);
+                    target.blur();
+                }}
+                className={style.tabArrow}
+            >
+                <span className={style.buttonText}>{">"}</span>
+            </p>
+        </div>
     );
 };
 

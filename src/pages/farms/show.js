@@ -1,13 +1,13 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import _ from "lodash";
 
-import {Button} from "../../components/buttons/buttons";
+import { Button } from "../../components/buttons/buttons";
 import ErrorAlert from "../../components/alerts/error";
 
 import style from "./styles/farms.module.scss";
-import {Alert, Placeholder} from "react-bootstrap";
+import { Alert, Placeholder } from "react-bootstrap";
 import farmService from "../../lib/services/farmService";
-import {useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 /**
  * Farm display component.
@@ -18,16 +18,22 @@ const Farm = ({ farm }) => {
     return (
         <span
             className={`${style.farmDisplay} p-2 mt-2`}
-            onClick={() => window.location.href = "/farms/panel/" + farm.id}
+            onClick={() => (window.location.href = "/farms/panel/" + farm.id)}
         >
-            <img src={farm.image === "" ? "/images/default-farm-picture.png" : farm.image}/>
+            <img
+                src={
+                    farm.image === ""
+                        ? "/images/default-farm-picture.png"
+                        : farm.image
+                }
+            />
             <div className={style.text}>
                 <h4>{farm.name}</h4>
                 <p>Your farm</p>
             </div>
         </span>
-    )
-}
+    );
+};
 
 const FarmPlaceholder = ({ times = 1 }) => {
     const sizeRange = [2, 6];
@@ -46,32 +52,28 @@ const FarmPlaceholder = ({ times = 1 }) => {
                 >
                     <Placeholder
                         as="h4"
-                        xs={
-                            Math.floor(
-                                sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0])
-                            )}
+                        xs={Math.floor(
+                            sizeRange[0] +
+                                Math.random() * (sizeRange[1] - sizeRange[0])
+                        )}
                     />
                 </span>
             ))}
         </>
-    )
-}
+    );
+};
 
 // used for not repeating
 const QueryAlert = ({ children }) => {
     const [show, setShow] = useState(true);
     if (show)
         return (
-            <Alert
-                variant="success"
-                onClose={() => setShow(false)}
-                dismissible
-            >
+            <Alert variant="success" onClose={() => setShow(false)} dismissible>
                 {children}
             </Alert>
         );
-    return <></>
-}
+    return <></>;
+};
 
 /**
  * Page located at "/farms".
@@ -85,12 +87,13 @@ const ShowFarms = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        farmService.getAuthenticatedUserFarms()
-            .then(farms => {
+        farmService
+            .getAuthenticatedUserFarms()
+            .then((farms) => {
                 setFarms(farms);
                 setLoading(false);
             })
-            .catch(err => setError(err));
+            .catch((err) => setError(err));
     }, []);
 
     return (
@@ -99,7 +102,7 @@ const ShowFarms = () => {
             <div className="d-flex m-3">
                 <h3 className="me-auto">Your farms</h3>
                 <Button
-                    onClick={() => window.location.href = "/farms/create"}
+                    onClick={() => (window.location.href = "/farms/create")}
                     className={style.createButton}
                 >
                     <span className={style.buttonText}>+</span>
@@ -113,15 +116,19 @@ const ShowFarms = () => {
                 <QueryAlert>You left the farm</QueryAlert>
             )}
 
-            <div className={`
+            <div
+                className={`
                 d-flex flex-column gap-3
                 ${style.farmContainer}
-            `}>
+            `}
+            >
                 {loading && <FarmPlaceholder times={4} />}
-                {farms.map((farm, index) => <Farm farm={farm} key={index} /> )}
+                {farms.map((farm, index) => (
+                    <Farm farm={farm} key={index} />
+                ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default ShowFarms;

@@ -1,7 +1,7 @@
-import {useState} from "react";
-import {Container, Form, Modal} from "react-bootstrap";
-import {Button} from "../../../../components/buttons/buttons";
-import {FileUploader} from "../../../../components/forms/forms";
+import { useState } from "react";
+import { Container, Form, Modal } from "react-bootstrap";
+import { Button } from "../../../../components/buttons/buttons";
+import { FileUploader } from "../../../../components/forms/forms";
 import ErrorAlert from "../../../../components/alerts/error";
 import farmService from "../../../../lib/services/farmService";
 import userService from "../../../../lib/services/userService";
@@ -11,12 +11,8 @@ import userService from "../../../../lib/services/userService";
  * @return {JSX.Element} placeholder component
  */
 const SettingsTabPlaceholder = () => {
-    return (
-        <Container>
-
-        </Container>
-    );
-}
+    return <Container></Container>;
+};
 
 /**
  * Modal that is used for confirming if the user want to exit the farm or not.
@@ -34,9 +30,9 @@ const ExitConfirmationModal = ({ show, setShow, setError, farm }) => {
         <Modal
             show={show}
             onHide={() => {
-                if (!exiting)
-                    setShow(false)
+                if (!exiting) setShow(false);
             }}
+            style={{ top: "25%" }}
         >
             <Modal.Header closeButton>
                 <Modal.Title>Are you sure?</Modal.Title>
@@ -44,8 +40,7 @@ const ExitConfirmationModal = ({ show, setShow, setError, farm }) => {
             <Modal.Body>
                 <p>
                     If you really want to exit farm
-                    <b>{` "${farm.name}"`}</b>,
-                    write the name of the farm:
+                    <b>{` "${farm.name}"`}</b>, write the name of the farm:
                 </p>
                 <Form.Control
                     value={farmNameInput}
@@ -57,14 +52,17 @@ const ExitConfirmationModal = ({ show, setShow, setError, farm }) => {
                     disabled={farmNameInput !== farm.name}
                     onClick={() => {
                         setExiting(true);
-                        userService.exitFarm(farm.id)
-                            .then(() => window.location.href = "/farms?exited")
+                        userService
+                            .exitFarm(farm.id)
+                            .then(
+                                () => (window.location.href = "/farms?exited")
+                            )
                             .catch((err) => setError(err.message))
                             .finally(() => {
                                 setExiting(false);
                                 setShow(false);
                                 setFarmNameInput("");
-                            })
+                            });
                     }}
                     className="bg-danger text-white fw-bolder"
                 >
@@ -72,8 +70,8 @@ const ExitConfirmationModal = ({ show, setShow, setError, farm }) => {
                 </Button>
             </Modal.Footer>
         </Modal>
-    )
-}
+    );
+};
 
 /**
  * Admin's tab used for viewing/changing farm's settings.
@@ -88,11 +86,8 @@ const AdminSettingsTab = ({ farm, users }) => {
     const [showExitModal, setShowExitModal] = useState(false);
     const [error, setError] = useState("");
 
-    if (
-        typeof farm === "undefined" ||
-        typeof users === "undefined"
-    )
-        return <SettingsTabPlaceholder />
+    if (typeof farm === "undefined" || typeof users === "undefined")
+        return <SettingsTabPlaceholder />;
     return (
         <>
             <ExitConfirmationModal
@@ -104,9 +99,13 @@ const AdminSettingsTab = ({ farm, users }) => {
             <Form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    farmService.updateFarm(farm.id, inputFarmName)
-                        .then(() => window.location.href = `/farms/panel/${farm.id}?updated`)
-                        .catch(err => setError(err.message));
+                    farmService
+                        .updateFarm(farm.id, inputFarmName)
+                        .then(
+                            () =>
+                                (window.location.href = `/farms/panel/${farm.id}?updated`)
+                        )
+                        .catch((err) => setError(err.message));
                 }}
             >
                 <Container className="d-flex flex-column gap-3">
@@ -115,15 +114,15 @@ const AdminSettingsTab = ({ farm, users }) => {
                         <Form.Label>Farm name:</Form.Label>
                         <Form.Control
                             value={inputFarmName}
-                            onChange={(event) => setInputFarmName(event.target.value)}
+                            onChange={(event) =>
+                                setInputFarmName(event.target.value)
+                            }
                         />
                     </Form.Group>
 
                     <Form.Group>
                         <Form.Label>Farm image:</Form.Label>
-                        <FileUploader
-                            setBlob={setInputFarmImage}
-                        />
+                        <FileUploader setBlob={setInputFarmImage} />
                     </Form.Group>
 
                     <div className="center gap-5">
@@ -138,7 +137,7 @@ const AdminSettingsTab = ({ farm, users }) => {
                 </Container>
             </Form>
         </>
-    )
-}
+    );
+};
 
 export default AdminSettingsTab;

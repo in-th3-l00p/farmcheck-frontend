@@ -13,7 +13,7 @@ import "./textbox.scss";
  */
 const TextBox = ({ title, children, className = "", style = {} }) => {
     return (
-        <Container className={`text-box p-5 ${className}`} style={style}>
+        <Container className={`text-box p-3 py-5 ${className}`} style={style}>
             <h2 className="text-center">{title}</h2>
             {children}
         </Container>
