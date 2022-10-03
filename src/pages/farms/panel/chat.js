@@ -54,17 +54,6 @@ const ChatMessage = ({ message }) => {
                 <p className={`${style.date} text-muted`}>{date}</p>
             </div>
             <p className={style.message}>{message.text}</p>
-            {/* <Row>
-                <Col sm>
-                    <p className="fw-bold me-2">{message.sender}</p>
-                </Col>
-                <Col sm={6}>
-                    <p>{message.text}</p>
-                </Col>
-                <Col sm>
-                    <p className="text-muted fw-lighter">{date}</p>
-                </Col>
-            </Row> */}
         </div>
     );
 };

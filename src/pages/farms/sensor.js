@@ -42,6 +42,7 @@ const DeleteSensorModal = ({ sensor, setError, show, setShow }) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button
+                    className={`${style.button} bg-danger text-white`}
                     disabled={confirmationInput !== sensor.name}
                     onClick={() => {
                         sensorService.deleteSensor(sensor.id)
@@ -52,7 +53,6 @@ const DeleteSensorModal = ({ sensor, setError, show, setShow }) => {
                                 setShow(false);
                             })
                     }}
-                    className="fw-bolder bg-danger text-white"
                 >
                     Delete
                 </Button>
@@ -74,17 +74,21 @@ const SensorDataDisplay = ({ sensorData }) => {
             className={style.sensorDataDisplay}
             onClick={() => setOpen(!open)}
         >
-            <h4>{
+            <h4 className={style.title}>{
                 sensorData
                     .dateTime
-                    .replace(/T./g, " ")
+                    .replace(/T/g, " ")
+                    .replace(/\..*/g, "")
+                    .replace("-", ".")
+                    .replace("-", ".")
+                    .slice(0, -3)
             }</h4>
             {open && (
                 <div className="mt-2 d-flex flex-column gap-3">
-                    <p>Soil humidity: {sensorData.soilHumidity}</p>
-                    <p>Air humidity: {sensorData.airHumidity}</p>
-                    <p>Soil temperature: {sensorData.soilTemperature}</p>
-                    <p>Air temperature: {sensorData.airTemperature}</p>
+                    <p className={style.items}>Soil humidity: {sensorData.soilHumidity}%</p>
+                    <p className={style.items}>Air humidity: {sensorData.airHumidity}%</p>
+                    <p className={style.items}>Soil temperature: {sensorData.soilTemperature}°C</p>
+                    <p className={style.items}>Air temperature: {sensorData.airTemperature}°C</p>
                 </div>
             )}
         </span>
@@ -128,15 +132,36 @@ const SensorPage = () => {
                     sensor={sensor}
                 />
             )}
-            <TextBox className="form-container">
+            <div className={`${style.textBox} form-container`}>
                 {error && <ErrorAlert error={error} setError={setError} />}
-                <h3 className="text-decoration-underline">Sensor name: <b>{sensor.name}</b></h3>
-                <p>Description: {sensor.description}</p>
-                <p>Token: {sensor.token}</p>
+                <h3 className="">Sensor name: <b>{sensor.name}</b></h3>
+                {sensor.description !== "" 
+                    ? <h5 style={{fontWeight: 400}} className={style.description}>
+                        Description: {sensor.description}
+                    </h5> 
+                    : <></>
+                }
+                <h5 style={{marginTop: 15, marginBottom: 15}}>Token: {sensor.token}</h5>
 
-                <h4>Sensor data:</h4>
+                {sensorDataList.length !== 0
+                    ? <><h4>Recent sensor data:</h4>
+                        <div className={`${style.sensorData} mt-2 d-flex flex-column gap-3`}>
+                            <p>Soil humidity: {sensorDataList[sensorDataList.length - 1].soilHumidity}%</p>
+                            <p>Air humidity: {sensorDataList[sensorDataList.length - 1].airHumidity}%</p>
+                            <p>Soil temperature: {sensorDataList[sensorDataList.length - 1].soilTemperature}°C</p>
+                            <p>Air temperature: {sensorDataList[sensorDataList.length - 1].airTemperature}°C</p>
+                        </div>
+                    </>
+                    : <></>
+                }
+
+                {sensorDataList.length !== 0 
+                    ? <h4>Sensor data:</h4> 
+                    : <></>
+                }
+
                 <div className="d-flex flex-column gap-3">
-                    {sensorDataList.map((sensorData, index) => (
+                    {sensorDataList.slice(0).reverse().map((sensorData, index) => (
                         <SensorDataDisplay
                             key={index}
                             sensorData={sensorData}
@@ -144,15 +169,15 @@ const SensorPage = () => {
                     ))}
                 </div>
 
-                <div className="d-flex justify-content-center mt-5">
+                <div className="d-flex justify-content-center mt-4">
                     <Button
-                        className="bg-danger text-white"
+                        className={`${style.button} bg-danger text-white`}
                         onClick={() => setShowDeleteModal(true)}
                     >
                         Delete sensor
                     </Button>
                 </div>
-            </TextBox>
+            </div>
         </>
     )
 }

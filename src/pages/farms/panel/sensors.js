@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Form, Container } from "react-bootstrap";
 import { Button } from "../../../components/buttons/buttons";
 import ErrorAlert from "../../../components/alerts/error";
 import TextBox from "../../../components/textbox/textbox";
@@ -46,7 +46,7 @@ export const CreateSensor = () => {
             </div>
         );
     return (
-        <TextBox className="form-container">
+        <div className={`${style.textBox} form-container`}>
             <form
                 className="form"
                 onSubmit={(event) => {
@@ -79,13 +79,13 @@ export const CreateSensor = () => {
                 <span className="d-flex justify-content-center">
                     <Button
                         type="submit"
-                        style={{ width: "150px", fontWeight: "500" }}
+                        className={style.button}
                     >
                         Submit
                     </Button>
                 </span>
             </form>
-        </TextBox>
+        </div>
     );
 };
 
