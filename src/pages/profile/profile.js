@@ -1,9 +1,12 @@
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import TextBox from "../../components/textbox/textbox";
-import {Col, Placeholder, Row} from "react-bootstrap";
+import { Col, Placeholder, Row } from "react-bootstrap";
 import userService from "../../lib/services/userService";
-import {NotAuthenticatedError} from "../../lib/constants";
+import { NotAuthenticatedError } from "../../lib/constants";
+import { Button } from "../../components/buttons/buttons";
+
+import style from "./profile.module.scss";
 
 /**
  * Animated placeholder used when the profile is loading.
@@ -14,13 +17,15 @@ const LoadingPlaceholders = () => {
         <TextBox style={{ marginTop: "100px" }}>
             <Row sm={5}>
                 <Col>
-                    <div style={{ 
-                        width: "200px", 
-                        height: "200px" 
-                    }}>
-                        <Placeholder 
-                            as="div" 
-                            animation="glow" 
+                    <div
+                        style={{
+                            width: "200px",
+                            height: "200px",
+                        }}
+                    >
+                        <Placeholder
+                            as="div"
+                            animation="glow"
                             className="w-100 h-100"
                         >
                             <Placeholder className="w-100 h-100" />
@@ -42,8 +47,8 @@ const LoadingPlaceholders = () => {
                 </Col>
             </Row>
         </TextBox>
-    )
-}
+    );
+};
 
 /**
  * Profile component used at "/profile/:username".
@@ -54,6 +59,7 @@ const Profile = () => {
     const [userDetails, setUserDetails] = useState(undefined);
     const [error, setError] = useState(undefined);
     const params = useParams();
+    const [editProfile, setEditProfile] = useState(true);
 
     useEffect(() => {
         if (!userService.isAuthenticated()) {
@@ -67,44 +73,58 @@ const Profile = () => {
             return;
         }
 
-        userService.getUserDetails(params.username)
-            .then(details => setUserDetails(details))
-            .catch(err => setError(err));
+        userService
+            .getUserDetails(params.username)
+            .then((details) => setUserDetails(details))
+            .catch((err) => setError(err));
     }, []);
 
     if (error)
         return (
             <TextBox style={{ marginTop: "100px" }}>
-                <h3 className="text-center">User {params.username} not found.</h3>
+                <h3 className="text-center">
+                    User {params.username} not found.
+                </h3>
             </TextBox>
         );
 
-    if (!userDetails)
-        return <LoadingPlaceholders />
+    if (!userDetails) return <LoadingPlaceholders />;
 
     return (
-        <TextBox style={{ marginTop: "100px" }}>
-            <Row>
-                <Col>
-                    <img 
-                        src="/images/default-profile-picture.png" 
-                        alt="profile"
-                        className="img-thumbnail"
-                        style={{ width: "200px" }}
-                    />
-                </Col>
-                <Col sm="10">
-                    <h4 
-                        className="text-left text-decoration-underline"
-                    >
+        <div className={style.profile}>
+            <div className={style.text}>
+                <img
+                    src="/images/default-profile-picture.png"
+                    alt="profile"
+                    className={`${style.image} img-thumbnail`}
+                    style={{ width: "200px" }}
+                />
+                <div>
+                    <h4 className={`${style.username} text-left`}>
                         {userDetails.login}
                     </h4>
-                    <p>First name: {userDetails.firstName}</p>
-                    <p>Last name: {userDetails.lastName}</p>
-                </Col>
-            </Row>
-        </TextBox>
+                    <h5 className={style.email}>{userDetails.email}</h5>
+                    <p className={style.name}>
+                        {userDetails.firstName} {userDetails.lastName}
+                    </p>
+                </div>
+            </div>
+            <div className={style.buttonPlacement}>
+                <Button
+                    className={style.button}
+                    onClick={() => setEditProfile(editProfile)}
+                >
+                    Edit Profile
+                </Button>
+                <Button
+                    className={style.button}
+                    onClick={() => setEditProfile(!editProfile)}
+                >
+                    Tasks
+                </Button>
+            </div>
+        </div>
     );
-}
+};
 
 export default Profile;

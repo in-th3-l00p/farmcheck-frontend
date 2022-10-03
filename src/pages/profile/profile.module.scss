@@ -1,0 +1,68 @@
+@import "src/styles/colorscheme.scss";
+
+.profile {
+    background-color: $white;
+    width: 90vw;
+    max-width: 500px;
+    margin: 100px auto 40px auto;
+    border-radius: 20px;
+
+    padding: 1rem;
+
+    .image {
+        border: 2px solid $orange;
+        border-radius: 10px;
+
+        max-width: 120px;
+        height: auto;
+        margin-right: 20px;
+
+        @media screen and (max-width: 500px) {
+            max-width: 100px;
+            margin-right: 10px;
+        }
+    }
+
+    .text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .image {
+            border: 2px solid $orange;
+            border-radius: 10px;
+
+            max-width: 120px;
+            height: auto;
+            margin-right: 20px;
+
+            @media screen and (max-width: 500px) {
+                max-width: 100px;
+                margin-right: 10px;
+            }
+        }
+
+        .email {
+            font-weight: 400;
+            color: $dark-orange;
+
+            @media screen and (max-width: 500px) {
+                font-size: 1rem;
+            }
+
+            @media screen and (max-width: 380px) {
+                font-size: 0.8rem;
+            }
+        }
+
+        .name {
+            margin: 0;
+        }
+    }
+
+    .buttonPlacement {
+        display: flex;
+        justify-content: center;
+        margin: 20px;
+    }
+}
