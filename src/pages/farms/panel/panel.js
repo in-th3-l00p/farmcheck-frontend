@@ -72,16 +72,17 @@ const PanelLayout = ({ tabs, tab, setTab, children }) => {
  * Tabs used by the owner
  * @param farm farm object
  * @param users users array
+ * @param setUsers users array state reducer
  * @return {JSX.Element} the tabs
  */
-const OwnerTabs = ({ farm, users }) => {
+const OwnerTabs = ({ farm, users, setUsers }) => {
     const [tab, setTab] = useState(0);
     const tabs = ["Info", "Users", "Sensors", "Chat", "Settings", "Todo"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} setTab={setTab} />}
-            {tab === 1 && <UsersTab farm={farm} users={users} />}
+            {tab === 1 && <UsersTab farm={farm} users={users} setUsers={setUsers} />}
             {tab === 2 && <SensorsTab farm={farm} users={users} />}
             {tab === 3 && <ChatTab farm={farm} users={users} />}
             {tab === 4 && <OwnerSettingsTab farm={farm} users={users} />}
@@ -94,16 +95,17 @@ const OwnerTabs = ({ farm, users }) => {
  * Tabs used by an admin
  * @param farm farm object
  * @param users users array
+ * @param setUsers users array state reducer
  * @return {JSX.Element} the tabs
  */
-const AdminTabs = ({ farm, users }) => {
+const AdminTabs = ({ farm, users, setUsers }) => {
     const [tab, setTab] = useState(0);
     const tabs = ["Info", "Users", "Sensors", "Chat", "Settings", "Todo"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} />}
-            {tab === 1 && <UsersTab farm={farm} users={users} />}
+            {tab === 1 && <UsersTab farm={farm} users={users} setUsers={setUsers} />}
             {tab === 2 && <SensorsTab farm={farm} users={users} />}
             {tab === 3 && <ChatTab farm={farm} users={users} />}
             {tab === 4 && <AdminSettingsTab farm={farm} users={users} />}
@@ -132,6 +134,16 @@ const WorkerTabs = ({ farm, users }) => {
     );
 };
 
+const FarmPanelPlaceholder = () => {
+    return (
+        <div className={`${style.textBox} form-container flex-column center`}>
+            <span className="w-100 text-center my-5">
+                <h1>loading...</h1>
+            </span>
+        </div>
+    );
+}
+
 /**
  * Farm panel located at "/farms/panel"
  * @return {JSX.Element} the panel component
@@ -157,11 +169,11 @@ const FarmPanel = () => {
     }, []);
 
     if (error) return <NotFound />;
-    if (farm === undefined || users === []) return <></>;
+    if (farm === undefined || users === []) return <FarmPanelPlaceholder />
     return (
         <>
-            {farm.role === 1 && <OwnerTabs farm={farm} users={users} />}
-            {farm.role === 2 && <AdminTabs farm={farm} users={users} />}
+            {farm.role === 1 && <OwnerTabs farm={farm} users={users} setUsers={setUsers} />}
+            {farm.role === 2 && <AdminTabs farm={farm} users={users} setUsers={setUsers} />}
             {farm.role === 3 && <WorkerTabs farm={farm} users={users} />}
         </>
     );

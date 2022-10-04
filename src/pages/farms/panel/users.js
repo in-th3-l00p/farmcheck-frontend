@@ -1,13 +1,10 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {
     Alert,
-    Col,
     Container,
     FormControl,
     FormSelect,
     Modal,
-    Row,
-    Table,
 } from "react-bootstrap";
 import { Button } from "../../../components/buttons/buttons";
 import ErrorAlert from "../../../components/alerts/error";
@@ -15,6 +12,7 @@ import userService from "../../../lib/services/userService";
 
 import style from "./../styles/panel.module.scss";
 import UserItem from "./user-item/useritem";
+import farmService from "../../../lib/services/farmService";
 
 /**
  * Used while waiting for the farm data to be fetched.
@@ -31,19 +29,13 @@ const selectableRoles = [
     { name: "Worker", id: 3 },
 ];
 
-/**
- * Modal user for adding a new user to the current farm.
- * @param show if the modal should appear
- * @param setShow show state's reducer
- * @param setError error state's reducer
- * @return {JSX.Element} the modal component
- */
 const AddUserModal = ({
     farmId,
     setSuccessMessage,
     setErrorMessage,
     show,
     setShow,
+    setUsers
 }) => {
     const [userDetails, setUserDetails] = useState("");
     const [error, setError] = useState("");
@@ -68,7 +60,10 @@ const AddUserModal = ({
                     onClick={() => {
                         userService
                             .addFarm(userDetails, farmId)
-                            .then((message) => setSuccessMessage(message))
+                            .then((message) => {
+                                setSuccessMessage(message);
+                                setUsers([]);
+                            })
                             .catch((error) => setErrorMessage(error.message))
                             .finally(() => setShow(false));
                     }}
@@ -90,6 +85,7 @@ const RemoveUserModal = ({
     setUser,
     show,
     setShow,
+    setUsers
 }) => {
     const [confirmationInput, setConfirmationInput] = useState("");
 
@@ -130,6 +126,7 @@ const RemoveUserModal = ({
                             .finally(() => {
                                 setShow(false);
                                 setConfirmationInput("");
+                                setUsers([]);
                             });
                     }}
                     className={`${style.button} fw-bold bg-danger text-white`}
@@ -149,6 +146,7 @@ const ChangeRoleModal = ({
     setUser,
     show,
     setShow,
+    setUsers
 }) => {
     const userRole = roles[user.farmRole - 1];
     const [selectedRole, setSelectedRole] = useState(selectableRoles[0].id);
@@ -200,7 +198,10 @@ const ChangeRoleModal = ({
                         }
                         userService
                             .updateFarmRole(user.login, farmId, selectedRole)
-                            .then((message) => setSuccessMessage(message))
+                            .then((message) => {
+                                setSuccessMessage(message);
+                                setUsers([]);
+                            })
                             .catch((err) => setErrorMessage(err.message))
                             .finally(hide);
                     }}
@@ -215,12 +216,12 @@ const ChangeRoleModal = ({
 
 /**
  * Tab for supporting CRUD operations on farm's users.
- * TODO: automatically reload changes.
  * @param farm farm object
  * @param users farm's users
+ * @param setUsers farm's users state reducer
  * @return {JSX.Element} the tab component
  */
-const UsersTab = ({ farm, users }) => {
+const UsersTab = ({ farm, users, setUsers }) => {
     const [showAddUserModal, setShowAddUserModal] = useState(false);
 
     const [showRemoveUserModal, setShowRemoveUserModal] = useState(false);
@@ -232,7 +233,20 @@ const UsersTab = ({ farm, users }) => {
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    if (typeof farm === "undefined" || typeof users === "undefined")
+    // auto reload
+    useEffect(() => {
+        if (users.length)
+            return;
+        farmService
+            .getFarmUsers(farm.id)
+            .then((resp) => {
+                console.log("data fetched ", resp);
+                setUsers(resp);
+            })
+            .catch((err) => setErrorMessage(err.message));
+    }, [users])
+
+    if (typeof farm === "undefined" || typeof users === "undefined" || !users.length)
         return <UsersTabPlaceholder />;
     return (
         <>
@@ -242,6 +256,7 @@ const UsersTab = ({ farm, users }) => {
                 setErrorMessage={setErrorMessage}
                 show={showAddUserModal}
                 setShow={setShowAddUserModal}
+                setUsers={setUsers}
             />
 
             {selectedRemoveUser && (
@@ -253,6 +268,7 @@ const UsersTab = ({ farm, users }) => {
                     setUser={setSelectedRemoveUser}
                     show={showRemoveUserModal}
                     setShow={setShowRemoveUserModal}
+                    setUsers={setUsers}
                 />
             )}
 
@@ -265,6 +281,7 @@ const UsersTab = ({ farm, users }) => {
                     setUser={setSelectedChangeRoleUser}
                     show={showChangeRoleModal}
                     setShow={setShowChangeRoleModel}
+                    setUsers={setUsers}
                 />
             )}
 
