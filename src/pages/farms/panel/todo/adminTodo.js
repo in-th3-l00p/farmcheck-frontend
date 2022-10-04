@@ -314,12 +314,54 @@ const CreateMenu = ({ setMenu, farm, users }) => {
     );
 };
 
-const TaskDisplay = ({ task }) => {
+const TaskDetailsDisplay = ({ task, show, setShow }) => {
+    const [status, setStatus] = useState(null);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        taskService.getTaskStatus(task.id) 
+            .then(data => setStatus(data))
+            .catch(err => setError(err.message));
+    }, []);
+
+    if (status === null)
+        return <></>;
     return (
-        <div className={style.task}>
-            <h4>{task.title}</h4>
-            <p style={{marginBottom: 0}}>{task.description}</p>
-        </div>
+        <Modal show={show} onHide={() => setShow(false)}>
+            <Modal.Header closeButton>
+                <Modal.Title>Details on task <b>"{task.name}"</b></Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                {status.map((pair, index) => (
+                    <Container key={index} fluid>
+                        <Row>
+                            <Col><p>{pair.user}</p></Col>
+                            <Col><p>{pair.status ? "finished" : "not finished"}</p></Col>
+                        </Row> 
+                    </Container>
+                ))}
+            </Modal.Body>
+        </Modal>
+    );
+}
+
+const TaskDisplay = ({ task }) => {
+    const [show, setShow] = useState(false);
+    return (
+        <>
+            <TaskDetailsDisplay 
+                task={task}
+                show={show}
+                setShow={setShow}
+            />
+            <div 
+                className={style.task} 
+                onClick={() => setShow(true)}
+            >
+                <h4>{task.title}</h4>
+                <p style={{marginBottom: 0}}>{task.description}</p>
+            </div>
+        </>
     );
 };
 

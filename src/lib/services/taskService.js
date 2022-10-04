@@ -73,6 +73,26 @@ class TaskService {
             throw new Error(err.response.data.detail);
         }
     }
+
+    /**
+     * Gets every status of a task
+     * @param taskId task's id
+     * @returns statuses
+     */
+    async getTaskStatus(taskId) {
+        try {
+            const resp = await axios.get(
+                "/api/farms/tasks/status",
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { taskId }
+                }
+            );
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
 }
 
 const taskService = new TaskService();
