@@ -125,11 +125,6 @@ $border-radius: 15px;
     border: 1px solid $grey !important;
 }
 
-.taskDisplay {
-    border: $light-grey;
-    border: 3px solid $grey;
-}
-
 .createButton {
     border-radius: 50%;
     width: 40px;
@@ -174,6 +169,15 @@ $border-radius: 15px;
     &:hover {
         animation: onWorkerDisplayHover 0.25s;
         background-color: $light-grey;
+    }
+}
+
+.finishedTaskDisplay {
+    @include workerDisplay;
+    background-color: #e5ffd8;
+    border: 3px solid $green;
+    &:disabled {
+        color: black;
     }
 }
 

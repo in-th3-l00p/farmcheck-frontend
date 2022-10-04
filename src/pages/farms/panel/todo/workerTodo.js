@@ -49,7 +49,11 @@ const TaskDisplay = ({ task }) => {
             />
             <button
                 onClick={() => setShowDetails(true)}
-                className={style.taskDisplay}
+                disabled={task.status}
+                className={task.status ? 
+                    style.finishedTaskDisplay :
+                    style.taskDisplay
+                }
             >
                 <h4>{task.title}</h4>
             </button>
