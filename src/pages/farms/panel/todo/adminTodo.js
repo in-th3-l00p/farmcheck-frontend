@@ -316,9 +316,9 @@ const CreateMenu = ({ setMenu, farm, users }) => {
 
 const TaskDisplay = ({ task }) => {
     return (
-        <div>
+        <div className={style.task}>
             <h4>{task.title}</h4>
-            <p>{task.description}</p>
+            <p style={{marginBottom: 0}}>{task.description}</p>
         </div>
     );
 };
@@ -378,37 +378,39 @@ const ManageMenu = ({ setMenu, farm, users }) => {
     if (workers === null || showedTasks === null)
         return <ManageMenuPlaceholder setMenu={setMenu} />;
     return (
-        <Layout setMenu={setMenu}>
+        <Container>
             {error && <ErrorAlert error={error} setError={setError} />}
-            <Row sm>
-                <Col xs={3}>
+            <div className={style.manage}>
+                <div style={{marginRight: 20}}>
                     <h5>Filter by workers:</h5>
-                    {workers.map((worker, index) => (
-                        <WorkerDisplay
-                            key={index}
-                            worker={worker}
-                            small={true}
-                            selectable={true}
-                            onSelect={() => {
-                                const workerList = _.cloneDeep(workers);
-                                workerList[index].selected =
-                                    !workerList[index].selected;
-                                selectedWorkers.current += workerList[index]
-                                    .selected
-                                    ? 1
-                                    : -1;
-                                setWorkers(workerList);
-                            }}
-                        />
-                    ))}
-                </Col>
-                <Col>
+                    <div className={style.filter}>
+                        {workers.map((worker, index) => (
+                            <WorkerDisplay
+                                key={index}
+                                worker={worker}
+                                small={true}
+                                selectable={true}
+                                onSelect={() => {
+                                    const workerList = _.cloneDeep(workers);
+                                    workerList[index].selected =
+                                        !workerList[index].selected;
+                                    selectedWorkers.current += workerList[index]
+                                        .selected
+                                        ? 1
+                                        : -1;
+                                    setWorkers(workerList);
+                                }}
+                            />
+                        ))}
+                </div>
+                </div>
+                <div style={{marginTop: 15, width:"100%"}}>
                     {showedTasks.map((task, index) => (
                         <TaskDisplay key={index} task={task} />
                     ))}
-                </Col>
-            </Row>
-        </Layout>
+                </div>
+            </div>
+        </Container>
     );
 };
 
@@ -454,11 +456,12 @@ const AdminTodoTab = ({ farm, users }) => {
                     <span className={style.buttonText}>+</span>
                 </Button>
             </div>
-            <Col>
+            {/* <Col>
                 <MainMenuButton onClick={() => setMenu(Menu.Manage)}>
                     <p className={style.text}>Manage</p>
                 </MainMenuButton>
-            </Col>
+            </Col> */}
+            <ManageMenu setMenu={setMenu} farm={farm} users={users} />
         </Layout>
     );
 };
