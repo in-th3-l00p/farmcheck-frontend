@@ -15,7 +15,7 @@ import feature from "./features.module.scss";
 const featuresIconsPath = [
     "/icons/features-icons/livedata.png",
     "/icons/features-icons/maintenance.png",
-    "/icons/features-icons/surveillance.png",
+    "/icons/features-icons/forecast.png",
     "/icons/features-icons/dictionary.png",
 ];
 
@@ -45,7 +45,7 @@ const Home = () => {
                     "/images/carousel-images/3.png",
                 ]}
                 title="FarmCheck"
-                description="We plant the future"
+                description="We plan(t) the future"
             />
 
             <TextBox title="About us" className="text-center my-4">
@@ -57,12 +57,7 @@ const Home = () => {
                 </h5>
                 <Button
                     className={style.button}
-                    onClick={() =>
-                        window.open(
-                            "https://www.facebook.com/FarmCheck-105867298851897",
-                            "_blank"
-                        )
-                    }
+                    onClick={() => (window.location.href = "/about")}
                 >
                     See more
                 </Button>
@@ -72,15 +67,15 @@ const Home = () => {
                 <Row>
                     <Col>
                         <FeatureIcon
-                            src={featuresIconsPath[0]}
-                            title="Dictionary"
-                            description="All the information you need to know about planting all types of crops  
-                            (from carrots to asparagus?)  all in one place - our free CropWiki."
+                            src={featuresIconsPath[3]}
+                            title="Crop Wiki"
+                            description="All the information you need to know about planting all types of crops 
+                            all in one place - our free CropWiki."
                         />
                     </Col>
                     <Col>
                         <FeatureIcon
-                            src={featuresIconsPath[1]}
+                            src={featuresIconsPath[0]}
                             title="Live Data"
                             description="Our hardware package brings you fresh data right from your own field, 
                             with just a few sensors and clicks. Nothing easier than that."
@@ -98,7 +93,7 @@ const Home = () => {
                     </Col>
                     <Col>
                         <FeatureIcon
-                            src={featuresIconsPath[3]}
+                            src={featuresIconsPath[1]}
                             title="Maintenance"
                             description="Your sensors are in good hands. If anything happens to them, just 
                             give us a call. We'll take care of everything, while you sit back and relax."
