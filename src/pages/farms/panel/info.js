@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { base64ToBlob } from "../../../lib/algorithms";
 
 import style from "./../styles/tabs.module.scss";
+import { Button } from "../../../components/buttons/buttons";
 
 /**
  * Used while waiting for the farm data to be fetched.
@@ -30,7 +31,7 @@ const PlaceholderInfoTab = () => {
  * @param users the users of the farm
  * @return {JSX.Element} the tab component
  */
-const InfoTab = ({ farm, users }) => {
+const InfoTab = ({ farm, users, setTab }) => {
     const imageRef = useRef(null);
     useEffect(() => {
         // loading the image
@@ -43,7 +44,7 @@ const InfoTab = ({ farm, users }) => {
     if (typeof farm === "undefined" || typeof users === "undefined")
         return <PlaceholderInfoTab />;
     return (
-        <Container className={`${style.profile} d-flex gap-3`}>
+        <Container className={`${style.profile} d-flex gap-3 p-2`}>
             <img
                 src={
                     farm.image === ""
@@ -56,7 +57,14 @@ const InfoTab = ({ farm, users }) => {
             />
             <div className={style.text}>
                 <h3 className={style.name}>{farm.name}</h3>
-                <p className={style.description}>Description</p>
+                <p className={style.elements}>This is your farm</p>
+                <h5 className={style.elements}>Number of users: {users.length}</h5>
+                <Button 
+                    className={`${style.button} ${style.elements}`} 
+                    onClick={() => {setTab(3)}}
+                >
+                    Open Chat
+                </Button>
             </div>
         </Container>
     );

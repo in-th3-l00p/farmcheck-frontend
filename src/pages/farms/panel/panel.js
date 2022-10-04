@@ -80,7 +80,7 @@ const OwnerTabs = ({ farm, users }) => {
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
-            {tab === 0 && <InfoTab farm={farm} users={users} />}
+            {tab === 0 && <InfoTab farm={farm} users={users} setTab={setTab} />}
             {tab === 1 && <UsersTab farm={farm} users={users} />}
             {tab === 2 && <SensorsTab farm={farm} users={users} />}
             {tab === 3 && <ChatTab farm={farm} users={users} />}
