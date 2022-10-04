@@ -2,26 +2,11 @@
 
 .profile {
     background-color: $white;
-    width: 90vw;
-    max-width: 500px;
-    margin: 100px auto 40px auto;
+    width: fit-content;
+    margin: 100px auto 0 auto;
     border-radius: 20px;
 
-    padding: 1rem;
-
-    .image {
-        border: 2px solid $orange;
-        border-radius: 10px;
-
-        max-width: 120px;
-        height: auto;
-        margin-right: 20px;
-
-        @media screen and (max-width: 500px) {
-            max-width: 100px;
-            margin-right: 10px;
-        }
-    }
+    padding: 2rem;
 
     .text {
         display: flex;
@@ -29,7 +14,7 @@
         align-items: center;
 
         .image {
-            border: 2px solid $orange;
+            border: 2px solid $yellow;
             border-radius: 10px;
 
             max-width: 120px;
@@ -44,25 +29,75 @@
 
         .email {
             font-weight: 400;
-            color: $dark-orange;
+            color: $yellow;
 
             @media screen and (max-width: 500px) {
                 font-size: 1rem;
             }
 
             @media screen and (max-width: 380px) {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            &:hover {
+                color: $dark-orange;
+                cursor: pointer;
             }
         }
 
         .name {
+            font-size: 1.25rem;
             margin: 0;
         }
     }
 
-    .buttonPlacement {
+    .label {
+        margin-top: 10px;
+        width: 100%;
+        
+        .labelText {
+            text-align: center;
+            width: 100px;
+            margin: 0 auto 5px auto;
+        }
+
+        .line {
+            border-bottom: 2px solid $grey;
+            position: relative;
+        }
+
+        .yellowLine {
+            position: absolute;
+            border-bottom: 3px solid $yellow;
+            border-radius: 20px;
+            bottom: -2px;
+            z-index: 1;
+            width: 30%;
+            left: 34%;
+        }
+    }
+
+    .tasks {
+        height: 40vh;
+        border: 2px solid $light-grey;
+        border-radius: 20px;
+        margin-top: 25px;
+    }
+
+    .change {
         display: flex;
-        justify-content: center;
-        margin: 20px;
+        margin-top: 10px;
+        font-size: 1.25rem;
+
+        .text {
+            color: $yellow;
+            margin: 0 5px 15px 5px;
+            text-decoration: none;
+
+            &:hover {
+                color: $dark-orange;
+                cursor: pointer;
+            }
+        }
     }
 }

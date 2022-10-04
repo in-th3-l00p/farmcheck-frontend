@@ -22,9 +22,13 @@ $collapse-width: 20rem;
     flex-direction: row;
 
     // design
-    height: 100vh;
+    height: 100%;
     width: $collapse-width;
     background-color: $light-grey;
+
+    @media screen and (max-width: 500px) {
+        width: 35vh;
+    }
     a {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-size: 1.5rem;

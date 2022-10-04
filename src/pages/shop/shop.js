@@ -67,12 +67,6 @@ const Shop = () => {
                                 images={["/images/shop-images/wifiModule.png"]}
                                 text="WiFi Module"
                                 description="The Wifi Module is used in places where signal or wifi has a bad connection. It can expand the cover range of WiFi up to 20km and allow all sensors in that range connect to the server."
-                                componentslist={[
-                                    "ESP32 microcontroller",
-                                    "DHT22 sensor",
-                                    "Capacitive Moisture sensor",
-                                    "Soil temperature sensor",
-                                ]}
                                 price="250"
                                 disabled={true}
                             />

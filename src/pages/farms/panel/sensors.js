@@ -109,8 +109,7 @@ const SensorsTab = ({ farm, users }) => {
     return (
         <Container>
             {error && <ErrorAlert error={error} setError={setError} />}
-            <div className="d-flex m-3">
-                <h3 className="me-auto">{farm.name} sensors:</h3>
+            <div className="text-end">
                 <Button
                     onClick={() =>
                         (window.location.href = `/sensors/create/${farm.id}`)

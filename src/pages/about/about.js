@@ -19,7 +19,7 @@ const About = () => {
                     </div>
                     <div className={style.line} />
                     <div className={`${style.description} py-4`}>
-                        <h5 style={{ fontWeight: 400 }}>
+                        <h5 style={{ fontWeight: 400, textAlign: "justify" }}>
                             We are a team of students from CNI “Grigore Moisil”
                             Brasov. Brought together by DpIT, we strive to
                             create an app that will help farmers and companies
@@ -60,7 +60,7 @@ const About = () => {
                                 <Col>
                                     <AboutItem
                                         imageSrc="/images/about-images/cristi.png"
-                                        name="George Cristi-Dan"
+                                        name="George Cristiany-Dan"
                                         description="Back-end Developer"
                                     />
                                 </Col>

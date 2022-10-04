@@ -32,6 +32,10 @@
     font-weight: 600 !important;
     width: 100%;
 
+    @media screen and (max-width: 300px) {
+        font-size: 1.25rem !important;
+    }
+
     &:hover {
         cursor: pointer;
         color: $grey;
@@ -46,6 +50,10 @@
         margin-top: 10px;
 
         -webkit-user-drag: none;
+
+        @media screen and (max-width: 300px) {
+            width: 30px;
+        }
     }
 }
 

@@ -109,19 +109,19 @@ const Profile = () => {
                     </p>
                 </div>
             </div>
-            <div className={style.buttonPlacement}>
-                <Button
-                    className={style.button}
-                    onClick={() => setEditProfile(editProfile)}
-                >
-                    Edit Profile
-                </Button>
-                <Button
-                    className={style.button}
-                    onClick={() => setEditProfile(!editProfile)}
-                >
-                    Tasks
-                </Button>
+            <div className={style.change}>
+                <p>Change</p>
+                <a className={style.text}>username</a>
+                <p>or</p>
+                <a className={style.text}>password</a>
+            </div>
+            <div className={style.label}>
+                <h5 className={style.labelText}>Tasks</h5>
+                <div className={style.line}>
+                    <div className={style.yellowLine} />
+                </div>
+            </div>
+            <div className={style.tasks}>
             </div>
         </div>
     );
