@@ -187,7 +187,7 @@ const ChangeRoleModal = ({
                 <Button
                     onClick={() => {
                         const selectedRoleObject = selectableRoles.find(
-                            (role) => role.id === selectedRole
+                            role => role.id == selectedRole
                         );
                         if (selectedRoleObject.name === userRole) {
                             setErrorMessage(
