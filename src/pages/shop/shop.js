@@ -30,7 +30,7 @@ const Shop = () => {
                                 frontImageSrc="/images/shop-images/basicSensor.png"
                                 images={["/images/shop-images/basicSensor.png"]}
                                 text="Basic Sensor"
-                                description="The basic sensor has the ability to get the temperature and humidity both from air and soil. Upon opening the sensor will create a hotspot on which the user must connect and give informations about a wifi connection and the token found on his account. After the connection the sensor will start sending data at the token showing it on the website."
+                                description="The basic sensor has the ability to get the temperature and humidity both from air and soil. Upon turning on the sensor will create a hotspot on which the user must connect and give informations about a wifi connection and the token found on his account. After the connection the sensor will start sending data at the token showing it on the website."
                                 price="200"
                                 componentslist={[
                                     "ESP32 microcontroller",
