@@ -2,6 +2,16 @@ import axios from "axios";
 import {getAuthorizationHeader} from "../auth";
 
 class TaskService {
+    /**
+     * Creates a task for a farm.
+     * @param farmId the farm's id
+     * @param userIds list that contains the id's of the users that have this task
+     * @param title the title of the task
+     * @param description the description of the task
+     * @param deadline the deadline of the task
+     * @param importance if the task is important
+     * @return status message
+     */
     async createTask(
         farmId,
         userIds,
@@ -28,6 +38,11 @@ class TaskService {
         }
     }
 
+    /**
+     * Gets every task of a farm.
+     * @param farmId farm's id
+     * @return list of tasks
+     */
     async getFarmTasks(farmId) {
         try {
             const resp = await axios.get(
@@ -36,6 +51,22 @@ class TaskService {
                     headers: getAuthorizationHeader(),
                     params: { farmId }
                 }
+            );
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    /**
+     * Gets every task of a user.
+     * @return list of tasks
+     */
+    async getUserTasks() {
+        try {
+            const resp = await axios.get(
+                "/api/farms/tasks",
+                { headers: getAuthorizationHeader() }
             );
             return resp.data;
         } catch (err) {

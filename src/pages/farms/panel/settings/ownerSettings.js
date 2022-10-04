@@ -55,14 +55,13 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farm }) => {
                         setDeleting(true);
                         farmService
                             .deleteFarm(farm.id)
-                            .then(
-                                () => (window.location.href = "/farms?deleted")
-                            )
+                            .then(() => window.location.href = "/farms?deleted")
                             .catch((err) => setError(err.message))
                             .finally(() => {
                                 setDeleting(false);
                                 setShow(false);
                                 setFarmNameInput("");
+                                window.location.href = "/farms?deleted";
                             });
                     }}
                     className="bg-danger text-white fw-bolder"

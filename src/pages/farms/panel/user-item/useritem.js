@@ -28,6 +28,7 @@ const UserItem = ({
 
     const roles = ["Owner", "Admin", "Worker"];
     const roleType = roles[user.farmRole - 1];
+    console.log(roleType, user.farmRole)
 
     return (
         <>

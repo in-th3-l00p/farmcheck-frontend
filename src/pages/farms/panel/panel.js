@@ -11,6 +11,7 @@ import ChatTab from "./chat";
 import NotFound from "../../notFound";
 import AdminSettingsTab from "./settings/adminSettings";
 import WorkerSettingsTab from "./settings/workerSettings";
+import WorkerTodoTab from "./todo/workerTodo";
 import SensorsTab from "./sensors";
 import AdminTodoTab from "./todo/adminTodo";
 
@@ -122,7 +123,7 @@ const AdminTabs = ({ farm, users, setUsers }) => {
  */
 const WorkerTabs = ({ farm, users }) => {
     const [tab, setTab] = useState(0);
-    const tabs = ["Info", "Sensors", "Chat", "Settings"];
+    const tabs = ["Info", "Sensors", "Chat", "Settings", "Todo"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
@@ -130,6 +131,7 @@ const WorkerTabs = ({ farm, users }) => {
             {tab === 1 && <SensorsTab farm={farm} users={users} />}
             {tab === 2 && <ChatTab farm={farm} users={users} />}
             {tab === 3 && <WorkerSettingsTab farm={farm} users={users} />}
+            {tab === 4 && <WorkerTodoTab farm={farm} users={users} />}
         </PanelLayout>
     );
 };

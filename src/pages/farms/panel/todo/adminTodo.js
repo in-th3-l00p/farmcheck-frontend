@@ -357,7 +357,6 @@ const ManageMenu = ({ setMenu, farm, users }) => {
     useEffect(() => {
         if (!tasks.current) return;
         if (!selectedWorkers.current) {
-            console.log("test");
             setShowedTasks(tasks.current);
             return;
         }
