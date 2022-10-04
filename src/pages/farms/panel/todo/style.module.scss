@@ -1,0 +1,115 @@
+@import "../../../../styles/colorscheme";
+
+/* universal border radius */
+$border-radius: 15px;
+
+@keyframes onMainMenuButtonHover {
+  from {
+    background-color: white;
+    color: $orange;
+  }
+  to {
+    background-color: $light-grey;
+    color: $yellow;
+  }
+}
+
+.mainMenuButton {
+  background-color: white;
+  color: $orange;
+  border: 10px solid $yellow;
+  border-radius: $border-radius;
+
+  font-size: 2rem;
+  max-width: 300px;
+  max-height: 300px;
+  width: 100%;
+  aspect-ratio: 1/1;
+
+  &:hover {
+    animation: onMainMenuButtonHover 0.25s;
+    background-color: $light-grey;
+    color: $yellow;
+    text-decoration: underline;
+  }
+}
+
+@keyframes onWorkerDisplayHover {
+  from {
+    background-color: white;
+    border: 3px solid $light-grey;
+  }
+  to {
+    background-color: $light-grey;
+    border: 3px solid $grey;
+  }
+}
+
+@mixin workerDisplay {
+  width: 100%;
+
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+
+  background-color: white;
+  border: 3px solid $light-grey;
+  border-radius: $border-radius;
+  font-size: 1.5rem;
+}
+
+.workerDisplay {
+  @include workerDisplay;
+
+  &:hover {
+    animation: onWorkerDisplayHover 0.25s;
+    background-color: $light-grey;
+    border: 3px solid $grey;
+  }
+}
+
+.unselectedWorkerDisplay {
+  @include workerDisplay;
+}
+
+.selectedWorkerDisplay {
+  @include workerDisplay;
+  background-color: $light-grey !important;
+  border: 3px solid $grey !important;
+}
+
+@mixin smallWorkerDisplay {
+  @include workerDisplay;
+  font-size: 0.9rem;
+  border: 1px solid $light-grey;
+
+  padding: 0.1rem;
+  margin-bottom: 0.3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.smallWorkerDisplay {
+  @include smallWorkerDisplay;
+  &:hover {
+    animation: onWorkerDisplayHover 0.25s;
+    background-color: $light-grey;
+    border: 1px solid $grey;
+  }
+}
+
+.unselectedSmallWorkerDisplay {
+  @include smallWorkerDisplay;
+}
+
+.selectedSmallWorkerDisplay {
+  @include smallWorkerDisplay;
+  background-color: $light-grey !important;
+  border: 1px solid $grey !important;
+}
+
+.taskDisplay {
+  border: $light-grey;
+  border: 3px solid $grey;
+}
