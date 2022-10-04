@@ -239,10 +239,7 @@ const UsersTab = ({ farm, users, setUsers }) => {
             return;
         farmService
             .getFarmUsers(farm.id)
-            .then((resp) => {
-                console.log("data fetched ", resp);
-                setUsers(resp);
-            })
+            .then((resp) => setUsers(resp))
             .catch((err) => setErrorMessage(err.message));
     }, [users])
 
