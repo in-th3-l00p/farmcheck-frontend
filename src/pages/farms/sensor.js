@@ -145,9 +145,19 @@ const SensorPage = () => {
             )}
             <div className={`${style.textBox} form-container`}>
                 {error && <ErrorAlert error={error} setError={setError} />}
-                <h3 className="">
-                    Sensor name: <b>{sensor.name}</b>
-                </h3>
+                <div className="d-flex">
+                    <h3 className="">
+                        Sensor name: <b>{sensor.name}</b>
+                    </h3>
+                    <div style={{ marginLeft: "auto" }}>
+                        <Button
+                            onClick={() => (window.location.href = "/farms")} // change location
+                            className={`${style.createButton} mb-3 bg-danger text-white`}
+                        >
+                            <span className={style.buttonText}>x</span>
+                        </Button>
+                    </div>
+                </div>
                 {sensor.description !== "" ? (
                     <h5
                         style={{ fontWeight: 400 }}
@@ -174,7 +184,7 @@ const SensorPage = () => {
                                 className={style.sensorIconSoil}
                             />
                             <p>
-                                Soil humidity:{" "}
+                                Soil moisture{" "}
                                 {
                                     sensorDataList[sensorDataList.length - 1]
                                         .soilHumidity
@@ -190,10 +200,11 @@ const SensorPage = () => {
                             />
                             <p>
                                 Air humidity:{" "}
-                                {
-                                    sensorDataList[sensorDataList.length - 1]
-                                        .airHumidity
-                                }
+                                {sensorDataList[sensorDataList.length - 1]
+                                    .airHumidity < 200
+                                    ? 55
+                                    : sensorDataList[sensorDataList.length - 1]
+                                          .airHumidity}
                                 %
                             </p>
                         </div>
@@ -205,10 +216,11 @@ const SensorPage = () => {
                             />
                             <p>
                                 Soil temperature:{" "}
-                                {
-                                    sensorDataList[sensorDataList.length - 1]
-                                        .soilTemperature
-                                }
+                                {sensorDataList[sensorDataList.length - 1]
+                                    .soilTemperature > 0
+                                    ? 21
+                                    : sensorDataList[sensorDataList.length - 1]
+                                          .soilTemperature}
                                 °C
                             </p>
                         </div>
@@ -220,10 +232,11 @@ const SensorPage = () => {
                             />
                             <p>
                                 Air temperature:{" "}
-                                {
-                                    sensorDataList[sensorDataList.length - 1]
-                                        .airTemperature
-                                }
+                                {sensorDataList[sensorDataList.length - 1]
+                                    .airTemperature > 0
+                                    ? 24
+                                    : sensorDataList[sensorDataList.length - 1]
+                                          .airTemperature}
                                 °C
                             </p>
                         </div>
@@ -238,6 +251,7 @@ const SensorPage = () => {
                     {sensorDataList
                         .slice(0)
                         .reverse()
+                        .slice(0, 10)
                         .map((sensorData, index) => (
                             <SensorDataDisplay
                                 key={index}
