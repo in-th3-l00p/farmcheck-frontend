@@ -1,5 +1,6 @@
 import axios from "axios";
 import {getAuthorizationHeader} from "../auth";
+import _ from "lodash";
 
 // farm main service
 class FarmService {
@@ -28,7 +29,7 @@ class FarmService {
     /**
      * Gets a farm's users.
      * @param farmId the id of the farm
-     * @returns 
+     * @returns the list of users
      */
     async getFarmUsers(farmId) {
         const resp = await axios.get(
@@ -40,6 +41,17 @@ class FarmService {
         );
 
         return resp.data;
+    }
+
+    /**
+     * Gets a farm's workers.
+     * @param farmId farm's id
+     * @return the list of workers
+     */
+    async getFarmWorkers(farmId) {
+        const users = await this.getFarmUsers(farmId);
+        return _
+            .filter(users, (user) => user.farmRole === 3);
     }
 
     /**

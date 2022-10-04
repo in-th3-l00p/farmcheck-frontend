@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { Alert, Col, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import farmService from "../../../lib/services/farmService";
 
 import style from "../styles/panel.module.scss";
@@ -13,6 +12,7 @@ import NotFound from "../../notFound";
 import AdminSettingsTab from "./settings/adminSettings";
 import WorkerSettingsTab from "./settings/workerSettings";
 import SensorsTab from "./sensors";
+import AdminTodoTab from "./todo/adminTodo";
 
 /**
  * Tab navigation component
@@ -76,7 +76,7 @@ const PanelLayout = ({ tabs, tab, setTab, children }) => {
  */
 const OwnerTabs = ({ farm, users }) => {
     const [tab, setTab] = useState(0);
-    const tabs = ["Info", "Users", "Sensors", "Chat", "Settings"];
+    const tabs = ["Info", "Users", "Sensors", "Chat", "Settings", "Todo"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
@@ -85,6 +85,7 @@ const OwnerTabs = ({ farm, users }) => {
             {tab === 2 && <SensorsTab farm={farm} users={users} />}
             {tab === 3 && <ChatTab farm={farm} users={users} />}
             {tab === 4 && <OwnerSettingsTab farm={farm} users={users} />}
+            {tab === 5 && <AdminTodoTab farm={farm} users={users} />}
         </PanelLayout>
     );
 };
@@ -97,7 +98,7 @@ const OwnerTabs = ({ farm, users }) => {
  */
 const AdminTabs = ({ farm, users }) => {
     const [tab, setTab] = useState(0);
-    const tabs = ["Info", "Users", "Sensors", "Chat", "Settings"];
+    const tabs = ["Info", "Users", "Sensors", "Chat", "Settings", "Todo"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
@@ -106,6 +107,7 @@ const AdminTabs = ({ farm, users }) => {
             {tab === 2 && <SensorsTab farm={farm} users={users} />}
             {tab === 3 && <ChatTab farm={farm} users={users} />}
             {tab === 4 && <AdminSettingsTab farm={farm} users={users} />}
+            {tab === 5 && <AdminTodoTab farm={farm} users={users} />}
         </PanelLayout>
     );
 };
