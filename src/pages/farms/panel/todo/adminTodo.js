@@ -456,7 +456,7 @@ const AdminTodoTab = ({ farm, users }) => {
             </div>
             <Col>
                 <MainMenuButton onClick={() => setMenu(Menu.Manage)}>
-                    <p>Manage</p>
+                    <p className={style.text}>Manage</p>
                 </MainMenuButton>
             </Col>
         </Layout>
