@@ -129,6 +129,13 @@ const SensorPage = () => {
             .getSensorDataList(params["sensor_id"])
             .then((sensorDataList) => setSensorDataList(sensorDataList))
             .catch((err) => setError(err.message));
+        
+        setInterval(() => {
+            sensorService
+                .getSensorDataList(params["sensor_id"])
+                .then((sensorDataList) => setSensorDataList(sensorDataList))
+                .catch((err) => setError(err.message));
+        }, 1000);
     }, []);
 
     if (sensor === null || sensorDataList === null)
