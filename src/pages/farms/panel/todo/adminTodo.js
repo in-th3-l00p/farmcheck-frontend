@@ -314,54 +314,12 @@ const CreateMenu = ({ setMenu, farm, users }) => {
     );
 };
 
-const TaskDetailsDisplay = ({ task, show, setShow }) => {
-    const [status, setStatus] = useState(null);
-    const [error, setError] = useState("");
-
-    useEffect(() => {
-        taskService.getTaskStatus(task.id) 
-            .then(data => setStatus(data))
-            .catch(err => setError(err.message));
-    }, []);
-
-    if (status === null)
-        return <></>;
-    return (
-        <Modal show={show} onHide={() => setShow(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>Details on task <b>"{task.name}"</b></Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                {status.map((pair, index) => (
-                    <Container key={index} fluid>
-                        <Row>
-                            <Col><p>{pair.user}</p></Col>
-                            <Col><p>{pair.status ? "finished" : "not finished"}</p></Col>
-                        </Row> 
-                    </Container>
-                ))}
-            </Modal.Body>
-        </Modal>
-    );
-}
-
 const TaskDisplay = ({ task }) => {
-    const [show, setShow] = useState(false);
     return (
-        <>
-            <TaskDetailsDisplay 
-                task={task}
-                show={show}
-                setShow={setShow}
-            />
-            <div 
-                className={style.task} 
-                onClick={() => setShow(true)}
-            >
-                <h4>{task.title}</h4>
-                <p style={{marginBottom: 0}}>{task.description}</p>
-            </div>
-        </>
+        <div>
+            <h4>{task.title}</h4>
+            <p>{task.description}</p>
+        </div>
     );
 };
 
@@ -420,39 +378,37 @@ const ManageMenu = ({ setMenu, farm, users }) => {
     if (workers === null || showedTasks === null)
         return <ManageMenuPlaceholder setMenu={setMenu} />;
     return (
-        <Container>
+        <Layout setMenu={setMenu}>
             {error && <ErrorAlert error={error} setError={setError} />}
-            <div className={style.manage}>
-                <div style={{marginRight: 20}}>
+            <Row sm>
+                <Col xs={3}>
                     <h5>Filter by workers:</h5>
-                    <div className={style.filter}>
-                        {workers.map((worker, index) => (
-                            <WorkerDisplay
-                                key={index}
-                                worker={worker}
-                                small={true}
-                                selectable={true}
-                                onSelect={() => {
-                                    const workerList = _.cloneDeep(workers);
-                                    workerList[index].selected =
-                                        !workerList[index].selected;
-                                    selectedWorkers.current += workerList[index]
-                                        .selected
-                                        ? 1
-                                        : -1;
-                                    setWorkers(workerList);
-                                }}
-                            />
-                        ))}
-                </div>
-                </div>
-                <div style={{marginTop: 15, width:"100%"}}>
-                    {showedTasks.map((task, index) => (
+                    {workers.map((worker, index) => (
+                        <WorkerDisplay
+                            key={index}
+                            worker={worker}
+                            small={true}
+                            selectable={true}
+                            onSelect={() => {
+                                const workerList = _.cloneDeep(workers);
+                                workerList[index].selected =
+                                    !workerList[index].selected;
+                                selectedWorkers.current += workerList[index]
+                                    .selected
+                                    ? 1
+                                    : -1;
+                                setWorkers(workerList);
+                            }}
+                        />
+                    ))}
+                </Col>
+                <Col>
+                    {showedTasks === null && showedTasks.map((task, index) => (
                         <TaskDisplay key={index} task={task} />
                     ))}
-                </div>
-            </div>
-        </Container>
+                </Col>
+            </Row>
+        </Layout>
     );
 };
 
@@ -498,12 +454,11 @@ const AdminTodoTab = ({ farm, users }) => {
                     <span className={style.buttonText}>+</span>
                 </Button>
             </div>
-            {/* <Col>
+            <Col>
                 <MainMenuButton onClick={() => setMenu(Menu.Manage)}>
                     <p className={style.text}>Manage</p>
                 </MainMenuButton>
-            </Col> */}
-            <ManageMenu setMenu={setMenu} farm={farm} users={users} />
+            </Col>
         </Layout>
     );
 };
