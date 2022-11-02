@@ -1,9 +1,9 @@
-import {useEffect, useState} from "react";
-import {Container, Modal} from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Container, Modal } from "react-bootstrap";
 import taskService from "../../../../lib/services/taskService";
 import _ from "lodash";
 import ErrorAlert from "../../../../components/alerts/error";
-import {Button} from "../../../../components/buttons/buttons";
+import { Button } from "../../../../components/buttons/buttons";
 
 import style from "./style.module.scss";
 
@@ -14,7 +14,7 @@ const WorkerTodoTabPlaceholder = () => {
             <h1>loading...</h1>
         </Container>
     );
-}
+};
 
 const TaskDetailsModal = ({ task, show, setShow }) => {
     return (
@@ -23,19 +23,27 @@ const TaskDetailsModal = ({ task, show, setShow }) => {
                 <Modal.Title>View task</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>Title: <b>"{task.title}"</b></p>
-                <p>Description: <b>"{task.description}"</b></p>
-                {task.deadline && <p>Deadline: <b>{task.deadline}</b></p>}
-                <p>Is important: <b>{task.importance ? "yes" : "no"}</b></p>
+                <p>
+                    Title: <b>"{task.title}"</b>
+                </p>
+                <p>
+                    Description: <b>"{task.description}"</b>
+                </p>
+                {task.deadline && (
+                    <p>
+                        Deadline: <b>{task.deadline}</b>
+                    </p>
+                )}
+                <p>
+                    Is important: <b>{task.importance ? "yes" : "no"}</b>
+                </p>
             </Modal.Body>
             <Modal.Footer>
-                <Button>
-                    Finish task
-                </Button>
+                <Button className={style.button}>Finish task</Button>
             </Modal.Footer>
         </Modal>
-    )
-}
+    );
+};
 
 const TaskDisplay = ({ task }) => {
     const [showDetails, setShowDetails] = useState(false);
@@ -50,16 +58,15 @@ const TaskDisplay = ({ task }) => {
             <button
                 onClick={() => setShowDetails(true)}
                 disabled={task.status}
-                className={task.status ? 
-                    style.finishedTaskDisplay :
-                    style.taskDisplay
+                className={
+                    task.status ? style.finishedTaskDisplay : style.taskDisplay
                 }
             >
                 <h4>{task.title}</h4>
             </button>
         </>
-    )
-}
+    );
+};
 
 /**
  * Worker's tab for managing a farm's tab.
@@ -72,18 +79,15 @@ const WorkerTodoTab = ({ farm, users }) => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        taskService.getUserTasks()
-            .then(taskList => setTasks(
-                _.filter(
-                    taskList,
-                    task => task.farmId === farm.id
-                )
-            ))
-            .catch(err => setError(err.message));
-    }, [])
+        taskService
+            .getUserTasks()
+            .then((taskList) =>
+                setTasks(_.filter(taskList, (task) => task.farmId === farm.id))
+            )
+            .catch((err) => setError(err.message));
+    }, []);
 
-    if (tasks === null)
-        return <WorkerTodoTabPlaceholder />
+    if (tasks === null) return <WorkerTodoTabPlaceholder />;
     return (
         <Container>
             {error && <ErrorAlert error={error} setError={setError} />}
@@ -95,14 +99,11 @@ const WorkerTodoTab = ({ farm, users }) => {
             )}
             <ul className="mx-0 px-0 d-flex flex-column gap-3 list-unstyled">
                 {tasks.map((task, index) => (
-                    <TaskDisplay
-                        key={index}
-                        task={task}
-                    />
+                    <TaskDisplay key={index} task={task} />
                 ))}
             </ul>
         </Container>
     );
-}
+};
 
 export default WorkerTodoTab;

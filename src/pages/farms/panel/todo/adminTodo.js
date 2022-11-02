@@ -300,15 +300,6 @@ const CreateMenu = ({ setMenu, farm, users }) => {
                         />
                     ))}
                 </Container>
-                <div className="w-100 d-flex justify-content-center">
-                    <Button
-                        disabled={!selectedWorkersCount.current}
-                        onClick={() => setShowCreateModal(true)}
-                        className={style.button}
-                    >
-                        Create task
-                    </Button>
-                </div>
             </Layout>
         </>
     );
@@ -343,6 +334,7 @@ const ManageMenu = ({ setMenu, farm, users }) => {
         taskService
             .getFarmTasks(farm.id)
             .then((taskList) => {
+                console.log(taskList);
                 tasks.current = taskList;
                 setShowedTasks(tasks.current);
             })
@@ -403,9 +395,10 @@ const ManageMenu = ({ setMenu, farm, users }) => {
                     ))}
                 </Col>
                 <Col>
-                    {showedTasks === null && showedTasks.map((task, index) => (
-                        <TaskDisplay key={index} task={task} />
-                    ))}
+                    {showedTasks === null &&
+                        showedTasks.map((task, index) => (
+                            <TaskDisplay key={index} task={task} />
+                        ))}
                 </Col>
             </Row>
         </Layout>
