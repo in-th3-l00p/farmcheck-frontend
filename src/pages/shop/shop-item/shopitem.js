@@ -78,7 +78,6 @@ const ShopItem = ({
                             <></>
                         ) : (
                             <div>
-                                {console.log(componentslist)}
                                 <h5>Components: </h5>
                                 <ul className={style.list}>
                                     {componentslist.map((component, index) => (

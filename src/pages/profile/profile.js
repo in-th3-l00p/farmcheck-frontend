@@ -7,7 +7,7 @@ import { NotAuthenticatedError } from "../../lib/constants";
 import { Button } from "../../components/buttons/buttons";
 import _ from "lodash";
 
-import { TaskDisplay, TaskDetailsModal } from "../farms/panel/todo/workerTodo";
+import { TaskDisplay } from "../farms/panel/todo/taskDisplay";
 import taskService from "../../lib/services/taskService";
 import farmService from "../../lib/services/farmService";
 

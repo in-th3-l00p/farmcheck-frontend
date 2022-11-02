@@ -78,16 +78,18 @@ const PanelLayout = ({ tabs, tab, setTab, children }) => {
  */
 const OwnerTabs = ({ farm, users, setUsers }) => {
     const [tab, setTab] = useState(0);
-    const tabs = ["Info", "Users", "Sensors", "Chat", "Settings", "Todo"];
+    const tabs = ["Info", "Users", "Sensors", "Chat", "Todo", "Settings"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} setTab={setTab} />}
-            {tab === 1 && <UsersTab farm={farm} users={users} setUsers={setUsers} />}
+            {tab === 1 && (
+                <UsersTab farm={farm} users={users} setUsers={setUsers} />
+            )}
             {tab === 2 && <SensorsTab farm={farm} users={users} />}
             {tab === 3 && <ChatTab farm={farm} users={users} />}
-            {tab === 4 && <OwnerSettingsTab farm={farm} users={users} />}
-            {tab === 5 && <AdminTodoTab farm={farm} users={users} />}
+            {tab === 4 && <AdminTodoTab farm={farm} users={users} />}
+            {tab === 5 && <OwnerSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
 };
@@ -101,16 +103,18 @@ const OwnerTabs = ({ farm, users, setUsers }) => {
  */
 const AdminTabs = ({ farm, users, setUsers }) => {
     const [tab, setTab] = useState(0);
-    const tabs = ["Info", "Users", "Sensors", "Chat", "Settings", "Todo"];
+    const tabs = ["Info", "Users", "Sensors", "Chat", "Todo", "Settings"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} />}
-            {tab === 1 && <UsersTab farm={farm} users={users} setUsers={setUsers} />}
+            {tab === 1 && (
+                <UsersTab farm={farm} users={users} setUsers={setUsers} />
+            )}
             {tab === 2 && <SensorsTab farm={farm} users={users} />}
             {tab === 3 && <ChatTab farm={farm} users={users} />}
-            {tab === 4 && <AdminSettingsTab farm={farm} users={users} />}
-            {tab === 5 && <AdminTodoTab farm={farm} users={users} />}
+            {tab === 4 && <AdminTodoTab farm={farm} users={users} />}
+            {tab === 5 && <AdminSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
 };
@@ -123,15 +127,15 @@ const AdminTabs = ({ farm, users, setUsers }) => {
  */
 const WorkerTabs = ({ farm, users }) => {
     const [tab, setTab] = useState(0);
-    const tabs = ["Info", "Sensors", "Chat", "Settings", "Todo"];
+    const tabs = ["Info", "Sensors", "Chat", "Todo", "Settings"];
 
     return (
         <PanelLayout tabs={tabs} tab={tab} setTab={setTab}>
             {tab === 0 && <InfoTab farm={farm} users={users} />}
             {tab === 1 && <SensorsTab farm={farm} users={users} />}
             {tab === 2 && <ChatTab farm={farm} users={users} />}
-            {tab === 3 && <WorkerSettingsTab farm={farm} users={users} />}
-            {tab === 4 && <WorkerTodoTab farm={farm} users={users} />}
+            {tab === 3 && <WorkerTodoTab farm={farm} users={users} />}
+            {tab === 4 && <WorkerSettingsTab farm={farm} users={users} />}
         </PanelLayout>
     );
 };
@@ -144,7 +148,7 @@ const FarmPanelPlaceholder = () => {
             </span>
         </div>
     );
-}
+};
 
 /**
  * Farm panel located at "/farms/panel"
@@ -171,11 +175,15 @@ const FarmPanel = () => {
     }, []);
 
     if (error) return <NotFound />;
-    if (farm === undefined || users === []) return <FarmPanelPlaceholder />
+    if (farm === undefined || users === []) return <FarmPanelPlaceholder />;
     return (
         <>
-            {farm.role === 1 && <OwnerTabs farm={farm} users={users} setUsers={setUsers} />}
-            {farm.role === 2 && <AdminTabs farm={farm} users={users} setUsers={setUsers} />}
+            {farm.role === 1 && (
+                <OwnerTabs farm={farm} users={users} setUsers={setUsers} />
+            )}
+            {farm.role === 2 && (
+                <AdminTabs farm={farm} users={users} setUsers={setUsers} />
+            )}
             {farm.role === 3 && <WorkerTabs farm={farm} users={users} />}
         </>
     );

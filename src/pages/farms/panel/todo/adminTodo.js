@@ -7,6 +7,7 @@ import { LabelInput } from "../../../../components/forms/forms";
 import _ from "lodash";
 import DateTimePicker from "react-datetime-picker";
 import taskService from "../../../../lib/services/taskService";
+import { TaskDisplay } from "./taskDisplay";
 
 import style from "./style.module.scss";
 
@@ -27,15 +28,10 @@ const CreateMenuPlaceholder = ({ setMenu }) => {
     );
 };
 
-const ManageMenuPlaceholder = ({ setMenu }) => {
-    return <Layout setMenu={true}></Layout>;
-};
-
 // menus
 const Menu = {
     Main: 0,
     Create: 1,
-    Manage: 2,
 };
 
 // used for creating selectable workers
@@ -314,15 +310,6 @@ const CreateMenu = ({ setMenu, farm, users }) => {
     );
 };
 
-const TaskDisplay = ({ task }) => {
-    return (
-        <div>
-            <h4>{task.title}</h4>
-            <p>{task.description}</p>
-        </div>
-    );
-};
-
 /**
  * Menu used for managing tasks.
  * @param setMenu the menu state reducer
@@ -331,7 +318,7 @@ const TaskDisplay = ({ task }) => {
  * @return {JSX.Element} the menu component
  * @constructor
  */
-const ManageMenu = ({ setMenu, farm, users }) => {
+const ManageMenu = ({ farm, users }) => {
     const tasks = useRef(null);
     const selectedWorkers = useRef(0);
 
@@ -343,7 +330,6 @@ const ManageMenu = ({ setMenu, farm, users }) => {
         taskService
             .getFarmTasks(farm.id)
             .then((taskList) => {
-                console.log(taskList);
                 tasks.current = taskList;
                 setShowedTasks(tasks.current);
             })
@@ -376,10 +362,9 @@ const ManageMenu = ({ setMenu, farm, users }) => {
         );
     }, [workers]);
 
-    if (workers === null || showedTasks === null)
-        return <ManageMenuPlaceholder setMenu={setMenu} />;
+    if (workers === null || showedTasks === null) return <></>;
     return (
-        <Layout setMenu={setMenu}>
+        <div>
             {error && <ErrorAlert error={error} setError={setError} />}
             <Row sm>
                 <Col xs={3}>
@@ -404,13 +389,17 @@ const ManageMenu = ({ setMenu, farm, users }) => {
                     ))}
                 </Col>
                 <Col>
-                    {showedTasks === null &&
+                    {showedTasks !== null &&
                         showedTasks.map((task, index) => (
-                            <TaskDisplay key={index} task={task} />
+                            <TaskDisplay
+                                className={style.filteredTask}
+                                key={index}
+                                task={task}
+                            />
                         ))}
                 </Col>
             </Row>
-        </Layout>
+        </div>
     );
 };
 
@@ -443,8 +432,8 @@ const AdminTodoTab = ({ farm, users }) => {
         return <AdminTodoTabPlaceholder />;
     if (menu === Menu.Create)
         return <CreateMenu setMenu={setMenu} farm={farm} users={users} />;
-    if (menu === Menu.Manage)
-        return <ManageMenu setMenu={setMenu} farm={farm} users={users} />;
+    // if (menu === Menu.Manage)
+    //     return <ManageMenu setMenu={setMenu} farm={farm} users={users} />;
     return (
         <Layout backButton={false}>
             {/* creating the dialog where the user selects the menu */}
@@ -456,11 +445,12 @@ const AdminTodoTab = ({ farm, users }) => {
                     <span className={style.buttonText}>+</span>
                 </Button>
             </div>
-            <Col>
+            <ManageMenu farm={farm} users={users} />
+            {/* <Col>
                 <MainMenuButton onClick={() => setMenu(Menu.Manage)}>
                     <p className={style.text}>Manage</p>
                 </MainMenuButton>
-            </Col>
+            </Col> */}
         </Layout>
     );
 };

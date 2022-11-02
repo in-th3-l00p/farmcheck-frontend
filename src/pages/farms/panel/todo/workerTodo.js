@@ -4,6 +4,7 @@ import taskService from "../../../../lib/services/taskService";
 import _ from "lodash";
 import ErrorAlert from "../../../../components/alerts/error";
 import { Button } from "../../../../components/buttons/buttons";
+import { TaskDisplay } from "./taskDisplay";
 
 import style from "./style.module.scss";
 
@@ -13,58 +14,6 @@ const WorkerTodoTabPlaceholder = () => {
         <Container className="p-5 text-center">
             <h1>loading...</h1>
         </Container>
-    );
-};
-
-export const TaskDetailsModal = ({ task, show, setShow }) => {
-    return (
-        <Modal show={show} onHide={() => setShow(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>View task</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <p>
-                    Title: <b>"{task.title}"</b>
-                </p>
-                <p>
-                    Description: <b>"{task.description}"</b>
-                </p>
-                {task.deadline && (
-                    <p>
-                        Deadline: <b>{task.deadline}</b>
-                    </p>
-                )}
-                <p>
-                    Is important: <b>{task.importance ? "yes" : "no"}</b>
-                </p>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button className={style.button}>Finish task</Button>
-            </Modal.Footer>
-        </Modal>
-    );
-};
-
-export const TaskDisplay = ({ className, task }) => {
-    const [showDetails, setShowDetails] = useState(false);
-
-    return (
-        <div className={className}>
-            <TaskDetailsModal
-                task={task}
-                show={showDetails}
-                setShow={setShowDetails}
-            />
-            <button
-                onClick={() => setShowDetails(true)}
-                disabled={task.status}
-                className={
-                    task.status ? style.finishedTaskDisplay : style.taskDisplay
-                }
-            >
-                <h4>{task.title}</h4>
-            </button>
-        </div>
     );
 };
 
@@ -91,7 +40,7 @@ const WorkerTodoTab = ({ farm, users }) => {
     return (
         <Container>
             {error && <ErrorAlert error={error} setError={setError} />}
-            <h3>Your tasks:</h3>
+            <h3 className="mb-4">Your tasks:</h3>
             {!tasks.length && (
                 <div className="w-100 text-center my-5">
                     <h4>You have no tasks 🤙</h4>
