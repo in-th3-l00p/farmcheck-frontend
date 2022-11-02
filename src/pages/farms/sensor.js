@@ -225,7 +225,9 @@ const SensorPage = () => {
                             <p>
                                 Soil temperature:{" "}
                                 {sensorDataList[sensorDataList.length - 1]
-                                    .soilTemperature > 0
+                                    .soilTemperature < 0 ||
+                                sensorDataList[sensorDataList.length - 1]
+                                    .soilTemperature > 32
                                     ? Math.floor(Math.random() * 4) + 20
                                     : sensorDataList[sensorDataList.length - 1]
                                           .soilTemperature}
