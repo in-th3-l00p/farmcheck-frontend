@@ -192,11 +192,10 @@ const SensorPage = () => {
                             />
                             <p>
                                 Soil moisture{" "}
-                                {sensorDataList[sensorDataList.length - 1]
-                                    .soilHumidity > 70
-                                    ? Math.floor(Math.random() * 2)
-                                    : sensorDataList[sensorDataList.length - 1]
-                                          .soilHumidity}
+                                {
+                                    sensorDataList[sensorDataList.length - 1]
+                                        .soilHumidity
+                                }
                                 %
                             </p>
                         </div>
@@ -208,11 +207,10 @@ const SensorPage = () => {
                             />
                             <p>
                                 Air humidity:{" "}
-                                {sensorDataList[sensorDataList.length - 1]
-                                    .airHumidity > 100
-                                    ? Math.floor(Math.random() * 10) + 45
-                                    : sensorDataList[sensorDataList.length - 1]
-                                          .airHumidity}
+                                {
+                                    sensorDataList[sensorDataList.length - 1]
+                                        .airHumidity
+                                }
                                 %
                             </p>
                         </div>
@@ -224,13 +222,10 @@ const SensorPage = () => {
                             />
                             <p>
                                 Soil temperature:{" "}
-                                {sensorDataList[sensorDataList.length - 1]
-                                    .soilTemperature < 0 ||
-                                sensorDataList[sensorDataList.length - 1]
-                                    .soilTemperature > 32
-                                    ? Math.floor(Math.random() * 4) + 20
-                                    : sensorDataList[sensorDataList.length - 1]
-                                          .soilTemperature}
+                                {
+                                    sensorDataList[sensorDataList.length - 1]
+                                        .soilTemperature
+                                }
                                 °C
                             </p>
                         </div>
@@ -242,11 +237,10 @@ const SensorPage = () => {
                             />
                             <p>
                                 Air temperature:{" "}
-                                {sensorDataList[sensorDataList.length - 1]
-                                    .airTemperature < 15
-                                    ? Math.floor(Math.random() * 4) + 20
-                                    : sensorDataList[sensorDataList.length - 1]
-                                          .airTemperature}
+                                {
+                                    sensorDataList[sensorDataList.length - 1]
+                                        .airTemperature
+                                }
                                 °C
                             </p>
                         </div>
