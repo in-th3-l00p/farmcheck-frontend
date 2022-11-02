@@ -300,6 +300,15 @@ const CreateMenu = ({ setMenu, farm, users }) => {
                         />
                     ))}
                 </Container>
+                <div className="w-100 d-flex justify-content-center">
+                    <Button
+                        disabled={!selectedWorkersCount.current}
+                        onClick={() => setShowCreateModal(true)}
+                        className={style.button}
+                    >
+                        Create task
+                    </Button>
+                </div>
             </Layout>
         </>
     );

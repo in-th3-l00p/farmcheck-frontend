@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import TextBox from "../../components/textbox/textbox";
-import { Col, Placeholder, Row } from "react-bootstrap";
+import { Col, Placeholder, Row, Modal } from "react-bootstrap";
 import userService from "../../lib/services/userService";
 import { NotAuthenticatedError } from "../../lib/constants";
 import { Button } from "../../components/buttons/buttons";
+import _ from "lodash";
+
+import { TaskDisplay, TaskDetailsModal } from "../farms/panel/todo/workerTodo";
+import taskService from "../../lib/services/taskService";
+import farmService from "../../lib/services/farmService";
 
 import style from "./profile.module.scss";
 
@@ -60,6 +65,9 @@ const Profile = () => {
     const [error, setError] = useState(undefined);
     const params = useParams();
     const [editProfile, setEditProfile] = useState(true);
+    const [farms, setFarms] = useState([]);
+
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         if (!userService.isAuthenticated()) {
@@ -78,6 +86,23 @@ const Profile = () => {
             .then((details) => setUserDetails(details))
             .catch((err) => setError(err));
     }, []);
+
+    useEffect(() => {
+        farmService
+            .getAuthenticatedUserFarms()
+            .then((farms) => {
+                setFarms(farms);
+            })
+            .catch((err) => setError(err));
+    }, []);
+
+    useEffect(() => {
+        if (farms == []) return;
+        taskService
+            .getUserTasks()
+            .then((taskList) => setTasks(taskList))
+            .catch((err) => setError(err.message));
+    }, [farms]);
 
     if (error)
         return (
@@ -122,6 +147,22 @@ const Profile = () => {
                 </div>
             </div>
             <div className={style.tasks}>
+                {!tasks.length && (
+                    <div className={`w-100 ${style.text}`}>
+                        <h5>You have no tasks 🤙</h5>
+                    </div>
+                )}
+                <ul
+                    className={`${style.task} d-flex flex-column list-unstyled`}
+                >
+                    {tasks.map((task, index) => (
+                        <TaskDisplay
+                            className={style.task}
+                            key={index}
+                            task={task}
+                        />
+                    ))}
+                </ul>
             </div>
         </div>
     );

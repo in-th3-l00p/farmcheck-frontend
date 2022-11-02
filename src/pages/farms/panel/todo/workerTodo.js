@@ -16,7 +16,7 @@ const WorkerTodoTabPlaceholder = () => {
     );
 };
 
-const TaskDetailsModal = ({ task, show, setShow }) => {
+export const TaskDetailsModal = ({ task, show, setShow }) => {
     return (
         <Modal show={show} onHide={() => setShow(false)}>
             <Modal.Header closeButton>
@@ -45,11 +45,11 @@ const TaskDetailsModal = ({ task, show, setShow }) => {
     );
 };
 
-const TaskDisplay = ({ task }) => {
+export const TaskDisplay = ({ className, task }) => {
     const [showDetails, setShowDetails] = useState(false);
 
     return (
-        <>
+        <div className={className}>
             <TaskDetailsModal
                 task={task}
                 show={showDetails}
@@ -64,7 +64,7 @@ const TaskDisplay = ({ task }) => {
             >
                 <h4>{task.title}</h4>
             </button>
-        </>
+        </div>
     );
 };
 

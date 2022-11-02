@@ -9,8 +9,14 @@ const FeedBack = () => {
     const [description, setDescription] = useState("");
 
     return (
-        <div className={style.feedBack}>
-            <h3 style={{ textAlign: "center", marginBottom: 30 }}>Feedback</h3>
+        <form
+            className={style.feedBack}
+            onSubmit={(e) => {
+                e.preventDefault();
+                window.location.href = "/";
+            }}
+        >
+            <h2 style={{ textAlign: "center", marginBottom: 30 }}>Feedback</h2>
             <LabelInput
                 label="Email address"
                 type="email"
@@ -29,7 +35,7 @@ const FeedBack = () => {
                     Submit
                 </Button>
             </span>
-        </div>
+        </form>
     );
 };
 

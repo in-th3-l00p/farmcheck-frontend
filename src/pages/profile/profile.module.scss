@@ -82,6 +82,23 @@
         border: 2px solid $light-grey;
         border-radius: 20px;
         margin-top: 25px;
+
+        padding-top: 20px;
+
+        justify-content: center;
+        align-items: center;
+
+        overflow: auto;
+
+        .task {
+            width: 90%;
+            margin: auto;
+            height: auto;
+        }
+
+        .text {
+            margin-top: 25%;
+        }
     }
 
     .change {

@@ -93,7 +93,9 @@ export const LabelTextInput = ({
 }) => {
     return (
         <Form.Group className={className} style={style}>
-            <Form.Label><h6>{label}</h6></Form.Label>
+            <Form.Label>
+                <h5>{label}</h5>
+            </Form.Label>
             <Form.Control
                 as="textarea"
                 className={inputClassName}
