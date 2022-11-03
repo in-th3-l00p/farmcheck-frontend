@@ -10,6 +10,7 @@ import taskService from "../../../../lib/services/taskService";
 import { TaskDisplay } from "./taskDisplay";
 
 import style from "./style.module.scss";
+import {AdminTaskDisplay} from "./adminTaskDisplay";
 
 // only placeholders
 const AdminTodoTabPlaceholder = () => {
@@ -391,7 +392,7 @@ const ManageMenu = ({ farm, users }) => {
                 <Col>
                     {showedTasks !== null &&
                         showedTasks.map((task, index) => (
-                            <TaskDisplay
+                            <AdminTaskDisplay
                                 className={style.filteredTask}
                                 key={index}
                                 task={task}
