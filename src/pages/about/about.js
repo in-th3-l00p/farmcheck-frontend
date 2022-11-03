@@ -15,7 +15,7 @@ const About = () => {
                         <h4>We plant the future.</h4>
                     </div>
                     <div className={style.image}>
-                        <img src="/images/team.png" alt="team" />
+                        <img src="/images/about-images/team.jpg" alt="team" />
                     </div>
                     <div className={style.line} />
                     <div className={`${style.description} py-4`}>
@@ -38,49 +38,49 @@ const About = () => {
                             <Row>
                                 <Col>
                                     <AboutItem
-                                        imageSrc="/images/about-images/ionut.png"
+                                        imageSrc="/images/about-images/ionut.jpg"
                                         name="Bene Ionut-Matei"
                                         description="Embedded Developer"
                                     />
                                 </Col>
                                 <Col>
                                     <AboutItem
-                                        imageSrc="/images/about-images/alexandru.png"
+                                        imageSrc="/images/about-images/alex.jpg"
                                         name="Bleotu Alexandru-David"
                                         description="Front-end Developer/Embedded Developer"
                                     />
                                 </Col>
                                 <Col>
                                     <AboutItem
-                                        imageSrc="/images/about-images/silviu.png"
+                                        imageSrc="/images/about-images/silviu.jpg"
                                         name="Curuciuc Silviu"
                                         description="Mentor DpIT"
                                     />
                                 </Col>
                                 <Col>
                                     <AboutItem
-                                        imageSrc="/images/about-images/cristi.png"
+                                        imageSrc="/images/about-images/cristi.jpg"
                                         name="George Cristiany-Dan"
                                         description="Back-end Developer"
                                     />
                                 </Col>
                                 <Col>
                                     <AboutItem
-                                        imageSrc="/images/about-images/mihaela.png"
+                                        imageSrc="/images/about-images/miha.jpg"
                                         name="Russu Mihaela"
                                         description="Front-end Developer"
                                     />
                                 </Col>
                                 <Col>
                                     <AboutItem
-                                        imageSrc="/images/about-images/eduard.png"
+                                        imageSrc="/images/about-images/edu.jpg"
                                         name="Serban Eduard-valentin"
                                         description="Back-end Developer"
                                     />
                                 </Col>
                                 <Col>
                                     <AboutItem
-                                        imageSrc="/images/about-images/catalin.png"
+                                        imageSrc="/images/about-images/cata.jpg"
                                         name="Tisca Catalin-George"
                                         description="Front-end Developer/Back-end Developer"
                                     />

@@ -1,23 +1,21 @@
 @import "src/styles/colorscheme.scss";
 
 .container {
-    margin: auto !important;
+    width: 275px !important;
+    height: 425px !important;
 
-    width: 300px !important;
-    height: 400px !important;
-
-    margin-bottom: 30px !important;
+    margin: 0 auto 30px auto !important;
 
     img {
         border-radius: 20px;
 
-        width: 300px !important;
-        height: 400px !important;
+        width: 250px !important;
+        height: 333px !important;
 
         border: 4px solid $yellow;
     }
 
     .name {
-        margin-top: -30px;
+        margin-top: -40px;
     }
 }
