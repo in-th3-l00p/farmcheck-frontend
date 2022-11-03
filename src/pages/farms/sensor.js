@@ -193,7 +193,7 @@ const SensorPage = () => {
                             <p>
                                 Soil moisture{" "}
                                 {
-                                    sensorDataList[sensorDataList.length - 1]
+                                    sensorDataList[0]
                                         .soilHumidity
                                 }
                                 %
@@ -208,7 +208,7 @@ const SensorPage = () => {
                             <p>
                                 Air humidity:{" "}
                                 {
-                                    sensorDataList[sensorDataList.length - 1]
+                                    sensorDataList[0]
                                         .airHumidity
                                 }
                                 %
@@ -223,7 +223,7 @@ const SensorPage = () => {
                             <p>
                                 Soil temperature:{" "}
                                 {
-                                    sensorDataList[sensorDataList.length - 1]
+                                    sensorDataList[0]
                                         .soilTemperature
                                 }
                                 °C
@@ -238,7 +238,7 @@ const SensorPage = () => {
                             <p>
                                 Air temperature:{" "}
                                 {
-                                    sensorDataList[sensorDataList.length - 1]
+                                    sensorDataList[0]
                                         .airTemperature
                                 }
                                 °C
@@ -253,9 +253,6 @@ const SensorPage = () => {
 
                 <div className="d-flex flex-column gap-3">
                     {sensorDataList
-                        .slice(0)
-                        .reverse()
-                        .slice(0, 10)
                         .map((sensorData, index) => (
                             <SensorDataDisplay
                                 key={index}
