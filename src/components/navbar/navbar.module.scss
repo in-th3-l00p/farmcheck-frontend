@@ -38,6 +38,10 @@
         font-size: 1.25rem !important;
     }
 
+    @media screen and (max-width: 520px) {
+        font-size: 1.35rem !important;
+    }
+
     &:hover {
         cursor: pointer;
         color: $grey;

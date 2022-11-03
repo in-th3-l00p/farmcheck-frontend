@@ -5,7 +5,6 @@
 
 import React from "react";
 import ShopItem from "./shop-item/shopitem";
-import Footer from "../../components/footer/footer";
 import { Col, Row } from "react-bootstrap";
 
 import style from "./shop.module.scss";
@@ -74,7 +73,6 @@ const Shop = () => {
                     </Row>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };

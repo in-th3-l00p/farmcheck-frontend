@@ -1,5 +1,4 @@
 import { Form } from "react-bootstrap";
-import Footer from "../../components/footer/footer";
 import WikiItem from "./wiki-item/wikiitem";
 import { Col, Row } from "react-bootstrap";
 import React, { useState } from "react";
@@ -66,7 +65,6 @@ const Wiki = () => {
                     )}
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };

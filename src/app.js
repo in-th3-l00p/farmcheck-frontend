@@ -22,6 +22,7 @@ import "./styles/globals.scss";
 import { CreateSensor } from "./pages/farms/panel/sensors";
 import SensorPage from "./pages/farms/sensor";
 import FeedBack from "./pages/feedback/feedback";
+import FeedBackShow from "./pages/feedback/feedbackshow";
 /**
  * Loading component showed when initial requests to the server are made.
  * @return {JSX.Element} the loading component
@@ -72,6 +73,7 @@ const App = () => {
                     <Route path="/profile/:username" element={<Profile />} />
                     <Route path="/wiki" element={<Wiki />} />
                     <Route path="/Feedback" element={<FeedBack />} />
+                    <Route path="/feedback/show" element={<FeedBackShow />} />
                     <Route path="/farms">
                         <Route
                             index

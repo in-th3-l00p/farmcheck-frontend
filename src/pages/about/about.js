@@ -74,7 +74,7 @@ const About = () => {
                                 <Col>
                                     <AboutItem
                                         imageSrc="/images/about-images/edu.jpg"
-                                        name="Serban Eduard-valentin"
+                                        name="Serban Eduard-Valentin"
                                         description="Back-end Developer"
                                     />
                                 </Col>
