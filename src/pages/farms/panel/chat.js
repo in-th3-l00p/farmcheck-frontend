@@ -8,6 +8,7 @@ import _ from "lodash";
 import userService from "../../../lib/services/userService";
 import messageService from "../../../lib/services/messageService";
 import ErrorAlert from "../../../components/alerts/error";
+import {getAuthorizationHeader} from "../../../lib/auth";
 
 const CHAT_URL = "http://localhost:8080/ws";
 
@@ -70,6 +71,7 @@ const ChatTab = ({ farm, users }) => {
     const [error, setError] = useState("");
 
     useEffect(() => {
+        console.log(getAuthorizationHeader());
         messageService
             .getFarmMessages(farm.id)
             .then((messageList) => setMessages(messageList))
@@ -92,6 +94,7 @@ const ChatTab = ({ farm, users }) => {
         <>
             <SockJsClient
                 url={CHAT_URL}
+                headers={getAuthorizationHeader()}
                 topics={[`/topic/${farm.id}`]}
                 onMessage={(message) => {
                     setMessages(_.cloneDeep(messages).concat(message));
