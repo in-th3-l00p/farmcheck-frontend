@@ -7,13 +7,13 @@ class FarmService {
     /**
      * Stores a farm inside the database.
      * @param name name farm
-     * @param image the image file encoded in bytes
+     * @param description farm's description
      */
-    async createFarm(name, image) {
+    async createFarm(name, description) {
         try {
             await axios.post(
                 "/api/farms",
-                {name, image},
+                {name, description},
                 {headers: getAuthorizationHeader()}
             );
         }catch(err) {

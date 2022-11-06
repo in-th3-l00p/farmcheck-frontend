@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { FileUploader, LabelInput } from "../../components/forms/forms";
+import {FileUploader, LabelInput, LabelTextInput} from "../../components/forms/forms";
 import { Button } from "../../components/buttons/buttons";
 import ErrorAlert from "../../components/alerts/error";
 
 import farmService from "../../lib/services/farmService";
 import style from "./styles/farms.module.scss";
+import TextBox from "../../components/textbox/textbox";
 
 /**
  * Create Farm page.
@@ -12,34 +13,44 @@ import style from "./styles/farms.module.scss";
  */
 const CreateFarm = () => {
     const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
     const [image, setImage] = useState([]);
 
     const [error, setError] = useState("");
 
     const isInputValid = () => {
-        return !!name && !!image;
+        return name && description && !!image;
     };
 
     return (
-        <div className={`${style.createContainer} form-container`}>
+        <TextBox className={"mt-100px"}>
             <form
                 className={`${style.form} form`}
                 onSubmit={(event) => {
                     event.preventDefault();
                     farmService
-                        .createFarm(name, image)
+                        .createFarm(name, description)
                         .then(() => (window.location.href = "/farms?created"))
                         .catch((err) => setError(err.message));
                 }}
             >
-                <h2 className="text-center mt-5 mb-4">Create Farm</h2>
+                <h2 className="text-center mb-4">Create Farm</h2>
                 <ErrorAlert error={error} setError={setError} />
 
                 <span className="input-container mb-2">
                     <LabelInput
-                        label="Farm name:"
+                        label="Farm's name:"
                         value={name}
                         setValue={setName}
+                    />
+                </span>
+
+                <span className={"input-container mb2"}>
+                    <LabelTextInput
+                        label={"Farm's description:"}
+                        inputStyle={{ height: "300px" }}
+                        value={description}
+                        setValue={setDescription}
                     />
                 </span>
 
@@ -55,7 +66,7 @@ const CreateFarm = () => {
                     </Button>
                 </span>
             </form>
-        </div>
+        </TextBox>
     );
 };
 
