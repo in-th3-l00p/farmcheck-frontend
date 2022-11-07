@@ -46,6 +46,7 @@ const TaskDetailsModal = ({ task, show, setShow }) => {
                             status.map((userStatus, index) => (
                                 <span
                                     className={`${style.viewTask} d-flex w-100 border p-2`}
+                                    key={index}
                                 >
                                     <p className="me-auto mt-2">
                                         {userStatus.user}
