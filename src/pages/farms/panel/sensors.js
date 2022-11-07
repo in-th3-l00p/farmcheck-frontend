@@ -44,6 +44,7 @@ export const CreateSensor = () => {
                 </h1>
             </div>
         );
+
     return (
         <div className={`${style.textBox} form-container`}>
             <form
@@ -76,7 +77,11 @@ export const CreateSensor = () => {
                 </span>
 
                 <span className="d-flex justify-content-center">
-                    <Button type="submit" className={style.button}>
+                    <Button
+                        type="submit"
+                        className={style.button}
+                        disabled={!name.length}
+                    >
                         Submit
                     </Button>
                 </span>
