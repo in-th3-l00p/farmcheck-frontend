@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import { Button } from "../../../components/buttons/buttons";
 import SockJsClient from "react-stomp";
 
@@ -103,7 +103,6 @@ const ChatTab = ({ farm, users }) => {
             />
             <div
                 className="d-flex flex-column gap-2 p-1"
-                style={{ padding: 10 }}
             >
                 <ErrorAlert error={error} setError={setError} />
                 <div

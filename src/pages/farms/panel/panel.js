@@ -38,37 +38,25 @@ const FarmInfo = ({ farm, users }) => {
 /**
  * Tab navigation component
  * @param tabs index object
- * @param tab the tab state
- * @param setTab the tab reducer
+ * @param currentTab the tab state
+ * @param setCurrentTab the tab reducer
  * @return {JSX.Element} the navigation component
  */
-const TabNav = ({ tabs, tab, setTab }) => {
+const TabNav = ({ tabs, currentTab, setCurrentTab }) => {
     return (
-        <div className={style.tabDisplay}>
-            <p
-                onClick={({ target }) => {
-                    if (tab === 0) setTab(tabs.length - 1);
-                    else setTab(tab - 1);
-                    target.blur();
-                }}
-                className={style.tabArrow}
-            >
-                <span className={style.buttonText}>{"<"}</span>
-            </p>
-            <div className={style.tabName}>
-                <h3>{tabs[tab]}</h3>
-            </div>
-            <p
-                onClick={({ target }) => {
-                    if (tab === tabs.length - 1) setTab(0);
-                    else setTab(tab + 1);
-                    target.blur();
-                }}
-                className={style.tabArrow}
-            >
-                <span className={style.buttonText}>{">"}</span>
-            </p>
-        </div>
+        <Row style={{width: "80%"}}>
+            {tabs.map((tab, index) => (
+                <Col key={index} className={"d-flex justify-content-center"}>
+                    <button
+                        className={"w-100 h-100 text-center"}
+                        disabled={tabs[currentTab] === tab}
+                        onClick={() => setCurrentTab(index)}
+                    >
+                        {tab}
+                    </button>
+                </Col>
+            ))}
+        </Row>
     );
 };
 
@@ -81,14 +69,15 @@ const TabNav = ({ tabs, tab, setTab }) => {
  * @return the layout component
  */
 const PanelLayout = ({ farm, users, tabs, tab, setTab, children }) => {
-    if (!farm || !users) return <p>loading..</p>;
+    if (!farm || !users)
+        return <p>loading..</p>;
 
     return (
         <div
             className={`${style.textBox} form-container flex-column center h-80`}
         >
             <FarmInfo farm={farm} users={users} />
-            <TabNav tabs={tabs} tab={tab} setTab={setTab} />
+            <TabNav tabs={tabs} currentTab={tab} setCurrentTab={setTab} />
             <div className={style.tab}>{children}</div>
         </div>
     );

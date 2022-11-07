@@ -7,7 +7,6 @@ import { LabelInput } from "../../../../components/forms/forms";
 import _ from "lodash";
 import DateTimePicker from "react-datetime-picker";
 import taskService from "../../../../lib/services/taskService";
-import { TaskDisplay } from "./taskDisplay";
 
 import style from "./style.module.scss";
 import { AdminTaskDisplay } from "./adminTaskDisplay";
@@ -414,14 +413,13 @@ const ManageMenu = ({ farm, users }) => {
                     ) : (
                         <></>
                     )}
-                    {showedTasks !== null &&
-                        showedTasks.map((task, index) => (
-                            <AdminTaskDisplay
-                                className={style.filteredTask}
-                                key={index}
-                                task={task}
-                            />
-                        ))}
+                    {showedTasks.map((task, index) => (
+                        <AdminTaskDisplay
+                            className={style.filteredTask}
+                            key={index}
+                            task={task}
+                        />
+                    ))}
                 </Col>
             </Row>
         </div>
@@ -461,21 +459,18 @@ const AdminTodoTab = ({ farm, users }) => {
     //     return <ManageMenu setMenu={setMenu} farm={farm} users={users} />;
     return (
         <Layout backButton={false}>
-            {/* creating the dialog where the user selects the menu */}
-            <div className="text-end">
-                <Button
-                    onClick={() => setMenu(Menu.Create)}
-                    className={style.createButton}
-                >
-                    <span className={style.buttonText}>+</span>
-                </Button>
+            <div>
+                {/* creating the dialog where the user selects the menu */}
+                <div className="text-end">
+                    <Button
+                        onClick={() => setMenu(Menu.Create)}
+                        className={style.createButton}
+                    >
+                        <span className={style.buttonText}>+</span>
+                    </Button>
+                </div>
+                <ManageMenu farm={farm} users={users} />
             </div>
-            <ManageMenu farm={farm} users={users} />
-            {/* <Col>
-                <MainMenuButton onClick={() => setMenu(Menu.Manage)}>
-                    <p className={style.text}>Manage</p>
-                </MainMenuButton>
-            </Col> */}
         </Layout>
     );
 };

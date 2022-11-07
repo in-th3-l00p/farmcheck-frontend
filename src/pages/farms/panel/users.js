@@ -58,8 +58,8 @@ const AddUserModal = ({
                 <Button
                     disabled={!userDetails}
                     onClick={() => {
-                        userService
-                            .addFarm(userDetails, farmId)
+                        farmService
+                            .addUser(farmId, userDetails)
                             .then((message) => {
                                 setSuccessMessage(message);
                                 setUsers([]);

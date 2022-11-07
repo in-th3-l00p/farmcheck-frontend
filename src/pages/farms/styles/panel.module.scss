@@ -72,8 +72,7 @@ $border-radius: 20px;
 }
 
 .chatBox {
-    height: auto;
-    height: 32vh;
+    height: 38vh;
     overflow-x: hidden;
     overflow-y: scroll;
     display: flex;
@@ -100,7 +99,7 @@ $border-radius: 20px;
     border-radius: 15px;
     padding: 1rem;
 
-    box-shadow: 0px 1px 5px 0px $grey;
+    box-shadow: 0 1px 5px 0 $grey;
 
     margin-top: 15px;
 

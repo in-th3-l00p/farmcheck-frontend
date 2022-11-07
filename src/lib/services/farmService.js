@@ -65,9 +65,79 @@ class FarmService {
     }
 
     /**
+     * Adds a user to a farm.
+     * @param {number} farmId farm's id
+     * @param {string} username user's username
+     * @returns the status message
+     */
+    async addUser(farmId, username) {
+        try {
+            const resp = await axios.put(
+                "/api/user/addFarm",
+                {},
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { "userLogin": username, farmId }
+                }
+            )
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    async removeUser(farmId, username) {
+        try {
+            const resp = await axios.delete(
+                "/api/farms/users",
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { "userLogin": username, farmId }
+                }
+            );
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    async exitFarm(farmId) {
+        try {
+            const resp = await axios.delete(
+                "/api/user/farms/exit",
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { farmId }
+                }
+            );
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    async updateFarmRole(username, farmId, role) {
+        try {
+            const resp = await axios.put(
+                "/api/farms/roles",
+                {
+                    farmId: farmId,
+                    userLogin: username,
+                    role: role
+                },
+                { headers: getAuthorizationHeader() }
+            );
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    /**
      * Updates a farm from the database
      * @param farmId farm's id
      * @param newName the new name
+     * @param newDescription top g
      * @param newImage the new image
      */
     async updateFarm(farmId, newName, newDescription, newImage) {

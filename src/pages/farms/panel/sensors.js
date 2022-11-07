@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { Form, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Button } from "../../../components/buttons/buttons";
 import ErrorAlert from "../../../components/alerts/error";
-import TextBox from "../../../components/textbox/textbox";
 import { LabelInput, LabelTextInput } from "../../../components/forms/forms";
 import sensorService from "../../../lib/services/sensorService";
 import { useParams } from "react-router-dom";
@@ -107,7 +106,7 @@ const SensorsTab = ({ farm, users }) => {
     if (farm === undefined || users === undefined || sensors === null)
         return <SensorsTabPlaceholder />;
     return (
-        <Container>
+        <Container className={"w-100"}>
             {error && <ErrorAlert error={error} setError={setError} />}
             <div className="text-end">
                 <Button
@@ -119,7 +118,10 @@ const SensorsTab = ({ farm, users }) => {
                     <span className={style.buttonText}>+</span>
                 </Button>
             </div>
-            <div className="d-flex flex-column gap-3">
+            <div
+                className="d-flex flex-column gap-3"
+                style={{overflowY: "scroll", maxHeight: "38vh"}}
+            >
                 {sensors.map((sensor, index) => (
                     <span
                         key={index}
