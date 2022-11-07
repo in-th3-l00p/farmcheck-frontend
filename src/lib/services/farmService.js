@@ -72,8 +72,8 @@ class FarmService {
      */
     async addUser(farmId, username) {
         try {
-            const resp = await axios.put(
-                "/api/user/addFarm",
+            const resp = await axios.post(
+                "/api/farms/users",
                 {},
                 {
                     headers: getAuthorizationHeader(),
@@ -104,7 +104,7 @@ class FarmService {
     async exitFarm(farmId) {
         try {
             const resp = await axios.delete(
-                "/api/user/farms/exit",
+                "/api/farms/users/exit",
                 {
                     headers: getAuthorizationHeader(),
                     params: { farmId }
