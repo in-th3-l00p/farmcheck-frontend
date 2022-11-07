@@ -117,10 +117,20 @@ $border-radius: 15px;
 }
 
 .unselectedSmallWorkerDisplay {
+    @media screen and (max-width: 899px) {
+        height: 40px;
+        width: 120px;
+    }
+
     @include smallWorkerDisplay;
 }
 
 .selectedSmallWorkerDisplay {
+    @media screen and (max-width: 899px) {
+        height: 40px;
+        width: 120px;
+    }
+
     @include smallWorkerDisplay;
     background-color: $light-grey !important;
     border: 1px solid $grey !important;
@@ -217,7 +227,8 @@ $border-radius: 15px;
 }
 
 .filteredTask {
-    width: 90%;
+    margin: auto;
+    width: 95%;
 }
 
 .center {
