@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "../../../../components/buttons/buttons";
 
@@ -11,11 +11,12 @@ const TaskDetailsModal = ({ task, show, setShow }) => {
                 <Modal.Title>View task</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>
-                    Title: <b>"{task.title}"</b>
-                </p>
-                <p>
-                    Description: <b>"{task.description}"</b>
+                <h5>
+                    Title: <b>{task.title}</b>
+                </h5>
+                <p className="mt-3">
+                    Description:{" "}
+                    <b>{task.description === "" ? "none" : task.description}</b>
                 </p>
                 {task.deadline && (
                     <p>
@@ -23,7 +24,7 @@ const TaskDetailsModal = ({ task, show, setShow }) => {
                     </p>
                 )}
                 <p>
-                    Is important: <b>{task.importance ? "yes" : "no"}</b>
+                    Importance: <b>{task.importance ? "high" : "low"}</b>
                 </p>
             </Modal.Body>
             <Modal.Footer>

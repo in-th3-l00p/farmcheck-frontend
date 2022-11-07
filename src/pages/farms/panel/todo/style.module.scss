@@ -58,14 +58,15 @@ $border-radius: 15px;
     width: 100%;
 
     padding: 0.5rem;
-    margin-bottom: 15px;
     padding-top: 15px !important;
 
     background-color: white;
     border-radius: $border-radius;
     font-size: 1.5rem;
-    box-shadow: 0px 1px 5px 0px $grey;
+    box-shadow: 0 1px 5px 0 $grey;
     border: 2px solid $grey;
+
+    margin: 5px;
 }
 
 .workerDisplay {
@@ -116,10 +117,20 @@ $border-radius: 15px;
 }
 
 .unselectedSmallWorkerDisplay {
+    @media screen and (max-width: 899px) {
+        height: 40px;
+        width: 120px;
+    }
+
     @include smallWorkerDisplay;
 }
 
 .selectedSmallWorkerDisplay {
+    @media screen and (max-width: 899px) {
+        height: 40px;
+        width: 120px;
+    }
+
     @include smallWorkerDisplay;
     background-color: $light-grey !important;
     border: 1px solid $grey !important;
@@ -183,7 +194,7 @@ $border-radius: 15px;
 
 .manage {
     display: flex;
-    
+
     @media screen and (max-width: 600px) {
         display: block;
     }
@@ -202,7 +213,7 @@ $border-radius: 15px;
     margin-top: 15px;
 
     padding: 1rem;
-    
+
     box-shadow: 0px 2px 5px 0px $grey;
 
     &:hover {
@@ -216,7 +227,8 @@ $border-radius: 15px;
 }
 
 .filteredTask {
-    width: 90%;
+    margin: auto;
+    width: 95%;
 }
 
 .center {
@@ -224,4 +236,50 @@ $border-radius: 15px;
     justify-content: center;
     align-items: center;
     height: 200px;
+}
+
+.taskTab {
+    max-height: 42vh;
+
+    @media screen and (max-height: 850px) {
+        max-height: 30vh;
+    }
+
+    @media screen and (max-height: 650px) {
+        max-height: 25vh;
+    }
+
+    .tasks {
+        max-height: 42vh;
+
+        @media screen and (max-height: 850px) {
+            max-height: 30vh;
+        }
+
+        @media screen and (max-height: 650px) {
+            max-height: 25vh;
+        }
+
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+    .filters {
+        max-height: 40vh;
+
+        @media screen and (max-height: 850px) {
+            max-height: 30vh;
+        }
+
+        @media screen and (max-height: 650px) {
+            max-height: 25vh;
+        }
+
+        width: 200px;
+        overflow-x: hidden;
+    }
+}
+
+.viewTask {
+    border-radius: 10px;
 }

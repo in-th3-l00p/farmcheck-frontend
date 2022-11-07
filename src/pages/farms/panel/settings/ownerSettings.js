@@ -119,7 +119,7 @@ const OwnerSettingsTab = ({ farm, users }) => {
             >
                 <Container className="d-flex flex-column gap-3">
                     {error && <ErrorAlert error={error} setError={setError} />}
-                    <div className="d-flex">
+                    <div className={style.settings}>
                         <Form.Group className="col-8">
                             <Form.Label>
                                 <h5>Farm name:</h5>
@@ -133,15 +133,15 @@ const OwnerSettingsTab = ({ farm, users }) => {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mx-5">
-                            <Form.Label>
+                        <Form.Group className={style.imgLabel}>
+                            <Form.Label className={style.label}>
                                 <h5>Farm image:</h5>
                             </Form.Label>
                             <FileUploader setBlob={setInputFarmImage} />
                         </Form.Group>
                     </div>
 
-                    <Form.Group>
+                    <Form.Group className={style.descriptionLabel}>
                         <Form.Label>
                             <h5>Farm description:</h5>
                         </Form.Label>

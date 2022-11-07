@@ -35,7 +35,7 @@ const DeleteSensorModal = ({ sensor, setError, show, setShow }) => {
                 <p>
                     Are you sure you want to delete sensor <b>{sensor.name}</b>.
                     <br />
-                    Enter the username of the user to confirm:
+                    Enter the name to confirm:
                 </p>
                 <FormControl
                     value={confirmationInput}
@@ -191,12 +191,7 @@ const SensorPage = () => {
                                 className={style.sensorIconSoil}
                             />
                             <p>
-                                Soil moisture{" "}
-                                {
-                                    sensorDataList[0]
-                                        .soilHumidity
-                                }
-                                %
+                                Soil moisture {sensorDataList[0].soilHumidity}%
                             </p>
                         </div>
                         <div className="d-flex">
@@ -206,12 +201,7 @@ const SensorPage = () => {
                                 className={style.sensorIconAir}
                             />
                             <p>
-                                Air humidity:{" "}
-                                {
-                                    sensorDataList[0]
-                                        .airHumidity
-                                }
-                                %
+                                Air humidity: {sensorDataList[0].airHumidity}%
                             </p>
                         </div>
                         <div className="d-flex">
@@ -222,10 +212,7 @@ const SensorPage = () => {
                             />
                             <p>
                                 Soil temperature:{" "}
-                                {
-                                    sensorDataList[0]
-                                        .soilTemperature
-                                }
+                                {sensorDataList[0].soilTemperature}
                                 °C
                             </p>
                         </div>
@@ -237,10 +224,7 @@ const SensorPage = () => {
                             />
                             <p>
                                 Air temperature:{" "}
-                                {
-                                    sensorDataList[0]
-                                        .airTemperature
-                                }
+                                {sensorDataList[0].airTemperature}
                                 °C
                             </p>
                         </div>
@@ -252,13 +236,12 @@ const SensorPage = () => {
                 {sensorDataList.length !== 0 ? <h4>Sensor data:</h4> : <></>}
 
                 <div className="d-flex flex-column gap-3">
-                    {sensorDataList
-                        .map((sensorData, index) => (
-                            <SensorDataDisplay
-                                key={index}
-                                sensorData={sensorData}
-                            />
-                        ))}
+                    {sensorDataList.map((sensorData, index) => (
+                        <SensorDataDisplay
+                            key={index}
+                            sensorData={sensorData}
+                        />
+                    ))}
                 </div>
 
                 <div className="d-flex justify-content-center mt-4">

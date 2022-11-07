@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Alert, Col, Container, Form, Modal, Row } from "react-bootstrap";
+import { Alert, Container, Form, Modal } from "react-bootstrap";
 import { Button } from "../../../../components/buttons/buttons";
 import farmService from "../../../../lib/services/farmService";
 import ErrorAlert from "../../../../components/alerts/error";
@@ -333,6 +333,20 @@ const ManageMenu = ({ farm, users }) => {
     const [showedTasks, setShowedTasks] = useState(null);
     const [error, setError] = useState("");
 
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        function handleWindowResize() {
+            setWidth(window.innerWidth);
+        }
+
+        window.addEventListener("resize", handleWindowResize);
+
+        return () => {
+            window.removeEventListener("resize", handleWindowResize);
+        };
+    }, []);
+
     useEffect(() => {
         taskService
             .getFarmTasks(farm.id)
@@ -371,38 +385,44 @@ const ManageMenu = ({ farm, users }) => {
 
     if (workers === null || showedTasks === null) return <></>;
     return (
-        <div>
+        <div className={style.taskTab}>
             {error && <ErrorAlert error={error} setError={setError} />}
-            <Row sm>
-                <Col xs={3}>
+            <div className="d-flex w-100">
+                <div>
                     {workers.length !== 0 ? (
-                        <>
-                            <h5>Filter by workers:</h5>
-                            {workers.map((worker, index) => (
-                                <WorkerDisplay
-                                    key={index}
-                                    worker={worker}
-                                    small={true}
-                                    selectable={true}
-                                    onSelect={() => {
-                                        const workerList = _.cloneDeep(workers);
-                                        workerList[index].selected =
-                                            !workerList[index].selected;
-                                        selectedWorkers.current += workerList[
-                                            index
-                                        ].selected
-                                            ? 1
-                                            : -1;
-                                        setWorkers(workerList);
-                                    }}
-                                />
-                            ))}
-                        </>
+                        width < 900 ? (
+                            <></>
+                        ) : (
+                            <>
+                                <h5>Filter by workers:</h5>
+                                <div className={style.filters}>
+                                    {workers.map((worker, index) => (
+                                        <WorkerDisplay
+                                            key={index}
+                                            worker={worker}
+                                            small={true}
+                                            selectable={true}
+                                            onSelect={() => {
+                                                const workerList =
+                                                    _.cloneDeep(workers);
+                                                workerList[index].selected =
+                                                    !workerList[index].selected;
+                                                selectedWorkers.current +=
+                                                    workerList[index].selected
+                                                        ? 1
+                                                        : -1;
+                                                setWorkers(workerList);
+                                            }}
+                                        />
+                                    ))}
+                                </div>
+                            </>
+                        )
                     ) : (
                         <></>
                     )}
-                </Col>
-                <Col>
+                </div>
+                <div className={`w-100 ${style.tasks}`}>
                     {showedTasks.length === 0 ? (
                         <div
                             className={style.center}
@@ -420,8 +440,8 @@ const ManageMenu = ({ farm, users }) => {
                             task={task}
                         />
                     ))}
-                </Col>
-            </Row>
+                </div>
+            </div>
         </div>
     );
 };

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import farmService from "../../../lib/services/farmService";
 
 import style from "../styles/panel.module.scss";
+import tabsStyle from "../styles/tabs.module.scss";
 
 import UsersTab from "./users";
 import OwnerSettingsTab from "./settings/ownerSettings";
@@ -27,9 +28,9 @@ const FarmInfo = ({ farm, users }) => {
             <div className={style.text}>
                 <h3 className={style.name}>{farm.name}</h3>
                 <p className={style.elements}>{farm.description}</p>
-                <h5 className={style.elements}>
+                <p className={style.elements}>
                     Number of users: {users.length}
-                </h5>
+                </p>
             </div>
         </Container>
     );
@@ -43,20 +44,51 @@ const FarmInfo = ({ farm, users }) => {
  * @return {JSX.Element} the navigation component
  */
 const TabNav = ({ tabs, currentTab, setCurrentTab }) => {
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        function handleWindowResize() {
+            setWidth(window.innerWidth);
+        }
+
+        window.addEventListener("resize", handleWindowResize);
+
+        return () => {
+            window.removeEventListener("resize", handleWindowResize);
+        };
+    }, []);
+
     return (
-        <Row style={{width: "80%"}}>
-            {tabs.map((tab, index) => (
-                <Col key={index} className={"d-flex justify-content-center"}>
-                    <button
-                        className={"w-100 h-100 text-center"}
-                        disabled={tabs[currentTab] === tab}
-                        onClick={() => setCurrentTab(index)}
-                    >
-                        {tab}
-                    </button>
-                </Col>
-            ))}
-        </Row>
+        <>
+            <Row style={{ width: "100%" }}>
+                {tabs.map((tab, index) => (
+                    <Col key={index} className={"d-flex text-center"}>
+                        <button
+                            className={`h-100 d-flex ${tabsStyle.buttonTab} ${
+                                tabs[currentTab] === tab
+                                    ? tabsStyle.yellowLine
+                                    : ""
+                            }`}
+                            disabled={tabs[currentTab] === tab}
+                            onClick={() => setCurrentTab(index)}
+                        >
+                            <img
+                                alt={tab}
+                                src={
+                                    "/icons/tabs-icons/" +
+                                    (tab.charAt(0).toLowerCase() +
+                                        tab.slice(1)) +
+                                    ".png"
+                                }
+                                className={tabsStyle.tabIcon}
+                            />
+                            {width > 950 ? tab : <></>}
+                        </button>
+                    </Col>
+                ))}
+            </Row>
+            <div className={tabsStyle.line}></div>
+        </>
     );
 };
 
@@ -69,12 +101,11 @@ const TabNav = ({ tabs, currentTab, setCurrentTab }) => {
  * @return the layout component
  */
 const PanelLayout = ({ farm, users, tabs, tab, setTab, children }) => {
-    if (!farm || !users)
-        return <p>loading..</p>;
+    if (!farm || !users) return <p>loading..</p>;
 
     return (
         <div
-            className={`${style.textBox} form-container flex-column center h-80`}
+            className={`${style.textBox} form-container flex-column center h-80 p-4`}
         >
             <FarmInfo farm={farm} users={users} />
             <TabNav tabs={tabs} currentTab={tab} setCurrentTab={setTab} />

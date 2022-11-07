@@ -124,8 +124,8 @@ const SensorsTab = ({ farm, users }) => {
                 </Button>
             </div>
             <div
-                className="d-flex flex-column gap-3"
-                style={{overflowY: "scroll", maxHeight: "38vh"}}
+                className={`${style.sensors} d-flex flex-column gap-3 p-3 mt-2`}
+                style={{ overflowY: "scroll" }}
             >
                 {sensors.map((sensor, index) => (
                     <span
