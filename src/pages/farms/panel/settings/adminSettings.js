@@ -115,7 +115,7 @@ const AdminSettingsTab = ({ farm, users }) => {
             >
                 <Container className="d-flex flex-column gap-3">
                     {error && <ErrorAlert error={error} setError={setError} />}
-                    <div className="d-flex">
+                    <div className={style.settings}>
                         <Form.Group className="col-8">
                             <Form.Label>
                                 <h5>Farm name:</h5>
@@ -129,7 +129,7 @@ const AdminSettingsTab = ({ farm, users }) => {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mx-5">
+                        <Form.Group className={style.imgLabel}>
                             <Form.Label>
                                 <h5>Farm image:</h5>
                             </Form.Label>

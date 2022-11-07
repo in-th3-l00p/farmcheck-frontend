@@ -38,15 +38,17 @@ const WorkerTodoTab = ({ farm, users }) => {
 
     if (tasks === null) return <WorkerTodoTabPlaceholder />;
     return (
-        <Container>
+        <Container className={style.taskTab} style={{ height: "42vh" }}>
             {error && <ErrorAlert error={error} setError={setError} />}
-            {tasks.length !== 0 ? <h3 className="mb-4">Your tasks:</h3> : <></>}
             {!tasks.length && (
                 <div className={style.center}>
                     <h4>You have no tasks 🤙</h4>
                 </div>
             )}
-            <ul className="mx-0 px-0 d-flex flex-column gap-3 list-unstyled">
+            <ul
+                className={`${style.tasks} mx-0 p-3 d-flex flex-column gap-3 list-unstyled`}
+                style={{ height: "42vh" }}
+            >
                 {tasks.map((task, index) => (
                     <TaskDisplay key={index} task={task} />
                 ))}

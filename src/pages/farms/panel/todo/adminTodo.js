@@ -371,10 +371,10 @@ const ManageMenu = ({ farm, users }) => {
 
     if (workers === null || showedTasks === null) return <></>;
     return (
-        <div>
+        <div className={style.taskTab}>
             {error && <ErrorAlert error={error} setError={setError} />}
             <Row sm>
-                <Col xs={3}>
+                <Col xs={3} className={style.filters}>
                     {workers.length !== 0 ? (
                         <>
                             <h5>Filter by workers:</h5>
@@ -402,7 +402,7 @@ const ManageMenu = ({ farm, users }) => {
                         <></>
                     )}
                 </Col>
-                <Col>
+                <Col className={style.tasks}>
                     {showedTasks.length === 0 ? (
                         <div
                             className={style.center}
