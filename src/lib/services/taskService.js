@@ -93,6 +93,22 @@ class TaskService {
             throw new Error(err.response.data.detail);
         }
     }
+
+    async deleteTask(taskId) {
+        try {
+            const resp = await axios.delete(
+                "/api/farms/tasks",
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { taskId }
+                }
+            )
+
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
 }
 
 const taskService = new TaskService();

@@ -52,7 +52,15 @@ const TaskDetailsModal = ({ task, show, setShow }) => {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button className={`${style.button} bg-danger text-white fw-bold`}>
+                <Button
+                    onClick={() => {
+                        console.log("mi-l sugi");
+                        taskService.deleteTask(task.id)
+                            .then(() => window.location.href = "/farms")
+                            .catch(err => setError(err));
+                    }}
+                    className={`${style.button} bg-danger text-white fw-bold`}
+                >
                     Delete task
                 </Button>
             </Modal.Footer>

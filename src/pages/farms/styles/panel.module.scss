@@ -71,20 +71,6 @@ $border-radius: 20px;
     }
 }
 
-.chatBox {
-    height: 38vh;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    display: flex;
-
-    ul {
-        width: 100%;
-        margin-top: auto;
-        list-style: none;
-        padding-left: 0;
-    }
-}
-
 @keyframes onSensorDisplayHover {
     from {
         background-color: white;
@@ -94,7 +80,7 @@ $border-radius: 20px;
     }
 }
 
-.sensorDisplay {
+.elementDisplay {
     border: 2px solid $grey;
     border-radius: 15px;
     padding: 1rem;
@@ -123,63 +109,6 @@ $border-radius: 20px;
     .buttonText {
         position: relative;
         bottom: 50%;
-    }
-}
-
-.rightMessages {
-    margin-left: auto;
-    margin-right: 15px;
-
-    border: 2px solid $green !important;
-
-    @media screen and (max-width: 550px) {
-        margin-right: 5px;
-    }
-}
-
-.messageBox {
-    border: 2px solid $orange;
-    border-radius: 18px;
-
-    padding: 2px 10px 2px 10px;
-    margin-top: 15px;
-
-    width: fit-content;
-    max-width: 60%;
-
-    @media screen and (max-width: 700px) {
-        max-width: 80%;
-    }
-
-    .messageHeader {
-        display: flex;
-
-        // @media screen and (max-width: 700px) {
-
-        //     display: block;
-        // }
-
-        .sender {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-right: 10px;
-            margin-bottom: 0;
-
-            @media screen and (max-width: 550px) {
-                font-size: 1rem;
-            }
-        }
-
-        .date {
-            margin-top: 4px;
-            margin-bottom: 0;
-        }
-    }
-
-    .message {
-        margin-top: 10px;
-        margin-bottom: 5px;
-        word-wrap: break-word;
     }
 }
 

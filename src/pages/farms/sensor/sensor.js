@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import TextBox from "../../components/textbox/textbox";
-import sensorService from "../../lib/services/sensorService";
+import TextBox from "../../../components/textbox/textbox";
+import sensorService from "../../../lib/services/sensorService";
 import { useParams } from "react-router-dom";
-import ErrorAlert from "../../components/alerts/error";
+import ErrorAlert from "../../../components/alerts/error";
 
-import style from "./styles/sensor.module.scss";
-import { Button } from "../../components/buttons/buttons";
+import style from "../styles/sensor.module.scss";
+import { Button } from "../../../components/buttons/buttons";
 import { FormControl, Modal } from "react-bootstrap";
 
 const SensorPagePlaceholder = () => {

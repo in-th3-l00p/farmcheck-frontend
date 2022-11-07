@@ -2,16 +2,53 @@ import axios from "axios";
 import {getAuthorizationHeader} from "../auth";
 
 class MessageService {
-    async getFarmMessages(farmId) {
-        const resp = await axios.get(
-            "/api/messages",
-            {
-                headers: getAuthorizationHeader(),
-                params: { farmId }
-            }
-        )
+    async getChatRooms(farmId) {
+        try {
+            const resp = await axios.get(
+                "/api/chats",
+                {
+                    headers: getAuthorizationHeader(),
+                    params: {farmId}
+                }
+            );
 
-        return resp.data;
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    async createChatRoom(farmId, name) {
+        try {
+            const resp = await axios.post(
+                "/api/chats/",
+                { name },
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { farmId }
+                }
+            );
+
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
+
+    async getChatMessages(chatId) {
+        try {
+            const resp = await axios.get(
+                "/api/chats/messages",
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { chatId }
+                }
+            );
+
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
     }
 }
 

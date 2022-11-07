@@ -14,15 +14,19 @@ import Wiki from "./pages/wiki/wiki";
 import ShowFarms from "./pages/farms/show";
 import FarmPanel from "./pages/farms/panel/panel";
 import NotFound from "./pages/notFound";
+import CreateSensor from "./pages/farms/sensor/create";
+import SensorPage from "./pages/farms/sensor/sensor";
+import FeedBack from "./pages/feedback/feedback";
+import FeedBackShow from "./pages/feedback/feedbackshow";
 
 // global styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.scss";
 import "./styles/globals.scss";
-import { CreateSensor } from "./pages/farms/panel/sensors";
-import SensorPage from "./pages/farms/sensor";
-import FeedBack from "./pages/feedback/feedback";
-import FeedBackShow from "./pages/feedback/feedbackshow";
+import CreateChat from "./pages/farms/chat/create";
+import Chat from "./pages/farms/chat/chat";
+
+
 /**
  * Loading component showed when initial requests to the server are made.
  * @return {JSX.Element} the loading component
@@ -116,6 +120,16 @@ const App = () => {
                                     <CreateSensor />
                                 </AuthenticatedRoute>
                             }
+                        />
+                    </Route>
+                    <Route path="/chat">
+                        <Route
+                            path={"/chat/create/:farm_id"}
+                            element={<CreateChat />}
+                        />
+                        <Route
+                            path={"/chat/:chat_id"}
+                            element={<Chat />}
                         />
                     </Route>
                 </Routes>
