@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import {
     Alert,
     Container,
@@ -35,7 +35,7 @@ const AddUserModal = ({
     setErrorMessage,
     show,
     setShow,
-    setUsers
+    setUsers,
 }) => {
     const [userDetails, setUserDetails] = useState("");
     const [error, setError] = useState("");
@@ -85,7 +85,7 @@ const RemoveUserModal = ({
     setUser,
     show,
     setShow,
-    setUsers
+    setUsers,
 }) => {
     const [confirmationInput, setConfirmationInput] = useState("");
 
@@ -146,7 +146,7 @@ const ChangeRoleModal = ({
     setUser,
     show,
     setShow,
-    setUsers
+    setUsers,
 }) => {
     const userRole = roles[user.farmRole - 1];
     const [selectedRole, setSelectedRole] = useState(selectableRoles[0].id);
@@ -187,7 +187,7 @@ const ChangeRoleModal = ({
                 <Button
                     onClick={() => {
                         const selectedRoleObject = selectableRoles.find(
-                            role => role.id == selectedRole
+                            (role) => role.id == selectedRole
                         );
                         if (selectedRoleObject.name === userRole) {
                             setErrorMessage(
@@ -235,15 +235,18 @@ const UsersTab = ({ farm, users, setUsers }) => {
 
     // auto reload
     useEffect(() => {
-        if (users.length)
-            return;
+        if (users.length) return;
         farmService
             .getFarmUsers(farm.id)
             .then((resp) => setUsers(resp))
             .catch((err) => setErrorMessage(err.message));
-    }, [users])
+    }, [users]);
 
-    if (typeof farm === "undefined" || typeof users === "undefined" || !users.length)
+    if (
+        typeof farm === "undefined" ||
+        typeof users === "undefined" ||
+        !users.length
+    )
         return <UsersTabPlaceholder />;
     return (
         <>
@@ -306,7 +309,7 @@ const UsersTab = ({ farm, users, setUsers }) => {
                         <span className={style.buttonText}>+</span>
                     </Button>
                 </div>
-                <div>
+                <div className={`overflow-auto p-3 ${style.user}`}>
                     {users.map((user, index) => {
                         if (
                             user.login === userService.getCurrentUsername() ||

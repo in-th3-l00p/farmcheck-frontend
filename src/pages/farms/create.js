@@ -1,5 +1,9 @@
 import { useState } from "react";
-import {FileUploader, LabelInput, LabelTextInput} from "../../components/forms/forms";
+import {
+    FileUploader,
+    LabelInput,
+    LabelTextInput,
+} from "../../components/forms/forms";
 import { Button } from "../../components/buttons/buttons";
 import ErrorAlert from "../../components/alerts/error";
 
@@ -23,7 +27,7 @@ const CreateFarm = () => {
     };
 
     return (
-        <TextBox className={"mt-100px"}>
+        <TextBox className={"mt-100"}>
             <form
                 className={`${style.form} form`}
                 onSubmit={(event) => {
@@ -48,7 +52,7 @@ const CreateFarm = () => {
                 <span className={"input-container mb2"}>
                     <LabelTextInput
                         label={"Farm's description:"}
-                        inputStyle={{ height: "300px" }}
+                        inputStyle={{ height: "20vh" }}
                         value={description}
                         setValue={setDescription}
                     />

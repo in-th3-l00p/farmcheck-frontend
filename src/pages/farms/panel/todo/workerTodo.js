@@ -40,9 +40,9 @@ const WorkerTodoTab = ({ farm, users }) => {
     return (
         <Container>
             {error && <ErrorAlert error={error} setError={setError} />}
-            <h3 className="mb-4">Your tasks:</h3>
+            {tasks.length !== 0 ? <h3 className="mb-4">Your tasks:</h3> : <></>}
             {!tasks.length && (
-                <div className="w-100 text-center my-5">
+                <div className={style.center}>
                     <h4>You have no tasks 🤙</h4>
                 </div>
             )}

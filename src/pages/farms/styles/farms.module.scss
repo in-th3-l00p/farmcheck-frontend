@@ -54,7 +54,7 @@ $farm-display-hover-bg-color: $light-grey;
 .textBox {
     background-color: $white;
     border-radius: 20px;
-    margin: 100px auto 0 auto;
+    margin: 100px auto 0 auto !important;
     width: 60%;
     padding: 30px;
 

@@ -6,6 +6,8 @@ import ErrorAlert from "../../../../components/alerts/error";
 import farmService from "../../../../lib/services/farmService";
 import userService from "../../../../lib/services/userService";
 
+import style from "./../../styles/panel.module.scss";
+
 /**
  * Used while waiting for the farm data to be fetched.
  * @return {JSX.Element} placeholder component
@@ -82,6 +84,9 @@ const ExitConfirmationModal = ({ show, setShow, setError, farm }) => {
 const AdminSettingsTab = ({ farm, users }) => {
     const [inputFarmName, setInputFarmName] = useState(farm.name);
     const [inputFarmImage, setInputFarmImage] = useState(farm.image);
+    const [inputFarmDescription, setInputFarmDescription] = useState(
+        farm.description
+    );
 
     const [showExitModal, setShowExitModal] = useState(false);
     const [error, setError] = useState("");
@@ -110,26 +115,50 @@ const AdminSettingsTab = ({ farm, users }) => {
             >
                 <Container className="d-flex flex-column gap-3">
                     {error && <ErrorAlert error={error} setError={setError} />}
+                    <div className="d-flex">
+                        <Form.Group className="col-8">
+                            <Form.Label>
+                                <h5>Farm name:</h5>
+                            </Form.Label>
+                            <Form.Control
+                                value={inputFarmName}
+                                onChange={(event) =>
+                                    setInputFarmName(event.target.value)
+                                }
+                                style={{ fontSize: "1.1rem" }}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mx-5">
+                            <Form.Label>
+                                <h5>Farm image:</h5>
+                            </Form.Label>
+                            <FileUploader setBlob={setInputFarmImage} />
+                        </Form.Group>
+                    </div>
+
                     <Form.Group>
-                        <Form.Label>Farm name:</Form.Label>
+                        <Form.Label>
+                            <h5>Farm description:</h5>
+                        </Form.Label>
                         <Form.Control
-                            value={inputFarmName}
+                            rows={2}
+                            as="textarea"
+                            value={inputFarmDescription}
                             onChange={(event) =>
-                                setInputFarmName(event.target.value)
+                                setInputFarmDescription(event.target.value)
                             }
+                            style={{ fontSize: "1.1rem" }}
                         />
                     </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label>Farm image:</Form.Label>
-                        <FileUploader setBlob={setInputFarmImage} />
-                    </Form.Group>
-
                     <div className="center gap-5">
-                        <Button type="submit">Save changes</Button>
+                        <Button type="submit" className={style.button}>
+                            Save changes
+                        </Button>
                         <Button
                             onClick={() => setShowExitModal(true)}
-                            className="bg-danger text-white"
+                            className={`${style.button} bg-danger text-white`}
                         >
                             Exit farm
                         </Button>

@@ -24,14 +24,17 @@ const FeedBackShow = () => {
 
     if (feedbacks === null) return <FeedBackPlaceholder />;
     return (
-        <div className={style.feedBack}>
-            <h2 style={{ textAlign: "center", marginBottom: 30 }}>
-                Feedback Responses
-            </h2>
+        <div className={`h-80 ${style.feedBack}`}>
+            <h2 className="text-center mb-4">Feedback Responses</h2>
             <>
                 {!feedbacks.length && (
                     <div className="w-100 mt-2">
-                        <h5>You have no tasks 🤙</h5>
+                        <h5
+                            className="text-center"
+                            style={{ marginTop: "25vh" }}
+                        >
+                            You have no feedbacks 🤙
+                        </h5>
                     </div>
                 )}
                 <ul className="mt-2 d-flex flex-column list-unstyled">

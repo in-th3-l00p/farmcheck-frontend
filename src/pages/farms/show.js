@@ -22,14 +22,14 @@ const Farm = ({ farm }) => {
         >
             <img
                 src={
-                    farm.image === ""
+                    farm.image === null
                         ? "/images/default-farm-picture.png"
                         : farm.image
                 }
             />
             <div className={style.text}>
                 <h4>{farm.name}</h4>
-                <p>Your farm</p>
+                <p>{farm.description}</p>
             </div>
         </span>
     );
@@ -97,7 +97,7 @@ const ShowFarms = () => {
     }, []);
 
     return (
-        <div className={`form-container ${style.textBox}`}>
+        <div className={`form-container h-80 ${style.textBox}`}>
             {error && <ErrorAlert error={error} setError={setError} />}
             <div className="d-flex m-3">
                 <h3 className="me-auto">Your farms</h3>

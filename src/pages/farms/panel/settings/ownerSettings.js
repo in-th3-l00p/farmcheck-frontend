@@ -55,7 +55,9 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farm }) => {
                         setDeleting(true);
                         farmService
                             .deleteFarm(farm.id)
-                            .then(() => window.location.href = "/farms?deleted")
+                            .then(
+                                () => (window.location.href = "/farms?deleted")
+                            )
                             .catch((err) => setError(err.message))
                             .finally(() => {
                                 setDeleting(false);
@@ -81,6 +83,9 @@ const DeleteFarmConfirmationModal = ({ show, setShow, setError, farm }) => {
  */
 const OwnerSettingsTab = ({ farm, users }) => {
     const [inputFarmName, setInputFarmName] = useState(farm.name);
+    const [inputFarmDescription, setInputFarmDescription] = useState(
+        farm.description
+    );
     const [inputFarmImage, setInputFarmImage] = useState(farm.image);
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -100,7 +105,11 @@ const OwnerSettingsTab = ({ farm, users }) => {
                 onSubmit={(event) => {
                     event.preventDefault();
                     farmService
-                        .updateFarm(farm.id, inputFarmName)
+                        .updateFarm(
+                            farm.id,
+                            inputFarmName,
+                            inputFarmDescription
+                        )
                         .then(
                             () =>
                                 (window.location.href = `/farms/panel/${farm.id}?updated`)
@@ -110,24 +119,41 @@ const OwnerSettingsTab = ({ farm, users }) => {
             >
                 <Container className="d-flex flex-column gap-3">
                     {error && <ErrorAlert error={error} setError={setError} />}
-                    <Form.Group>
-                        <Form.Label>
-                            <h5>Farm name:</h5>
-                        </Form.Label>
-                        <Form.Control
-                            value={inputFarmName}
-                            onChange={(event) =>
-                                setInputFarmName(event.target.value)
-                            }
-                            style={{ fontSize: "1.1rem" }}
-                        />
-                    </Form.Group>
+                    <div className="d-flex">
+                        <Form.Group className="col-8">
+                            <Form.Label>
+                                <h5>Farm name:</h5>
+                            </Form.Label>
+                            <Form.Control
+                                value={inputFarmName}
+                                onChange={(event) =>
+                                    setInputFarmName(event.target.value)
+                                }
+                                style={{ fontSize: "1.1rem" }}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mx-5">
+                            <Form.Label>
+                                <h5>Farm image:</h5>
+                            </Form.Label>
+                            <FileUploader setBlob={setInputFarmImage} />
+                        </Form.Group>
+                    </div>
 
                     <Form.Group>
                         <Form.Label>
-                            <h5>Farm image:</h5>
+                            <h5>Farm description:</h5>
                         </Form.Label>
-                        <FileUploader setBlob={setInputFarmImage} />
+                        <Form.Control
+                            rows={2}
+                            as="textarea"
+                            value={inputFarmDescription}
+                            onChange={(event) =>
+                                setInputFarmDescription(event.target.value)
+                            }
+                            style={{ fontSize: "1.1rem" }}
+                        />
                     </Form.Group>
 
                     <div className="center gap-4">

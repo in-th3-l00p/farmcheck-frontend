@@ -10,7 +10,7 @@ import taskService from "../../../../lib/services/taskService";
 import { TaskDisplay } from "./taskDisplay";
 
 import style from "./style.module.scss";
-import {AdminTaskDisplay} from "./adminTaskDisplay";
+import { AdminTaskDisplay } from "./adminTaskDisplay";
 
 // only placeholders
 const AdminTodoTabPlaceholder = () => {
@@ -276,36 +276,43 @@ const CreateMenu = ({ setMenu, farm, users }) => {
                         {success}
                     </Alert>
                 )}
-                <h4 className="mb-4 mx-3">Select the workers:</h4>
-                <Container fluid>
-                    {workers.map((worker, index) => (
-                        <WorkerDisplay
-                            key={index}
-                            worker={worker}
-                            selectable={true}
-                            onSelect={() => {
-                                const workerList = _.cloneDeep(workers);
-                                selectedWorkersCount.current += !workerList[
-                                    index
-                                ].selected
-                                    ? 1
-                                    : -1;
-                                workerList[index].selected =
-                                    !workerList[index].selected;
-                                setWorkers(workerList);
-                            }}
-                        />
-                    ))}
-                </Container>
-                <div className="w-100 d-flex justify-content-center">
-                    <Button
-                        disabled={!selectedWorkersCount.current}
-                        onClick={() => setShowCreateModal(true)}
-                        className={style.button}
-                    >
-                        Create task
-                    </Button>
-                </div>
+                {workers.length === 0 ? (
+                    <div className={style.center} style={{ marginTop: "-4vh" }}>
+                        <h4>There are no users</h4>
+                    </div>
+                ) : (
+                    <>
+                        <h4 className="mb-4 mx-3">Select the workers:</h4>
+                        <Container fluid>
+                            {workers.map((worker, index) => (
+                                <WorkerDisplay
+                                    key={index}
+                                    worker={worker}
+                                    selectable={true}
+                                    onSelect={() => {
+                                        const workerList = _.cloneDeep(workers);
+                                        selectedWorkersCount.current +=
+                                            !workerList[index].selected
+                                                ? 1
+                                                : -1;
+                                        workerList[index].selected =
+                                            !workerList[index].selected;
+                                        setWorkers(workerList);
+                                    }}
+                                />
+                            ))}
+                        </Container>
+                        <div className="w-100 d-flex justify-content-center">
+                            <Button
+                                disabled={!selectedWorkersCount.current}
+                                onClick={() => setShowCreateModal(true)}
+                                className={style.button}
+                            >
+                                Create task
+                            </Button>
+                        </div>
+                    </>
+                )}
             </Layout>
         </>
     );
@@ -369,27 +376,44 @@ const ManageMenu = ({ farm, users }) => {
             {error && <ErrorAlert error={error} setError={setError} />}
             <Row sm>
                 <Col xs={3}>
-                    <h5>Filter by workers:</h5>
-                    {workers.map((worker, index) => (
-                        <WorkerDisplay
-                            key={index}
-                            worker={worker}
-                            small={true}
-                            selectable={true}
-                            onSelect={() => {
-                                const workerList = _.cloneDeep(workers);
-                                workerList[index].selected =
-                                    !workerList[index].selected;
-                                selectedWorkers.current += workerList[index]
-                                    .selected
-                                    ? 1
-                                    : -1;
-                                setWorkers(workerList);
-                            }}
-                        />
-                    ))}
+                    {workers.length !== 0 ? (
+                        <>
+                            <h5>Filter by workers:</h5>
+                            {workers.map((worker, index) => (
+                                <WorkerDisplay
+                                    key={index}
+                                    worker={worker}
+                                    small={true}
+                                    selectable={true}
+                                    onSelect={() => {
+                                        const workerList = _.cloneDeep(workers);
+                                        workerList[index].selected =
+                                            !workerList[index].selected;
+                                        selectedWorkers.current += workerList[
+                                            index
+                                        ].selected
+                                            ? 1
+                                            : -1;
+                                        setWorkers(workerList);
+                                    }}
+                                />
+                            ))}
+                        </>
+                    ) : (
+                        <></>
+                    )}
                 </Col>
                 <Col>
+                    {showedTasks.length === 0 ? (
+                        <div
+                            className={style.center}
+                            style={{ marginLeft: "-10vw" }}
+                        >
+                            <h4>There are no tasks 🤙</h4>
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                     {showedTasks !== null &&
                         showedTasks.map((task, index) => (
                             <AdminTaskDisplay

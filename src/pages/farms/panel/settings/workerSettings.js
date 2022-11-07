@@ -94,7 +94,7 @@ const WorkerSettingsTab = ({ farm, users }) => {
                 farm={farm}
             />
             <Form>
-                <div className="center gap-5">
+                <div className="center gap-5" style={{ marginTop: "25vh" }}>
                     {error && <ErrorAlert error={error} setError={setError} />}
 
                     <Button

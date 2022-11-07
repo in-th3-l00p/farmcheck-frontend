@@ -13,11 +13,11 @@ import WorkerSettingsTab from "./settings/workerSettings";
 import WorkerTodoTab from "./todo/workerTodo";
 import SensorsTab from "./sensors";
 import AdminTodoTab from "./todo/adminTodo";
-import {Container} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 const FarmInfo = ({ farm, users }) => {
     return (
-        <Container className={`d-flex gap-3 p-2 w-100`}>
+        <Container className={`d-flex gap-3 p-1 w-100 mb-3 ${style.info}`}>
             <img
                 src={"/images/default-farm-picture.png"}
                 width={200}
@@ -27,12 +27,13 @@ const FarmInfo = ({ farm, users }) => {
             <div className={style.text}>
                 <h3 className={style.name}>{farm.name}</h3>
                 <p className={style.elements}>{farm.description}</p>
-                <h5 className={style.elements}>Number of users: {users.length}</h5>
+                <h5 className={style.elements}>
+                    Number of users: {users.length}
+                </h5>
             </div>
         </Container>
     );
-}
-
+};
 
 /**
  * Tab navigation component
@@ -80,11 +81,12 @@ const TabNav = ({ tabs, tab, setTab }) => {
  * @return the layout component
  */
 const PanelLayout = ({ farm, users, tabs, tab, setTab, children }) => {
-    if (!farm || !users)
-        return <p>loading..</p>
+    if (!farm || !users) return <p>loading..</p>;
 
     return (
-        <div className={`${style.textBox} form-container flex-column center`}>
+        <div
+            className={`${style.textBox} form-container flex-column center h-80`}
+        >
             <FarmInfo farm={farm} users={users} />
             <TabNav tabs={tabs} tab={tab} setTab={setTab} />
             <div className={style.tab}>{children}</div>
@@ -104,7 +106,13 @@ const OwnerTabs = ({ farm, users, setUsers }) => {
     const tabs = ["Users", "Sensors", "Chat", "Todo", "Settings"];
 
     return (
-        <PanelLayout farm={farm} users={users} tabs={tabs} tab={tab} setTab={setTab}>
+        <PanelLayout
+            farm={farm}
+            users={users}
+            tabs={tabs}
+            tab={tab}
+            setTab={setTab}
+        >
             {tab === 0 && (
                 <UsersTab farm={farm} users={users} setUsers={setUsers} />
             )}
@@ -128,7 +136,13 @@ const AdminTabs = ({ farm, users, setUsers }) => {
     const tabs = ["Users", "Sensors", "Chat", "Todo", "Settings"];
 
     return (
-        <PanelLayout farm={farm} users={users} tabs={tabs} tab={tab} setTab={setTab}>
+        <PanelLayout
+            farm={farm}
+            users={users}
+            tabs={tabs}
+            tab={tab}
+            setTab={setTab}
+        >
             {tab === 0 && (
                 <UsersTab farm={farm} users={users} setUsers={setUsers} />
             )}
@@ -151,7 +165,13 @@ const WorkerTabs = ({ farm, users }) => {
     const tabs = ["Sensors", "Chat", "Todo", "Settings"];
 
     return (
-        <PanelLayout farm={farm} users={users} tabs={tabs} tab={tab} setTab={setTab}>
+        <PanelLayout
+            farm={farm}
+            users={users}
+            tabs={tabs}
+            tab={tab}
+            setTab={setTab}
+        >
             {tab === 0 && <SensorsTab farm={farm} users={users} />}
             {tab === 1 && <ChatTab farm={farm} users={users} />}
             {tab === 2 && <WorkerTodoTab farm={farm} users={users} />}
