@@ -41,7 +41,7 @@
                 margin-left: -110px;
             }
         }
-        
+
         .button {
             margin-top: 10px;
             font-weight: 500;
@@ -57,18 +57,37 @@
     padding: 0px;
     border: none;
 
-    width: 125px;
+    width: 150px;
 
     font-size: 1.25rem;
 
     margin: auto;
+    margin-bottom: 5px;
 
     position: relative;
     bottom: -2px;
 
+    text-align: center;
+
+    @media screen and (max-width: 1400px) {
+        width: 125px;
+    }
+
+    @media screen and (max-width: 1000px) {
+        width: 110px;
+    }
+
+    @media screen and (max-width: 950px) {
+        width: 70px;
+        margin-bottom: 10px;
+    }
+
     @media screen and (max-width: 650px) {
-        font-size: 1rem;
-        width: 100px;
+        width: 50px;
+    }
+
+    @media screen and (max-width: 450px) {
+        width: 30px;
     }
 }
 
@@ -83,4 +102,32 @@
     margin: auto;
     border-bottom: 2px solid black;
     margin-bottom: 15px;
+}
+
+.tabIcon {
+    height: auto;
+    width: 35px;
+    margin: 0 5px 2px 15%;
+
+    @media screen and (max-width: 1400px) {
+        width: 30px;
+    }
+
+    @media screen and (max-width: 1000px) {
+        width: 25px;
+    }
+
+    @media screen and (max-width: 950px) {
+        width: 35px;
+        margin: auto;
+    }
+
+    @media screen and (max-width: 650px) {
+        width: 30px;
+        margin: auto;
+    }
+
+    @media screen and (max-width: 450px) {
+        width: 25px;
+    }
 }

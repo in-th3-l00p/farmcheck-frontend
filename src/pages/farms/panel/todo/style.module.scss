@@ -65,6 +65,8 @@ $border-radius: 15px;
     font-size: 1.5rem;
     box-shadow: 0px 1px 5px 0px $grey;
     border: 2px solid $grey;
+
+    margin: 5px;
 }
 
 .workerDisplay {
@@ -182,7 +184,7 @@ $border-radius: 15px;
 
 .manage {
     display: flex;
-    
+
     @media screen and (max-width: 600px) {
         display: block;
     }
@@ -201,7 +203,7 @@ $border-radius: 15px;
     margin-top: 15px;
 
     padding: 1rem;
-    
+
     box-shadow: 0px 2px 5px 0px $grey;
 
     &:hover {
@@ -215,7 +217,6 @@ $border-radius: 15px;
 }
 
 .filteredTask {
-    margin-top: 15px;
     width: 90%;
 }
 
@@ -227,20 +228,47 @@ $border-radius: 15px;
 }
 
 .taskTab {
-    height: 35vh;
+    max-height: 42vh;
+
+    @media screen and (max-height: 850px) {
+        max-height: 30vh;
+    }
+
+    @media screen and (max-height: 650px) {
+        max-height: 25vh;
+    }
 
     .tasks {
-        height: 35vh;
+        max-height: 42vh;
+
+        @media screen and (max-height: 850px) {
+            max-height: 30vh;
+        }
+
+        @media screen and (max-height: 650px) {
+            max-height: 25vh;
+        }
 
         overflow: scroll;
         overflow-x: hidden;
-
-        color: red;
     }
 
     .filters {
-        max-height: 35vh;
-        margin-left: 20px;
+        max-height: 40vh;
+
+        @media screen and (max-height: 850px) {
+            max-height: 30vh;
+        }
+
+        @media screen and (max-height: 650px) {
+            max-height: 25vh;
+        }
+
+        width: 200px;
         overflow-x: hidden;
     }
+}
+
+.viewTask {
+    border-radius: 10px;
 }

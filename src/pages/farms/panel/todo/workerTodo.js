@@ -46,7 +46,7 @@ const WorkerTodoTab = ({ farm, users }) => {
                 </div>
             )}
             <ul
-                className={`${style.tasks} mx-0 p-3 d-flex flex-column gap-3 list-unstyled`}
+                className={`${style.tasks} mx-0 p-3 d-flex flex-column list-unstyled`}
                 style={{ height: "42vh" }}
             >
                 {tasks.map((task, index) => (

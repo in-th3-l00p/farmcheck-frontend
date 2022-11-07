@@ -11,10 +11,11 @@ const TaskDetailsModal = ({ task, show, setShow }) => {
     const [error, setError] = useState();
 
     useEffect(() => {
-        taskService.getTaskStatus(task.id)
-            .then(taskStatus => setStatus(taskStatus))
-            .catch(err => setError(error))
-    }, [])
+        taskService
+            .getTaskStatus(task.id)
+            .then((taskStatus) => setStatus(taskStatus))
+            .catch((err) => setError(error));
+    }, []);
 
     return (
         <Modal show={show} onHide={() => setShow(false)}>
@@ -22,11 +23,12 @@ const TaskDetailsModal = ({ task, show, setShow }) => {
                 <Modal.Title>View task</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>
-                    Title: <b>"{task.title}"</b>
-                </p>
-                <p>
-                    Description: <b>"{task.description}"</b>
+                <h5>
+                    Title: <b>{task.title}</b>
+                </h5>
+                <p className="mt-3">
+                    Description:{" "}
+                    <b>{task.description === "" ? "none" : task.description}</b>
                 </p>
                 {task.deadline && (
                     <p>
@@ -34,25 +36,44 @@ const TaskDetailsModal = ({ task, show, setShow }) => {
                     </p>
                 )}
                 <p>
-                    Is important: <b>{task.importance ? "yes" : "no"}</b>
+                    Importance: <b>{task.importance ? "high" : "low"}</b>
                 </p>
                 <div>
-                    <h2>Users' status:</h2>
+                    <h5>Status:</h5>
                     {error && <h2>Error getting users' status</h2>}
-                    <span className={"d-flex flex-column gap-3"}>
-                        {(status && !error) ? (
+                    <span className="d-flex flex-column gap-3">
+                        {status && !error ? (
                             status.map((userStatus, index) => (
-                                <span className={"d-flex w-100 border p-2"}>
-                                    <p className={"me-auto"}>{userStatus.user}</p>
-                                    <p>{userStatus.status ? "finished" : "not finished"}</p>
+                                <span
+                                    className={`${style.viewTask} d-flex w-100 border p-2`}
+                                >
+                                    <p className="me-auto mt-2">
+                                        {userStatus.user}
+                                    </p>
+                                    <p
+                                        className="mt-2"
+                                        style={
+                                            userStatus.status
+                                                ? { color: "green" }
+                                                : { color: "red" }
+                                        }
+                                    >
+                                        {userStatus.status
+                                            ? "finished"
+                                            : "not finished"}
+                                    </p>
                                 </span>
                             ))
-                        ): <p>loading...</p>}
+                        ) : (
+                            <p>loading...</p>
+                        )}
                     </span>
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button className={`${style.button} bg-danger text-white fw-bold`}>
+                <Button
+                    className={`${style.button} bg-danger text-white fw-bold`}
+                >
                     Delete task
                 </Button>
             </Modal.Footer>

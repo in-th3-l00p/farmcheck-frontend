@@ -137,7 +137,7 @@ const AdminSettingsTab = ({ farm, users }) => {
                         </Form.Group>
                     </div>
 
-                    <Form.Group>
+                    <Form.Group className={style.descriptionLabel}>
                         <Form.Label>
                             <h5>Farm description:</h5>
                         </Form.Label>

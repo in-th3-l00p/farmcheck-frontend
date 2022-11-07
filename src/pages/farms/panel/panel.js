@@ -28,9 +28,9 @@ const FarmInfo = ({ farm, users }) => {
             <div className={style.text}>
                 <h3 className={style.name}>{farm.name}</h3>
                 <p className={style.elements}>{farm.description}</p>
-                <h5 className={style.elements}>
+                <p className={style.elements}>
                     Number of users: {users.length}
-                </h5>
+                </p>
             </div>
         </Container>
     );
@@ -44,13 +44,27 @@ const FarmInfo = ({ farm, users }) => {
  * @return {JSX.Element} the navigation component
  */
 const TabNav = ({ tabs, currentTab, setCurrentTab }) => {
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        function handleWindowResize() {
+            setWidth(window.innerWidth);
+        }
+
+        window.addEventListener("resize", handleWindowResize);
+
+        return () => {
+            window.removeEventListener("resize", handleWindowResize);
+        };
+    }, []);
+
     return (
         <>
             <Row style={{ width: "100%" }}>
                 {tabs.map((tab, index) => (
                     <Col key={index} className={"d-flex text-center"}>
                         <button
-                            className={`h-100 ${tabsStyle.buttonTab} ${
+                            className={`h-100 d-flex ${tabsStyle.buttonTab} ${
                                 tabs[currentTab] === tab
                                     ? tabsStyle.yellowLine
                                     : ""
@@ -58,7 +72,17 @@ const TabNav = ({ tabs, currentTab, setCurrentTab }) => {
                             disabled={tabs[currentTab] === tab}
                             onClick={() => setCurrentTab(index)}
                         >
-                            {tab}
+                            <img
+                                alt={tab}
+                                src={
+                                    "/icons/tabs-icons/" +
+                                    (tab.charAt(0).toLowerCase() +
+                                        tab.slice(1)) +
+                                    ".png"
+                                }
+                                className={tabsStyle.tabIcon}
+                            />
+                            {width > 950 ? tab : <></>}
                         </button>
                     </Col>
                 ))}

@@ -134,14 +134,14 @@ const OwnerSettingsTab = ({ farm, users }) => {
                         </Form.Group>
 
                         <Form.Group className={style.imgLabel}>
-                            <Form.Label>
+                            <Form.Label className={style.label}>
                                 <h5>Farm image:</h5>
                             </Form.Label>
                             <FileUploader setBlob={setInputFarmImage} />
                         </Form.Group>
                     </div>
 
-                    <Form.Group>
+                    <Form.Group className={style.descriptionLabel}>
                         <Form.Label>
                             <h5>Farm description:</h5>
                         </Form.Label>

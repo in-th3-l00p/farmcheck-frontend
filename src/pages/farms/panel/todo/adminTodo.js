@@ -374,29 +374,31 @@ const ManageMenu = ({ farm, users }) => {
         <div className={style.taskTab}>
             {error && <ErrorAlert error={error} setError={setError} />}
             <Row sm>
-                <Col xs={3} className={style.filters}>
+                <Col xs={3}>
                     {workers.length !== 0 ? (
                         <>
                             <h5>Filter by workers:</h5>
-                            {workers.map((worker, index) => (
-                                <WorkerDisplay
-                                    key={index}
-                                    worker={worker}
-                                    small={true}
-                                    selectable={true}
-                                    onSelect={() => {
-                                        const workerList = _.cloneDeep(workers);
-                                        workerList[index].selected =
-                                            !workerList[index].selected;
-                                        selectedWorkers.current += workerList[
-                                            index
-                                        ].selected
-                                            ? 1
-                                            : -1;
-                                        setWorkers(workerList);
-                                    }}
-                                />
-                            ))}
+                            <div className={style.filters}>
+                                {workers.map((worker, index) => (
+                                    <WorkerDisplay
+                                        key={index}
+                                        worker={worker}
+                                        small={true}
+                                        selectable={true}
+                                        onSelect={() => {
+                                            const workerList =
+                                                _.cloneDeep(workers);
+                                            workerList[index].selected =
+                                                !workerList[index].selected;
+                                            selectedWorkers.current +=
+                                                workerList[index].selected
+                                                    ? 1
+                                                    : -1;
+                                            setWorkers(workerList);
+                                        }}
+                                    />
+                                ))}
+                            </div>
                         </>
                     ) : (
                         <></>

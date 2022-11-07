@@ -23,6 +23,7 @@ import { CreateSensor } from "./pages/farms/panel/sensors";
 import SensorPage from "./pages/farms/sensor";
 import FeedBack from "./pages/feedback/feedback";
 import FeedBackShow from "./pages/feedback/feedbackshow";
+import Cart from "./pages/shop/cart/cart";
 /**
  * Loading component showed when initial requests to the server are made.
  * @return {JSX.Element} the loading component
@@ -74,6 +75,7 @@ const App = () => {
                     <Route path="/wiki" element={<Wiki />} />
                     <Route path="/Feedback" element={<FeedBack />} />
                     <Route path="/feedback/show" element={<FeedBackShow />} />
+                    <Route path="/shop/cart" element={<Cart />} />
                     <Route path="/farms">
                         <Route
                             index

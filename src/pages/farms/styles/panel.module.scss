@@ -185,11 +185,17 @@ $border-radius: 20px;
     width: 150px;
     font-weight: 500;
 
-    margin-top: 25px;
+    margin-top: 6vh;
+
+    @media screen and (max-width: 1101px) {
+        margin-top: 0vh;
+    }
 
     @media screen and (max-width: 650px) {
         font-size: 1rem;
         width: 120px;
+
+        margin-top: 0;
     }
 
     @media screen and (max-width: 350px) {
@@ -208,7 +214,15 @@ $border-radius: 20px;
 }
 
 .user {
-    max-height: 35vh;
+    max-height: 42vh;
+
+    @media screen and (max-height: 850px) {
+        max-height: 30vh;
+    }
+
+    @media screen and (max-height: 650px) {
+        max-height: 25vh;
+    }
 }
 
 .settings {
@@ -222,6 +236,34 @@ $border-radius: 20px;
     margin-left: 20px;
 
     @media screen and (max-width: 1100px) {
-        margin: 15px 0 10px 0;
+        margin: 10px 0 10px 0;
+    }
+
+    @media screen and (max-width: 650px) {
+        margin: 10px 0 0 0;
+    }
+
+    .label {
+        @media screen and (max-width: 650px) {
+            margin: 0;
+        }
+    }
+}
+
+.descriptionLabel {
+    @media screen and (max-width: 1100px) {
+        margin-top: -15px;
+    }
+}
+
+.sensors {
+    max-height: 42vh;
+
+    @media screen and (max-height: 850px) {
+        max-height: 30vh;
+    }
+
+    @media screen and (max-height: 650px) {
+        max-height: 25vh;
     }
 }
