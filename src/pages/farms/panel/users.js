@@ -196,7 +196,7 @@ const ChangeRoleModal = ({
                             hide();
                             return;
                         }
-                        userService
+                        farmService
                             .updateFarmRole(user.login, farmId, selectedRole)
                             .then((message) => {
                                 setSuccessMessage(message);
@@ -335,48 +335,6 @@ const UsersTab = ({ farm, users, setUsers }) => {
                         );
                     })}
                 </div>
-                {/* <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Roles</th>
-                            <th>Controls</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.map((user, index) => {
-                            if (
-                                user.login ===
-                                    userService.getCurrentUsername() ||
-                                user.farmRole === 1
-                            )
-                                return (
-                                    <UserDisplayWithoutControls
-                                        key={index}
-                                        user={user}
-                                    />
-                                );
-                            return (
-                                <UserDisplay
-                                    key={index}
-                                    user={user}
-                                    setRemoveUser={setSelectedRemoveUser}
-                                    setShowRemoveUserModal={
-                                        setShowRemoveUserModal
-                                    }
-                                    setChangeRoleUser={
-                                        setSelectedChangeRoleUser
-                                    }
-                                    setShowChangeRoleModal={
-                                        setShowChangeRoleModel
-                                    }
-                                />
-                            );
-                        })}
-                    </tbody>
-                </Table> */}
             </Container>
         </>
     );
