@@ -1,13 +1,13 @@
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import TextBox from "../../../components/textbox/textbox";
 import userService from "../../../lib/services/userService";
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import ErrorAlert from "../../../components/alerts/error";
-import {Form} from "react-bootstrap";
-import {Button} from "../../../components/buttons/buttons";
+import { Form } from "react-bootstrap";
+import { Button } from "../../../components/buttons/buttons";
 import SockJsClient from "react-stomp";
 import _ from "lodash";
-import {getAuthorizationHeader} from "../../../lib/auth";
+import { getAuthorizationHeader } from "../../../lib/auth";
 
 import style from "./styles/chat.module.scss";
 import messageService from "../../../lib/services/messageService";
@@ -51,9 +51,10 @@ const ChatMessage = ({ message }) => {
             <p className={style.message}>{message.text}</p>
         </div>
     );
-}
+};
 
 const Chat = () => {
+    const [rooms, setRooms] = useState();
     const params = useParams();
     const stompClient = useRef(null);
     const [messageInput, setMessageInput] = useState("");
@@ -61,15 +62,20 @@ const Chat = () => {
     const [error, setError] = useState();
 
     useEffect(() => {
-        messageService.getChatMessages(params["chat_id"])
-            .then(resp => setMessages(resp))
-            .catch(err => setError(err));
-    }, [])
+        messageService
+            .getChatMessages(params["chat_id"])
+            .then((resp) => setMessages(resp))
+            .catch((err) => setError(err));
+    }, []);
+
+    console.log(params);
 
     if (!params["chat_id"] || error)
         return (
             <TextBox
-                className={"mt-100 d-flex justify-content-center align-items-center"}
+                className={
+                    "mt-100 d-flex justify-content-center align-items-center"
+                }
                 style={{ height: "80vh" }}
             >
                 <h1>Chat with the given id not found.</h1>
@@ -91,41 +97,40 @@ const Chat = () => {
                 }}
                 ref={stompClient}
             />
-             <div className="d-flex flex-column gap-2 p-1 h-100 pb-4">
+            <div className="d-flex flex-column gap-2 p-1 h-100 pb-4">
                 <ErrorAlert error={error} setError={setError} />
-                    <div className={style.chatBox}>
-                        <ul>
-                            {messages.map((message, index) => (
-                                 <li key={index}>
-                                     <ChatMessage message={message} />
-                                 </li>
-                            ))}
-                        </ul>
-                    </div>
+                <div className={style.chatBox}>
+                    <ul>
+                        {messages.map((message, index) => (
+                            <li key={index}>
+                                <ChatMessage message={message} />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
                 <Form
                     className="d-flex w-100"
                     onSubmit={(event) => {
                         event.preventDefault();
-                        if (stompClient.current === null)
-                            return;
+                        if (stompClient.current === null) return;
                         stompClient.current.sendMessage(
-                             `/app/chat/sendMessage/${params["chat_id"]}`,
-                             JSON.stringify({
-                                 sender: userService.getCurrentUsername(),
-                                 text: messageInput,
-                             }),
+                            `/app/chat/sendMessage/${params["chat_id"]}`,
+                            JSON.stringify({
+                                sender: userService.getCurrentUsername(),
+                                text: messageInput,
+                            }),
                             getAuthorizationHeader()
                         );
                         setMessageInput("");
                     }}
                 >
-                <Form.Control
-                    value={messageInput}
-                    onChange={(event) =>
-                        setMessageInput(event.target.value)
-                    }
-                    className="me-2 w-100"
-                />
+                    <Form.Control
+                        value={messageInput}
+                        onChange={(event) =>
+                            setMessageInput(event.target.value)
+                        }
+                        className="me-2 w-100"
+                    />
                     <Button
                         type="submit"
                         disabled={!messageInput}
@@ -137,6 +142,6 @@ const Chat = () => {
             </div>
         </TextBox>
     );
-}
+};
 
 export default Chat;

@@ -80,6 +80,36 @@ $border-radius: 20px;
     }
 }
 
+.chatRooms {
+    height: 45vh;
+
+    @media screen and (max-height: 850px) {
+        height: 30vh;
+    }
+
+    @media screen and (max-height: 650px) {
+        height: 25vh;
+    }
+
+    .elementDisplay {
+        border: 2px solid $grey;
+        border-radius: 15px;
+        padding: 1rem;
+
+        box-shadow: 0 1px 5px 0 $grey;
+
+        &:hover {
+            animation: onSensorDisplayHover 0.3s;
+            background-color: $light-grey;
+            cursor: pointer;
+            user-select: none;
+
+            transform: translateY(-5px);
+            box-shadow: 0px 3px 8px 2px $grey;
+        }
+    }
+}
+
 .elementDisplay {
     border: 2px solid $grey;
     border-radius: 15px;

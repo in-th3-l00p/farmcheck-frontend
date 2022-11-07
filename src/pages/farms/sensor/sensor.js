@@ -90,7 +90,7 @@ const SensorDataDisplay = ({ sensorData }) => {
             {open && (
                 <div className="mt-2 d-flex flex-column gap-3">
                     <p className={style.items}>
-                        Soil humidity: {sensorData.soilHumidity}%
+                        Soil moisture: {sensorData.soilHumidity}%
                     </p>
                     <p className={style.items}>
                         Air humidity: {sensorData.airHumidity}%
@@ -191,7 +191,7 @@ const SensorPage = () => {
                                 className={style.sensorIconSoil}
                             />
                             <p>
-                                Soil moisture {sensorDataList[0].soilHumidity}%
+                                Soil moisture: {sensorDataList[0].soilHumidity}%
                             </p>
                         </div>
                         <div className="d-flex">
