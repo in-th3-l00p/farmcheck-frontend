@@ -3,8 +3,9 @@ import { Modal } from "react-bootstrap";
 import { Button } from "../../../../components/buttons/buttons";
 
 import style from "./style.module.scss";
+import taskService from "../../../../lib/services/taskService";
 
-const TaskDetailsModal = ({ task, show, setShow }) => {
+const TaskDetailsModal = ({ refetch, setRefetch, task, show, setShow }) => {
     return (
         <Modal show={show} onHide={() => setShow(false)}>
             <Modal.Header closeButton>
@@ -28,18 +29,29 @@ const TaskDetailsModal = ({ task, show, setShow }) => {
                 </p>
             </Modal.Body>
             <Modal.Footer>
-                <Button className={style.button}>Finish task</Button>
+                <Button
+                    onClick={() => {
+                        taskService.finishTask(task.id)
+                            .then(() => setRefetch(!refetch));
+                        setShow(false);
+                    }}
+                    className={style.button}
+                >
+                    Finish task
+                </Button>
             </Modal.Footer>
         </Modal>
     );
 };
 
-export const TaskDisplay = ({ className, task }) => {
+export const TaskDisplay = ({ refetch, setRefetch, className, task }) => {
     const [showDetails, setShowDetails] = useState(false);
 
     return (
         <div className={className}>
             <TaskDetailsModal
+                refetch={refetch}
+                setRefetch={setRefetch}
                 task={task}
                 show={showDetails}
                 setShow={setShowDetails}

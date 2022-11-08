@@ -25,6 +25,7 @@ const WorkerTodoTabPlaceholder = () => {
 const WorkerTodoTab = ({ farm, users }) => {
     const [tasks, setTasks] = useState(null);
     const [error, setError] = useState("");
+    const [refetch, setRefetch] = useState(false);
 
     useEffect(() => {
         taskService
@@ -33,7 +34,7 @@ const WorkerTodoTab = ({ farm, users }) => {
                 setTasks(_.filter(taskList, (task) => task.farmId === farm.id))
             )
             .catch((err) => setError(err.message));
-    }, []);
+    }, [refetch]);
 
     if (tasks === null) return <WorkerTodoTabPlaceholder />;
     return (
@@ -49,7 +50,12 @@ const WorkerTodoTab = ({ farm, users }) => {
                 style={{ height: "42vh" }}
             >
                 {tasks.map((task, index) => (
-                    <TaskDisplay key={index} task={task} />
+                    <TaskDisplay
+                        refetch={refetch}
+                        setRefetch={setRefetch}
+                        key={index}
+                        task={task}
+                    />
                 ))}
             </ul>
         </Container>

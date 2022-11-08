@@ -109,6 +109,23 @@ class TaskService {
             throw new Error(err.response.data.detail);
         }
     }
+
+    async finishTask(taskId) {
+        try {
+            const resp = await axios.put(
+                "/api/farms/tasks",
+                {},
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { taskId }
+                }
+            );
+
+            return resp.data;
+        } catch (err) {
+            throw new Error(err);
+        }
+    }
 }
 
 const taskService = new TaskService();
