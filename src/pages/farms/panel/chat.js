@@ -27,8 +27,6 @@ const ChatTab = ({ farm, users }) => {
             .catch((err) => setError(err));
     }, []);
 
-    console.log(rooms);
-
     if (farm === undefined || users === undefined || rooms === undefined)
         return <ChatPlaceholder />;
     return (

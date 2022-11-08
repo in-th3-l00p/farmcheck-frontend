@@ -97,7 +97,6 @@ export function useUserDetailsUpdater() {
                 sessionStorage.setItem(detailsStorageKey, JSON.stringify(data));
             })
             .catch((err) => {
-                console.log(err)
                 if (err.code === "ERR_NETWORK") {
                     setError(NetworkError);
                     return;

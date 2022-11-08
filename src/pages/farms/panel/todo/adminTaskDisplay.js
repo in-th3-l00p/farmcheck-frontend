@@ -54,7 +54,6 @@ const TaskDetailsModal = ({ task, show, setShow }) => {
             <Modal.Footer>
                 <Button
                     onClick={() => {
-                        console.log("mi-l sugi");
                         taskService.deleteTask(task.id)
                             .then(() => window.location.href = "/farms")
                             .catch(err => setError(err));

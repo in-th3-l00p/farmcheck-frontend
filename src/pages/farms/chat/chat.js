@@ -59,16 +59,21 @@ const Chat = () => {
     const stompClient = useRef(null);
     const [messageInput, setMessageInput] = useState("");
     const [messages, setMessages] = useState([]);
+    const [name, setName] = useState();
     const [error, setError] = useState();
 
     useEffect(() => {
+        if (!params["chat_id"])
+            return;
         messageService
             .getChatMessages(params["chat_id"])
-            .then((resp) => setMessages(resp))
-            .catch((err) => setError(err));
+            .then(resp => setMessages(resp))
+            .catch(err => setError(err));
+        messageService
+            .getChatName(params["chat_id"])
+            .then(resp => setName(resp))
+            .catch(err => setError(err));
     }, []);
-
-    console.log(params);
 
     if (!params["chat_id"] || error)
         return (
@@ -84,7 +89,7 @@ const Chat = () => {
 
     return (
         <TextBox
-            title={`Chat #${params["chat_id"]}`}
+            title={`Chat "${name}"`}
             className={"mt-100"}
             style={{ height: "80vh" }}
         >

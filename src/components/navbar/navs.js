@@ -64,9 +64,6 @@ export const UnauthenticatedNavs = () => {
                     Feedback
                 </Link>
                 <Link
-                    onClick={() => {
-                        console.log("yees");
-                    }}
                     iconSrc="/icons/menu-icons/dark.png"
                     iconAlt="switch theme"
                 >
@@ -131,9 +128,6 @@ export const AuthenticatedNavs = () => {
                     Feedback
                 </Link>
                 <Link
-                    onClick={() => {
-                        console.log("yees");
-                    }}
                     iconSrc="/icons/menu-icons/dark.png"
                     iconAlt="switch theme"
                 >

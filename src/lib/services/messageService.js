@@ -50,6 +50,22 @@ class MessageService {
             throw new Error(err.response.data.detail);
         }
     }
+
+    async getChatName(chatId) {
+        try {
+            const resp = await axios.get(
+                "/api/chats/name",
+                {
+                    headers: getAuthorizationHeader(),
+                    params: { chatId }
+                }
+            );
+
+            return resp.data;
+        } catch (err) {
+            throw new Error(err.response.data.detail);
+        }
+    }
 }
 
 // main message service
